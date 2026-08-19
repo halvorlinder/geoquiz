@@ -1,0 +1,3466 @@
+[
+  {
+    "id": "abu-dhabi",
+    "capital": "Abu Dhabi",
+    "latitude": 24.466666666666665,
+    "longitude": 54.366667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ARE",
+        "country": "United Arab Emirates",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "abuja",
+    "capital": "Abuja",
+    "latitude": 9.083333333333334,
+    "longitude": 7.533333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "NGA",
+        "country": "Nigeria",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "accra",
+    "capital": "Accra",
+    "latitude": 5.55,
+    "longitude": -0.216667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "GHA",
+        "country": "Ghana",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "addis-ababa",
+    "capital": "Addis Ababa",
+    "latitude": 9.033333333333333,
+    "longitude": 38.7,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ETH",
+        "country": "Ethiopia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "algiers",
+    "capital": "Algiers",
+    "latitude": 36.75,
+    "longitude": 3.05,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "DZA",
+        "country": "Algeria",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "amman",
+    "capital": "Amman",
+    "latitude": 31.95,
+    "longitude": 35.933333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "JOR",
+        "country": "Jordan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "amsterdam",
+    "capital": "Amsterdam",
+    "latitude": 52.35,
+    "longitude": 4.916667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "NLD",
+        "country": "Netherlands",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "andorra-la-vella",
+    "capital": "Andorra la Vella",
+    "latitude": 42.5,
+    "longitude": 1.516667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "AND",
+        "country": "Andorra",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "ankara",
+    "capital": "Ankara",
+    "latitude": 39.93333333333333,
+    "longitude": 32.866667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "TUR",
+        "country": "Türkiye",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "antananarivo",
+    "capital": "Antananarivo",
+    "latitude": -18.916666666666668,
+    "longitude": 47.516667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MDG",
+        "country": "Madagascar",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "apia",
+    "capital": "Apia",
+    "latitude": -13.816666666666666,
+    "longitude": -171.766667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "WSM",
+        "country": "Samoa",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "ashgabat",
+    "capital": "Ashgabat",
+    "latitude": 37.95,
+    "longitude": 58.383333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "TKM",
+        "country": "Turkmenistan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "asmara",
+    "capital": "Asmara",
+    "latitude": 15.333333333333334,
+    "longitude": 38.933333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ERI",
+        "country": "Eritrea",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "astana",
+    "capital": "Astana",
+    "latitude": 51.166666666666664,
+    "longitude": 71.416667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "KAZ",
+        "country": "Kazakhstan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "asuncion",
+    "capital": "Asuncion",
+    "latitude": -25.266666666666666,
+    "longitude": -57.666667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "PRY",
+        "country": "Paraguay",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "athens",
+    "capital": "Athens",
+    "latitude": 37.983333333333334,
+    "longitude": 23.733333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "GRC",
+        "country": "Greece",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "baghdad",
+    "capital": "Baghdad",
+    "latitude": 33.333333333333336,
+    "longitude": 44.4,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "IRQ",
+        "country": "Iraq",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "baku",
+    "capital": "Baku",
+    "latitude": 40.38333333333333,
+    "longitude": 49.866667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "AZE",
+        "country": "Azerbaijan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bamako",
+    "capital": "Bamako",
+    "latitude": 12.65,
+    "longitude": -8,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MLI",
+        "country": "Mali",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bandar-seri-begawan",
+    "capital": "Bandar Seri Begawan",
+    "latitude": 4.883333333333333,
+    "longitude": 114.933333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BRN",
+        "country": "Brunei",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bangkok",
+    "capital": "Bangkok",
+    "latitude": 13.75,
+    "longitude": 100.516667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "THA",
+        "country": "Thailand",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bangui",
+    "capital": "Bangui",
+    "latitude": 4.366666666666666,
+    "longitude": 18.583333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "CAF",
+        "country": "Central African Republic",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "banjul",
+    "capital": "Banjul",
+    "latitude": 13.45,
+    "longitude": -16.566667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "GMB",
+        "country": "Gambia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "basseterre",
+    "capital": "Basseterre",
+    "latitude": 17.3,
+    "longitude": -62.716667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "KNA",
+        "country": "Saint Kitts and Nevis",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "beijing",
+    "capital": "Beijing",
+    "latitude": 39.916666666666664,
+    "longitude": 116.383333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "CHN",
+        "country": "China",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "beirut",
+    "capital": "Beirut",
+    "latitude": 33.86666666666667,
+    "longitude": 35.5,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "LBN",
+        "country": "Lebanon",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "belgrade",
+    "capital": "Belgrade",
+    "latitude": 44.833333333333336,
+    "longitude": 20.5,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SRB",
+        "country": "Serbia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "belmopan",
+    "capital": "Belmopan",
+    "latitude": 17.25,
+    "longitude": -88.766667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BLZ",
+        "country": "Belize",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "berlin",
+    "capital": "Berlin",
+    "latitude": 52.516666666666666,
+    "longitude": 13.4,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "DEU",
+        "country": "Germany",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bern",
+    "capital": "Bern",
+    "latitude": 46.916666666666664,
+    "longitude": 7.466667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "CHE",
+        "country": "Switzerland",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bishkek",
+    "capital": "Bishkek",
+    "latitude": 42.86666666666667,
+    "longitude": 74.6,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "KGZ",
+        "country": "Kyrgyzstan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bissau",
+    "capital": "Bissau",
+    "latitude": 11.85,
+    "longitude": -15.583333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "GNB",
+        "country": "Guinea-Bissau",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bloemfontein",
+    "capital": "Bloemfontein",
+    "latitude": -29.0852,
+    "longitude": 26.1596,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ZAF",
+        "country": "South Africa",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bogota",
+    "capital": "Bogota",
+    "latitude": 4.6,
+    "longitude": -74.083333,
+    "aliases": [
+      "Bogota"
+    ],
+    "entities": [
+      {
+        "code": "COL",
+        "country": "Colombia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "brasilia",
+    "capital": "Brasilia",
+    "latitude": -15.783333333333333,
+    "longitude": -47.916667,
+    "aliases": [
+      "Brasilia"
+    ],
+    "entities": [
+      {
+        "code": "BRA",
+        "country": "Brazil",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bratislava",
+    "capital": "Bratislava",
+    "latitude": 48.15,
+    "longitude": 17.116667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SVK",
+        "country": "Slovakia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "brazzaville",
+    "capital": "Brazzaville",
+    "latitude": -4.25,
+    "longitude": 15.283333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "COG",
+        "country": "Republic of the Congo",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bridgetown",
+    "capital": "Bridgetown",
+    "latitude": 13.1,
+    "longitude": -59.616667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BRB",
+        "country": "Barbados",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "brussels",
+    "capital": "Brussels",
+    "latitude": 50.833333333333336,
+    "longitude": 4.333333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BEL",
+        "country": "Belgium",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "bucharest",
+    "capital": "Bucharest",
+    "latitude": 44.43333333333333,
+    "longitude": 26.1,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ROU",
+        "country": "Romania",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "budapest",
+    "capital": "Budapest",
+    "latitude": 47.5,
+    "longitude": 19.083333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "HUN",
+        "country": "Hungary",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "buenos-aires",
+    "capital": "Buenos Aires",
+    "latitude": -34.583333333333336,
+    "longitude": -58.666667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ARG",
+        "country": "Argentina",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "cairo",
+    "capital": "Cairo",
+    "latitude": 30.05,
+    "longitude": 31.25,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "EGY",
+        "country": "Egypt",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "canberra",
+    "capital": "Canberra",
+    "latitude": -35.266666666666666,
+    "longitude": 149.133333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "AUS",
+        "country": "Australia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "cape-town",
+    "capital": "Cape Town",
+    "latitude": -33.9249,
+    "longitude": 18.4241,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ZAF",
+        "country": "South Africa",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "caracas",
+    "capital": "Caracas",
+    "latitude": 10.483333333333333,
+    "longitude": -66.866667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "VEN",
+        "country": "Venezuela",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "castries",
+    "capital": "Castries",
+    "latitude": 14,
+    "longitude": -61,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "LCA",
+        "country": "Saint Lucia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "chisinau",
+    "capital": "Chisinau",
+    "latitude": 47,
+    "longitude": 28.85,
+    "aliases": [
+      "Chisinau",
+      "Chişinău"
+    ],
+    "entities": [
+      {
+        "code": "MDA",
+        "country": "Moldova",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "ciudad-de-la-paz",
+    "capital": "Ciudad de la Paz",
+    "latitude": 1.606,
+    "longitude": 10.798,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "GNQ",
+        "country": "Equatorial Guinea",
+        "sourceRef": "Equatorial Guinea decree, 2026-01-02: https://www.guineaecuatorialpress.com/index.php/noticias/el_presidente_de_la_republica_proclama_la_ciudad_de_la_paz_como_capital_de_la_republica_de_guinea_ecuatorial_con_la_firma_de_un_decreto_ley",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "conakry",
+    "capital": "Conakry",
+    "latitude": 9.5,
+    "longitude": -13.7,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "GIN",
+        "country": "Guinea",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "copenhagen",
+    "capital": "Copenhagen",
+    "latitude": 55.666666666666664,
+    "longitude": 12.583333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "DNK",
+        "country": "Denmark",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "dakar",
+    "capital": "Dakar",
+    "latitude": 14.733333333333333,
+    "longitude": -17.633333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SEN",
+        "country": "Senegal",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "damascus",
+    "capital": "Damascus",
+    "latitude": 33.5,
+    "longitude": 36.3,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SYR",
+        "country": "Syria",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "dhaka",
+    "capital": "Dhaka",
+    "latitude": 23.716666666666665,
+    "longitude": 90.4,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BGD",
+        "country": "Bangladesh",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "dili",
+    "capital": "Dili",
+    "latitude": -8.559,
+    "longitude": 125.579,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "TLS",
+        "country": "Timor-Leste",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "djibouti",
+    "capital": "Djibouti",
+    "latitude": 11.583333333333334,
+    "longitude": 43.15,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "DJI",
+        "country": "Djibouti",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "dodoma",
+    "capital": "Dodoma",
+    "latitude": -6.163,
+    "longitude": 35.752,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "TZA",
+        "country": "Tanzania",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "doha",
+    "capital": "Doha",
+    "latitude": 25.283333333333335,
+    "longitude": 51.533333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "QAT",
+        "country": "Qatar",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "dublin",
+    "capital": "Dublin",
+    "latitude": 53.31666666666667,
+    "longitude": -6.233333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "IRL",
+        "country": "Ireland",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "dushanbe",
+    "capital": "Dushanbe",
+    "latitude": 38.55,
+    "longitude": 68.766667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "TJK",
+        "country": "Tajikistan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "freetown",
+    "capital": "Freetown",
+    "latitude": 8.483333333333333,
+    "longitude": -13.233333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SLE",
+        "country": "Sierra Leone",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "funafuti",
+    "capital": "Funafuti",
+    "latitude": -8.516666666666667,
+    "longitude": 179.216667,
+    "aliases": [
+      "Fongafale",
+      "Vaiaku"
+    ],
+    "entities": [
+      {
+        "code": "TUV",
+        "country": "Tuvalu",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "gaborone",
+    "capital": "Gaborone",
+    "latitude": -24.633333333333333,
+    "longitude": 25.9,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BWA",
+        "country": "Botswana",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "georgetown",
+    "capital": "Georgetown",
+    "latitude": 6.8,
+    "longitude": -58.15,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "GUY",
+        "country": "Guyana",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "gitega",
+    "capital": "Gitega",
+    "latitude": -3.426,
+    "longitude": 29.93,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BDI",
+        "country": "Burundi",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "guatemala-city",
+    "capital": "Guatemala City",
+    "latitude": 14.616666666666667,
+    "longitude": -90.516667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "GTM",
+        "country": "Guatemala",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "hanoi",
+    "capital": "Hanoi",
+    "latitude": 21.033333333333335,
+    "longitude": 105.85,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "VNM",
+        "country": "Vietnam",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "harare",
+    "capital": "Harare",
+    "latitude": -17.816666666666666,
+    "longitude": 31.033333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ZWE",
+        "country": "Zimbabwe",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "havana",
+    "capital": "Havana",
+    "latitude": 23.116666666666667,
+    "longitude": -82.35,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "CUB",
+        "country": "Cuba",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "helsinki",
+    "capital": "Helsinki",
+    "latitude": 60.166666666666664,
+    "longitude": 24.933333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "FIN",
+        "country": "Finland",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "honiara",
+    "capital": "Honiara",
+    "latitude": -9.433333333333334,
+    "longitude": 159.95,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SLB",
+        "country": "Solomon Islands",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "islamabad",
+    "capital": "Islamabad",
+    "latitude": 33.68333333333333,
+    "longitude": 73.05,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "PAK",
+        "country": "Pakistan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "jakarta",
+    "capital": "Jakarta",
+    "latitude": -6.166666666666667,
+    "longitude": 106.816667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "IDN",
+        "country": "Indonesia",
+        "sourceRef": "Indonesia Law No. 2/2024 and IKN Authority update: https://peraturan.bpk.go.id/Details/283616",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "jerusalem",
+    "capital": "Jerusalem",
+    "latitude": 31.766666666666666,
+    "longitude": 35.233333,
+    "aliases": [
+      "Al-Quds",
+      "East Jerusalem"
+    ],
+    "entities": [
+      {
+        "code": "ISR",
+        "country": "Israel",
+        "sourceRef": "Israel Basic Law: Jerusalem: https://m.knesset.gov.il/EN/activity/documents/BasicLawsPDF/BasicLawJerusalem.pdf",
+        "checked": "2026-08-19"
+      },
+      {
+        "code": "PSE",
+        "country": "State of Palestine",
+        "sourceRef": "Palestinian Basic Law: https://www.tscc.pna.ps/en/pages?id=palestinian_basic_law",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "juba",
+    "capital": "Juba",
+    "latitude": 4.85,
+    "longitude": 31.616667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SSD",
+        "country": "South Sudan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "kabul",
+    "capital": "Kabul",
+    "latitude": 34.516666666666666,
+    "longitude": 69.183333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "AFG",
+        "country": "Afghanistan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "kampala",
+    "capital": "Kampala",
+    "latitude": 0.31666666666666665,
+    "longitude": 32.55,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "UGA",
+        "country": "Uganda",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "kathmandu",
+    "capital": "Kathmandu",
+    "latitude": 27.716666666666665,
+    "longitude": 85.316667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "NPL",
+        "country": "Nepal",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "khartoum",
+    "capital": "Khartoum",
+    "latitude": 15.6,
+    "longitude": 32.533333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SDN",
+        "country": "Sudan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "kigali",
+    "capital": "Kigali",
+    "latitude": -1.95,
+    "longitude": 30.05,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "RWA",
+        "country": "Rwanda",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "kingston",
+    "capital": "Kingston",
+    "latitude": 18,
+    "longitude": -76.8,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "JAM",
+        "country": "Jamaica",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "kingstown",
+    "capital": "Kingstown",
+    "latitude": 13.133333333333333,
+    "longitude": -61.216667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "VCT",
+        "country": "Saint Vincent and the Grenadines",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "kinshasa",
+    "capital": "Kinshasa",
+    "latitude": -4.316666666666666,
+    "longitude": 15.3,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "COD",
+        "country": "Democratic Republic of the Congo",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "kuala-lumpur",
+    "capital": "Kuala Lumpur",
+    "latitude": 3.1666666666666665,
+    "longitude": 101.7,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MYS",
+        "country": "Malaysia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "kuwait-city",
+    "capital": "Kuwait City",
+    "latitude": 29.366666666666667,
+    "longitude": 47.966667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "KWT",
+        "country": "Kuwait",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "kyiv",
+    "capital": "Kyiv",
+    "latitude": 50.43333333333333,
+    "longitude": 30.516667,
+    "aliases": [
+      "Kiev"
+    ],
+    "entities": [
+      {
+        "code": "UKR",
+        "country": "Ukraine",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "la-paz",
+    "capital": "La Paz",
+    "latitude": -16.5,
+    "longitude": -68.15,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BOL",
+        "country": "Bolivia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "libreville",
+    "capital": "Libreville",
+    "latitude": 0.38333333333333336,
+    "longitude": 9.45,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "GAB",
+        "country": "Gabon",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "lilongwe",
+    "capital": "Lilongwe",
+    "latitude": -13.966666666666667,
+    "longitude": 33.783333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MWI",
+        "country": "Malawi",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "lima",
+    "capital": "Lima",
+    "latitude": -12.05,
+    "longitude": -77.05,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "PER",
+        "country": "Peru",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "lisbon",
+    "capital": "Lisbon",
+    "latitude": 38.71666666666667,
+    "longitude": -9.133333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "PRT",
+        "country": "Portugal",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "ljubljana",
+    "capital": "Ljubljana",
+    "latitude": 46.05,
+    "longitude": 14.516667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SVN",
+        "country": "Slovenia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "lobamba",
+    "capital": "Lobamba",
+    "latitude": -26.4667,
+    "longitude": 31.2,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SWZ",
+        "country": "Eswatini",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "lome",
+    "capital": "Lome",
+    "latitude": 6.116666666666666,
+    "longitude": 1.216667,
+    "aliases": [
+      "Lome"
+    ],
+    "entities": [
+      {
+        "code": "TGO",
+        "country": "Togo",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "london",
+    "capital": "London",
+    "latitude": 51.5,
+    "longitude": -0.083333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "GBR",
+        "country": "United Kingdom",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "luanda",
+    "capital": "Luanda",
+    "latitude": -8.833333333333334,
+    "longitude": 13.216667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "AGO",
+        "country": "Angola",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "lusaka",
+    "capital": "Lusaka",
+    "latitude": -15.416666666666666,
+    "longitude": 28.283333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ZMB",
+        "country": "Zambia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "luxembourg",
+    "capital": "Luxembourg",
+    "latitude": 49.6,
+    "longitude": 6.116667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "LUX",
+        "country": "Luxembourg",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "madrid",
+    "capital": "Madrid",
+    "latitude": 40.4,
+    "longitude": -3.683333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ESP",
+        "country": "Spain",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "majuro",
+    "capital": "Majuro",
+    "latitude": 7.1,
+    "longitude": 171.383333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MHL",
+        "country": "Marshall Islands",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "male",
+    "capital": "Male",
+    "latitude": 4.166666666666667,
+    "longitude": 73.5,
+    "aliases": [
+      "Male"
+    ],
+    "entities": [
+      {
+        "code": "MDV",
+        "country": "Maldives",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "managua",
+    "capital": "Managua",
+    "latitude": 12.133333333333333,
+    "longitude": -86.25,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "NIC",
+        "country": "Nicaragua",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "manama",
+    "capital": "Manama",
+    "latitude": 26.233333333333334,
+    "longitude": 50.566667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BHR",
+        "country": "Bahrain",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "manila",
+    "capital": "Manila",
+    "latitude": 14.6,
+    "longitude": 120.966667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "PHL",
+        "country": "Philippines",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "maputo",
+    "capital": "Maputo",
+    "latitude": -25.95,
+    "longitude": 32.583333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MOZ",
+        "country": "Mozambique",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "maseru",
+    "capital": "Maseru",
+    "latitude": -29.316666666666666,
+    "longitude": 27.483333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "LSO",
+        "country": "Lesotho",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "mbabane",
+    "capital": "Mbabane",
+    "latitude": -26.316666666666666,
+    "longitude": 31.133333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SWZ",
+        "country": "Eswatini",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "mexico-city",
+    "capital": "Mexico City",
+    "latitude": 19.433333333333334,
+    "longitude": -99.133333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MEX",
+        "country": "Mexico",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "minsk",
+    "capital": "Minsk",
+    "latitude": 53.9,
+    "longitude": 27.566667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BLR",
+        "country": "Belarus",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "mogadishu",
+    "capital": "Mogadishu",
+    "latitude": 2.066666666666667,
+    "longitude": 45.333333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SOM",
+        "country": "Somalia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "monaco",
+    "capital": "Monaco",
+    "latitude": 43.733333333333334,
+    "longitude": 7.416667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MCO",
+        "country": "Monaco",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "monrovia",
+    "capital": "Monrovia",
+    "latitude": 6.3,
+    "longitude": -10.8,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "LBR",
+        "country": "Liberia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "montevideo",
+    "capital": "Montevideo",
+    "latitude": -34.85,
+    "longitude": -56.166667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "URY",
+        "country": "Uruguay",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "moroni",
+    "capital": "Moroni",
+    "latitude": -11.7,
+    "longitude": 43.233333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "COM",
+        "country": "Comoros",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "moscow",
+    "capital": "Moscow",
+    "latitude": 55.75,
+    "longitude": 37.6,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "RUS",
+        "country": "Russia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "muscat",
+    "capital": "Muscat",
+    "latitude": 23.616666666666667,
+    "longitude": 58.583333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "OMN",
+        "country": "Oman",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "n-djamena",
+    "capital": "N'Djamena",
+    "latitude": 12.1,
+    "longitude": 15.033333,
+    "aliases": [
+      "Ndjamena",
+      "N Djamena"
+    ],
+    "entities": [
+      {
+        "code": "TCD",
+        "country": "Chad",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "nairobi",
+    "capital": "Nairobi",
+    "latitude": -1.2833333333333332,
+    "longitude": 36.816667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "KEN",
+        "country": "Kenya",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "nassau",
+    "capital": "Nassau",
+    "latitude": 25.083333333333332,
+    "longitude": -77.35,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BHS",
+        "country": "Bahamas",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "nay-pyi-taw",
+    "capital": "Nay Pyi Taw",
+    "latitude": 19.7633,
+    "longitude": 96.0785,
+    "aliases": [
+      "Naypyidaw",
+      "Nay Pyi Daw",
+      "Naypyitaw"
+    ],
+    "entities": [
+      {
+        "code": "MMR",
+        "country": "Myanmar",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "new-delhi",
+    "capital": "New Delhi",
+    "latitude": 28.6,
+    "longitude": 77.2,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "IND",
+        "country": "India",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "ngerulmud",
+    "capital": "Ngerulmud",
+    "latitude": 7.5006,
+    "longitude": 134.6242,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "PLW",
+        "country": "Palau",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "niamey",
+    "capital": "Niamey",
+    "latitude": 13.516666666666667,
+    "longitude": 2.116667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "NER",
+        "country": "Niger",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "nicosia",
+    "capital": "Nicosia",
+    "latitude": 35.1856,
+    "longitude": 33.3823,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "CYP",
+        "country": "Cyprus",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "nouakchott",
+    "capital": "Nouakchott",
+    "latitude": 18.066666666666666,
+    "longitude": -15.966667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MRT",
+        "country": "Mauritania",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "nuku-alofa",
+    "capital": "Nukuʻalofa",
+    "latitude": -21.139,
+    "longitude": -175.204,
+    "aliases": [
+      "Nukualofa"
+    ],
+    "entities": [
+      {
+        "code": "TON",
+        "country": "Tonga",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "oslo",
+    "capital": "Oslo",
+    "latitude": 59.916666666666664,
+    "longitude": 10.75,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "NOR",
+        "country": "Norway",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "ottawa",
+    "capital": "Ottawa",
+    "latitude": 45.416666666666664,
+    "longitude": -75.7,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "CAN",
+        "country": "Canada",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "ouagadougou",
+    "capital": "Ouagadougou",
+    "latitude": 12.366666666666667,
+    "longitude": -1.516667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BFA",
+        "country": "Burkina Faso",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "palikir",
+    "capital": "Palikir",
+    "latitude": 6.916666666666667,
+    "longitude": 158.15,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "FSM",
+        "country": "Federated States of Micronesia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "panama-city",
+    "capital": "Panama City",
+    "latitude": 8.966666666666667,
+    "longitude": -79.533333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "PAN",
+        "country": "Panama",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "paramaribo",
+    "capital": "Paramaribo",
+    "latitude": 5.833333333333333,
+    "longitude": -55.166667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SUR",
+        "country": "Suriname",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "paris",
+    "capital": "Paris",
+    "latitude": 48.86666666666667,
+    "longitude": 2.333333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "FRA",
+        "country": "France",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "phnom-penh",
+    "capital": "Phnom Penh",
+    "latitude": 11.55,
+    "longitude": 104.916667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "KHM",
+        "country": "Cambodia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "podgorica",
+    "capital": "Podgorica",
+    "latitude": 42.43333333333333,
+    "longitude": 19.266667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MNE",
+        "country": "Montenegro",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "port-louis",
+    "capital": "Port Louis",
+    "latitude": -20.15,
+    "longitude": 57.483333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MUS",
+        "country": "Mauritius",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "port-moresby",
+    "capital": "Port Moresby",
+    "latitude": -9.45,
+    "longitude": 147.183333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "PNG",
+        "country": "Papua New Guinea",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "port-of-spain",
+    "capital": "Port of Spain",
+    "latitude": 10.65,
+    "longitude": -61.516667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "TTO",
+        "country": "Trinidad and Tobago",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "port-vila",
+    "capital": "Port Vila",
+    "latitude": -17.75,
+    "longitude": 168.3,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "VUT",
+        "country": "Vanuatu",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "port-au-prince",
+    "capital": "Port-au-Prince",
+    "latitude": 18.533333333333335,
+    "longitude": -72.333333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "HTI",
+        "country": "Haiti",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "porto-novo",
+    "capital": "Porto-Novo",
+    "latitude": 6.483333333333333,
+    "longitude": 2.616667,
+    "aliases": [
+      "Porto Novo"
+    ],
+    "entities": [
+      {
+        "code": "BEN",
+        "country": "Benin",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "prague",
+    "capital": "Prague",
+    "latitude": 50.083333333333336,
+    "longitude": 14.466667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "CZE",
+        "country": "Czechia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "praia",
+    "capital": "Praia",
+    "latitude": 14.916666666666666,
+    "longitude": -23.516667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "CPV",
+        "country": "Cabo Verde",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "pretoria",
+    "capital": "Pretoria",
+    "latitude": -25.7,
+    "longitude": 28.216667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ZAF",
+        "country": "South Africa",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "pristina",
+    "capital": "Pristina",
+    "latitude": 42.666666666666664,
+    "longitude": 21.166667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "XKX",
+        "country": "Kosovo",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "pyongyang",
+    "capital": "Pyongyang",
+    "latitude": 39.016666666666666,
+    "longitude": 125.75,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "PRK",
+        "country": "North Korea",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "quito",
+    "capital": "Quito",
+    "latitude": -0.21666666666666667,
+    "longitude": -78.5,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ECU",
+        "country": "Ecuador",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "rabat",
+    "capital": "Rabat",
+    "latitude": 34.016666666666666,
+    "longitude": -6.816667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MAR",
+        "country": "Morocco",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "reykjavik",
+    "capital": "Reykjavik",
+    "latitude": 64.15,
+    "longitude": -21.95,
+    "aliases": [
+      "Reykjavik"
+    ],
+    "entities": [
+      {
+        "code": "ISL",
+        "country": "Iceland",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "riga",
+    "capital": "Riga",
+    "latitude": 56.95,
+    "longitude": 24.1,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "LVA",
+        "country": "Latvia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "riyadh",
+    "capital": "Riyadh",
+    "latitude": 24.65,
+    "longitude": 46.7,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SAU",
+        "country": "Saudi Arabia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "rome",
+    "capital": "Rome",
+    "latitude": 41.9,
+    "longitude": 12.483333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ITA",
+        "country": "Italy",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "roseau",
+    "capital": "Roseau",
+    "latitude": 15.3,
+    "longitude": -61.4,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "DMA",
+        "country": "Dominica",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "saint-george-s",
+    "capital": "Saint George's",
+    "latitude": 12.05,
+    "longitude": -61.75,
+    "aliases": [
+      "St George’s",
+      "St Georges"
+    ],
+    "entities": [
+      {
+        "code": "GRD",
+        "country": "Grenada",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "saint-john-s",
+    "capital": "Saint John's",
+    "latitude": 17.116666666666667,
+    "longitude": -61.85,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ATG",
+        "country": "Antigua and Barbuda",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "san-jose",
+    "capital": "San Jose",
+    "latitude": 9.933333333333334,
+    "longitude": -84.083333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "CRI",
+        "country": "Costa Rica",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "san-marino",
+    "capital": "San Marino",
+    "latitude": 43.93333333333333,
+    "longitude": 12.416667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SMR",
+        "country": "San Marino",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "san-salvador",
+    "capital": "San Salvador",
+    "latitude": 13.7,
+    "longitude": -89.2,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SLV",
+        "country": "El Salvador",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "sana-a",
+    "capital": "Sana'a",
+    "latitude": 15.35,
+    "longitude": 44.2,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "YEM",
+        "country": "Yemen",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "santiago",
+    "capital": "Santiago",
+    "latitude": -33.45,
+    "longitude": -70.666667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "CHL",
+        "country": "Chile",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "santo-domingo",
+    "capital": "Santo Domingo",
+    "latitude": 18.466666666666665,
+    "longitude": -69.9,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "DOM",
+        "country": "Dominican Republic",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "sao-tome",
+    "capital": "Sao Tome",
+    "latitude": 0.3333333333333333,
+    "longitude": 6.733333,
+    "aliases": [
+      "Sao Tome"
+    ],
+    "entities": [
+      {
+        "code": "STP",
+        "country": "São Tomé and Príncipe",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "sarajevo",
+    "capital": "Sarajevo",
+    "latitude": 43.86666666666667,
+    "longitude": 18.416667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BIH",
+        "country": "Bosnia and Herzegovina",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "seoul",
+    "capital": "Seoul",
+    "latitude": 37.55,
+    "longitude": 126.983333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "KOR",
+        "country": "South Korea",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "singapore",
+    "capital": "Singapore",
+    "latitude": 1.2833333333333332,
+    "longitude": 103.85,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SGP",
+        "country": "Singapore",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "skopje",
+    "capital": "Skopje",
+    "latitude": 42,
+    "longitude": 21.433333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MKD",
+        "country": "North Macedonia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "sofia",
+    "capital": "Sofia",
+    "latitude": 42.68333333333333,
+    "longitude": 23.316667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BGR",
+        "country": "Bulgaria",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "south-tarawa",
+    "capital": "South Tarawa",
+    "latitude": -1.329,
+    "longitude": 172.979,
+    "aliases": [
+      "Tarawa",
+      "Bairiki"
+    ],
+    "entities": [
+      {
+        "code": "KIR",
+        "country": "Kiribati",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "sri-jayawardenepura-kotte",
+    "capital": "Sri Jayawardenepura Kotte",
+    "latitude": 6.894,
+    "longitude": 79.902,
+    "aliases": [
+      "Sri Jayewardenepura Kotte",
+      "Sri Jayawardanapura Kotte",
+      "Kotte"
+    ],
+    "entities": [
+      {
+        "code": "LKA",
+        "country": "Sri Lanka",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "stockholm",
+    "capital": "Stockholm",
+    "latitude": 59.333333333333336,
+    "longitude": 18.05,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SWE",
+        "country": "Sweden",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "sucre",
+    "capital": "Sucre",
+    "latitude": -19.043,
+    "longitude": -65.259,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BOL",
+        "country": "Bolivia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "suva",
+    "capital": "Suva",
+    "latitude": -18.133333333333333,
+    "longitude": 178.416667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "FJI",
+        "country": "Fiji",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "taipei",
+    "capital": "Taipei",
+    "latitude": 25.033333333333335,
+    "longitude": 121.516667,
+    "aliases": [
+      "Taipei City"
+    ],
+    "entities": [
+      {
+        "code": "TWN",
+        "country": "Taiwan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "tallinn",
+    "capital": "Tallinn",
+    "latitude": 59.43333333333333,
+    "longitude": 24.716667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "EST",
+        "country": "Estonia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "tashkent",
+    "capital": "Tashkent",
+    "latitude": 41.31666666666667,
+    "longitude": 69.25,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "UZB",
+        "country": "Uzbekistan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "tbilisi",
+    "capital": "Tbilisi",
+    "latitude": 41.68333333333333,
+    "longitude": 44.833333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "GEO",
+        "country": "Georgia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "tegucigalpa",
+    "capital": "Tegucigalpa",
+    "latitude": 14.1,
+    "longitude": -87.216667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "HND",
+        "country": "Honduras",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "tehran",
+    "capital": "Tehran",
+    "latitude": 35.7,
+    "longitude": 51.416667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "IRN",
+        "country": "Iran",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "thimphu",
+    "capital": "Thimphu",
+    "latitude": 27.466666666666665,
+    "longitude": 89.633333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "BTN",
+        "country": "Bhutan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "tirana",
+    "capital": "Tirana",
+    "latitude": 41.31666666666667,
+    "longitude": 19.816667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ALB",
+        "country": "Albania",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "tokyo",
+    "capital": "Tokyo",
+    "latitude": 35.68333333333333,
+    "longitude": 139.75,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "JPN",
+        "country": "Japan",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "tripoli",
+    "capital": "Tripoli",
+    "latitude": 32.88333333333333,
+    "longitude": 13.166667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "LBY",
+        "country": "Libya",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "tunis",
+    "capital": "Tunis",
+    "latitude": 36.8,
+    "longitude": 10.183333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "TUN",
+        "country": "Tunisia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "ulaanbaatar",
+    "capital": "Ulaanbaatar",
+    "latitude": 47.916666666666664,
+    "longitude": 106.916667,
+    "aliases": [
+      "Ulan Bator"
+    ],
+    "entities": [
+      {
+        "code": "MNG",
+        "country": "Mongolia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "vaduz",
+    "capital": "Vaduz",
+    "latitude": 47.13333333333333,
+    "longitude": 9.516667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "LIE",
+        "country": "Liechtenstein",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "valletta",
+    "capital": "Valletta",
+    "latitude": 35.88333333333333,
+    "longitude": 14.5,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "MLT",
+        "country": "Malta",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "vatican-city",
+    "capital": "Vatican City",
+    "latitude": 41.9,
+    "longitude": 12.45,
+    "aliases": [
+      "Vatican"
+    ],
+    "entities": [
+      {
+        "code": "VAT",
+        "country": "Vatican City / Holy See",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "victoria",
+    "capital": "Victoria",
+    "latitude": -4.616666666666667,
+    "longitude": 55.45,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "SYC",
+        "country": "Seychelles",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "vienna",
+    "capital": "Vienna",
+    "latitude": 48.2,
+    "longitude": 16.366667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "AUT",
+        "country": "Austria",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "vientiane",
+    "capital": "Vientiane",
+    "latitude": 17.966666666666665,
+    "longitude": 102.6,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "LAO",
+        "country": "Laos",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "vilnius",
+    "capital": "Vilnius",
+    "latitude": 54.68333333333333,
+    "longitude": 25.316667,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "LTU",
+        "country": "Lithuania",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "warsaw",
+    "capital": "Warsaw",
+    "latitude": 52.25,
+    "longitude": 21,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "POL",
+        "country": "Poland",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "washington-d-c",
+    "capital": "Washington, D.C.",
+    "latitude": 38.883333,
+    "longitude": -77,
+    "aliases": [
+      "Washington DC",
+      "Washington D.C.",
+      "Washington"
+    ],
+    "entities": [
+      {
+        "code": "USA",
+        "country": "United States",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "wellington",
+    "capital": "Wellington",
+    "latitude": -41.3,
+    "longitude": 174.783333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "NZL",
+        "country": "New Zealand",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "windhoek",
+    "capital": "Windhoek",
+    "latitude": -22.566666666666666,
+    "longitude": 17.083333,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "NAM",
+        "country": "Namibia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "yamoussoukro",
+    "capital": "Yamoussoukro",
+    "latitude": 6.816666666666666,
+    "longitude": -5.266667,
+    "aliases": [
+      "Yamoussoukro"
+    ],
+    "entities": [
+      {
+        "code": "CIV",
+        "country": "Côte d’Ivoire",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "yaounde",
+    "capital": "Yaounde",
+    "latitude": 3.8666666666666667,
+    "longitude": 11.516667,
+    "aliases": [
+      "Yaounde"
+    ],
+    "entities": [
+      {
+        "code": "CMR",
+        "country": "Cameroon",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "yaren",
+    "capital": "Yaren",
+    "latitude": -0.5477,
+    "longitude": 166.920867,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "NRU",
+        "country": "Nauru",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "yerevan",
+    "capital": "Yerevan",
+    "latitude": 40.166666666666664,
+    "longitude": 44.5,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "ARM",
+        "country": "Armenia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  },
+  {
+    "id": "zagreb",
+    "capital": "Zagreb",
+    "latitude": 45.8,
+    "longitude": 16,
+    "aliases": [],
+    "entities": [
+      {
+        "code": "HRV",
+        "country": "Croatia",
+        "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+        "checked": "2026-08-19"
+      }
+    ],
+    "coordinateSource": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
+    "checked": "2026-08-19"
+  }
+]
