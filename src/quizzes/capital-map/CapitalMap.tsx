@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
-import { CircleMarker, MapContainer, useMap } from 'react-leaflet'
+import { useEffect, useState } from 'react'
+import { CircleMarker, GeoJSON, MapContainer, Pane, useMap } from 'react-leaflet'
 import type { Capital } from '../../core/capital'
+import { COUNTRY_OUTLINES_PANE, COUNTRY_OUTLINES_PANE_Z_INDEX, countryBoundaryLines } from './countryBoundaries'
 import { MAP_LABEL, MAP_VIEWPORT_OPTIONS, WORLD_BOUNDS } from './mapViewport'
 
 function ResetMapOnQuestion({ questionNumber }: { questionNumber: number }) {
@@ -32,6 +33,8 @@ type CapitalMapProps = {
 }
 
 export function CapitalMap({ capitals, target, questionNumber }: CapitalMapProps) {
+  const [showCountryOutlines, setShowCountryOutlines] = useState(false)
+
   return (
     <section className="map-shell" role="region" aria-label={MAP_LABEL}>
       <MapContainer
@@ -48,6 +51,15 @@ export function CapitalMap({ capitals, target, questionNumber }: CapitalMapProps
       >
         <ResetMapOnQuestion questionNumber={questionNumber} />
         <SetMapSemantics />
+        {showCountryOutlines && (
+          <Pane name={COUNTRY_OUTLINES_PANE} style={{ zIndex: COUNTRY_OUTLINES_PANE_Z_INDEX }}>
+            <GeoJSON
+              data={countryBoundaryLines}
+              interactive={false}
+              style={{ color: '#7898c3', weight: 0.8, opacity: 0.72, fill: false }}
+            />
+          </Pane>
+        )}
         {capitals.map((capital) => (
           <CircleMarker
             key={capital.id}
@@ -64,6 +76,17 @@ export function CapitalMap({ capitals, target, questionNumber }: CapitalMapProps
           interactive={false}
         />
       </MapContainer>
+      <button
+        className="map-layer-switch"
+        type="button"
+        role="switch"
+        aria-label="Country outlines"
+        aria-checked={showCountryOutlines}
+        onClick={() => setShowCountryOutlines((visible) => !visible)}
+      >
+        <span>Country outlines</span>
+        <span className="map-layer-switch-state" aria-hidden="true">{showCountryOutlines ? 'On' : 'Off'}</span>
+      </button>
       <p className="map-hint">Drag to pan · scroll or pinch to zoom</p>
     </section>
   )

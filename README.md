@@ -23,6 +23,7 @@ The production build uses Vite's `/geoquiz/` base path, for the project Pages UR
 ## Controls and answer rules
 
 - Drag or touch-drag to pan. Use the map buttons, mouse wheel/trackpad, or pinch to zoom.
+- Use the **Country outlines** switch to show or hide country and coastline lines; it starts **Off**.
 - Type in the focused answer field and press Enter or select **Check answer**.
 - Case, accents, punctuation, spacing, common transliterations, and one or two small spelling edits are handled tolerantly. A precise name or alias belonging to another capital is always rejected.
 - **Reveal and skip** shows the answer without adding to the score. A completed deck can be restarted with a new order.
@@ -33,7 +34,7 @@ The production build uses Vite's `/geoquiz/` base path, for the project Pages UR
 
 The list uses common English study names and a current primary official or functional seat where this keeps the questions practical. The most consequential choices are documented in [data notes](docs/capital-data.md). Coordinates are city-centre points, not country centroids. The validation script enforces entity/place/association cardinalities, unique city/coordinate values, usable coordinates, provenance, and non-colliding aliases.
 
-Source checking is based on the [UN member-state list](https://www.un.org/about-us/member-states), the [UNGEGN capital-name and coordinate API](https://ungegn-api.azurewebsites.net/swagger/index.html) and its [database description](https://unstats.un.org/unsd/geoinfo/geonames/About.htm), plus country-specific official/government sources cited in the data notes. The final data is bundled into the application—using the quiz makes no network, tile, map-image, or API requests.
+Source checking is based on the [UN member-state list](https://www.un.org/about-us/member-states), the [UNGEGN capital-name and coordinate API](https://ungegn-api.azurewebsites.net/swagger/index.html) and its [database description](https://unstats.un.org/unsd/geoinfo/geonames/About.htm), plus country-specific official/government sources cited in the data notes. The final data and optional [map-boundary geometry](docs/map-boundaries.md) are bundled into the application—using the quiz makes no network, tile, map-image, or API requests.
 
 ## GitHub Pages
 

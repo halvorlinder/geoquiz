@@ -59,6 +59,10 @@ h2 { margin-bottom: 28px; color: #f5f8ff; font-size: clamp(1.45rem, 2.5vw, 2rem)
 .leaflet-control-zoom a { width: 31px !important; height: 31px !important; border-color: #3d5a84 !important; background: #172946 !important; color: #edf3ff !important; line-height: 29px !important; }
 .leaflet-control-zoom a:hover { background: #29456e !important; }
 .target-halo { filter: drop-shadow(0 0 5px #ffcc66); }
+.map-layer-switch { position: absolute; z-index: 500; top: 12px; right: 12px; display: inline-flex; align-items: center; gap: 9px; padding: 7px 10px; border: 1px solid #3d5a84; border-radius: 999px; background: #111e33dd; color: #eaf1ff; font-size: .78rem; font-weight: 700; }
+.map-layer-switch:hover { background: #1b304f; }
+.map-layer-switch-state { min-width: 2.1em; padding: 2px 5px; border-radius: 999px; background: #37537d; color: #dce9ff; font-size: .7rem; text-align: center; }
+.map-layer-switch[aria-checked="true"] .map-layer-switch-state { background: #397b67; color: #d9fff0; }
 .map-hint { position: absolute; z-index: 500; right: 12px; bottom: 10px; margin: 0; padding: 6px 9px; border: 1px solid #385275; border-radius: 999px; background: #111e33dd; color: #c5d6f3; font-size: .74rem; pointer-events: none; }
 
 .answer-card { align-self: center; padding: clamp(24px, 3vw, 40px); border: 1px solid #2b456d; border-radius: 18px; background: #172843; box-shadow: 0 24px 60px #060d183d; }
