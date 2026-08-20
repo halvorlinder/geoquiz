@@ -5,8 +5,8 @@ The **Country outlines** switch draws an optional, unlabelled line layer behind 
 ## Source and processing
 
 - The build bundles `world-atlas@2.0.2`'s `countries-110m.json` file. Its README identifies the data as Natural Earth Admin 0 Countries, version 4.1.0, at 1:110m small scale.
-- This is a deliberately low-detail, small-scale source appropriate for a global quiz. Natural Earth's 1:110m source is already generalized; `world-atlas` quantizes that geometry, and the app does not further generalize or alter it.
-- At module initialization, `topojson-client@3.1.0` uses `mesh()` over the topology's `countries` object to create one `MultiLineString`. This includes country boundaries and coastlines while avoiding filled polygons and per-country layers.
+- This is a deliberately low-detail, small-scale source appropriate for a global quiz. Natural Earth's 1:110m source is already generalized, and `world-atlas` quantizes that geometry. The app does not further generalize it.
+- At module initialization, `topojson-client@3.1.0` uses `mesh()` over the topology's `countries` object to create one `MultiLineString`. The app then splits only line segments that cross the antimeridian, inserting equivalent seam endpoints so Leaflet does not draw artificial cross-world strokes. This includes country boundaries and coastlines while avoiding filled polygons and per-country layers.
 - The generated geometry is part of the built JavaScript bundle. It is neither fetched at runtime nor supplied by map tiles, a map API, or a backend.
 
 ## Attribution and licenses
