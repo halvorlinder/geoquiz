@@ -1,6 +1,6 @@
 # Geoquiz
 
-A deliberately bare capital-city quiz: every question shows the same 200 capital-place dots on a neutral, tile-free map, with one gold ring to identify. Pan, zoom, type the capital, and work through a shuffled deck without repeats.
+A deliberately bare capital-city quiz: every question shows the same 200 capital-place dots on a neutral, tile-free map, with one gold ring to identify. Each question automatically focuses its target region; you can still pan, zoom, type the capital, and work through a shuffled deck without repeats.
 
 ## Run locally
 
@@ -24,6 +24,7 @@ The production build uses Vite's `/geoquiz/` base path, for the project Pages UR
 
 - Drag or touch-drag to pan. Use the map buttons, mouse wheel/trackpad, or pinch to zoom.
 - Use the **Country outlines** switch to show or hide country and coastline lines; it starts **Off**.
+- Use the **Capital names** switch to show or hide every capital label; it starts **Off**.
 - Type in the focused answer field and press Enter or select **Check answer**.
 - Case, accents, punctuation, spacing, common transliterations, and one or two small spelling edits are handled tolerantly. A precise name or alias belonging to another capital is always rejected.
 - **Reveal and skip** shows the answer without adding to the score. A completed deck can be restarted with a new order.
