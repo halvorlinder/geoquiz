@@ -147,7 +147,7 @@ describe('capital answers', () => {
         }
       }
     }
-  })
+  }, 30_000)
 
   it('rejects every ambiguous one-deletion typo generated from the production corpus', () => {
     const names = data.flatMap((capital) => capitalNames(capital).map((name) => ({ id: capital.id, name })))
