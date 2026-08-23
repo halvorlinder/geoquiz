@@ -9,7 +9,10 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "validate:data": "tsx scripts/validate-capitals.ts"
+    "generate:country-shapes": "tsx scripts/generate-country-shapes.ts",
+    "validate:design": "tsx scripts/validate-design-decisions.ts",
+    "validate:flags": "tsx scripts/validate-flags.ts",
+    "validate:data": "tsx scripts/validate-capitals.ts && tsx scripts/validate-entities.ts && tsx scripts/validate-country-shapes.ts && tsx scripts/validate-neighbours.ts && tsx scripts/validate-high-points.ts && npm run validate:flags"
   },
   "dependencies": {
     "@types/leaflet": "^1.9.21",

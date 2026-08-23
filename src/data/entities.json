@@ -1,0 +1,2443 @@
+{
+  "version": 1,
+  "checked": "2026-08-20",
+  "provenance": {
+    "entityRoster": "Derived from the versioned capitals.json study-entity associations.",
+    "continentPolicy": "UN M49 regional placement baseline with product overrides for Russia, Türkiye, Kazakhstan, Egypt, and Georgia; Taiwan and Kosovo are supplemental study-product classifications.",
+    "source": "UN M49: https://unstats.un.org/unsd/methodology/m49/"
+  },
+  "entities": [
+    {
+      "code": "AFG",
+      "name": "Afghanistan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "kabul",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "AGO",
+      "name": "Angola",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "luanda",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ALB",
+      "name": "Albania",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "tirana",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "AND",
+      "name": "Andorra",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "andorra-la-vella",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ARE",
+      "name": "United Arab Emirates",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "abu-dhabi",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ARG",
+      "name": "Argentina",
+      "aliases": [],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "buenos-aires",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ARM",
+      "name": "Armenia",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "yerevan",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ATG",
+      "name": "Antigua and Barbuda",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "saint-john-s",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "AUS",
+      "name": "Australia",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "canberra",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "AUT",
+      "name": "Austria",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "vienna",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "AZE",
+      "name": "Azerbaijan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "baku",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BDI",
+      "name": "Burundi",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "gitega",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BEL",
+      "name": "Belgium",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "brussels",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BEN",
+      "name": "Benin",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "porto-novo",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BFA",
+      "name": "Burkina Faso",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "ouagadougou",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BGD",
+      "name": "Bangladesh",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "dhaka",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BGR",
+      "name": "Bulgaria",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "sofia",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BHR",
+      "name": "Bahrain",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "manama",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BHS",
+      "name": "Bahamas",
+      "aliases": [
+        "The Bahamas"
+      ],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "nassau",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BIH",
+      "name": "Bosnia and Herzegovina",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "sarajevo",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BLR",
+      "name": "Belarus",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "minsk",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BLZ",
+      "name": "Belize",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "belmopan",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BOL",
+      "name": "Bolivia",
+      "aliases": [
+        "Plurinational State of Bolivia"
+      ],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "la-paz",
+          "role": "Seat of government"
+        },
+        {
+          "id": "sucre",
+          "role": "Constitutional capital"
+        }
+      ]
+    },
+    {
+      "code": "BRA",
+      "name": "Brazil",
+      "aliases": [],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "brasilia",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BRB",
+      "name": "Barbados",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "bridgetown",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BRN",
+      "name": "Brunei",
+      "aliases": [
+        "Brunei Darussalam"
+      ],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "bandar-seri-begawan",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BTN",
+      "name": "Bhutan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "thimphu",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "BWA",
+      "name": "Botswana",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "gaborone",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CAF",
+      "name": "Central African Republic",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "bangui",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CAN",
+      "name": "Canada",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "ottawa",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CHE",
+      "name": "Switzerland",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "bern",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CHL",
+      "name": "Chile",
+      "aliases": [],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "santiago",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CHN",
+      "name": "China",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "beijing",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CIV",
+      "name": "Côte d’Ivoire",
+      "aliases": [
+        "Ivory Coast"
+      ],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "yamoussoukro",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CMR",
+      "name": "Cameroon",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "yaounde",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "COD",
+      "name": "Democratic Republic of the Congo",
+      "aliases": [
+        "DR Congo",
+        "Congo-Kinshasa"
+      ],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "kinshasa",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "COG",
+      "name": "Republic of the Congo",
+      "aliases": [
+        "Congo-Brazzaville"
+      ],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "brazzaville",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "COL",
+      "name": "Colombia",
+      "aliases": [],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "bogota",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "COM",
+      "name": "Comoros",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "moroni",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CPV",
+      "name": "Cabo Verde",
+      "aliases": [
+        "Cape Verde"
+      ],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "praia",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CRI",
+      "name": "Costa Rica",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "san-jose",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CUB",
+      "name": "Cuba",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "havana",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CYP",
+      "name": "Cyprus",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "nicosia",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "CZE",
+      "name": "Czechia",
+      "aliases": [
+        "Czech Republic"
+      ],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "prague",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "DEU",
+      "name": "Germany",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "berlin",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "DJI",
+      "name": "Djibouti",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "djibouti",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "DMA",
+      "name": "Dominica",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "roseau",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "DNK",
+      "name": "Denmark",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "copenhagen",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "DOM",
+      "name": "Dominican Republic",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "santo-domingo",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "DZA",
+      "name": "Algeria",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "algiers",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ECU",
+      "name": "Ecuador",
+      "aliases": [],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "quito",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "EGY",
+      "name": "Egypt",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "cairo",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ERI",
+      "name": "Eritrea",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "asmara",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ESP",
+      "name": "Spain",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "madrid",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "EST",
+      "name": "Estonia",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "tallinn",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ETH",
+      "name": "Ethiopia",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "addis-ababa",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "FIN",
+      "name": "Finland",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "helsinki",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "FJI",
+      "name": "Fiji",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "suva",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "FRA",
+      "name": "France",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "paris",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "FSM",
+      "name": "Federated States of Micronesia",
+      "aliases": [
+        "Micronesia"
+      ],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "palikir",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GAB",
+      "name": "Gabon",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "libreville",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GBR",
+      "name": "United Kingdom",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "london",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GEO",
+      "name": "Georgia",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "tbilisi",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GHA",
+      "name": "Ghana",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "accra",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GIN",
+      "name": "Guinea",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "conakry",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GMB",
+      "name": "Gambia",
+      "aliases": [
+        "The Gambia"
+      ],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "banjul",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GNB",
+      "name": "Guinea-Bissau",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "bissau",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GNQ",
+      "name": "Equatorial Guinea",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "ciudad-de-la-paz",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GRC",
+      "name": "Greece",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "athens",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GRD",
+      "name": "Grenada",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "saint-george-s",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GTM",
+      "name": "Guatemala",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "guatemala-city",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "GUY",
+      "name": "Guyana",
+      "aliases": [],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "georgetown",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "HND",
+      "name": "Honduras",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "tegucigalpa",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "HRV",
+      "name": "Croatia",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "zagreb",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "HTI",
+      "name": "Haiti",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "port-au-prince",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "HUN",
+      "name": "Hungary",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "budapest",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "IDN",
+      "name": "Indonesia",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "jakarta",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "IND",
+      "name": "India",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "new-delhi",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "IRL",
+      "name": "Ireland",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "dublin",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "IRN",
+      "name": "Iran",
+      "aliases": [
+        "Islamic Republic of Iran"
+      ],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "tehran",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "IRQ",
+      "name": "Iraq",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "baghdad",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ISL",
+      "name": "Iceland",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "reykjavik",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ISR",
+      "name": "Israel",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "jerusalem",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ITA",
+      "name": "Italy",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "rome",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "JAM",
+      "name": "Jamaica",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "kingston",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "JOR",
+      "name": "Jordan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "amman",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "JPN",
+      "name": "Japan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "tokyo",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "KAZ",
+      "name": "Kazakhstan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "astana",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "KEN",
+      "name": "Kenya",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "nairobi",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "KGZ",
+      "name": "Kyrgyzstan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "bishkek",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "KHM",
+      "name": "Cambodia",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "phnom-penh",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "KIR",
+      "name": "Kiribati",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "south-tarawa",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "KNA",
+      "name": "Saint Kitts and Nevis",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "basseterre",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "KOR",
+      "name": "South Korea",
+      "aliases": [
+        "Republic of Korea"
+      ],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "seoul",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "KWT",
+      "name": "Kuwait",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "kuwait-city",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "LAO",
+      "name": "Laos",
+      "aliases": [
+        "Lao PDR"
+      ],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "vientiane",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "LBN",
+      "name": "Lebanon",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "beirut",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "LBR",
+      "name": "Liberia",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "monrovia",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "LBY",
+      "name": "Libya",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "tripoli",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "LCA",
+      "name": "Saint Lucia",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "castries",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "LIE",
+      "name": "Liechtenstein",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "vaduz",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "LKA",
+      "name": "Sri Lanka",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "sri-jayawardenepura-kotte",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "LSO",
+      "name": "Lesotho",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "maseru",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "LTU",
+      "name": "Lithuania",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "vilnius",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "LUX",
+      "name": "Luxembourg",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "luxembourg",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "LVA",
+      "name": "Latvia",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "riga",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MAR",
+      "name": "Morocco",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "rabat",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MCO",
+      "name": "Monaco",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "monaco",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MDA",
+      "name": "Moldova",
+      "aliases": [
+        "Republic of Moldova"
+      ],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "chisinau",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MDG",
+      "name": "Madagascar",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "antananarivo",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MDV",
+      "name": "Maldives",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "male",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MEX",
+      "name": "Mexico",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "mexico-city",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MHL",
+      "name": "Marshall Islands",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "majuro",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MKD",
+      "name": "North Macedonia",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "skopje",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MLI",
+      "name": "Mali",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "bamako",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MLT",
+      "name": "Malta",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "valletta",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MMR",
+      "name": "Myanmar",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "nay-pyi-taw",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MNE",
+      "name": "Montenegro",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "podgorica",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MNG",
+      "name": "Mongolia",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "ulaanbaatar",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MOZ",
+      "name": "Mozambique",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "maputo",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MRT",
+      "name": "Mauritania",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "nouakchott",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MUS",
+      "name": "Mauritius",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "port-louis",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MWI",
+      "name": "Malawi",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "lilongwe",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "MYS",
+      "name": "Malaysia",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "kuala-lumpur",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "NAM",
+      "name": "Namibia",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "windhoek",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "NER",
+      "name": "Niger",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "niamey",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "NGA",
+      "name": "Nigeria",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "abuja",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "NIC",
+      "name": "Nicaragua",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "managua",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "NLD",
+      "name": "Netherlands",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "amsterdam",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "NOR",
+      "name": "Norway",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "oslo",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "NPL",
+      "name": "Nepal",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "kathmandu",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "NRU",
+      "name": "Nauru",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "yaren",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "NZL",
+      "name": "New Zealand",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "wellington",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "OMN",
+      "name": "Oman",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "muscat",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "PAK",
+      "name": "Pakistan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "islamabad",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "PAN",
+      "name": "Panama",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "panama-city",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "PER",
+      "name": "Peru",
+      "aliases": [],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "lima",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "PHL",
+      "name": "Philippines",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "manila",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "PLW",
+      "name": "Palau",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "ngerulmud",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "PNG",
+      "name": "Papua New Guinea",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "port-moresby",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "POL",
+      "name": "Poland",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "warsaw",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "PRK",
+      "name": "North Korea",
+      "aliases": [
+        "DPRK",
+        "Democratic People’s Republic of Korea"
+      ],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "pyongyang",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "PRT",
+      "name": "Portugal",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "lisbon",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "PRY",
+      "name": "Paraguay",
+      "aliases": [],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "asuncion",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "PSE",
+      "name": "State of Palestine",
+      "aliases": [
+        "Palestine"
+      ],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "jerusalem",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "QAT",
+      "name": "Qatar",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "doha",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ROU",
+      "name": "Romania",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "bucharest",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "RUS",
+      "name": "Russia",
+      "aliases": [
+        "Russian Federation"
+      ],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "moscow",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "RWA",
+      "name": "Rwanda",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "kigali",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SAU",
+      "name": "Saudi Arabia",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "riyadh",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SDN",
+      "name": "Sudan",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "khartoum",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SEN",
+      "name": "Senegal",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "dakar",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SGP",
+      "name": "Singapore",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "singapore",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SLB",
+      "name": "Solomon Islands",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "honiara",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SLE",
+      "name": "Sierra Leone",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "freetown",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SLV",
+      "name": "El Salvador",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "san-salvador",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SMR",
+      "name": "San Marino",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "san-marino",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SOM",
+      "name": "Somalia",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "mogadishu",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SRB",
+      "name": "Serbia",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "belgrade",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SSD",
+      "name": "South Sudan",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "juba",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "STP",
+      "name": "São Tomé and Príncipe",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "sao-tome",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SUR",
+      "name": "Suriname",
+      "aliases": [],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "paramaribo",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SVK",
+      "name": "Slovakia",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "bratislava",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SVN",
+      "name": "Slovenia",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "ljubljana",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SWE",
+      "name": "Sweden",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "stockholm",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SWZ",
+      "name": "Eswatini",
+      "aliases": [
+        "Swaziland"
+      ],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "lobamba",
+          "role": "Royal and legislative"
+        },
+        {
+          "id": "mbabane",
+          "role": "Administrative"
+        }
+      ]
+    },
+    {
+      "code": "SYC",
+      "name": "Seychelles",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "victoria",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "SYR",
+      "name": "Syria",
+      "aliases": [
+        "Syrian Arab Republic"
+      ],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "damascus",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TCD",
+      "name": "Chad",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "n-djamena",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TGO",
+      "name": "Togo",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "lome",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "THA",
+      "name": "Thailand",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "bangkok",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TJK",
+      "name": "Tajikistan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "dushanbe",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TKM",
+      "name": "Turkmenistan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "ashgabat",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TLS",
+      "name": "Timor-Leste",
+      "aliases": [
+        "East Timor"
+      ],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "dili",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TON",
+      "name": "Tonga",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "nuku-alofa",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TTO",
+      "name": "Trinidad and Tobago",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "port-of-spain",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TUN",
+      "name": "Tunisia",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "tunis",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TUR",
+      "name": "Türkiye",
+      "aliases": [
+        "Turkey"
+      ],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "ankara",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TUV",
+      "name": "Tuvalu",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "funafuti",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TWN",
+      "name": "Taiwan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "taipei",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "TZA",
+      "name": "Tanzania",
+      "aliases": [
+        "United Republic of Tanzania"
+      ],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "dodoma",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "UGA",
+      "name": "Uganda",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "kampala",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "UKR",
+      "name": "Ukraine",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "kyiv",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "URY",
+      "name": "Uruguay",
+      "aliases": [],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "montevideo",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "USA",
+      "name": "United States",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "washington-d-c",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "UZB",
+      "name": "Uzbekistan",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "tashkent",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "VAT",
+      "name": "Vatican City / Holy See",
+      "aliases": [
+        "Holy See"
+      ],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "vatican-city",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "VCT",
+      "name": "Saint Vincent and the Grenadines",
+      "aliases": [],
+      "continent": "North America",
+      "capitals": [
+        {
+          "id": "kingstown",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "VEN",
+      "name": "Venezuela",
+      "aliases": [
+        "Venezuela, Bolivarian Republic of"
+      ],
+      "continent": "South America",
+      "capitals": [
+        {
+          "id": "caracas",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "VNM",
+      "name": "Vietnam",
+      "aliases": [
+        "Viet Nam"
+      ],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "hanoi",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "VUT",
+      "name": "Vanuatu",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "port-vila",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "WSM",
+      "name": "Samoa",
+      "aliases": [],
+      "continent": "Oceania",
+      "capitals": [
+        {
+          "id": "apia",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "XKX",
+      "name": "Kosovo",
+      "aliases": [],
+      "continent": "Europe",
+      "capitals": [
+        {
+          "id": "pristina",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "YEM",
+      "name": "Yemen",
+      "aliases": [],
+      "continent": "Asia",
+      "capitals": [
+        {
+          "id": "sana-a",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ZAF",
+      "name": "South Africa",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "bloemfontein",
+          "role": "Judicial"
+        },
+        {
+          "id": "cape-town",
+          "role": "Legislative"
+        },
+        {
+          "id": "pretoria",
+          "role": "Administrative"
+        }
+      ]
+    },
+    {
+      "code": "ZMB",
+      "name": "Zambia",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "lusaka",
+          "role": "Capital"
+        }
+      ]
+    },
+    {
+      "code": "ZWE",
+      "name": "Zimbabwe",
+      "aliases": [],
+      "continent": "Africa",
+      "capitals": [
+        {
+          "id": "harare",
+          "role": "Capital"
+        }
+      ]
+    }
+  ]
+}

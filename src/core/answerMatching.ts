@@ -87,3 +87,36 @@ export function checkCapitalAnswer(
   )
   return isCloseEnough ? { status: 'correct', matched: target.capital } : { status: 'incorrect' }
 }
+
+/**
+ * A typed answer may finish only when it is not a strict prefix of any known
+ * capital spelling and its non-exact fuzzy candidate resolves to one capital
+ * place. This keeps typo tolerance from completing a question while a player
+ * is still entering a longer answer or an ambiguous near-match.
+ */
+export function isTimedCapitalAnswerAccepted(
+  submitted: string,
+  target: Capital,
+  allCapitals: readonly Capital[],
+): boolean {
+  const normalized = normalizeAnswer(submitted)
+  if (!normalized) return false
+
+  const targetNames = capitalNames(target)
+  if (targetNames.includes(normalized)) return checkCapitalAnswer(submitted, target, allCapitals).status === 'correct'
+
+  const allNames = allCapitals.flatMap((capital) => capitalNames(capital).map((name) => ({ capitalId: capital.id, name })))
+  // A player may still be entering any known capital, not just the current
+  // target. Do not let fuzzy tolerance resolve an incomplete prefix early.
+  if (allNames.some(({ name }) => name.startsWith(normalized))) return false
+
+  // Exact names for another place remain rejected by the normal collision
+  // guard. For a typo, require one unambiguous capital-place candidate.
+  const fuzzyCandidateIds = new Set(
+    allNames
+      .filter(({ name }) => damerauLevenshtein(normalized, name) <= allowedDistance(name.length))
+      .map(({ capitalId }) => capitalId),
+  )
+  if (fuzzyCandidateIds.size !== 1 || !fuzzyCandidateIds.has(target.id)) return false
+  return checkCapitalAnswer(submitted, target, allCapitals).status === 'correct'
+}

@@ -9,6 +9,7 @@ import { MAP_LABEL } from './mapViewport'
 const leaflet = vi.hoisted(() => ({
   flyTo: vi.fn(),
   getSize: vi.fn(),
+  invalidateSize: vi.fn(),
   reducedMotion: true,
   setView: vi.fn(),
   stop: vi.fn(),
@@ -19,12 +20,13 @@ vi.mock('react-leaflet', () => {
     flyTo: leaflet.flyTo,
     getContainer: () => document.querySelector('.capital-map') as HTMLElement,
     getSize: leaflet.getSize,
+    invalidateSize: leaflet.invalidateSize,
     setView: leaflet.setView,
     stop: leaflet.stop,
   }
   return {
     MapContainer: ({ children, className }: { children: ReactNode; className: string }) => <div className={className}>{children}</div>,
-    CircleMarker: ({ children }: { children?: ReactNode }) => <div data-testid="capital-marker">{children}</div>,
+    CircleMarker: ({ children, pathOptions }: { children?: ReactNode; pathOptions?: { className?: string } }) => <div data-testid="capital-marker" data-class-name={pathOptions?.className}>{children}</div>,
     GeoJSON: ({ data, interactive }: { data: { type: string }; interactive: boolean }) => (
       <div data-testid="country-boundaries" data-geometry-type={data.type} data-interactive={String(interactive)} />
     ),
@@ -65,10 +67,50 @@ const secondCapital: Capital = {
 beforeEach(() => {
   leaflet.reducedMotion = true
   leaflet.getSize.mockReturnValue({ x: 640, y: 640 })
+  leaflet.invalidateSize.mockClear()
+  Object.defineProperty(window, 'ResizeObserver', { configurable: true, value: undefined })
   Object.defineProperty(window, 'matchMedia', { value: () => ({ matches: leaflet.reducedMotion }), writable: true })
   leaflet.flyTo.mockClear()
   leaflet.setView.mockClear()
   leaflet.stop.mockClear()
+})
+
+describe('CapitalMap viewport resizing', () => {
+  it('uses and cleans up a window-resize fallback when ResizeObserver is unavailable', () => {
+    const { unmount } = render(<CapitalMap capitals={[capital]} target={capital} questionNumber={0} />)
+
+    fireEvent(window, new Event('resize'))
+    expect(leaflet.invalidateSize).toHaveBeenCalledWith({ animate: false, pan: false })
+
+    leaflet.invalidateSize.mockClear()
+    unmount()
+    fireEvent(window, new Event('resize'))
+    expect(leaflet.invalidateSize).not.toHaveBeenCalled()
+  })
+
+  it('invalidates Leaflet dimensions after its container changes size without refocusing the question', () => {
+    let callback: ResizeObserverCallback | undefined
+    const disconnect = vi.fn()
+    const observe = vi.fn()
+    class TestResizeObserver {
+      constructor(nextCallback: ResizeObserverCallback) { callback = nextCallback }
+      observe = observe
+      disconnect = disconnect
+      unobserve = vi.fn()
+    }
+    Object.defineProperty(window, 'ResizeObserver', { configurable: true, value: TestResizeObserver })
+
+    const { unmount } = render(<CapitalMap capitals={[capital]} target={capital} questionNumber={0} />)
+    expect(observe).toHaveBeenCalledWith(document.querySelector('.capital-map'))
+    expect(leaflet.invalidateSize).not.toHaveBeenCalled()
+
+    callback?.([], {} as ResizeObserver)
+    expect(leaflet.invalidateSize).toHaveBeenCalledWith({ animate: false, pan: false })
+    expect(leaflet.stop).toHaveBeenCalledTimes(1)
+
+    unmount()
+    expect(disconnect).toHaveBeenCalledTimes(1)
+  })
 })
 
 describe('CapitalMap semantics', () => {
@@ -89,6 +131,18 @@ describe('CapitalMap semantics', () => {
     rerender(<CapitalMap capitals={[capital, secondCapital]} target={secondCapital} questionNumber={1} />)
     expect(leaflet.stop).toHaveBeenCalledTimes(2)
     expect(leaflet.setView).toHaveBeenLastCalledWith([-18.14, 178.43], 3, { animate: false })
+  })
+
+  it('refocuses the same target for a new presentation key, but ignores ordinary rerenders', () => {
+    const { rerender } = render(<CapitalMap capitals={[capital]} target={capital} questionNumber={4} />)
+    expect(leaflet.stop).toHaveBeenCalledTimes(1)
+
+    rerender(<CapitalMap capitals={[capital]} target={capital} questionNumber={4} statusByCapitalId={{ oslo: 'correct' }} />)
+    expect(leaflet.stop).toHaveBeenCalledTimes(1)
+
+    rerender(<CapitalMap capitals={[capital]} target={capital} questionNumber={5} statusByCapitalId={{ oslo: 'correct' }} />)
+    expect(leaflet.stop).toHaveBeenCalledTimes(2)
+    expect(leaflet.setView).toHaveBeenLastCalledWith([59.91, 10.75], 3, { animate: false })
   })
 
   it('flies to a wide target view when motion is allowed', () => {
@@ -172,5 +226,26 @@ describe('CapitalMap semantics', () => {
     expect(screen.getAllByTestId('capital-marker')).toHaveLength(3)
     expect(leaflet.stop).toHaveBeenCalledTimes(1)
     expect(leaflet.setView).toHaveBeenCalledTimes(1)
+  })
+
+  it('hides learning aids in timed mode and exposes semantic correct/revealed dot states', () => {
+    render(
+      <CapitalMap
+        capitals={[capital, secondCapital]}
+        target={capital}
+        questionNumber={0}
+        mode="timed"
+        statusByCapitalId={{ oslo: 'correct', suva: 'revealed' }}
+      />,
+    )
+
+    expect(screen.queryByRole('switch', { name: 'Country outlines' })).toBeNull()
+    expect(screen.queryByRole('switch', { name: 'Capital names' })).toBeNull()
+    expect(screen.queryByText('Drag to pan · scroll or pinch to zoom')).toBeTruthy()
+    expect(screen.getAllByTestId('capital-marker').map((marker) => marker.getAttribute('data-class-name'))).toEqual([
+      'capital-dot capital-dot-correct',
+      'capital-dot capital-dot-revealed',
+      'target-halo',
+    ])
   })
 })

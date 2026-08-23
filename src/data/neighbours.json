@@ -1,0 +1,4034 @@
+{
+  "version": 1,
+  "checked": "2026-08-20",
+  "entityCodes": [
+    "AFG",
+    "AGO",
+    "ALB",
+    "AND",
+    "ARE",
+    "ARG",
+    "ARM",
+    "ATG",
+    "AUS",
+    "AUT",
+    "AZE",
+    "BDI",
+    "BEL",
+    "BEN",
+    "BFA",
+    "BGD",
+    "BGR",
+    "BHR",
+    "BHS",
+    "BIH",
+    "BLR",
+    "BLZ",
+    "BOL",
+    "BRA",
+    "BRB",
+    "BRN",
+    "BTN",
+    "BWA",
+    "CAF",
+    "CAN",
+    "CHE",
+    "CHL",
+    "CHN",
+    "CIV",
+    "CMR",
+    "COD",
+    "COG",
+    "COL",
+    "COM",
+    "CPV",
+    "CRI",
+    "CUB",
+    "CYP",
+    "CZE",
+    "DEU",
+    "DJI",
+    "DMA",
+    "DNK",
+    "DOM",
+    "DZA",
+    "ECU",
+    "EGY",
+    "ERI",
+    "ESP",
+    "EST",
+    "ETH",
+    "FIN",
+    "FJI",
+    "FRA",
+    "FSM",
+    "GAB",
+    "GBR",
+    "GEO",
+    "GHA",
+    "GIN",
+    "GMB",
+    "GNB",
+    "GNQ",
+    "GRC",
+    "GRD",
+    "GTM",
+    "GUY",
+    "HND",
+    "HRV",
+    "HTI",
+    "HUN",
+    "IDN",
+    "IND",
+    "IRL",
+    "IRN",
+    "IRQ",
+    "ISL",
+    "ISR",
+    "ITA",
+    "JAM",
+    "JOR",
+    "JPN",
+    "KAZ",
+    "KEN",
+    "KGZ",
+    "KHM",
+    "KIR",
+    "KNA",
+    "KOR",
+    "KWT",
+    "LAO",
+    "LBN",
+    "LBR",
+    "LBY",
+    "LCA",
+    "LIE",
+    "LKA",
+    "LSO",
+    "LTU",
+    "LUX",
+    "LVA",
+    "MAR",
+    "MCO",
+    "MDA",
+    "MDG",
+    "MDV",
+    "MEX",
+    "MHL",
+    "MKD",
+    "MLI",
+    "MLT",
+    "MMR",
+    "MNE",
+    "MNG",
+    "MOZ",
+    "MRT",
+    "MUS",
+    "MWI",
+    "MYS",
+    "NAM",
+    "NER",
+    "NGA",
+    "NIC",
+    "NLD",
+    "NOR",
+    "NPL",
+    "NRU",
+    "NZL",
+    "OMN",
+    "PAK",
+    "PAN",
+    "PER",
+    "PHL",
+    "PLW",
+    "PNG",
+    "POL",
+    "PRK",
+    "PRT",
+    "PRY",
+    "PSE",
+    "QAT",
+    "ROU",
+    "RUS",
+    "RWA",
+    "SAU",
+    "SDN",
+    "SEN",
+    "SGP",
+    "SLB",
+    "SLE",
+    "SLV",
+    "SMR",
+    "SOM",
+    "SRB",
+    "SSD",
+    "STP",
+    "SUR",
+    "SVK",
+    "SVN",
+    "SWE",
+    "SWZ",
+    "SYC",
+    "SYR",
+    "TCD",
+    "TGO",
+    "THA",
+    "TJK",
+    "TKM",
+    "TLS",
+    "TON",
+    "TTO",
+    "TUN",
+    "TUR",
+    "TUV",
+    "TWN",
+    "TZA",
+    "UGA",
+    "UKR",
+    "URY",
+    "USA",
+    "UZB",
+    "VAT",
+    "VCT",
+    "VEN",
+    "VNM",
+    "VUT",
+    "WSM",
+    "XKX",
+    "YEM",
+    "ZAF",
+    "ZMB",
+    "ZWE"
+  ],
+  "sourceCatalog": [
+    {
+      "id": "un-geodata",
+      "title": "UN Geospatial Data",
+      "url": "https://geoportal.un.org/arcgis/home/item.html?id=e4ee80edac9d4e08b8303522dd4a5fc1",
+      "checked": "2026-08-20",
+      "description": "Baseline audit of ordinary adjacency; not a legal delimitation or answer generator."
+    },
+    {
+      "id": "un-maps",
+      "title": "United Nations Maps",
+      "url": "https://maps.un.org/",
+      "checked": "2026-08-20",
+      "description": "General neutral map reference."
+    },
+    {
+      "id": "china-india-lac-agreement",
+      "title": "Agreement on the Maintenance of Peace and Tranquility along the Line of Actual Control in the India-China Border Areas",
+      "url": "https://peacemaker.un.org/en/node/9226",
+      "checked": "2026-08-20",
+      "description": "UN record of the bilateral agreement documenting the LAC/boundary question without resolving delimitation."
+    },
+    {
+      "id": "palestine-ocha",
+      "title": "OCHA occupied Palestinian territory overview map",
+      "url": "https://www.ochaopt.org/sites/default/files/ocha_opt_overview_map_june_2010.pdf",
+      "checked": "2026-08-20",
+      "description": "Palestine-sensitive mapping audit."
+    },
+    {
+      "id": "kosovo-yearbook",
+      "title": "Kosovo Statistical Yearbook",
+      "url": "https://askapi.rks-gov.net/Custom/4bd04f76-1e2b-444c-8dc1-86d3edf20225.pdf",
+      "checked": "2026-08-20",
+      "description": "Kosovo boundary audit."
+    },
+    {
+      "id": "western-sahara-un-map",
+      "title": "UN map of Western Sahara",
+      "url": "https://www.un.org/geospatial/sites/www.un.org.geospatial/files/files/documents/2023/Sep/western_sahara_3175_r4_oct12_120.pdf",
+      "checked": "2026-08-20",
+      "description": "Western Sahara exclusion audit."
+    },
+    {
+      "id": "israel-syria-un-map",
+      "title": "UN Israel–Syria armistice map",
+      "url": "https://www.un.org/unispal/document/auto-insert-183273/",
+      "checked": "2026-08-20",
+      "description": "Israel–Syria-sensitive mapping audit."
+    },
+    {
+      "id": "pakistan-un-map",
+      "title": "UN map of Pakistan",
+      "url": "https://www.un.org/geospatial/sites/www.un.org.geospatial/files/files/documents/2020/Apr/pakistan_4181_r1_converted_120.pdf",
+      "checked": "2026-08-20",
+      "description": "Pakistan, India, China and Afghanistan-sensitive mapping audit."
+    },
+    {
+      "id": "sudan-south-sudan-un-map",
+      "title": "UN map of Sudan and South Sudan",
+      "url": "https://www.un.org/geospatial/file/4850/download?token=9bDMTJ69",
+      "checked": "2026-08-20",
+      "description": "Sudan–South Sudan audit."
+    },
+    {
+      "id": "belize-guatemala-icj",
+      "title": "Belize–Guatemala special agreement",
+      "url": "https://api.icj-cij.org/sites/default/files/case-related/177/177-20081208-SPE-01-00-EN.pdf",
+      "checked": "2026-08-20",
+      "description": "Belize–Guatemala audit."
+    },
+    {
+      "id": "armenia-azerbaijan-un-filing",
+      "title": "UN filing concerning Armenia and Azerbaijan",
+      "url": "https://documents.un.org/doc/undoc/gen/n23/214/96/pdf/n2321496.pdf",
+      "checked": "2026-08-20",
+      "description": "Armenia–Azerbaijan audit."
+    },
+    {
+      "id": "kaliningrad-poland",
+      "title": "Poland Ministry of Interior: cross-border cooperation",
+      "url": "https://www.gov.pl/web/mswia-en/inter-governmental-councils-and-commissions-for-cross-border-and-interregional-cooperation",
+      "checked": "2026-08-20",
+      "description": "Kaliningrad audit."
+    },
+    {
+      "id": "nakhchivan-azerbaijan",
+      "title": "Azerbaijan MFA: Nakhchivan",
+      "url": "https://thehague.mfa.gov.az/en/news/nakhchivan-islamic-capital-of-culture",
+      "checked": "2026-08-20",
+      "description": "Nakhchivan audit."
+    },
+    {
+      "id": "cabinda-angola",
+      "title": "Angola transport authority: Cabinda border activity",
+      "url": "https://antt.gov.ao/pt/noticias/ANTT-e-CGCF-Iniciam-Actividades-Transfronteiricas-no-Yema-e-Visitam-Delegacao-Aduaneira-de-Massabi",
+      "checked": "2026-08-20",
+      "description": "Cabinda audit."
+    },
+    {
+      "id": "french-guiana-treaty",
+      "title": "UN Treaty Series: France–Brazil frontier",
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%201298/v1298.pdf",
+      "checked": "2026-08-20",
+      "description": "French Guiana audit."
+    },
+    {
+      "id": "ceuta-melilla-spain",
+      "title": "Spanish Government: Ceuta and Melilla border information",
+      "url": "https://www.lamoncloa.gob.es/lang/en/gobierno/news/Paginas/2022/20220512_morocco-borders.aspx",
+      "checked": "2026-08-20",
+      "description": "Ceuta/Melilla audit."
+    },
+    {
+      "id": "gibraltar-uk",
+      "title": "UK administrative arrangement on Gibraltar border checks",
+      "url": "https://assets.publishing.service.gov.uk/media/6a54f608c3d64d94cacab896/Administrative_Arrangement_on_Border_Checks_and_Border_Surveillance.pdf",
+      "checked": "2026-08-20",
+      "description": "Gibraltar dependency exclusion."
+    },
+    {
+      "id": "uk-sba",
+      "title": "UK Overseas Territories profile",
+      "url": "https://assets.publishing.service.gov.uk/media/5a790a78ed915d07d35b4643/overseas_territories.pdf",
+      "checked": "2026-08-20",
+      "description": "Sovereign Base Areas exclusion."
+    },
+    {
+      "id": "kazungula-zambia-act",
+      "title": "Zambia Kazungula Bridge Authority Act 2024",
+      "url": "https://www.parliament.gov.zm/sites/default/files/documents/acts/Kazungula%20Bridge%20Authority%20Act%20No.%2012%20of%202024.pdf",
+      "checked": "2026-08-20",
+      "description": "Botswana–Zambia boundary/bridge audit."
+    },
+    {
+      "id": "latvia-geospatial-border",
+      "title": "Latvian Geospatial Information Agency: state-border maps",
+      "url": "https://www.lgia.gov.lv/en/valsts-robezas-kartes",
+      "checked": "2026-08-20",
+      "description": "Latvia–Lithuania boundary audit."
+    },
+    {
+      "id": "mali-un-map",
+      "title": "UN map of Mali",
+      "url": "https://www.un.org/geospatial/file/2090/download?token=LYA5hpYH",
+      "checked": "2026-08-20",
+      "description": "Mali–Mauritania and Mali–Niger boundary audit."
+    },
+    {
+      "id": "mongolia-immigration",
+      "title": "Mongolia Immigration Agency: border checkpoints",
+      "url": "https://immigration.gov.mn/mn/boomt/",
+      "checked": "2026-08-20",
+      "description": "Mongolia–Russia boundary audit."
+    },
+    {
+      "id": "oman-saudi-un-map",
+      "title": "UN treaty-map record for Oman–Saudi Arabia",
+      "url": "https://digitallibrary.un.org/record/627116?ln=en",
+      "checked": "2026-08-20",
+      "description": "Oman–Saudi Arabia boundary audit."
+    },
+    {
+      "id": "oman-yemen-un-map",
+      "title": "UN treaty-map record for Oman–Yemen",
+      "url": "https://digitallibrary.un.org/record/632761?ln=en",
+      "checked": "2026-08-20",
+      "description": "Oman–Yemen boundary audit."
+    },
+    {
+      "id": "qatar-saudi-un-treaty",
+      "title": "UN Treaty Collection record for Qatar–Saudi Arabia",
+      "url": "https://treaties.un.org/pages/showDetails.aspx?objid=08000002800b44a0",
+      "checked": "2026-08-20",
+      "description": "Qatar–Saudi Arabia boundary audit."
+    },
+    {
+      "id": "croatia-montenegro-border-police",
+      "title": "Montenegro Border Police: characteristics of the state border",
+      "url": "https://www.gov.me/en/article/characteristics-of-the-state-border",
+      "checked": "2026-08-20",
+      "description": "Croatia–Montenegro boundary audit."
+    },
+    {
+      "id": "russia-ukraine-un-map",
+      "title": "UN treaty-map record for Russia–Ukraine",
+      "url": "https://digitallibrary.un.org/record/3812430?ln=en",
+      "checked": "2026-08-20",
+      "description": "Russia–Ukraine boundary audit."
+    },
+    {
+      "id": "eritrea-ethiopia-pca",
+      "title": "Permanent Court of Arbitration: Eritrea–Ethiopia Boundary Commission",
+      "url": "https://pca-cpa.org/en/cases/99/",
+      "checked": "2026-08-20",
+      "description": "Eritrea–Ethiopia boundary audit."
+    },
+    {
+      "id": "georgia-border-police",
+      "title": "Georgia Border Police",
+      "url": "https://police.ge/en/ministry/structure-and-offices/border-police?sub=247",
+      "checked": "2026-08-20",
+      "description": "Georgia–Russia boundary audit."
+    },
+    {
+      "id": "guyana-frontiers",
+      "title": "Guyana Ministry of Foreign Affairs: Frontiers Department",
+      "url": "https://www.minfor.gov.gy/index.php/frontiers-department",
+      "checked": "2026-08-20",
+      "description": "Guyana–Suriname boundary audit."
+    },
+    {
+      "id": "guyana-venezuela-icj",
+      "title": "International Court of Justice: Guyana v. Venezuela",
+      "url": "https://www.icj-cij.org/case/171",
+      "checked": "2026-08-20",
+      "description": "Guyana–Venezuela boundary audit."
+    },
+    {
+      "id": "croatia-serbia-border-crossings",
+      "title": "Croatian Government: border-crossing points",
+      "url": "https://www.gov.hr/en/visa-issuance-at-border-crossing-points/1218",
+      "checked": "2026-08-20",
+      "description": "Croatia–Serbia boundary audit."
+    }
+  ],
+  "boundaries": [
+    {
+      "codes": [
+        "AFG",
+        "CHN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AFG",
+        "IRN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AFG",
+        "PAK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "pakistan-un-map"
+      ],
+      "note": "Included as the Afghanistan–Pakistan boundary; the Durand Line remains disputed."
+    },
+    {
+      "codes": [
+        "AFG",
+        "TJK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AFG",
+        "TKM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AFG",
+        "UZB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AGO",
+        "COD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AGO",
+        "COG"
+      ],
+      "boundaryType": "land",
+      "scope": "exclave",
+      "sourceRefs": [
+        "un-geodata",
+        "cabinda-angola"
+      ],
+      "note": "Cabinda exclave boundary."
+    },
+    {
+      "codes": [
+        "AGO",
+        "NAM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AGO",
+        "ZMB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ALB",
+        "GRC"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ALB",
+        "MKD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ALB",
+        "MNE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ALB",
+        "XKX"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "kosovo-yearbook"
+      ],
+      "note": "Kosovo study-entity boundary."
+    },
+    {
+      "codes": [
+        "AND",
+        "ESP"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AND",
+        "FRA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ARE",
+        "OMN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ARE",
+        "SAU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ARG",
+        "BOL"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ARG",
+        "BRA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ARG",
+        "CHL"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ARG",
+        "PRY"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ARG",
+        "URY"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ARM",
+        "AZE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "armenia-azerbaijan-un-filing"
+      ],
+      "note": "Included without taking a position on delimitation or control."
+    },
+    {
+      "codes": [
+        "ARM",
+        "GEO"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ARM",
+        "IRN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ARM",
+        "TUR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AUT",
+        "CHE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AUT",
+        "CZE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AUT",
+        "DEU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AUT",
+        "HUN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AUT",
+        "ITA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AUT",
+        "LIE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AUT",
+        "SVK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AUT",
+        "SVN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AZE",
+        "GEO"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AZE",
+        "IRN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AZE",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "AZE",
+        "TUR"
+      ],
+      "boundaryType": "land",
+      "scope": "exclave",
+      "sourceRefs": [
+        "un-geodata",
+        "nakhchivan-azerbaijan"
+      ],
+      "note": "Nakhchivan exclave boundary."
+    },
+    {
+      "codes": [
+        "BDI",
+        "COD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BDI",
+        "RWA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BDI",
+        "TZA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BEL",
+        "DEU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BEL",
+        "FRA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BEL",
+        "LUX"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BEL",
+        "NLD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BEN",
+        "BFA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BEN",
+        "NER"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BEN",
+        "NGA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BEN",
+        "TGO"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BFA",
+        "CIV"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BFA",
+        "GHA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BFA",
+        "MLI"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BFA",
+        "NER"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BFA",
+        "TGO"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BGD",
+        "IND"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BGD",
+        "MMR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BGR",
+        "GRC"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BGR",
+        "MKD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BGR",
+        "ROU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BGR",
+        "SRB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BGR",
+        "TUR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BIH",
+        "HRV"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BIH",
+        "MNE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BIH",
+        "SRB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BLR",
+        "LTU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BLR",
+        "LVA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BLR",
+        "POL"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BLR",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BLR",
+        "UKR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BLZ",
+        "GTM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "belize-guatemala-icj"
+      ],
+      "note": "Included while the territorial dispute remains unresolved."
+    },
+    {
+      "codes": [
+        "BLZ",
+        "MEX"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BOL",
+        "BRA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BOL",
+        "CHL"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BOL",
+        "PER"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BOL",
+        "PRY"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BRA",
+        "COL"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BRA",
+        "FRA"
+      ],
+      "boundaryType": "land",
+      "scope": "integral-territory",
+      "sourceRefs": [
+        "un-geodata",
+        "french-guiana-treaty"
+      ],
+      "note": "French Guiana is integral French territory for this policy."
+    },
+    {
+      "codes": [
+        "BRA",
+        "GUY"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BRA",
+        "PER"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BRA",
+        "PRY"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BRA",
+        "SUR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BRA",
+        "URY"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BRA",
+        "VEN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BRN",
+        "MYS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BTN",
+        "CHN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BTN",
+        "IND"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BWA",
+        "NAM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BWA",
+        "ZAF"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "BWA",
+        "ZMB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "kazungula-zambia-act"
+      ],
+      "note": "Short Botswana–Zambia terrestrial boundary at Kazungula."
+    },
+    {
+      "codes": [
+        "BWA",
+        "ZWE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CAF",
+        "CMR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CAF",
+        "COD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CAF",
+        "COG"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CAF",
+        "SDN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CAF",
+        "SSD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CAF",
+        "TCD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CAN",
+        "USA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHE",
+        "DEU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHE",
+        "FRA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHE",
+        "ITA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHE",
+        "LIE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHL",
+        "PER"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHN",
+        "IND"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "china-india-lac-agreement"
+      ],
+      "note": "Included without taking a position on the Line of Actual Control."
+    },
+    {
+      "codes": [
+        "CHN",
+        "KAZ"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHN",
+        "KGZ"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHN",
+        "LAO"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHN",
+        "MMR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHN",
+        "MNG"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHN",
+        "NPL"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHN",
+        "PAK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHN",
+        "PRK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHN",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHN",
+        "TJK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CHN",
+        "VNM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CIV",
+        "GHA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CIV",
+        "GIN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CIV",
+        "LBR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CIV",
+        "MLI"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CMR",
+        "COG"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CMR",
+        "GAB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CMR",
+        "GNQ"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CMR",
+        "NGA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CMR",
+        "TCD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "COD",
+        "COG"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "COD",
+        "RWA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "COD",
+        "SSD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "COD",
+        "TZA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "COD",
+        "UGA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "COD",
+        "ZMB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "COG",
+        "GAB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "COL",
+        "ECU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "COL",
+        "PAN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "COL",
+        "PER"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "COL",
+        "VEN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CRI",
+        "NIC"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CRI",
+        "PAN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CZE",
+        "DEU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CZE",
+        "POL"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CZE",
+        "SVK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DEU",
+        "DNK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DEU",
+        "FRA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DEU",
+        "LUX"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DEU",
+        "NLD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DEU",
+        "POL"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DJI",
+        "ERI"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DJI",
+        "ETH"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DJI",
+        "SOM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DOM",
+        "HTI"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DZA",
+        "LBY"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DZA",
+        "MAR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DZA",
+        "MLI"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DZA",
+        "MRT"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DZA",
+        "NER"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "DZA",
+        "TUN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ECU",
+        "PER"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "EGY",
+        "ISR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "EGY",
+        "LBY"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "EGY",
+        "PSE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "palestine-ocha"
+      ],
+      "note": "Gaza–Egypt boundary."
+    },
+    {
+      "codes": [
+        "EGY",
+        "SDN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ERI",
+        "ETH"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "eritrea-ethiopia-pca"
+      ],
+      "note": "Included while boundary implementation issues remain unresolved."
+    },
+    {
+      "codes": [
+        "ERI",
+        "SDN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ESP",
+        "FRA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ESP",
+        "MAR"
+      ],
+      "boundaryType": "land",
+      "scope": "integral-territory",
+      "sourceRefs": [
+        "un-geodata",
+        "ceuta-melilla-spain"
+      ],
+      "note": "Ceuta and Melilla are integral Spanish territory for this policy."
+    },
+    {
+      "codes": [
+        "ESP",
+        "PRT"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "EST",
+        "LVA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "EST",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ETH",
+        "KEN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ETH",
+        "SDN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ETH",
+        "SOM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ETH",
+        "SSD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "FIN",
+        "NOR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "FIN",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "FIN",
+        "SWE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "FRA",
+        "ITA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "FRA",
+        "LUX"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "FRA",
+        "MCO"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "FRA",
+        "SUR"
+      ],
+      "boundaryType": "land",
+      "scope": "integral-territory",
+      "sourceRefs": [
+        "un-geodata",
+        "french-guiana-treaty"
+      ],
+      "note": "French Guiana is integral French territory for this policy."
+    },
+    {
+      "codes": [
+        "GAB",
+        "GNQ"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GBR",
+        "IRL"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GEO",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "georgia-border-police"
+      ],
+      "note": "Included without taking a position on disputed regions or boundary control."
+    },
+    {
+      "codes": [
+        "GEO",
+        "TUR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GHA",
+        "TGO"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GIN",
+        "GNB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GIN",
+        "LBR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GIN",
+        "MLI"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GIN",
+        "SEN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GIN",
+        "SLE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GMB",
+        "SEN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GNB",
+        "SEN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GRC",
+        "MKD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GRC",
+        "TUR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GTM",
+        "HND"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GTM",
+        "MEX"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GTM",
+        "SLV"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "GUY",
+        "SUR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "guyana-frontiers"
+      ],
+      "note": "Included while the boundary dispute remains unresolved."
+    },
+    {
+      "codes": [
+        "GUY",
+        "VEN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "guyana-venezuela-icj"
+      ],
+      "note": "Included while the Essequibo dispute remains unresolved."
+    },
+    {
+      "codes": [
+        "HND",
+        "NIC"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "HND",
+        "SLV"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "HRV",
+        "HUN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "HRV",
+        "MNE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "croatia-montenegro-border-police"
+      ]
+    },
+    {
+      "codes": [
+        "HRV",
+        "SRB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "croatia-serbia-border-crossings"
+      ],
+      "note": "Danube boundary treated as a terrestrial river boundary."
+    },
+    {
+      "codes": [
+        "HRV",
+        "SVN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "HUN",
+        "ROU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "HUN",
+        "SRB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "HUN",
+        "SVK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "HUN",
+        "SVN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "HUN",
+        "UKR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IDN",
+        "MYS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IDN",
+        "PNG"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IDN",
+        "TLS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IND",
+        "MMR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IND",
+        "NPL"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IND",
+        "PAK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "pakistan-un-map"
+      ],
+      "note": "Included without taking a position on the Line of Control."
+    },
+    {
+      "codes": [
+        "IRN",
+        "IRQ"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IRN",
+        "PAK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IRN",
+        "TKM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IRN",
+        "TUR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IRQ",
+        "JOR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IRQ",
+        "KWT"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IRQ",
+        "SAU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IRQ",
+        "SYR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "IRQ",
+        "TUR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ISR",
+        "JOR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ISR",
+        "LBN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ISR",
+        "PSE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "palestine-ocha"
+      ],
+      "note": "Palestine–Israel boundary."
+    },
+    {
+      "codes": [
+        "ISR",
+        "SYR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "israel-syria-un-map"
+      ],
+      "note": "Included without taking a position on the Golan Heights."
+    },
+    {
+      "codes": [
+        "ITA",
+        "SMR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ITA",
+        "SVN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ITA",
+        "VAT"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "JOR",
+        "PSE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "palestine-ocha"
+      ],
+      "note": "Palestine–Jordan boundary."
+    },
+    {
+      "codes": [
+        "JOR",
+        "SAU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "JOR",
+        "SYR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KAZ",
+        "KGZ"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KAZ",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KAZ",
+        "TKM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KAZ",
+        "UZB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KEN",
+        "SOM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KEN",
+        "SSD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KEN",
+        "TZA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KEN",
+        "UGA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KGZ",
+        "TJK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KGZ",
+        "UZB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KHM",
+        "LAO"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KHM",
+        "THA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KHM",
+        "VNM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KOR",
+        "PRK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "KWT",
+        "SAU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LAO",
+        "MMR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LAO",
+        "THA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LAO",
+        "VNM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LBN",
+        "SYR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LBR",
+        "SLE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LBY",
+        "NER"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LBY",
+        "SDN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LBY",
+        "TCD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LBY",
+        "TUN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LSO",
+        "ZAF"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LTU",
+        "LVA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "latvia-geospatial-border"
+      ]
+    },
+    {
+      "codes": [
+        "LTU",
+        "POL"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "LTU",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "exclave",
+      "sourceRefs": [
+        "un-geodata",
+        "kaliningrad-poland"
+      ],
+      "note": "Kaliningrad exclave boundary."
+    },
+    {
+      "codes": [
+        "LVA",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MDA",
+        "ROU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MDA",
+        "UKR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MEX",
+        "USA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MKD",
+        "SRB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MKD",
+        "XKX"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "kosovo-yearbook"
+      ],
+      "note": "Kosovo study-entity boundary."
+    },
+    {
+      "codes": [
+        "MLI",
+        "MRT"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "mali-un-map"
+      ]
+    },
+    {
+      "codes": [
+        "MLI",
+        "NER"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "mali-un-map"
+      ]
+    },
+    {
+      "codes": [
+        "MLI",
+        "SEN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MMR",
+        "THA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MNE",
+        "SRB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MNE",
+        "XKX"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "kosovo-yearbook"
+      ],
+      "note": "Kosovo study-entity boundary."
+    },
+    {
+      "codes": [
+        "MNG",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "mongolia-immigration"
+      ]
+    },
+    {
+      "codes": [
+        "MOZ",
+        "MWI"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MOZ",
+        "SWZ"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MOZ",
+        "TZA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MOZ",
+        "ZAF"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MOZ",
+        "ZMB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MOZ",
+        "ZWE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MRT",
+        "SEN"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MWI",
+        "TZA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MWI",
+        "ZMB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "MYS",
+        "THA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "NAM",
+        "ZAF"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "NAM",
+        "ZMB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "NER",
+        "NGA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "NER",
+        "TCD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "NGA",
+        "TCD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "NOR",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "NOR",
+        "SWE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "OMN",
+        "SAU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "oman-saudi-un-map"
+      ]
+    },
+    {
+      "codes": [
+        "OMN",
+        "YEM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "oman-yemen-un-map"
+      ]
+    },
+    {
+      "codes": [
+        "POL",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "exclave",
+      "sourceRefs": [
+        "un-geodata",
+        "kaliningrad-poland"
+      ],
+      "note": "Kaliningrad exclave boundary."
+    },
+    {
+      "codes": [
+        "POL",
+        "SVK"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "POL",
+        "UKR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "PRK",
+        "RUS"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "QAT",
+        "SAU"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "qatar-saudi-un-treaty"
+      ]
+    },
+    {
+      "codes": [
+        "ROU",
+        "SRB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ROU",
+        "UKR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "RUS",
+        "UKR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "russia-ukraine-un-map"
+      ],
+      "note": "Included as a reciprocal study edge without taking a position on sovereignty, control, or delimitation."
+    },
+    {
+      "codes": [
+        "RWA",
+        "TZA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "RWA",
+        "UGA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "SAU",
+        "YEM"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "SDN",
+        "SSD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "sudan-south-sudan-un-map"
+      ],
+      "note": "Included while boundary delimitation and status questions remain unresolved."
+    },
+    {
+      "codes": [
+        "SDN",
+        "TCD"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "SRB",
+        "XKX"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata",
+        "kosovo-yearbook"
+      ],
+      "note": "Kosovo study-entity boundary."
+    },
+    {
+      "codes": [
+        "SSD",
+        "UGA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "SVK",
+        "UKR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "SWZ",
+        "ZAF"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "SYR",
+        "TUR"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "TJK",
+        "UZB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "TKM",
+        "UZB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "TZA",
+        "UGA"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "TZA",
+        "ZMB"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ZAF",
+        "ZWE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ZMB",
+        "ZWE"
+      ],
+      "boundaryType": "land",
+      "scope": "ordinary",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    }
+  ],
+  "excludedContacts": [
+    {
+      "codes": [
+        "CAN",
+        "DNK"
+      ],
+      "reason": "Greenland is outside the sovereign-study deck and does not create a Denmark–Canada edge.",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "CYP",
+        "GBR"
+      ],
+      "reason": "UK Sovereign Base Areas are dependency-only contacts and excluded.",
+      "sourceRefs": [
+        "uk-sba"
+      ]
+    },
+    {
+      "codes": [
+        "CYP",
+        "TUR"
+      ],
+      "reason": "No eligible terrestrial sovereign-study boundary is recorded.",
+      "sourceRefs": [
+        "un-geodata"
+      ]
+    },
+    {
+      "codes": [
+        "ESP",
+        "GBR"
+      ],
+      "reason": "Gibraltar is a UK Overseas Territory and does not create a Spain–United Kingdom edge.",
+      "sourceRefs": [
+        "gibraltar-uk"
+      ]
+    },
+    {
+      "codes": [
+        "MAR",
+        "MRT"
+      ],
+      "reason": "Western Sahara is not a study entity and does not create a Morocco–Mauritania edge.",
+      "sourceRefs": [
+        "western-sahara-un-map"
+      ]
+    }
+  ]
+}

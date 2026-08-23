@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { CircleMarker, GeoJSON, MapContainer, Pane, Tooltip, useMap } from 'react-leaflet'
 import type { Capital } from '../../core/capital'
 import { COUNTRY_OUTLINES_PANE, COUNTRY_OUTLINES_PANE_Z_INDEX, countryBoundaryLines } from './countryBoundaries'
+import type { CapitalMapMode, CapitalStatus } from './capitalMapModes'
 import { MAP_LABEL, MAP_PAN_BOUNDS, MAP_VIEWPORT_OPTIONS, WORLD_BOUNDS, targetFocusZoom } from './mapViewport'
 
 function FocusMapOnTarget({ target, questionNumber }: { target: Capital; questionNumber: number }) {
@@ -35,15 +36,49 @@ function SetMapSemantics() {
   return null
 }
 
+function InvalidateMapSizeOnResize() {
+  const map = useMap()
+
+  useEffect(() => {
+    const invalidate = () => map.invalidateSize({ animate: false, pan: false })
+    const container = map.getContainer()
+    const ResizeObserverConstructor = window.ResizeObserver
+
+    if (ResizeObserverConstructor) {
+      const observer = new ResizeObserverConstructor(invalidate)
+      observer.observe(container)
+      return () => observer.disconnect()
+    }
+
+    window.addEventListener('resize', invalidate)
+    return () => window.removeEventListener('resize', invalidate)
+  }, [map])
+
+  return null
+}
+
 type CapitalMapProps = {
   capitals: readonly Capital[]
   target: Capital
   questionNumber: number
+  mode?: CapitalMapMode
+  statusByCapitalId?: Readonly<Record<string, CapitalStatus>>
 }
 
-export function CapitalMap({ capitals, target, questionNumber }: CapitalMapProps) {
+function markerStyle(status: CapitalStatus | undefined) {
+  if (status === 'correct') {
+    return { color: '#58c997', weight: 1.25, fillColor: '#a7f1cb', fillOpacity: 0.98, className: 'capital-dot capital-dot-correct' }
+  }
+  if (status === 'revealed') {
+    return { color: '#e6746c', weight: 1.25, fillColor: '#ffb4ae', fillOpacity: 0.98, className: 'capital-dot capital-dot-revealed' }
+  }
+  return { color: '#a8c9ff', weight: 1, fillColor: '#dbe9ff', fillOpacity: 0.9, className: 'capital-dot capital-dot-pending' }
+}
+
+export function CapitalMap({ capitals, target, questionNumber, mode = 'practice', statusByCapitalId = {} }: CapitalMapProps) {
   const [showCountryOutlines, setShowCountryOutlines] = useState(false)
   const [showCapitalNames, setShowCapitalNames] = useState(false)
+  const showAids = mode === 'practice'
 
   return (
     <section className="map-shell" role="region" aria-label={MAP_LABEL}>
@@ -61,7 +96,8 @@ export function CapitalMap({ capitals, target, questionNumber }: CapitalMapProps
       >
         <FocusMapOnTarget target={target} questionNumber={questionNumber} />
         <SetMapSemantics />
-        {showCountryOutlines && (
+        <InvalidateMapSizeOnResize />
+        {showAids && showCountryOutlines && (
           <Pane name={COUNTRY_OUTLINES_PANE} style={{ zIndex: COUNTRY_OUTLINES_PANE_Z_INDEX }}>
             <GeoJSON
               data={countryBoundaryLines}
@@ -75,10 +111,10 @@ export function CapitalMap({ capitals, target, questionNumber }: CapitalMapProps
             key={capital.id}
             center={[capital.latitude, capital.longitude]}
             radius={2.75}
-            pathOptions={{ color: '#a8c9ff', weight: 1, fillColor: '#dbe9ff', fillOpacity: 0.9 }}
+            pathOptions={markerStyle(statusByCapitalId[capital.id])}
             interactive={false}
           >
-            {showCapitalNames && (
+            {showAids && showCapitalNames && (
               <Tooltip permanent interactive={false} direction="right" offset={[5, 0]} className="capital-name-label">
                 {capital.capital}
               </Tooltip>
@@ -92,7 +128,7 @@ export function CapitalMap({ capitals, target, questionNumber }: CapitalMapProps
           interactive={false}
         />
       </MapContainer>
-      <div className="map-display-options" role="group" aria-label="Map display options">
+      {showAids && <div className="map-display-options" role="group" aria-label="Map display options">
         <button
           className="map-layer-switch"
           type="button"
@@ -115,7 +151,7 @@ export function CapitalMap({ capitals, target, questionNumber }: CapitalMapProps
           <span>Capital names</span>
           <span className="map-layer-switch-state" aria-hidden="true">{showCapitalNames ? 'On' : 'Off'}</span>
         </button>
-      </div>
+      </div>}
       <p className="map-hint">Drag to pan · scroll or pinch to zoom</p>
     </section>
   )

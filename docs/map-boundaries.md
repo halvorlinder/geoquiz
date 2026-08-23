@@ -14,3 +14,30 @@ The **Country outlines** switch draws an optional, unlabelled line layer behind 
 Natural Earth data are in the public domain. The `world-atlas@2.0.2` redistribution package is ISC-licensed, and `topojson-client@3.1.0` is ISC-licensed. The development-only `@types/topojson-client@3.1.4` typings (and its transitive TopoJSON-specification typings) are MIT-licensed. These package licenses apply to their code and packaging, not to a new claim over the underlying public-domain Natural Earth data.
 
 For package source and license texts, see the installed `world-atlas` and `topojson-client` package metadata in this repository's lockfile and their published npm packages.
+
+## Display boundary sources
+
+The existing optional capital-map outlines continue to use their own bundled
+`world-atlas/countries-110m.json` line conversion. They are unrelated to the
+country-silhouette dataset described in [country-shapes.md](country-shapes.md).
+The silhouette source is display-only and must never be used to infer quiz
+neighbours, recognition, sovereignty, or answer policy.
+
+## Review cadence
+
+The optional boundary source and conversion were checked on **2026-08-20**:
+Natural Earth v4.1.0 at 1:110m, bundled by `world-atlas@2.0.2`, converted with
+`topojson-client@3.1.0`. Review this document and the rendered line behavior at
+least annually, and immediately when any of these changes:
+
+- the `world-atlas` package, Natural Earth source version, or selected 110m
+  topology;
+- `topojson-client`, mesh conversion, antimeridian splitting, or Leaflet
+  rendering behavior; or
+- the optional-outline study-context policy or capital-map display invariants.
+
+For an approved update, record the new version and checked date, run lint,
+`npm run validate:data`, tests, and a production build, then complete the
+required Chrome MCP matrix. That matrix must verify outline Off/On, distant
+target changes, pan/zoom, reduced motion, console output, local-only network
+activity, and absence of cross-world line artifacts before publication.

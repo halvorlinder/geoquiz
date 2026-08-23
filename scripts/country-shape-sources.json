@@ -1,0 +1,1199 @@
+{
+  "version": 2,
+  "source": "world-atlas@2.0.2 / Natural Earth v4.1.0 countries-50m, with Tuvalu countries-10m fallback; audited geoBoundaries 6.0 microstate overrides are locked in geoboundaries-shape-overrides.json",
+  "geoBoundariesOverridesManifest": "geoboundaries-shape-overrides.json",
+  "mappings": [
+    {
+      "code": "AFG",
+      "resolution": "50m",
+      "sourceId": "004",
+      "sourceName": "Afghanistan"
+    },
+    {
+      "code": "AGO",
+      "resolution": "50m",
+      "sourceId": "024",
+      "sourceName": "Angola"
+    },
+    {
+      "code": "ALB",
+      "resolution": "50m",
+      "sourceId": "008",
+      "sourceName": "Albania"
+    },
+    {
+      "code": "AND",
+      "resolution": "50m",
+      "sourceId": "020",
+      "sourceName": "Andorra"
+    },
+    {
+      "code": "ARE",
+      "resolution": "50m",
+      "sourceId": "784",
+      "sourceName": "United Arab Emirates"
+    },
+    {
+      "code": "ARG",
+      "resolution": "50m",
+      "sourceId": "032",
+      "sourceName": "Argentina"
+    },
+    {
+      "code": "ARM",
+      "resolution": "50m",
+      "sourceId": "051",
+      "sourceName": "Armenia"
+    },
+    {
+      "code": "ATG",
+      "resolution": "50m",
+      "sourceId": "028",
+      "sourceName": "Antigua and Barb."
+    },
+    {
+      "code": "AUS",
+      "resolution": "50m",
+      "sourceId": "036",
+      "sourceName": "Australia"
+    },
+    {
+      "code": "AUT",
+      "resolution": "50m",
+      "sourceId": "040",
+      "sourceName": "Austria"
+    },
+    {
+      "code": "AZE",
+      "resolution": "50m",
+      "sourceId": "031",
+      "sourceName": "Azerbaijan"
+    },
+    {
+      "code": "BDI",
+      "resolution": "50m",
+      "sourceId": "108",
+      "sourceName": "Burundi"
+    },
+    {
+      "code": "BEL",
+      "resolution": "50m",
+      "sourceId": "056",
+      "sourceName": "Belgium"
+    },
+    {
+      "code": "BEN",
+      "resolution": "50m",
+      "sourceId": "204",
+      "sourceName": "Benin"
+    },
+    {
+      "code": "BFA",
+      "resolution": "50m",
+      "sourceId": "854",
+      "sourceName": "Burkina Faso"
+    },
+    {
+      "code": "BGD",
+      "resolution": "50m",
+      "sourceId": "050",
+      "sourceName": "Bangladesh"
+    },
+    {
+      "code": "BGR",
+      "resolution": "50m",
+      "sourceId": "100",
+      "sourceName": "Bulgaria"
+    },
+    {
+      "code": "BHR",
+      "resolution": "50m",
+      "sourceId": "048",
+      "sourceName": "Bahrain"
+    },
+    {
+      "code": "BHS",
+      "resolution": "50m",
+      "sourceId": "044",
+      "sourceName": "Bahamas"
+    },
+    {
+      "code": "BIH",
+      "resolution": "50m",
+      "sourceId": "070",
+      "sourceName": "Bosnia and Herz."
+    },
+    {
+      "code": "BLR",
+      "resolution": "50m",
+      "sourceId": "112",
+      "sourceName": "Belarus"
+    },
+    {
+      "code": "BLZ",
+      "resolution": "50m",
+      "sourceId": "084",
+      "sourceName": "Belize"
+    },
+    {
+      "code": "BOL",
+      "resolution": "50m",
+      "sourceId": "068",
+      "sourceName": "Bolivia"
+    },
+    {
+      "code": "BRA",
+      "resolution": "50m",
+      "sourceId": "076",
+      "sourceName": "Brazil"
+    },
+    {
+      "code": "BRB",
+      "resolution": "50m",
+      "sourceId": "052",
+      "sourceName": "Barbados"
+    },
+    {
+      "code": "BRN",
+      "resolution": "50m",
+      "sourceId": "096",
+      "sourceName": "Brunei"
+    },
+    {
+      "code": "BTN",
+      "resolution": "50m",
+      "sourceId": "064",
+      "sourceName": "Bhutan"
+    },
+    {
+      "code": "BWA",
+      "resolution": "50m",
+      "sourceId": "072",
+      "sourceName": "Botswana"
+    },
+    {
+      "code": "CAF",
+      "resolution": "50m",
+      "sourceId": "140",
+      "sourceName": "Central African Rep."
+    },
+    {
+      "code": "CAN",
+      "resolution": "50m",
+      "sourceId": "124",
+      "sourceName": "Canada"
+    },
+    {
+      "code": "CHE",
+      "resolution": "50m",
+      "sourceId": "756",
+      "sourceName": "Switzerland"
+    },
+    {
+      "code": "CHL",
+      "resolution": "50m",
+      "sourceId": "152",
+      "sourceName": "Chile"
+    },
+    {
+      "code": "CHN",
+      "resolution": "50m",
+      "sourceId": "156",
+      "sourceName": "China"
+    },
+    {
+      "code": "CIV",
+      "resolution": "50m",
+      "sourceId": "384",
+      "sourceName": "Côte d'Ivoire"
+    },
+    {
+      "code": "CMR",
+      "resolution": "50m",
+      "sourceId": "120",
+      "sourceName": "Cameroon"
+    },
+    {
+      "code": "COD",
+      "resolution": "50m",
+      "sourceId": "180",
+      "sourceName": "Dem. Rep. Congo"
+    },
+    {
+      "code": "COG",
+      "resolution": "50m",
+      "sourceId": "178",
+      "sourceName": "Congo"
+    },
+    {
+      "code": "COL",
+      "resolution": "50m",
+      "sourceId": "170",
+      "sourceName": "Colombia"
+    },
+    {
+      "code": "COM",
+      "resolution": "50m",
+      "sourceId": "174",
+      "sourceName": "Comoros"
+    },
+    {
+      "code": "CPV",
+      "resolution": "50m",
+      "sourceId": "132",
+      "sourceName": "Cabo Verde"
+    },
+    {
+      "code": "CRI",
+      "resolution": "50m",
+      "sourceId": "188",
+      "sourceName": "Costa Rica"
+    },
+    {
+      "code": "CUB",
+      "resolution": "50m",
+      "sourceId": "192",
+      "sourceName": "Cuba"
+    },
+    {
+      "code": "CYP",
+      "resolution": "50m",
+      "sourceId": "196",
+      "sourceName": "Cyprus"
+    },
+    {
+      "code": "CZE",
+      "resolution": "50m",
+      "sourceId": "203",
+      "sourceName": "Czechia"
+    },
+    {
+      "code": "DEU",
+      "resolution": "50m",
+      "sourceId": "276",
+      "sourceName": "Germany"
+    },
+    {
+      "code": "DJI",
+      "resolution": "50m",
+      "sourceId": "262",
+      "sourceName": "Djibouti"
+    },
+    {
+      "code": "DMA",
+      "resolution": "50m",
+      "sourceId": "212",
+      "sourceName": "Dominica"
+    },
+    {
+      "code": "DNK",
+      "resolution": "50m",
+      "sourceId": "208",
+      "sourceName": "Denmark"
+    },
+    {
+      "code": "DOM",
+      "resolution": "50m",
+      "sourceId": "214",
+      "sourceName": "Dominican Rep."
+    },
+    {
+      "code": "DZA",
+      "resolution": "50m",
+      "sourceId": "012",
+      "sourceName": "Algeria"
+    },
+    {
+      "code": "ECU",
+      "resolution": "50m",
+      "sourceId": "218",
+      "sourceName": "Ecuador"
+    },
+    {
+      "code": "EGY",
+      "resolution": "50m",
+      "sourceId": "818",
+      "sourceName": "Egypt"
+    },
+    {
+      "code": "ERI",
+      "resolution": "50m",
+      "sourceId": "232",
+      "sourceName": "Eritrea"
+    },
+    {
+      "code": "ESP",
+      "resolution": "50m",
+      "sourceId": "724",
+      "sourceName": "Spain"
+    },
+    {
+      "code": "EST",
+      "resolution": "50m",
+      "sourceId": "233",
+      "sourceName": "Estonia"
+    },
+    {
+      "code": "ETH",
+      "resolution": "50m",
+      "sourceId": "231",
+      "sourceName": "Ethiopia"
+    },
+    {
+      "code": "FIN",
+      "resolution": "50m",
+      "sourceId": "246",
+      "sourceName": "Finland"
+    },
+    {
+      "code": "FJI",
+      "resolution": "50m",
+      "sourceId": "242",
+      "sourceName": "Fiji"
+    },
+    {
+      "code": "FRA",
+      "resolution": "50m",
+      "sourceId": "250",
+      "sourceName": "France"
+    },
+    {
+      "code": "FSM",
+      "resolution": "50m",
+      "sourceId": "583",
+      "sourceName": "Micronesia"
+    },
+    {
+      "code": "GAB",
+      "resolution": "50m",
+      "sourceId": "266",
+      "sourceName": "Gabon"
+    },
+    {
+      "code": "GBR",
+      "resolution": "50m",
+      "sourceId": "826",
+      "sourceName": "United Kingdom"
+    },
+    {
+      "code": "GEO",
+      "resolution": "50m",
+      "sourceId": "268",
+      "sourceName": "Georgia"
+    },
+    {
+      "code": "GHA",
+      "resolution": "50m",
+      "sourceId": "288",
+      "sourceName": "Ghana"
+    },
+    {
+      "code": "GIN",
+      "resolution": "50m",
+      "sourceId": "324",
+      "sourceName": "Guinea"
+    },
+    {
+      "code": "GMB",
+      "resolution": "50m",
+      "sourceId": "270",
+      "sourceName": "Gambia"
+    },
+    {
+      "code": "GNB",
+      "resolution": "50m",
+      "sourceId": "624",
+      "sourceName": "Guinea-Bissau"
+    },
+    {
+      "code": "GNQ",
+      "resolution": "50m",
+      "sourceId": "226",
+      "sourceName": "Eq. Guinea"
+    },
+    {
+      "code": "GRC",
+      "resolution": "50m",
+      "sourceId": "300",
+      "sourceName": "Greece"
+    },
+    {
+      "code": "GRD",
+      "resolution": "50m",
+      "sourceId": "308",
+      "sourceName": "Grenada"
+    },
+    {
+      "code": "GTM",
+      "resolution": "50m",
+      "sourceId": "320",
+      "sourceName": "Guatemala"
+    },
+    {
+      "code": "GUY",
+      "resolution": "50m",
+      "sourceId": "328",
+      "sourceName": "Guyana"
+    },
+    {
+      "code": "HND",
+      "resolution": "50m",
+      "sourceId": "340",
+      "sourceName": "Honduras"
+    },
+    {
+      "code": "HRV",
+      "resolution": "50m",
+      "sourceId": "191",
+      "sourceName": "Croatia"
+    },
+    {
+      "code": "HTI",
+      "resolution": "50m",
+      "sourceId": "332",
+      "sourceName": "Haiti"
+    },
+    {
+      "code": "HUN",
+      "resolution": "50m",
+      "sourceId": "348",
+      "sourceName": "Hungary"
+    },
+    {
+      "code": "IDN",
+      "resolution": "50m",
+      "sourceId": "360",
+      "sourceName": "Indonesia"
+    },
+    {
+      "code": "IND",
+      "resolution": "50m",
+      "sourceId": "356",
+      "sourceName": "India"
+    },
+    {
+      "code": "IRL",
+      "resolution": "50m",
+      "sourceId": "372",
+      "sourceName": "Ireland"
+    },
+    {
+      "code": "IRN",
+      "resolution": "50m",
+      "sourceId": "364",
+      "sourceName": "Iran"
+    },
+    {
+      "code": "IRQ",
+      "resolution": "50m",
+      "sourceId": "368",
+      "sourceName": "Iraq"
+    },
+    {
+      "code": "ISL",
+      "resolution": "50m",
+      "sourceId": "352",
+      "sourceName": "Iceland"
+    },
+    {
+      "code": "ISR",
+      "resolution": "50m",
+      "sourceId": "376",
+      "sourceName": "Israel"
+    },
+    {
+      "code": "ITA",
+      "resolution": "50m",
+      "sourceId": "380",
+      "sourceName": "Italy"
+    },
+    {
+      "code": "JAM",
+      "resolution": "50m",
+      "sourceId": "388",
+      "sourceName": "Jamaica"
+    },
+    {
+      "code": "JOR",
+      "resolution": "50m",
+      "sourceId": "400",
+      "sourceName": "Jordan"
+    },
+    {
+      "code": "JPN",
+      "resolution": "50m",
+      "sourceId": "392",
+      "sourceName": "Japan"
+    },
+    {
+      "code": "KAZ",
+      "resolution": "50m",
+      "sourceId": "398",
+      "sourceName": "Kazakhstan"
+    },
+    {
+      "code": "KEN",
+      "resolution": "50m",
+      "sourceId": "404",
+      "sourceName": "Kenya"
+    },
+    {
+      "code": "KGZ",
+      "resolution": "50m",
+      "sourceId": "417",
+      "sourceName": "Kyrgyzstan"
+    },
+    {
+      "code": "KHM",
+      "resolution": "50m",
+      "sourceId": "116",
+      "sourceName": "Cambodia"
+    },
+    {
+      "code": "KIR",
+      "resolution": "50m",
+      "sourceId": "296",
+      "sourceName": "Kiribati"
+    },
+    {
+      "code": "KNA",
+      "resolution": "50m",
+      "sourceId": "659",
+      "sourceName": "St. Kitts and Nevis"
+    },
+    {
+      "code": "KOR",
+      "resolution": "50m",
+      "sourceId": "410",
+      "sourceName": "South Korea"
+    },
+    {
+      "code": "KWT",
+      "resolution": "50m",
+      "sourceId": "414",
+      "sourceName": "Kuwait"
+    },
+    {
+      "code": "LAO",
+      "resolution": "50m",
+      "sourceId": "418",
+      "sourceName": "Laos"
+    },
+    {
+      "code": "LBN",
+      "resolution": "50m",
+      "sourceId": "422",
+      "sourceName": "Lebanon"
+    },
+    {
+      "code": "LBR",
+      "resolution": "50m",
+      "sourceId": "430",
+      "sourceName": "Liberia"
+    },
+    {
+      "code": "LBY",
+      "resolution": "50m",
+      "sourceId": "434",
+      "sourceName": "Libya"
+    },
+    {
+      "code": "LCA",
+      "resolution": "50m",
+      "sourceId": "662",
+      "sourceName": "Saint Lucia"
+    },
+    {
+      "code": "LIE",
+      "resolution": "50m",
+      "sourceId": "438",
+      "sourceName": "Liechtenstein"
+    },
+    {
+      "code": "LKA",
+      "resolution": "50m",
+      "sourceId": "144",
+      "sourceName": "Sri Lanka"
+    },
+    {
+      "code": "LSO",
+      "resolution": "50m",
+      "sourceId": "426",
+      "sourceName": "Lesotho"
+    },
+    {
+      "code": "LTU",
+      "resolution": "50m",
+      "sourceId": "440",
+      "sourceName": "Lithuania"
+    },
+    {
+      "code": "LUX",
+      "resolution": "50m",
+      "sourceId": "442",
+      "sourceName": "Luxembourg"
+    },
+    {
+      "code": "LVA",
+      "resolution": "50m",
+      "sourceId": "428",
+      "sourceName": "Latvia"
+    },
+    {
+      "code": "MAR",
+      "resolution": "50m",
+      "sourceId": "504",
+      "sourceName": "Morocco"
+    },
+    {
+      "code": "MCO",
+      "resolution": "50m",
+      "sourceId": "492",
+      "sourceName": "Monaco"
+    },
+    {
+      "code": "MDA",
+      "resolution": "50m",
+      "sourceId": "498",
+      "sourceName": "Moldova"
+    },
+    {
+      "code": "MDG",
+      "resolution": "50m",
+      "sourceId": "450",
+      "sourceName": "Madagascar"
+    },
+    {
+      "code": "MDV",
+      "resolution": "50m",
+      "sourceId": "462",
+      "sourceName": "Maldives"
+    },
+    {
+      "code": "MEX",
+      "resolution": "50m",
+      "sourceId": "484",
+      "sourceName": "Mexico"
+    },
+    {
+      "code": "MHL",
+      "resolution": "50m",
+      "sourceId": "584",
+      "sourceName": "Marshall Is."
+    },
+    {
+      "code": "MKD",
+      "resolution": "50m",
+      "sourceId": "807",
+      "sourceName": "Macedonia"
+    },
+    {
+      "code": "MLI",
+      "resolution": "50m",
+      "sourceId": "466",
+      "sourceName": "Mali"
+    },
+    {
+      "code": "MLT",
+      "resolution": "50m",
+      "sourceId": "470",
+      "sourceName": "Malta"
+    },
+    {
+      "code": "MMR",
+      "resolution": "50m",
+      "sourceId": "104",
+      "sourceName": "Myanmar"
+    },
+    {
+      "code": "MNE",
+      "resolution": "50m",
+      "sourceId": "499",
+      "sourceName": "Montenegro"
+    },
+    {
+      "code": "MNG",
+      "resolution": "50m",
+      "sourceId": "496",
+      "sourceName": "Mongolia"
+    },
+    {
+      "code": "MOZ",
+      "resolution": "50m",
+      "sourceId": "508",
+      "sourceName": "Mozambique"
+    },
+    {
+      "code": "MRT",
+      "resolution": "50m",
+      "sourceId": "478",
+      "sourceName": "Mauritania"
+    },
+    {
+      "code": "MUS",
+      "resolution": "50m",
+      "sourceId": "480",
+      "sourceName": "Mauritius"
+    },
+    {
+      "code": "MWI",
+      "resolution": "50m",
+      "sourceId": "454",
+      "sourceName": "Malawi"
+    },
+    {
+      "code": "MYS",
+      "resolution": "50m",
+      "sourceId": "458",
+      "sourceName": "Malaysia"
+    },
+    {
+      "code": "NAM",
+      "resolution": "50m",
+      "sourceId": "516",
+      "sourceName": "Namibia"
+    },
+    {
+      "code": "NER",
+      "resolution": "50m",
+      "sourceId": "562",
+      "sourceName": "Niger"
+    },
+    {
+      "code": "NGA",
+      "resolution": "50m",
+      "sourceId": "566",
+      "sourceName": "Nigeria"
+    },
+    {
+      "code": "NIC",
+      "resolution": "50m",
+      "sourceId": "558",
+      "sourceName": "Nicaragua"
+    },
+    {
+      "code": "NLD",
+      "resolution": "50m",
+      "sourceId": "528",
+      "sourceName": "Netherlands"
+    },
+    {
+      "code": "NOR",
+      "resolution": "50m",
+      "sourceId": "578",
+      "sourceName": "Norway"
+    },
+    {
+      "code": "NPL",
+      "resolution": "50m",
+      "sourceId": "524",
+      "sourceName": "Nepal"
+    },
+    {
+      "code": "NRU",
+      "resolution": "50m",
+      "sourceId": "520",
+      "sourceName": "Nauru"
+    },
+    {
+      "code": "NZL",
+      "resolution": "50m",
+      "sourceId": "554",
+      "sourceName": "New Zealand"
+    },
+    {
+      "code": "OMN",
+      "resolution": "50m",
+      "sourceId": "512",
+      "sourceName": "Oman"
+    },
+    {
+      "code": "PAK",
+      "resolution": "50m",
+      "sourceId": "586",
+      "sourceName": "Pakistan"
+    },
+    {
+      "code": "PAN",
+      "resolution": "50m",
+      "sourceId": "591",
+      "sourceName": "Panama"
+    },
+    {
+      "code": "PER",
+      "resolution": "50m",
+      "sourceId": "604",
+      "sourceName": "Peru"
+    },
+    {
+      "code": "PHL",
+      "resolution": "50m",
+      "sourceId": "608",
+      "sourceName": "Philippines"
+    },
+    {
+      "code": "PLW",
+      "resolution": "50m",
+      "sourceId": "585",
+      "sourceName": "Palau"
+    },
+    {
+      "code": "PNG",
+      "resolution": "50m",
+      "sourceId": "598",
+      "sourceName": "Papua New Guinea"
+    },
+    {
+      "code": "POL",
+      "resolution": "50m",
+      "sourceId": "616",
+      "sourceName": "Poland"
+    },
+    {
+      "code": "PRK",
+      "resolution": "50m",
+      "sourceId": "408",
+      "sourceName": "North Korea"
+    },
+    {
+      "code": "PRT",
+      "resolution": "50m",
+      "sourceId": "620",
+      "sourceName": "Portugal"
+    },
+    {
+      "code": "PRY",
+      "resolution": "50m",
+      "sourceId": "600",
+      "sourceName": "Paraguay"
+    },
+    {
+      "code": "PSE",
+      "resolution": "50m",
+      "sourceId": "275",
+      "sourceName": "Palestine",
+      "auditNote": "Mapped to Natural Earth feature 275, Palestine."
+    },
+    {
+      "code": "QAT",
+      "resolution": "50m",
+      "sourceId": "634",
+      "sourceName": "Qatar"
+    },
+    {
+      "code": "ROU",
+      "resolution": "50m",
+      "sourceId": "642",
+      "sourceName": "Romania"
+    },
+    {
+      "code": "RUS",
+      "resolution": "50m",
+      "sourceId": "643",
+      "sourceName": "Russia"
+    },
+    {
+      "code": "RWA",
+      "resolution": "50m",
+      "sourceId": "646",
+      "sourceName": "Rwanda"
+    },
+    {
+      "code": "SAU",
+      "resolution": "50m",
+      "sourceId": "682",
+      "sourceName": "Saudi Arabia"
+    },
+    {
+      "code": "SDN",
+      "resolution": "50m",
+      "sourceId": "729",
+      "sourceName": "Sudan"
+    },
+    {
+      "code": "SEN",
+      "resolution": "50m",
+      "sourceId": "686",
+      "sourceName": "Senegal"
+    },
+    {
+      "code": "SGP",
+      "resolution": "50m",
+      "sourceId": "702",
+      "sourceName": "Singapore"
+    },
+    {
+      "code": "SLB",
+      "resolution": "50m",
+      "sourceId": "090",
+      "sourceName": "Solomon Is."
+    },
+    {
+      "code": "SLE",
+      "resolution": "50m",
+      "sourceId": "694",
+      "sourceName": "Sierra Leone"
+    },
+    {
+      "code": "SLV",
+      "resolution": "50m",
+      "sourceId": "222",
+      "sourceName": "El Salvador"
+    },
+    {
+      "code": "SMR",
+      "resolution": "50m",
+      "sourceId": "674",
+      "sourceName": "San Marino"
+    },
+    {
+      "code": "SOM",
+      "resolution": "50m",
+      "sourceId": "706",
+      "sourceName": "Somalia",
+      "mergeSource": {
+        "sourceId": null,
+        "sourceName": "Somaliland"
+      },
+      "auditNote": "Merge the two Natural Earth 50m display features into the single SOM study silhouette. This follows Geoquiz's 197-entity study geometry; it makes no recognition or final-border assertion."
+    },
+    {
+      "code": "SRB",
+      "resolution": "50m",
+      "sourceId": "688",
+      "sourceName": "Serbia"
+    },
+    {
+      "code": "SSD",
+      "resolution": "50m",
+      "sourceId": "728",
+      "sourceName": "S. Sudan"
+    },
+    {
+      "code": "STP",
+      "resolution": "50m",
+      "sourceId": "678",
+      "sourceName": "São Tomé and Principe"
+    },
+    {
+      "code": "SUR",
+      "resolution": "50m",
+      "sourceId": "740",
+      "sourceName": "Suriname"
+    },
+    {
+      "code": "SVK",
+      "resolution": "50m",
+      "sourceId": "703",
+      "sourceName": "Slovakia"
+    },
+    {
+      "code": "SVN",
+      "resolution": "50m",
+      "sourceId": "705",
+      "sourceName": "Slovenia"
+    },
+    {
+      "code": "SWE",
+      "resolution": "50m",
+      "sourceId": "752",
+      "sourceName": "Sweden"
+    },
+    {
+      "code": "SWZ",
+      "resolution": "50m",
+      "sourceId": "748",
+      "sourceName": "eSwatini"
+    },
+    {
+      "code": "SYC",
+      "resolution": "50m",
+      "sourceId": "690",
+      "sourceName": "Seychelles"
+    },
+    {
+      "code": "SYR",
+      "resolution": "50m",
+      "sourceId": "760",
+      "sourceName": "Syria"
+    },
+    {
+      "code": "TCD",
+      "resolution": "50m",
+      "sourceId": "148",
+      "sourceName": "Chad"
+    },
+    {
+      "code": "TGO",
+      "resolution": "50m",
+      "sourceId": "768",
+      "sourceName": "Togo"
+    },
+    {
+      "code": "THA",
+      "resolution": "50m",
+      "sourceId": "764",
+      "sourceName": "Thailand"
+    },
+    {
+      "code": "TJK",
+      "resolution": "50m",
+      "sourceId": "762",
+      "sourceName": "Tajikistan"
+    },
+    {
+      "code": "TKM",
+      "resolution": "50m",
+      "sourceId": "795",
+      "sourceName": "Turkmenistan"
+    },
+    {
+      "code": "TLS",
+      "resolution": "50m",
+      "sourceId": "626",
+      "sourceName": "Timor-Leste"
+    },
+    {
+      "code": "TON",
+      "resolution": "50m",
+      "sourceId": "776",
+      "sourceName": "Tonga"
+    },
+    {
+      "code": "TTO",
+      "resolution": "50m",
+      "sourceId": "780",
+      "sourceName": "Trinidad and Tobago"
+    },
+    {
+      "code": "TUN",
+      "resolution": "50m",
+      "sourceId": "788",
+      "sourceName": "Tunisia"
+    },
+    {
+      "code": "TUR",
+      "resolution": "50m",
+      "sourceId": "792",
+      "sourceName": "Turkey"
+    },
+    {
+      "code": "TUV",
+      "resolution": "10m",
+      "sourceId": "798",
+      "sourceName": "Tuvalu",
+      "auditNote": "Natural Earth countries-50m has no Tuvalu feature; use the exact 10m feature 798 as a documented source-resolution fallback."
+    },
+    {
+      "code": "TWN",
+      "resolution": "50m",
+      "sourceId": "158",
+      "sourceName": "Taiwan",
+      "auditNote": "Mapped to Natural Earth feature 158, Taiwan."
+    },
+    {
+      "code": "TZA",
+      "resolution": "50m",
+      "sourceId": "834",
+      "sourceName": "Tanzania"
+    },
+    {
+      "code": "UGA",
+      "resolution": "50m",
+      "sourceId": "800",
+      "sourceName": "Uganda"
+    },
+    {
+      "code": "UKR",
+      "resolution": "50m",
+      "sourceId": "804",
+      "sourceName": "Ukraine"
+    },
+    {
+      "code": "URY",
+      "resolution": "50m",
+      "sourceId": "858",
+      "sourceName": "Uruguay"
+    },
+    {
+      "code": "USA",
+      "resolution": "50m",
+      "sourceId": "840",
+      "sourceName": "United States of America"
+    },
+    {
+      "code": "UZB",
+      "resolution": "50m",
+      "sourceId": "860",
+      "sourceName": "Uzbekistan"
+    },
+    {
+      "code": "VAT",
+      "resolution": "50m",
+      "sourceId": "336",
+      "sourceName": "Vatican",
+      "auditNote": "Mapped to Natural Earth feature 336, Vatican."
+    },
+    {
+      "code": "VCT",
+      "resolution": "50m",
+      "sourceId": "670",
+      "sourceName": "St. Vin. and Gren."
+    },
+    {
+      "code": "VEN",
+      "resolution": "50m",
+      "sourceId": "862",
+      "sourceName": "Venezuela"
+    },
+    {
+      "code": "VNM",
+      "resolution": "50m",
+      "sourceId": "704",
+      "sourceName": "Vietnam"
+    },
+    {
+      "code": "VUT",
+      "resolution": "50m",
+      "sourceId": "548",
+      "sourceName": "Vanuatu"
+    },
+    {
+      "code": "WSM",
+      "resolution": "50m",
+      "sourceId": "882",
+      "sourceName": "Samoa"
+    },
+    {
+      "code": "XKX",
+      "resolution": "50m",
+      "sourceId": null,
+      "sourceName": "Kosovo",
+      "auditNote": "Mapped by the unique Natural Earth feature name Kosovo; the source has no numeric ID."
+    },
+    {
+      "code": "YEM",
+      "resolution": "50m",
+      "sourceId": "887",
+      "sourceName": "Yemen"
+    },
+    {
+      "code": "ZAF",
+      "resolution": "50m",
+      "sourceId": "710",
+      "sourceName": "South Africa"
+    },
+    {
+      "code": "ZMB",
+      "resolution": "50m",
+      "sourceId": "894",
+      "sourceName": "Zambia"
+    },
+    {
+      "code": "ZWE",
+      "resolution": "50m",
+      "sourceId": "716",
+      "sourceName": "Zimbabwe"
+    }
+  ]
+}
