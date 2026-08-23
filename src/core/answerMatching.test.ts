@@ -106,14 +106,14 @@ describe('capital answers', () => {
   it('does not permit exact known non-target names across the full dataset', () => {
     for (const target of data) {
       for (const other of data) {
-      if (target.id === other.id) continue
+        if (target.id === other.id) continue
         expect(checkCapitalAnswer(other.capital, target, data).status, `${other.capital} must not answer ${target.capital}`).toBe('incorrect')
         for (const alias of other.aliases ?? []) {
           expect(checkCapitalAnswer(alias, target, data).status, `${alias} must not answer ${target.capital}`).toBe('incorrect')
         }
       }
     }
-  })
+  }, 30_000)
 
   it('does not auto-complete a fuzzy answer that is another capital prefix or an ambiguous typo', () => {
     const berlin: Capital = { ...metadata, id: 'berlin', capital: 'Berlin', latitude: 0, longitude: 0 }

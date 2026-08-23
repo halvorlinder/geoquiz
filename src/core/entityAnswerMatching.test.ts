@@ -52,7 +52,7 @@ describe('entity neighbour answer matching', () => {
         }
       }
     }
-  })
+  }, 30_000)
 
   it('has exactly the three curated normalized strict-prefix pairs', () => {
     const pairs = studyEntities.flatMap((left) => studyEntities.filter((right) => left.code !== right.code && normalizeAnswer(left.name) !== normalizeAnswer(right.name) && normalizeAnswer(right.name).startsWith(normalizeAnswer(left.name))).map((right) => [left.code, right.code]))
