@@ -1,48 +1,142 @@
 # Geoquiz
 
-A deliberately bare capital-city quiz: every question shows the same 200 capital-place dots on a neutral, tile-free map, with one gold ring to identify. Each question automatically focuses its target region; you can still pan, zoom, type the capital, and work through a shuffled deck without repeats.
+Geoquiz is a static, local-first collection of focused world-geography exercises.
+It has no accounts, backend, map tiles, runtime geography API, or remotely loaded
+quiz images. The production site is built for GitHub Pages at
+`https://halvorlinder.github.io/geoquiz/`.
 
-## Run locally
+## Quizzes
+
+Capital dots is the front page at `#/`. The quiz chooser lives at `#/quizzes`.
+Each quiz also has a stable hash route:
+
+| Quiz | Route | Question set |
+| --- | --- | --- |
+| Capital dots | `#/` (also `#/capital-map`) | Identify a highlighted capital from a tile-free world map. |
+| Country capitals | `#/country-capital` | Name a country's capital(s), including role-labelled multi-capital questions. |
+| Shape capitals | `#/shape-capital` | Name a capital from a country silhouette. |
+| Shape neighbours | `#/shape-neighbours` | Name every eligible land neighbour from a country silhouette. |
+| Shape highest points | `#/shape-high-point` | Name the marked highest point on a country silhouette. |
+| Flag countries | `#/flag-country` | Identify countries or approved territories from bundled local SVG flags. |
+
+All routes are lazy-loaded at the quiz boundary. Country silhouettes are a known
+large lazy chunk (about 680 kB raw / 257 kB gzip); flags remain individual local
+SVG files and the flag-quiz code chunk is about 92 kB raw / 10 kB gzip.
+
+## Play modes and accessibility
+
+Every quiz has **Practice** and **Timed** modes plus an **All/continent** filter.
+The flag quiz also has **Without territories** (197), **With territories** (235),
+and **Only territories** (38) scopes.
+
+- Practice has explicit checking and reveal controls. The capital-dot map starts
+  with outlines and capital names off; both are optional practice aids.
+- Timed runs count upward, remove learning aids, and accept a correct answer as
+  it is typed. **Skip** rotates a question to the back of its circular queue;
+  it returns after every other outstanding question. A timed **Reveal** marks a
+  question revealed. On Capital dots, its old dot becomes red, feedback names
+  the capital, and play advances immediately. Text, shape, and flag quizzes
+  instead show an answer-revealed card that requires **Continue** before play
+  resumes.
+- Answers normalize case, accents, punctuation, and spacing; curated aliases and
+  controlled typo tolerance are supported. Known answers for a different target
+  are rejected, except deliberately shared highest-point answers whose records
+  have the same declared `sharedFeatureId`. In the flag quiz, an exact answer
+  that is also the start of another accepted catalog answer requires Enter in
+  Timed mode rather than auto-advancing: **Dominica**, **Guinea**, **Niger**,
+  **UK**, and **United States**. Unambiguous alternatives such as **United
+  Kingdom** and **USA** still auto-advance.
+- Native controls, visible focus, live feedback, readable timer text, and
+  keyboard-safe actions are provided. The map remains pannable and zoomable by
+  mouse, keyboard, touch, trackpad, and pinch.
+
+Completed timed runs are stored only in browser `localStorage`: one top-ten board
+per quiz and active filter combination, ranked by correct answers then duration.
+Results from another data version are ignored. Corrupt, blocked, disabled, or
+quota-full storage never prevents play; it simply leaves no persistent score.
+
+## Study data
+
+The sovereign study set contains **197** entities, **201** entity-to-capital
+associations, and **200** unique capital places. It also contains **197** local
+country silhouettes, **317** reciprocal neighbour edges, **157** eligible
+neighbour questions, **40** zero-neighbour exclusions, **197** highest-point
+records, and **235** flag records (197 sovereign + 38 territory/associated-area).
+
+Each dataset is bundled and versioned. Policy, provenance, exceptions, and
+maintenance details are in:
+
+- [Capital data](docs/capital-data.md)
+- [Entity and continent policy](docs/entity-data.md)
+- [Map boundaries](docs/map-boundaries.md)
+- [Country shapes](docs/country-shapes.md)
+- [Neighbours](docs/neighbours-data.md)
+- [Highest points](docs/high-point-data.md)
+- [Flags and territories](docs/flag-data.md)
+
+Durable UI and interaction direction is maintained separately in the
+[design-decision index](docs/design-decisions/README.md). New explicit design
+decisions must be recorded there and validated in the same change that
+implements them.
+
+The source records may contain provenance links, but those are data references:
+the browser does not request them while a quiz runs. Flag SVGs live in
+`public/flags/v1/` and are validated for integrity and safe SVG content.
+
+## Local development and maintenance
 
 ```sh
 npm ci
-npm run dev
+npm run dev -- --host 127.0.0.1
 ```
 
-Useful checks:
+Open `http://127.0.0.1:5173/geoquiz/`.
+
+Run the full deterministic verification suite before proposing publication:
 
 ```sh
 npm run lint
+npm run validate:design
 npm run validate:data
 npm test
 npm run build
+npm run generate:country-shapes -- --check
+npm run validate:flags
+git diff --check
 ```
 
-The production build uses Vite's `/geoquiz/` base path, for the project Pages URL `https://halvorlinder.github.io/geoquiz/`.
+`validate:data` includes capital, entity, country-shape, neighbour, highest-point,
+and flag validation. `generate:country-shapes -- --check` additionally asserts
+that the checked-in shape artifact is byte-for-byte current. To intentionally
+regenerate that artifact after an approved source-policy change, run:
 
-## Controls and answer rules
+```sh
+npm run generate:country-shapes
+```
 
-- Drag or touch-drag to pan. Use the map buttons, mouse wheel/trackpad, or pinch to zoom.
-- Use the **Country outlines** switch to show or hide country and coastline lines; it starts **Off**.
-- Use the **Capital names** switch to show or hide every capital label; it starts **Off**.
-- Type in the focused answer field and press Enter or select **Check answer**.
-- Case, accents, punctuation, spacing, common transliterations, and one or two small spelling edits are handled tolerantly. A precise name or alias belonging to another capital is always rejected.
-- **Reveal and skip** shows the answer without adding to the score. A completed deck can be restarted with a new order.
+Do not refresh study data casually: preserve stable IDs and documented policy,
+record source/checked dates, update the relevant policy document, and run every
+check above. The flag catalogue and its local assets are intentionally audited
+rather than fetched at runtime.
 
-## Capital data policy
+## GitHub Pages and release gate
 
-[`src/data/capitals.json`](src/data/capitals.json) models **197** study entities: the 193 UN member states, plus Vatican City / Holy See, State of Palestine, Kosovo, and Taiwan. It has **201 entity→capital associations** resolved to **200 unique capital-place questions**. Bolivia, Eswatini, and South Africa retain their explicitly divided official capital functions. Israel and the State of Palestine share the single Jerusalem place/question, so it is not duplicated on the map.
+The repository's CI workflow runs installation, linting, every data validator,
+the deterministic country-shape check, tests, and a production build. The Pages
+workflow repeats those checks and deploys `dist/` on pushes to `main`. In the
+repository settings, select **GitHub Actions** as the Pages source.
 
-The list uses common English study names and a current primary official or functional seat where this keeps the questions practical. The most consequential choices are documented in [data notes](docs/capital-data.md). Coordinates are city-centre points, not country centroids. The validation script enforces entity/place/association cardinalities, unique city/coordinate values, usable coordinates, provenance, and non-colliding aliases.
+Before a visual or interactive change is pushed, merged, deployed, or called
+shipped, test locally with the requested Chrome MCP—not a substitute browser—at:
 
-Source checking is based on the [UN member-state list](https://www.un.org/about-us/member-states), the [UNGEGN capital-name and coordinate API](https://ungegn-api.azurewebsites.net/swagger/index.html) and its [database description](https://unstats.un.org/unsd/geoinfo/geonames/About.htm), plus country-specific official/government sources cited in the data notes. The final data and optional [map-boundary geometry](docs/map-boundaries.md) are bundled into the application—using the quiz makes no network, tile, map-image, or API requests.
+- Desktop around 1440 × 900 and mobile around 390 × 844.
+- Capital-map outline Off/On, pan/zoom controls, and movement between distant
+  targets (including the responsive focus context and reduced motion).
+- Keyboard and pointer interaction, visible focus through reveal/next/restart,
+  all quiz modes and filters, and circular Skip/Reveal behavior.
+- Browser console output and network activity, confirming no map tiles, external
+  runtime data, or remote flag requests; also check for antimeridian/cross-world
+  line artifacts.
 
-## GitHub Pages
-
-After creating the `halvorlinder/geoquiz` repository and pushing `main`:
-
-1. In **Settings → Pages**, select **GitHub Actions** as the source.
-2. The included Pages workflow builds and deploys the static `dist/` directory on each push to `main`.
-3. The CI workflow runs linting, dataset validation, unit tests, and the production build for pushes and pull requests.
-
-No secrets, database, map API key, or hosting account is required.
+Chrome MCP QA, passing GitHub Actions, an authorized merge, a successful Pages
+deployment, and a hosted smoke test are all required before publication.

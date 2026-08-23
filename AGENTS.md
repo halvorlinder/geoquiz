@@ -4,9 +4,9 @@ These instructions apply to the entire repository.
 
 ## Product intent
 
-Geoquiz is a static collection of focused geography-learning games. The current
-quiz asks the player to identify a highlighted world capital from its position.
-Future quiz formats may use flags, images, or trivia, but they should share only
+Geoquiz is a static collection of focused geography-learning games. Capital
+dots is the landing experience, alongside country/capital, country-shape,
+neighbour, highest-point, and flag quizzes. Quiz formats should share only
 genuinely reusable infrastructure.
 
 Keep the application deployable as a static GitHub Pages site. Do not introduce
@@ -26,6 +26,24 @@ hosted map imagery unless the user explicitly changes that product boundary.
 
 Do not prematurely build a generic quiz framework. Add an abstraction only when
 at least two concrete quiz formats need it.
+
+## Design decisions
+
+`docs/design-decisions/` is the authoritative product-design memory. Before any
+UI, interaction, responsive-layout, navigation, or visual-language change, read
+its `README.md` and every applicable accepted record.
+
+- Record each new explicit user design decision before, or in the same patch
+  as, its implementation. Conversation history, screenshots, CSS, and tests are
+  not substitutes for a decision record.
+- Use the documented `DD-NNNN` lifecycle. Never delete or silently rewrite a
+  superseded decision; add a replacement and link both directions.
+- Workers may record already-fixed direction but must not invent product
+  decisions. Escalate ambiguity or conflict to the root orchestrator.
+- Prompts for delegated design work must cite the governing decision IDs.
+- Reviewers must check implementation, tests, README guidance, and decision
+  records for parity, and report missing or stale records as findings.
+- Run `npm run validate:design` for every design-related change.
 
 ## Capital-map invariants
 
@@ -104,6 +122,7 @@ Before reporting an implementation complete, run:
 
 ```sh
 npm run lint
+npm run validate:design
 npm run validate:data
 npm test
 npm run build

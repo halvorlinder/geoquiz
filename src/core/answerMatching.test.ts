@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import capitals from '../data/capitals.json'
-import { allowedDistance, checkCapitalAnswer, damerauLevenshtein, normalizeAnswer } from './answerMatching'
+import { allowedDistance, capitalNames, checkCapitalAnswer, damerauLevenshtein, isTimedCapitalAnswerAccepted, normalizeAnswer } from './answerMatching'
 import type { Capital } from './capital'
 
 const data = capitals as Capital[]
@@ -106,10 +106,57 @@ describe('capital answers', () => {
   it('does not permit exact known non-target names across the full dataset', () => {
     for (const target of data) {
       for (const other of data) {
-      if (target.id === other.id) continue
+        if (target.id === other.id) continue
         expect(checkCapitalAnswer(other.capital, target, data).status, `${other.capital} must not answer ${target.capital}`).toBe('incorrect')
         for (const alias of other.aliases ?? []) {
           expect(checkCapitalAnswer(alias, target, data).status, `${alias} must not answer ${target.capital}`).toBe('incorrect')
+        }
+      }
+    }
+  }, 30_000)
+
+  it('does not auto-complete a fuzzy answer that is another capital prefix or an ambiguous typo', () => {
+    const berlin: Capital = { ...metadata, id: 'berlin', capital: 'Berlin', latitude: 0, longitude: 0 }
+    const bern: Capital = { ...metadata, id: 'bern', capital: 'Bern', latitude: 0, longitude: 0 }
+    const dhaka: Capital = { ...metadata, id: 'dhaka', capital: 'Dhaka', latitude: 0, longitude: 0 }
+    const dakar: Capital = { ...metadata, id: 'dakar', capital: 'Dakar', latitude: 0, longitude: 0 }
+    const alpha: Capital = { ...metadata, id: 'alpha', capital: 'Abcde', latitude: 0, longitude: 0 }
+    const bravo: Capital = { ...metadata, id: 'bravo', capital: 'Abfde', latitude: 0, longitude: 0 }
+    const alphaBeta: Capital = { ...metadata, id: 'alpha-beta', capital: 'AlphaBeta', latitude: 0, longitude: 0 }
+    const alphaZeta: Capital = { ...metadata, id: 'alpha-zeta', capital: 'AlphaZeta', latitude: 0, longitude: 0 }
+    expect(isTimedCapitalAnswerAccepted('Berl', bern, [bern, berlin])).toBe(false)
+    expect(isTimedCapitalAnswerAccepted('daka', dhaka, [dhaka, dakar])).toBe(false)
+    expect(isTimedCapitalAnswerAccepted('abgde', alpha, [alpha, bravo])).toBe(false)
+    expect(isTimedCapitalAnswerAccepted('alphaxbeta', alphaBeta, [alphaBeta, alphaZeta])).toBe(false)
+    expect(isTimedCapitalAnswerAccepted('alpahbeta', alphaBeta, [alphaBeta, alphaZeta])).toBe(false)
+    expect(isTimedCapitalAnswerAccepted('Bern', bern, [bern, berlin])).toBe(true)
+  })
+
+  it('never auto-completes a strict prefix of any other production answer', () => {
+    for (const target of data) {
+      for (const other of data) {
+        if (other.id === target.id) continue
+        for (const name of capitalNames(other)) {
+          for (let length = 1; length < name.length; length += 1) {
+            const prefix = name.slice(0, length)
+            // Keep this exhaustive corpus property fast while still exercising
+            // the actual matcher against each production answer/alias pair.
+            const otherName: Capital = { ...other, capital: name, aliases: [] }
+            expect(isTimedCapitalAnswerAccepted(prefix, target, [target, otherName]), `${prefix} must not complete ${target.capital}`).toBe(false)
+          }
+        }
+      }
+    }
+  }, 30_000)
+
+  it('rejects every ambiguous one-deletion typo generated from the production corpus', () => {
+    const names = data.flatMap((capital) => capitalNames(capital).map((name) => ({ id: capital.id, name })))
+    const submitted = new Set(names.flatMap(({ name }) => Array.from({ length: name.length }, (_, index) => `${name.slice(0, index)}${name.slice(index + 1)}`)).filter(Boolean))
+    for (const value of submitted) {
+      const candidates = new Set(names.filter(({ name }) => damerauLevenshtein(value, name) <= allowedDistance(name.length)).map(({ id }) => id))
+      if (candidates.size > 1) {
+        for (const target of data.filter((capital) => candidates.has(capital.id))) {
+          if (!capitalNames(target).includes(value)) expect(isTimedCapitalAnswerAccepted(value, target, data), `${value} is ambiguous`).toBe(false)
         }
       }
     }
