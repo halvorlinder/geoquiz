@@ -1,0 +1,23 @@
+.shape-neighbours-card { display: grid; gap: 0; }
+.shape-neighbours-shell.quiz-active-shell { min-height: 0; overflow-x: hidden; overflow-y: auto; align-content: start; scroll-padding-block: 18px; overscroll-behavior: contain; }
+/* Override the shared active-shell card rule: a neighbour map card is an
+   intrinsic grid item, not the fixed-height flex panel used by compact quizzes. */
+.shape-neighbours-shell.quiz-active-shell > .shape-neighbours-card { display: grid; align-self: start; height: auto; min-height: 0; overflow: visible; }
+.shape-neighbours-card .shape-capital-visual { margin-bottom: 12px; }
+.neighbour-progress-map-shell { position: relative; min-height: clamp(230px, 34vw, 370px); margin: 0 0 12px; overflow: hidden; border: 1px solid #3c5b86; border-radius: 14px; background: radial-gradient(circle at 50% 45%, #243f68, #101e33 72%); }
+.neighbour-progress-map { min-height: clamp(230px, 34vw, 370px); background: transparent; }
+.neighbour-progress-map-shell .leaflet-control-zoom { margin: 10px; }
+.neighbour-map-hint, .neighbour-map-attribution { position: absolute; z-index: 500; margin: 0; padding: 5px 8px; border: 1px solid #385275; border-radius: 999px; background: #111e33e8; color: #c5d6f3; font-size: .7rem; line-height: 1.25; }
+.neighbour-map-hint { right: 9px; bottom: 9px; pointer-events: none; }
+.neighbour-map-attribution { left: 9px; bottom: 9px; max-width: calc(100% - 240px); overflow-wrap: anywhere; }
+.neighbour-map-attribution a { color: #b9d3ff; text-underline-offset: 2px; }
+.neighbour-map-layer { animation: neighbour-map-enter 420ms ease-out both; transform-box: fill-box; transform-origin: center; }
+.neighbour-map-layer-revealed { stroke-dasharray: 4 3; }
+.shape-neighbours-aid { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 12px; padding: 9px 11px; border: 1px solid #36547e; border-radius: 11px; background: #101e33; }
+.shape-neighbours-aid-copy { margin: 0; color: #c4d4ed; font-size: .82rem; line-height: 1.35; }
+.shape-neighbours-aid button { flex: 0 0 auto; }
+.shape-neighbours-recenter { margin: -4px 0 12px; justify-self: start; }
+@keyframes neighbour-map-enter { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .neighbour-map-layer { animation: none; } }
+@media (min-width: 621px) and (max-height: 920px) { .neighbour-progress-map-shell, .neighbour-progress-map { min-height: 260px; } }
+@media (max-width: 620px) { .neighbour-progress-map-shell, .neighbour-progress-map { min-height: 250px; } .neighbour-map-attribution { max-width: calc(100% - 20px); } .neighbour-map-hint { display: none; } .shape-neighbours-aid { align-items: flex-start; flex-direction: column; } }

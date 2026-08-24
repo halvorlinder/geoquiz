@@ -73,6 +73,15 @@ describe('ShapeCapitalQuiz', () => {
     expect(screen.getByRole('button', { name: /Next country/ })).toBeTruthy()
   })
 
+  it('submits Practice fields through their native form with Enter', () => {
+    renderSouthAfrica()
+    const administrative = screen.getByLabelText('Administrative') as HTMLInputElement
+    fireEvent.change(administrative, { target: { value: 'Pretoria' } })
+    fireEvent.submit(administrative.closest('form')!)
+    expect(administrative.disabled).toBe(true)
+    expect(screen.getByText(/Complete the remaining fields/)).toBeTruthy()
+  })
+
   it('auto-locks timed multi-capital fields, honours IME composition, and records the shape-capital board', () => {
     render(<StrictMode><ShapeCapitalQuiz entities={bolivia} /></StrictMode>)
     fireEvent.click(screen.getByLabelText('Timed'))

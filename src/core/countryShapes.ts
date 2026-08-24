@@ -47,6 +47,16 @@ export type CountryShapeDataset = {
   shapes: Readonly<Record<string, CountryShape>>
 }
 
+/** A deliberately property-free geographic feature for local map consumers. */
+export type SanitizedCountryShapeGeoJson = Readonly<{
+  type: 'Feature'
+  properties: Readonly<Record<string, never>>
+  geometry: Readonly<{
+    type: 'Polygon' | 'MultiPolygon'
+    coordinates: readonly (readonly (readonly GeographicPosition[])[])[] | readonly (readonly GeographicPosition[])[]
+  }>
+}>
+
 /**
  * A display frame for a silhouette and one exact WGS84 coordinate. Unlike the
  * legacy silhouette projection, it never clamps a coordinate to the shape.
@@ -146,6 +156,36 @@ export function decodeShapePolygons(shape: CountryShape): [number, number][][][]
     if (!points) throw new Error('Invalid encoded country shape ring.')
     return points
   }))
+}
+
+/**
+ * Expands an encoded local silhouette into unwrapped WGS84 GeoJSON for a map.
+ * Feature properties are intentionally empty: callers must not accidentally
+ * disclose an unresolved entity through a geographic layer.
+ */
+export function countryShapeToSanitizedGeoJson(shape: CountryShape): SanitizedCountryShapeGeoJson {
+  const [west, , , north] = shape.bounds
+  const coordinateScale = shape.coordinateScale ?? NATURAL_EARTH_SCALE
+  const polygons = decodeShapePolygons(shape).map((polygon) => polygon.map((ring) => {
+    const positions: GeographicPosition[] = ring.map(([x, y]) => [
+      west + x / coordinateScale,
+      north - y / coordinateScale,
+    ])
+    if (positions.length < 3) throw new Error('Country shape rings must contain at least three positions.')
+    if (!samePosition(positions[0], positions.at(-1) as GeographicPosition)) positions.push(positions[0])
+    if (positions.some((position, index) => index > 0 && Math.abs(position[0] - positions[index - 1][0]) > 180 + EPSILON)) {
+      throw new Error('Country shape geometry contains a cross-world segment.')
+    }
+    return positions
+  }))
+  if (!polygons.length) throw new Error('Country shape must contain at least one polygon.')
+  return {
+    type: 'Feature',
+    properties: {},
+    geometry: polygons.length === 1
+      ? { type: 'Polygon', coordinates: polygons[0] }
+      : { type: 'MultiPolygon', coordinates: polygons },
+  }
 }
 
 export function projectCoordinateToShape(shape: CountryShape, position: GeographicPosition): [number, number] | undefined {

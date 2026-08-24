@@ -5,6 +5,10 @@ import { scoreboardKey } from '../../core/scoreboard/scoreboard'
 import { entityForNeighbourCode, shapeNeighboursQuestions, type ShapeNeighboursQuestion } from './shapeNeighbours'
 import { ShapeNeighboursQuiz } from './ShapeNeighboursQuiz'
 
+vi.mock('./NeighbourProgressMap', () => ({
+  NeighbourProgressMap: ({ layers, targetShape }: { layers: readonly { status: string }[]; targetShape: { bounds: readonly number[] } }) => <div aria-label="Neighbour study map" data-layers={layers.map(({ status }) => status).join(',')} data-target-width={targetShape.bounds[2] - targetShape.bounds[0]} />,
+}))
+
 const catalog = shapeNeighboursQuestions()
 const q = (code: string) => catalog.find((question) => question.entity.code === code)!
 const afghanistan = q('AFG'), niger = q('NER'), guinea = q('GIN')
@@ -34,6 +38,43 @@ describe('ShapeNeighboursQuiz', () => {
     expect(screen.getByRole('link', { name: 'geoBoundaries' }).getAttribute('href')).toBe('/geoquiz/country-shape-credits.html')
     expect(screen.getByText(/ODbL 1\.0/)).toBeTruthy()
     expect(screen.getByRole('link', { name: '© OpenStreetMap contributors' }).getAttribute('href')).toBe('https://www.openstreetmap.org/copyright')
+  })
+
+  it('keeps the progressive map as an off-by-default Practice aid and preserves it across answers', () => {
+    vi.useFakeTimers(); render(<ShapeNeighboursQuiz questionFactory={factory(afghanistan)} />)
+    const toggle = screen.getByRole('switch', { name: 'Neighbour map' })
+    expect(toggle.getAttribute('aria-checked')).toBe('false')
+    expect(screen.queryByLabelText('Neighbour study map')).toBeNull()
+    fireEvent.click(toggle)
+    expect(toggle.getAttribute('aria-checked')).toBe('true')
+    expect(screen.getByLabelText('Neighbour study map').getAttribute('data-layers')).toBe('')
+    practice('China')
+    expect(screen.getByLabelText('Neighbour study map').getAttribute('data-layers')).toBe('found')
+    expect(screen.getByRole('button', { name: 'Recenter target' })).toBeTruthy()
+  })
+
+  it('keeps the map preference on and replaces the target layer when Practice advances', () => {
+    vi.useFakeTimers(); vi.spyOn(Math, 'random').mockReturnValue(0.999)
+    const first = small(afghanistan, ['CHN']), second = small(niger, ['NGA'])
+    render(<ShapeNeighboursQuiz questionFactory={factory(first, second)} />)
+    fireEvent.click(screen.getByRole('switch', { name: 'Neighbour map' }))
+    const map = screen.getByLabelText('Neighbour study map')
+    const firstWidth = map.getAttribute('data-target-width')
+    practice('China')
+    fireEvent.click(screen.getByRole('button', { name: /Next country/ }))
+    flush()
+    const nextMap = screen.getByLabelText('Neighbour study map')
+    expect(screen.getByRole('switch', { name: 'Neighbour map' }).getAttribute('aria-checked')).toBe('true')
+    expect(nextMap.getAttribute('data-target-width')).not.toBe(firstWidth)
+    expect(nextMap.getAttribute('data-layers')).toBe('')
+  })
+
+  it('keeps the map aid out of Timed mode', () => {
+    render(<ShapeNeighboursQuiz questionFactory={factory(afghanistan)} />)
+    fireEvent.click(screen.getByLabelText('Timed'))
+    fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+    expect(screen.queryByRole('switch', { name: 'Neighbour map' })).toBeNull()
+    expect(screen.queryByLabelText('Neighbour study map')).toBeNull()
   })
 
   it('exposes only an answered neighbour and keeps target plus unresolved answers hidden', () => {

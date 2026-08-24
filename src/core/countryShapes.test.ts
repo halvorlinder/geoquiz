@@ -7,7 +7,7 @@ import { join, resolve } from 'node:path'
 import { tmpdir } from 'node:os'
 import { describe, expect, it } from 'vitest'
 import { generateCountryShapeCredits, generateCountryShapeDataset, sourcePolygonsForEntity, validateGeoBoundariesOverrides, validateSourceManifest, type GeoBoundariesOverride, type SourceMapping } from '../../scripts/generate-country-shapes'
-import { alignRingsToLongitudeDomain, coordinateRelationToShape, createShapeCoordinateFrame, decodeRing, decodeShapePaths, decodeShapePolygons, getCountryShape, isNonDegenerateRing, projectCoordinateToFrame, projectCoordinateToShape, unwrapRingAtAntimeridian, validateCountryShapeDataset, type CountryShapeDataset } from './countryShapes'
+import { alignRingsToLongitudeDomain, coordinateRelationToShape, countryShapeToSanitizedGeoJson, createShapeCoordinateFrame, decodeRing, decodeShapePaths, decodeShapePolygons, getCountryShape, isNonDegenerateRing, projectCoordinateToFrame, projectCoordinateToShape, unwrapRingAtAntimeridian, validateCountryShapeDataset, type CountryShapeDataset, type GeographicPosition } from './countryShapes'
 
 const shapes = dataset as unknown as CountryShapeDataset
 
@@ -171,6 +171,23 @@ describe('country shape geometry', () => {
     const aligned = alignRingsToLongitudeDomain([[[170, 0], [171, 0], [171, 1], [170, 1], [170, 0]], [[-179, 0], [-178, 0], [-178, 1], [-179, 1], [-179, 0]]])
     expect(Math.min(...aligned[1].map(([longitude]) => longitude))).toBeGreaterThan(180)
     expect(isNonDegenerateRing([[0, 0], [1, 0], [2, 0], [0, 0]])).toBe(false)
+  })
+
+  it('converts encoded shapes to closed, property-free geographic map features', () => {
+    const germany = countryShapeToSanitizedGeoJson(getCountryShape(shapes, 'DEU')!)
+    const denmark = countryShapeToSanitizedGeoJson(getCountryShape(shapes, 'DNK')!)
+    expect(germany.properties).toEqual({})
+    const flatten = (feature: typeof germany): readonly (readonly GeographicPosition[])[] => feature.geometry.type === 'Polygon'
+      ? feature.geometry.coordinates as readonly (readonly GeographicPosition[])[]
+      : feature.geometry.coordinates.flat() as readonly (readonly GeographicPosition[])[]
+    for (const ring of flatten(germany)) {
+      expect(ring[0]).toEqual(ring.at(-1))
+      for (let index = 1; index < ring.length; index += 1) expect(Math.abs(ring[index][0] - ring[index - 1][0])).toBeLessThanOrEqual(180)
+    }
+    const latitude = (feature: typeof germany) => flatten(feature).flat().reduce((total, point) => total + point[1], 0) / flatten(feature).flat().length
+    expect(latitude(denmark)).toBeGreaterThan(latitude(germany))
+    const fiji = countryShapeToSanitizedGeoJson(getCountryShape(shapes, 'FJI')!)
+    for (const ring of flatten(fiji)) for (let index = 1; index < ring.length; index += 1) expect(Math.abs(ring[index][0] - ring[index - 1][0])).toBeLessThanOrEqual(180)
   })
 
   it('projects canonical longitudes but rejects materially out-of-bounds positions', () => {

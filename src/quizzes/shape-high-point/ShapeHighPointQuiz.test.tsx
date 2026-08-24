@@ -57,7 +57,7 @@ describe('ShapeHighPointQuiz', () => {
 
   it('checks practice answers, exposes red reveal metadata, and focuses deliberate Next', () => {
     vi.useFakeTimers(); const { container } = render(<ShapeHighPointQuiz questionFactory={single(denmarkQuestion)} />)
-    fireEvent.change(input(), { target: { value: 'wrong' } }); fireEvent.submit(input().closest('form')!); expect(screen.getByText(/Not recognized/)).toBeTruthy()
+    fireEvent.change(input(), { target: { value: 'wrong' } }); fireEvent.submit(input().closest('form')!); flush(); expect(screen.getByText(/Not recognized/)).toBeTruthy(); expect(document.activeElement).toBe(input())
     fireEvent.click(screen.getByRole('button', { name: 'Reveal answer' })); flush()
     expect(container.querySelector('.high-point-revealed')).toBeTruthy(); expect(screen.getByText('Møllehøj')).toBeTruthy(); expect(screen.getByText('Denmark')).toBeTruthy(); expect(document.activeElement).toBe(screen.getByRole('button', { name: /Next country/ }))
     fireEvent.click(screen.getByRole('button', { name: /Next country/ })); flush(); expect(screen.getByRole('heading', { name: 'Deck complete' })).toBeTruthy()

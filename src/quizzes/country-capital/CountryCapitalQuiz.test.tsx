@@ -81,6 +81,31 @@ describe('CountryCapitalQuiz', () => {
     expect(screen.getByText(/No new correct answers yet/)).toBeTruthy()
   })
 
+  it('returns keyboard focus to the first unresolved field after wrong and partial practice checks', () => {
+    vi.useFakeTimers()
+    render(<CountryCapitalQuiz entities={entities} capitals={capitals} />)
+    const legislative = screen.getByLabelText('Legislative') as HTMLInputElement
+    const executive = screen.getByLabelText('Executive') as HTMLInputElement
+    fireEvent.change(legislative, { target: { value: 'Wrong city' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Check answers' }))
+    act(() => vi.runOnlyPendingTimers())
+    expect(document.activeElement).toBe(legislative)
+    expect(legislative.selectionStart).toBe(0)
+    fireEvent.change(legislative, { target: { value: 'Alpha City' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Check answers' }))
+    act(() => vi.runOnlyPendingTimers())
+    expect(document.activeElement).toBe(executive)
+  })
+
+  it('submits Practice fields through their native form with Enter', () => {
+    render(<CountryCapitalQuiz entities={entities} capitals={capitals} />)
+    const legislative = screen.getByLabelText('Legislative') as HTMLInputElement
+    fireEvent.change(legislative, { target: { value: 'Alpha City' } })
+    fireEvent.submit(legislative.closest('form')!)
+    expect(legislative.disabled).toBe(true)
+    expect(screen.getByText(/Complete the remaining fields/)).toBeTruthy()
+  })
+
   it('starts timed only on request and completes a multi-field question in any order', () => {
     render(<CountryCapitalQuiz entities={entities} capitals={capitals} />)
     fireEvent.click(screen.getByLabelText('Timed'))

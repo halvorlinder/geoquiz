@@ -42,11 +42,11 @@ describe('design-decision validation', () => {
 
   it('requires exact index metadata parity', () => {
     const root = fixture()
-    replace(root, 'README.md', '| [DD-0001](DD-0001-capital-dots-landing.md) | Capital dots is the landing experience | accepted | app shell, routing, capital map |', '| [DD-0001](DD-0001-capital-dots-landing.md) | Wrong title | rejected | unrelated |')
+    replace(root, 'README.md', '| [DD-0002](DD-0002-capital-map-viewport-composition.md) | Capital-map viewport composition | accepted | capital map, responsive layout, run setup |', '| [DD-0002](DD-0002-capital-map-viewport-composition.md) | Wrong title | rejected | unrelated |')
     const errors = designDecisionValidationErrors({ root })
-    expect(errors).toContain('README.md: DD-0001 title does not match its record')
-    expect(errors).toContain('README.md: DD-0001 status does not match its record')
-    expect(errors).toContain('README.md: DD-0001 applies-to list does not match its record')
+    expect(errors).toContain('README.md: DD-0002 title does not match its record')
+    expect(errors).toContain('README.md: DD-0002 status does not match its record')
+    expect(errors).toContain('README.md: DD-0002 applies-to list does not match its record')
   })
 
   it('requires substantive sections and observable acceptance criteria', () => {
@@ -69,18 +69,18 @@ describe('design-decision validation', () => {
 
   it('requires accepted reciprocal supersession links', () => {
     const root = fixture()
-    replace(root, 'DD-0003-rendered-browser-design-review.md', 'supersedes: none', 'supersedes: DD-0001')
+    replace(root, 'DD-0003-rendered-browser-design-review.md', 'supersedes: none', 'supersedes: DD-0002')
     const errors = designDecisionValidationErrors({ root })
-    expect(errors).toContain('DD-0003-rendered-browser-design-review.md: superseded target DD-0001 must have status superseded')
-    expect(errors).toContain('DD-0003-rendered-browser-design-review.md: supersession of DD-0001 is not linked back')
+    expect(errors).toContain('DD-0003-rendered-browser-design-review.md: superseded target DD-0002 must have status superseded')
+    expect(errors).toContain('DD-0003-rendered-browser-design-review.md: supersession of DD-0002 is not linked back')
   })
 
   it('accepts a complete reciprocal supersession lifecycle', () => {
     const root = fixture()
-    replace(root, 'DD-0003-rendered-browser-design-review.md', 'supersedes: none', 'supersedes: DD-0001')
-    replace(root, 'DD-0001-capital-dots-landing.md', 'status: accepted', 'status: superseded')
-    replace(root, 'DD-0001-capital-dots-landing.md', 'superseded_by: none', 'superseded_by: DD-0003')
-    replace(root, 'README.md', '| [DD-0001](DD-0001-capital-dots-landing.md) | Capital dots is the landing experience | accepted |', '| [DD-0001](DD-0001-capital-dots-landing.md) | Capital dots is the landing experience | superseded |')
+    replace(root, 'DD-0003-rendered-browser-design-review.md', 'supersedes: none', 'supersedes: DD-0002')
+    replace(root, 'DD-0002-capital-map-viewport-composition.md', 'status: accepted', 'status: superseded')
+    replace(root, 'DD-0002-capital-map-viewport-composition.md', 'superseded_by: none', 'superseded_by: DD-0003')
+    replace(root, 'README.md', '| [DD-0002](DD-0002-capital-map-viewport-composition.md) | Capital-map viewport composition | accepted |', '| [DD-0002](DD-0002-capital-map-viewport-composition.md) | Capital-map viewport composition | superseded |')
     expect(designDecisionValidationErrors({ root })).toEqual([])
   })
 
@@ -100,7 +100,7 @@ describe('design-decision validation', () => {
     replace(root, file, 'title: Capital dots is the landing experience', 'title: Reused decision identity')
     replace(root, file, '# DD-0001: Capital dots is the landing experience', '# DD-0001: Reused decision identity')
     replace(root, file, 'The root hash route `#/` opens', 'A replacement product direction opens')
-    replace(root, 'README.md', 'Capital dots is the landing experience | accepted', 'Reused decision identity | accepted')
+    replace(root, 'README.md', 'Capital dots is the landing experience | superseded', 'Reused decision identity | superseded')
     const errors = designDecisionValidationErrors({ root, historicalRecords: new Map([[file, historical]]) })
     expect(errors).toContain(`${file}: historical title is immutable`)
     expect(errors).toContain(`${file}: historical Decision outcome is immutable`)
