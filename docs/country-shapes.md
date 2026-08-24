@@ -90,6 +90,10 @@ generic so the SVG does not reveal the answer. Current shape quiz routes
 lazy-load the dataset rather than placing it in the initial application bundle;
 future callers must preserve that lazy boundary.
 
+Country borders does not alter this global asset or reuse it for its nine
+non-aligning override pairs. Its pair-specific Overture silhouettes and exact
+line provenance are documented separately in `docs/border-lines-data.md`.
+
 ## Regeneration and validation
 
 The generated JSON is checked in and is never modified by install or ordinary

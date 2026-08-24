@@ -12,6 +12,7 @@ describe('hash routes', () => {
     expect(routeFromHash('#/shape-neighbours')).toBe('shape-neighbours')
     expect(routeFromHash('#/shape-high-point')).toBe('shape-high-point')
     expect(routeFromHash('#/flag-country')).toBe('flag-country')
+    expect(routeFromHash('#/border-countries')).toBe('border-countries')
     expect(routeFromHash('#/missing')).toBe('not-found')
   })
 })

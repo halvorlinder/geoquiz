@@ -8,6 +8,7 @@ const ShapeCapitalQuiz = lazy(() => import('./quizzes/shape-capital/ShapeCapital
 const ShapeNeighboursQuiz = lazy(() => import('./quizzes/shape-neighbours/ShapeNeighboursQuiz'))
 const ShapeHighPointQuiz = lazy(() => import('./quizzes/shape-high-point/ShapeHighPointQuiz'))
 const FlagCountryQuiz = lazy(() => import('./quizzes/flag-country/FlagCountryQuiz'))
+const BorderCountriesQuiz = lazy(() => import('./quizzes/border-countries/BorderCountriesQuiz'))
 
 export function App() {
   const [route, setRoute] = useState(() => routeFromHash(window.location.hash))
@@ -45,6 +46,7 @@ export function App() {
       'shape-neighbours': 'Geoquiz — Shape neighbours',
       'shape-high-point': 'Geoquiz — Shape highest points',
       'flag-country': 'Geoquiz — Flag countries',
+      'border-countries': 'Geoquiz — Country borders',
       'not-found': 'Geoquiz — Quiz not found',
     } as const
     document.title = titles[route]
@@ -53,12 +55,12 @@ export function App() {
   const openMenu = (event?: MouseEvent<HTMLButtonElement>) => { setMenuOpener(event?.currentTarget ?? menuOpenerRef.current); setMenuOpen(true) }
   const chooseQuiz = (item: Readonly<{ route: Exclude<AppRoute, 'not-found'>; hash: string }>) => { setMenuOpen(false); window.location.hash = item.hash }
 
-  const isStudyQuiz = route === 'country-capital' || route === 'shape-capital' || route === 'shape-high-point' || route === 'flag-country'
+  const isStudyQuiz = route === 'country-capital' || route === 'shape-capital' || route === 'shape-high-point' || route === 'flag-country' || route === 'border-countries'
   return <div className={`app-frame${route === 'capital-map' ? ' capital-map-frame' : ''}${isStudyQuiz ? ' study-quiz-frame' : ''}`}>
     <nav className="quiz-route-nav" aria-label="Quiz navigation"><button ref={menuOpenerRef} className="quiz-menu-trigger" type="button" onClick={openMenu}>All quizzes</button></nav>
     {route === 'not-found' ? <NotFound onOpenMenu={openMenu} /> :
     <Suspense fallback={<main className="app-shell"><p className="feedback" role="status">Loading quiz…</p></main>}>
-      {route === 'capital-map' ? <CapitalMapQuiz /> : route === 'country-capital' ? <CountryCapitalQuiz /> : route === 'shape-capital' ? <ShapeCapitalQuiz /> : route === 'shape-neighbours' ? <ShapeNeighboursQuiz /> : route === 'shape-high-point' ? <ShapeHighPointQuiz /> : <FlagCountryQuiz />}
+      {route === 'capital-map' ? <CapitalMapQuiz /> : route === 'country-capital' ? <CountryCapitalQuiz /> : route === 'shape-capital' ? <ShapeCapitalQuiz /> : route === 'shape-neighbours' ? <ShapeNeighboursQuiz /> : route === 'shape-high-point' ? <ShapeHighPointQuiz /> : route === 'flag-country' ? <FlagCountryQuiz /> : <BorderCountriesQuiz />}
     </Suspense>}
     <QuizMenu open={menuOpen} currentRoute={route} opener={menuOpener} fallbackOpenerRef={menuOpenerRef} onClose={() => setMenuOpen(false)} onChoose={chooseQuiz} />
   </div>

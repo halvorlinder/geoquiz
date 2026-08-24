@@ -21,7 +21,7 @@ describe('entity neighbour answer matching', () => {
   it('keeps known non-neighbours out and blocks timed prefixes and ambiguous typos', () => {
     expect(matchNeighbourAnswer('Beta State', ['AAA'], [], entities)).toMatchObject({ status: 'known-non-neighbour' })
     expect(matchNeighbourAnswer('alp', ['AAA'], [], entities, { timed: true })).toEqual({ status: 'invalid' })
-    expect(matchNeighbourAnswer('Deltx', ['AAA', 'CCC', 'DDD'], [], entities, { timed: true })).toEqual({ status: 'ambiguous' })
+    expect(matchNeighbourAnswer('Deltx', ['AAA', 'CCC', 'DDD'], [], entities, { timed: true })).toEqual({ status: 'invalid' })
   })
 
   it('resolves strict-prefix names from the current missing neighbour context', () => {

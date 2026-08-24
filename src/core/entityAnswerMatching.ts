@@ -57,9 +57,12 @@ export function matchNeighbourAnswer(
     return isPrefixOfMissing ? { status: 'invalid' } : { status: 'known-non-neighbour', entity }
   }
 
+  // Timed runs accept only an already exact curated spelling or abbreviation.
+  // Fuzzy, partial, and ambiguous text remains in the field for deliberate
+  // correction or submission, never an auto-advance trigger.
+  if (options.timed) return { status: 'invalid' }
+
   const allNames = entities.flatMap((entity) => names(entity).map((name) => ({ entity, name })))
-  // Do not auto-accept a partial spelling while the player is still typing.
-  if (options.timed && allNames.some(({ name }) => name.startsWith(normalized))) return { status: 'invalid' }
   const fuzzy = new Map<string, StudyEntity>()
   for (const { entity, name } of allNames) {
     if (damerauLevenshtein(normalized, name) <= allowedDistance(name.length)) fuzzy.set(entity.code, entity)

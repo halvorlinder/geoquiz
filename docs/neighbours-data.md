@@ -6,6 +6,10 @@ capitals.json, checked on 2026-08-20. It currently contains 317 reciprocal
 land-boundary edges, 157 eligible entities, and 40 known zero-neighbour
 entities.
 
+The separate Country borders image quiz renders this same authoritative roster
+through display-only selected runs. Its geometry and ODbL provenance are in
+`docs/border-lines-data.md`; it never determines neighbour answers.
+
 ## Scope and neutrality
 
 The data represents the quiz's answer policy, not a legal boundary
