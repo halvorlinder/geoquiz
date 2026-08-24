@@ -1,11 +1,11 @@
 ---
 id: DD-0001
 title: Capital dots is the landing experience
-status: accepted
+status: superseded
 date: 2026-08-21
 applies_to: app shell, routing, capital map
 supersedes: none
-superseded_by: none
+superseded_by: DD-0019
 ---
 
 # DD-0001: Capital dots is the landing experience
@@ -43,3 +43,9 @@ decision explicitly supersedes this one.
 Route parsing and application tests cover the root, chooser, legacy, history,
 and unknown-route behavior. Rendered browser QA must still confirm navigation
 and focus behavior before publication.
+
+## History
+
+Superseded by DD-0019. Its root landing and `#/capital-map` compatibility
+outcomes are explicitly retained there; only its chooser-page and `All quizzes`
+navigation outcomes are replaced.

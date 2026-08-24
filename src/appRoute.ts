@@ -1,8 +1,10 @@
-export type AppRoute = 'hub' | 'capital-map' | 'country-capital' | 'shape-capital' | 'shape-neighbours' | 'shape-high-point' | 'flag-country' | 'not-found'
+export type AppRoute = 'capital-map' | 'country-capital' | 'shape-capital' | 'shape-neighbours' | 'shape-high-point' | 'flag-country' | 'not-found'
 
 export function routeFromHash(hash: string): AppRoute {
   if (!hash || hash === '#' || hash === '#/') return 'capital-map'
-  if (hash === '#/quizzes') return 'hub'
+  // The former chooser URL remains a compatible entry point. App canonicalizes it
+  // to the landing route and opens the overlay menu without adding history.
+  if (hash === '#/quizzes') return 'capital-map'
   if (hash === '#/capital-map') return 'capital-map'
   if (hash === '#/country-capital') return 'country-capital'
   if (hash === '#/shape-capital') return 'shape-capital'

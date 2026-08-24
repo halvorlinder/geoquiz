@@ -10,6 +10,7 @@ import {
 } from "react";
 import { CountryShapeAttribution, CountrySilhouette } from "../../components/CountrySilhouette";
 import countryShapesData from "../../data/country-shapes.json";
+import { getCountryShape, type CountryShapeDataset } from "../../core/countryShapes";
 import {
   entityCatalog,
   studyEntities,
@@ -45,6 +46,7 @@ import {
   type NeighbourContinent,
   type ShapeNeighboursQuestion,
 } from "./shapeNeighbours";
+import { NeighbourProgressMap, type NeighbourProgressLayer } from "./NeighbourProgressMap";
 
 type Mode = "practice" | "timed";
 type Config = Readonly<{ mode: Mode; continent: NeighbourContinent }>;
@@ -60,6 +62,7 @@ type Feedback = Readonly<{
 }>;
 
 const DATA_VERSION = `shape-neighbours-v1-entities-${entityCatalog.version}-shapes-${(countryShapesData as { version: number }).version}-neighbours-${NEIGHBOUR_DATA_VERSION}`;
+const countryShapeDataset = countryShapesData as unknown as CountryShapeDataset;
 const emptyState = (): QuestionState => ({
   value: "",
   foundCodes: [],
@@ -149,6 +152,8 @@ export function ShapeNeighboursQuiz({
     useState<ShapeNeighboursQuestion | null>(null);
   const [scores, setScores] = useState<readonly ScoreboardEntry[]>([]);
   const [presentation, setPresentation] = useState(0);
+  const [showProgressMap, setShowProgressMap] = useState(false);
+  const [recenterVersion, setRecenterVersion] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const acknowledgementRef = useRef<HTMLElement>(null);
@@ -181,6 +186,22 @@ export function ShapeNeighboursQuiz({
     active.mode === "timed"
       ? timed !== null && isTimedSessionComplete(timed)
       : isComplete(practice);
+  const progressLayers = useMemo<NeighbourProgressLayer[]>(() => {
+    if (!target) return [];
+    const foundLayers = state.foundCodes.flatMap<NeighbourProgressLayer>((code) => {
+      const shape = getCountryShape(countryShapeDataset, code);
+      return shape ? [{ shape, status: "found" as const }] : [];
+    });
+    const revealedLayers = state.revealed
+      ? target.neighbourCodes
+          .filter((code) => !state.foundCodes.includes(code))
+          .flatMap<NeighbourProgressLayer>((code) => {
+            const shape = getCountryShape(countryShapeDataset, code);
+            return shape ? [{ shape, status: "revealed" as const }] : [];
+          })
+      : [];
+    return [...foundLayers, ...revealedLayers];
+  }, [state.foundCodes, state.revealed, target]);
   const scope = useMemo(
     () => ({
       quizId: "shape-neighbours",
@@ -602,8 +623,9 @@ export function ShapeNeighboursQuiz({
   const found = state.foundCodes
     .map((code) => entityForNeighbourCode(code, entities))
     .filter((entity): entity is StudyEntity => Boolean(entity));
+  const mapEnabled = active.mode === "practice" && showProgressMap;
   return (
-    <main className="app-shell quiz-active-shell">
+    <main className="app-shell quiz-active-shell shape-neighbours-shell">
       <header className="masthead">
         <div>
           <p className="eyebrow">
@@ -642,14 +664,49 @@ export function ShapeNeighboursQuiz({
             ? "Timed question"
             : `Country ${practice.index + 1}`}
         </p>
-        <div className="shape-capital-visual">
-          <CountrySilhouette
-            shape={target.shape}
-            accessibleLabel="Country silhouette"
-            className="shape-capital-silhouette"
-          />
-        </div>
-        <CountryShapeAttribution shape={target.shape} />
+        {active.mode === "practice" && (
+          <div className="shape-neighbours-aid">
+            <p className="shape-neighbours-aid-copy">Build the local map as you identify each neighbour.</p>
+            <button
+              type="button"
+              className="map-layer-switch"
+              role="switch"
+              aria-checked={showProgressMap}
+              onClick={() => setShowProgressMap((visible) => !visible)}
+            >
+              <span>Neighbour map</span>
+              <span className="map-layer-switch-state" aria-hidden="true">{showProgressMap ? "On" : "Off"}</span>
+            </button>
+          </div>
+        )}
+        {mapEnabled ? (
+          <>
+            <NeighbourProgressMap
+              targetShape={target.shape}
+              layers={progressLayers}
+              questionKey={target.id}
+              recenterVersion={recenterVersion}
+            />
+            <button
+              className="secondary-button shape-neighbours-recenter"
+              type="button"
+              onClick={() => setRecenterVersion((version) => version + 1)}
+            >
+              Recenter target
+            </button>
+          </>
+        ) : (
+          <>
+            <div className="shape-capital-visual">
+              <CountrySilhouette
+                shape={target.shape}
+                accessibleLabel="Country silhouette"
+                className="shape-capital-silhouette"
+              />
+            </div>
+            <CountryShapeAttribution shape={target.shape} />
+          </>
+        )}
         <h2 id="shape-neighbours-question">Country silhouette</h2>
         <p className="country-capital-instruction">
           Name every neighbouring country, one at a time.

@@ -52,7 +52,7 @@ paraphrase user direction rather than copying private conversation.
 
 | ID | Decision | Status | Applies to |
 | --- | --- | --- | --- |
-| [DD-0001](DD-0001-capital-dots-landing.md) | Capital dots is the landing experience | accepted | app shell, routing, capital map |
+| [DD-0001](DD-0001-capital-dots-landing.md) | Capital dots is the landing experience | superseded | app shell, routing, capital map |
 | [DD-0002](DD-0002-capital-map-viewport-composition.md) | Capital-map viewport composition | accepted | capital map, responsive layout, run setup |
 | [DD-0003](DD-0003-rendered-browser-design-review.md) | Rendered browser review is required for visual acceptance | accepted | all user-facing UI, responsive layout, maps |
 | [DD-0004](DD-0004-practice-and-timed-session-behavior.md) | Practice and timed session behavior | accepted | shared session behavior, quiz interaction, answer feedback |
@@ -70,3 +70,6 @@ paraphrase user direction rather than copying private conversation.
 | [DD-0016](DD-0016-desktop-only-practice-answer-recap.md) | Practice answer recap is desktop-only | accepted | capital map, desktop practice, study facts |
 | [DD-0017](DD-0017-high-fidelity-microstate-silhouettes.md) | High-fidelity microstate silhouettes | accepted | country silhouettes, microstate geometry, boundary attribution |
 | [DD-0018](DD-0018-non-disclosing-shape-attribution.md) | Shape attribution is local and non-disclosing | accepted | country silhouettes, boundary attribution, unresolved challenges |
+| [DD-0019](DD-0019-overlay-quiz-menu.md) | Overlay quiz menu retains the active exercise | accepted | app shell, routing, quiz navigation, responsive layout |
+| [DD-0020](DD-0020-study-quiz-layout-and-keyboard-flow.md) | Study quiz layout and keyboard flow | accepted | country-capital, shape-capital, shape-high-point, flag-country, responsive layout, keyboard interaction |
+| [DD-0021](DD-0021-progressive-neighbour-map.md) | Practice progressively builds a target-focused neighbour map | accepted | shape-neighbours quiz, practice aids, country-shape map rendering, responsive map viewport |

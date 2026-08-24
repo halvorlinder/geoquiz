@@ -88,10 +88,13 @@ describe('FlagCountryQuiz', () => {
   })
 
   it('keeps practice incorrect, resolves correct/reveal answers, and focuses the deliberate Next action', () => {
+    vi.useFakeTimers()
     const firstRender = render(<FlagCountryQuiz questionFactory={() => questions(['CAN'])} />)
     const input = screen.getByLabelText('country')
     fireEvent.change(input, { target: { value: 'wrong' } }); fireEvent.submit(input.closest('form')!)
+    act(() => vi.runOnlyPendingTimers())
     expect(screen.getByText(/Not recognized yet/)).toBeTruthy()
+    expect(document.activeElement).toBe(input)
     fireEvent.change(input, { target: { value: 'Canada' } }); fireEvent.submit(input.closest('form')!)
     expect(screen.getByText('Canada')).toBeTruthy()
     expect(document.querySelector('.flag-country-card')?.className).toContain('flag-correct')

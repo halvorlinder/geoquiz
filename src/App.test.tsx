@@ -1,102 +1,121 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { App } from './App'
 
-vi.mock('./quizzes/capital-map/CapitalMapQuiz', () => ({ default: () => <main><h1>Capital map mock</h1></main> }))
+vi.mock('./quizzes/capital-map/CapitalMapQuiz', () => ({ default: () => <main><h1>Capital map mock</h1><input aria-label="Capital answer" /></main> }))
 
 function setHash(hash: string) {
   window.location.hash = hash
   fireEvent(window, new HashChangeEvent('hashchange'))
 }
 
-afterEach(() => { setHash('#/quizzes') })
+afterEach(() => { setHash('#/') })
 
-describe('App quiz hub navigation', () => {
-  it('keeps Capital dots on the landing route and places the chooser on its own stable route', async () => {
-    setHash('#/')
-    render(<App />)
-    expect(await screen.findByRole('heading', { name: 'Capital map mock' })).toBeTruthy()
-    expect(document.title).toBe('Geoquiz — Capital dots')
-    expect(document.querySelector('.capital-map-frame')).toBeTruthy()
-    expect(screen.getByRole('link', { name: 'All quizzes' }).getAttribute('href')).toBe('#/quizzes')
-
-    setHash('#/quizzes')
-    const hubHeading = screen.getByRole('heading', { name: 'Choose a quiz' })
-    expect(hubHeading).toBeTruthy()
-    expect(document.activeElement).toBe(hubHeading)
-    expect(document.title).toBe('Geoquiz — All quizzes')
-    expect(document.querySelector('.capital-map-frame')).toBeNull()
-    expect(screen.getByRole('link', { name: /^Capital dots/ }).getAttribute('href')).toBe('#/')
-    expect(screen.getByRole('link', { name: /^Country capitals/ }).getAttribute('href')).toBe('#/country-capital')
-    expect(screen.getByRole('link', { name: /^Shape capitals/ }).getAttribute('href')).toBe('#/shape-capital')
-    expect(screen.getByRole('link', { name: /^Shape neighbours/ }).getAttribute('href')).toBe('#/shape-neighbours')
-    expect(screen.getByRole('link', { name: /^Shape highest points/ }).getAttribute('href')).toBe('#/shape-high-point')
-    expect(screen.getByRole('link', { name: /^Flag countries/ }).getAttribute('href')).toBe('#/flag-country')
-    setHash('#/not-a-quiz')
-    const notFoundHeading = screen.getByRole('heading', { name: 'Quiz not found' })
-    expect(notFoundHeading).toBeTruthy()
-    expect(document.activeElement).toBe(notFoundHeading)
-    expect(notFoundHeading.closest('main')?.classList.contains('not-found')).toBe(true)
-    expect(document.title).toBe('Geoquiz — Quiz not found')
-    expect(screen.getByRole('link', { name: 'All quizzes' }).getAttribute('href')).toBe('#/quizzes')
-  })
-
-  it('loads the real country-capital route and updates the route title', async () => {
+describe('App quiz menu navigation', () => {
+  it('opens a modal over the mounted quiz without changing its route, and restores menu-button focus on close', async () => {
     setHash('#/country-capital')
     render(<App />)
-    expect(await screen.findByRole('heading', { name: 'Country capitals' })).toBeTruthy()
-    expect(document.title).toBe('Geoquiz — Country capitals')
-    expect(screen.getByRole('link', { name: 'All quizzes' }).getAttribute('href')).toBe('#/quizzes')
+    await screen.findByRole('heading', { name: 'Country capitals' })
+    const opener = screen.getByRole('button', { name: 'All quizzes' })
+    opener.focus()
+    fireEvent.click(opener)
+    const dialog = screen.getByRole('dialog', { name: 'Choose a quiz' })
+    expect(dialog).toBeTruthy()
+    expect(window.location.hash).toBe('#/country-capital')
+    expect(screen.getByRole('heading', { name: 'Country capitals' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: /Country capitals.*Current quiz/ }).getAttribute('aria-current')).toBe('page')
+    fireEvent.click(screen.getByRole('dialog', { hidden: true }).querySelector('button[aria-label="Close quiz menu"]')!)
+    await waitFor(() => expect(document.activeElement).toBe(opener))
   })
 
-  it('loads the capital-map route without retaining country-capital route state', async () => {
+  it('uses Escape and current-quiz selection to close the dialog without route changes', async () => {
+    setHash('#/')
+    render(<App />)
+    await screen.findByRole('heading', { name: 'Capital map mock' })
+    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+    fireEvent(screen.getByRole('dialog', { name: 'Choose a quiz' }), new Event('cancel', { cancelable: true }))
+    expect(window.location.hash).toBe('#/')
+    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+    fireEvent.click(screen.getByRole('button', { name: /Capital dots.*Current quiz/ }))
+    expect(window.location.hash).toBe('#/')
+  })
+
+  it('navigates only after choosing a different quiz', async () => {
+    setHash('#/')
+    render(<App />)
+    await screen.findByRole('heading', { name: 'Capital map mock' })
+    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+    fireEvent.click(screen.getByRole('button', { name: /Flag countries/ }))
+    expect(window.location.hash).toBe('#/flag-country')
+    expect(await screen.findByRole('heading', { name: 'Flag quiz' })).toBeTruthy()
+  })
+
+  it('canonicalizes the legacy chooser hash to the landing route and opens the modal', async () => {
+    cleanup()
+    window.history.pushState(window.history.state, '', '#/quizzes')
+    const historyLength = window.history.length
+    const replaceState = vi.spyOn(window.history, 'replaceState')
+    render(<App />)
+    expect(await screen.findByRole('heading', { name: 'Capital map mock' })).toBeTruthy()
+    expect(window.location.hash).toBe('#/')
+    expect(replaceState).toHaveBeenCalledTimes(1)
+    expect(window.history.length).toBe(historyLength)
+    const dialog = screen.getByRole('dialog') as HTMLDialogElement
+    expect(dialog.open).toBe(true)
+    expect(dialog.getAttribute('aria-labelledby')).toBe('quiz-menu-title')
+    expect(document.title).toBe('Geoquiz — Capital dots')
+    fireEvent.click(dialog.querySelector('button[aria-label="Close quiz menu"]')!)
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('button', { name: 'All quizzes' })))
+  })
+
+  it('promotes every opening to a native modal and closes it before the next opening', async () => {
+    const originalShowModal = Object.getOwnPropertyDescriptor(HTMLDialogElement.prototype, 'showModal')
+    const originalClose = Object.getOwnPropertyDescriptor(HTMLDialogElement.prototype, 'close')
+    const showModal = vi.fn(function (this: HTMLDialogElement) { this.setAttribute('open', '') })
+    const close = vi.fn(function (this: HTMLDialogElement) { this.removeAttribute('open'); this.dispatchEvent(new Event('close')) })
+    Object.defineProperty(HTMLDialogElement.prototype, 'showModal', { configurable: true, value: showModal })
+    Object.defineProperty(HTMLDialogElement.prototype, 'close', { configurable: true, value: close })
+    try {
+      setHash('#/')
+      render(<App />)
+      await screen.findByRole('heading', { name: 'Capital map mock' })
+      fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+      expect(showModal).toHaveBeenCalledTimes(1)
+      fireEvent.click(screen.getByRole('button', { name: 'Close quiz menu' }))
+      expect(close).toHaveBeenCalledTimes(1)
+      fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+      expect(showModal).toHaveBeenCalledTimes(2)
+    } finally {
+      if (originalShowModal) Object.defineProperty(HTMLDialogElement.prototype, 'showModal', originalShowModal)
+      else delete (HTMLDialogElement.prototype as { showModal?: unknown }).showModal
+      if (originalClose) Object.defineProperty(HTMLDialogElement.prototype, 'close', originalClose)
+      else delete (HTMLDialogElement.prototype as { close?: unknown }).close
+    }
+  })
+
+  it('keeps legacy capital-map and unknown routes recoverable without a chooser page', async () => {
     setHash('#/capital-map')
     render(<App />)
     expect(await screen.findByRole('heading', { name: 'Capital map mock' })).toBeTruthy()
-    expect(document.title).toBe('Geoquiz — Capital dots')
-    expect(screen.queryByRole('heading', { name: 'Country capitals' })).toBeNull()
+    setHash('#/not-a-quiz')
+    expect(screen.getByRole('heading', { name: 'Quiz not found' })).toBeTruthy()
+    const notFoundOpener = screen.getByRole('button', { name: 'Open quiz menu' })
+    fireEvent.click(notFoundOpener)
+    expect(screen.getByRole('dialog', { name: 'Choose a quiz' })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Close quiz menu' }))
+    await waitFor(() => expect(document.activeElement).toBe(notFoundOpener))
+    fireEvent.click(notFoundOpener)
+    fireEvent(screen.getByRole('dialog', { name: 'Choose a quiz' }), new Event('cancel', { cancelable: true }))
+    await waitFor(() => expect(document.activeElement).toBe(notFoundOpener))
+    expect(screen.queryByText('Focused, local-first exercises for learning world geography.')).toBeNull()
   })
 
-  it('updates the rendered route when the browser moves through hash history', async () => {
-    setHash('#/country-capital')
-    render(<App />)
-    expect(await screen.findByRole('heading', { name: 'Country capitals' })).toBeTruthy()
-
-    window.location.hash = '#/quizzes'
-    fireEvent(window, new PopStateEvent('popstate'))
-    fireEvent(window, new HashChangeEvent('hashchange'))
-    expect(screen.getByRole('heading', { name: 'Choose a quiz' })).toBeTruthy()
-
-    window.location.hash = '#/'
-    fireEvent(window, new PopStateEvent('popstate'))
-    fireEvent(window, new HashChangeEvent('hashchange'))
-    expect(await screen.findByRole('heading', { name: 'Capital map mock' })).toBeTruthy()
-  })
-
-  it('loads the lazy shape-capital route and updates the route title', async () => {
-    setHash('#/shape-capital')
-    render(<App />)
-    expect(await screen.findByRole('heading', { name: 'Shape capitals' })).toBeTruthy()
-    expect(document.title).toBe('Geoquiz — Shape capitals')
-  })
-
-  it('loads the lazy shape-neighbours route and updates the route title', async () => {
-    setHash('#/shape-neighbours')
-    render(<App />)
-    expect(await screen.findByRole('heading', { name: 'Shape neighbours' })).toBeTruthy()
-    expect(document.title).toBe('Geoquiz — Shape neighbours')
-  })
-
-  it('loads the lazy shape-high-point route and updates the route title', async () => {
+  it('synchronizes representative lazy routes and titles when hash history changes', async () => {
     setHash('#/shape-high-point')
     render(<App />)
     expect(await screen.findByRole('heading', { name: 'Shape highest points' })).toBeTruthy()
     expect(document.title).toBe('Geoquiz — Shape highest points')
-  })
-
-  it('loads the lazy flag-country route and updates the route title', async () => {
     setHash('#/flag-country')
-    render(<App />)
     expect(await screen.findByRole('heading', { name: 'Flag quiz' })).toBeTruthy()
     expect(document.title).toBe('Geoquiz — Flag countries')
   })

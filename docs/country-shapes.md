@@ -78,6 +78,12 @@ to project a local point overlay without shipping the original topology at
 runtime. Rendering is entirely local; no map tiles, runtime data, or imagery is
 requested.
 
+The framework-light decoder also exposes a property-free conversion from one
+selected encoded shape to closed, unwrapped WGS84 GeoJSON. It is used by the
+optional Shape neighbours Practice map only; callers must keep its feature
+properties empty and supply no answer-bearing labels while a challenge is
+unresolved. It is a display conversion, not a source for neighbour policy.
+
 `CountrySilhouette` accepts a shape object rather than an entity name and has a
 generic accessible label by default. Callers must keep challenge-mode labels
 generic so the SVG does not reveal the answer. Current shape quiz routes
