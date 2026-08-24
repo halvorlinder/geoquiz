@@ -7,19 +7,24 @@ quiz images. The production site is built for GitHub Pages at
 
 ## Quizzes
 
-Capital dots is the front page at `#/`. The quiz chooser lives at `#/quizzes`.
-Each quiz also has a stable hash route:
+Capital dots is the front page at `/geoquiz/`. The quiz chooser is an overlay,
+opened from **All quizzes**; it does not replace the active exercise. Every quiz
+has a separate static, crawlable page:
 
 | Quiz | Route | Question set |
 | --- | --- | --- |
-| Capital dots | `#/` (also `#/capital-map`) | Identify a highlighted capital from a tile-free world map. |
-| Country capitals | `#/country-capital` | Name a country's capital(s), including role-labelled multi-capital questions. |
-| Shape capitals | `#/shape-capital` | Name a capital from a country silhouette. |
-| Shape neighbours | `#/shape-neighbours` | Name every eligible land neighbour from a country silhouette. |
-| Shape highest points | `#/shape-high-point` | Name the marked highest point on a country silhouette. |
-| Flag countries | `#/flag-country` | Identify countries or approved territories from bundled local SVG flags. |
+| Capital dots | `/geoquiz/` | Identify a highlighted capital from a tile-free world map. |
+| Country capitals | `/geoquiz/country-capital/` | Name a country's capital(s), including role-labelled multi-capital questions. |
+| Shape capitals | `/geoquiz/shape-capital/` | Name a capital from a country silhouette. |
+| Shape neighbours | `/geoquiz/shape-neighbours/` | Name every eligible land neighbour from a country silhouette. |
+| Shape highest points | `/geoquiz/shape-high-point/` | Name the marked highest point on a country silhouette. |
+| Flag countries | `/geoquiz/flag-country/` | Identify countries or approved territories from bundled local SVG flags. |
+| Country borders | `/geoquiz/border-countries/` | Identify neighbouring countries from locally rendered shared land borders. |
 
-All routes are lazy-loaded at the quiz boundary. Country silhouettes are a known
+The former `#/`, `#/capital-map`, and quiz hash routes remain compatible
+bookmarks: the app replaces them with their canonical paths. `#/quizzes` opens
+the overlay once over Capital dots after canonicalizing to the front page. All
+quiz modules remain lazy-loaded at the quiz boundary. Country silhouettes are a known
 large lazy chunk (about 680 kB raw / 257 kB gzip); flags remain individual local
 SVG files and the flag-quiz code chunk is about 92 kB raw / 10 kB gzip.
 
@@ -73,6 +78,7 @@ maintenance details are in:
 - [Neighbours](docs/neighbours-data.md)
 - [Highest points](docs/high-point-data.md)
 - [Flags and territories](docs/flag-data.md)
+- [Country-border display data](docs/border-lines-data.md)
 
 Durable UI and interaction direction is maintained separately in the
 [design-decision index](docs/design-decisions/README.md). New explicit design
@@ -140,3 +146,14 @@ shipped, test locally with the requested Chrome MCPâ€”not a substitute browserâ€
 
 Chrome MCP QA, passing GitHub Actions, an authorized merge, a successful Pages
 deployment, and a hosted smoke test are all required before publication.
+
+## Search discovery
+
+The production build emits static HTML for all seven canonical quiz routes, each
+with its own title, description, and canonical URL. `sitemap.xml` lists those
+seven URLs exactly; submit `https://halvorlinder.github.io/geoquiz/sitemap.xml` in
+Google Search Console after deployment. The downloaded Google ownership file is
+copied unchanged into `public/` so it is served at the project-site root.
+
+Search indexing and ranking remain controlled by Google. Geoquiz does not add
+visitor analytics as part of its search-discovery setup.

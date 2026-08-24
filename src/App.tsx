@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState, type MouseEvent } from 'react'
 import { QuizMenu } from './components/QuizMenu'
-import { routeFromHash, type AppRoute } from './appRoute'
+import { isLegacyMenuHash, legacyHashRoute, routeFromLocation, routeMetadata, type AppRoute, type QuizRoute } from './appRoute'
 
 const CapitalMapQuiz = lazy(() => import('./quizzes/capital-map/CapitalMapQuiz'))
 const CountryCapitalQuiz = lazy(() => import('./quizzes/country-capital/CountryCapitalQuiz'))
@@ -10,50 +10,73 @@ const ShapeHighPointQuiz = lazy(() => import('./quizzes/shape-high-point/ShapeHi
 const FlagCountryQuiz = lazy(() => import('./quizzes/flag-country/FlagCountryQuiz'))
 const BorderCountriesQuiz = lazy(() => import('./quizzes/border-countries/BorderCountriesQuiz'))
 
-export function App() {
-  const [route, setRoute] = useState(() => routeFromHash(window.location.hash))
-  const [menuOpen, setMenuOpen] = useState(() => window.location.hash === '#/quizzes')
-  const [menuOpener, setMenuOpener] = useState<HTMLElement | null>(null)
-  const menuOpenerRef = useRef<HTMLButtonElement>(null)
-  const canonicalizingLegacyMenuRef = useRef(false)
+function syncDocumentMetadata(route: AppRoute) {
+  const metadata = routeMetadata[route]
+  document.title = metadata.title
 
-  function canonicalizeLegacyMenuHash() {
-    if (window.location.hash !== '#/quizzes') return false
-    canonicalizingLegacyMenuRef.current = true
-    window.history.replaceState(window.history.state, '', `${window.location.pathname}${window.location.search}#/`)
-    setRoute('capital-map')
-    setMenuOpen(true)
-    window.setTimeout(() => { canonicalizingLegacyMenuRef.current = false }, 0)
-    return true
+  const description = document.head.querySelector<HTMLMetaElement>('meta[name="description"]') ?? document.createElement('meta')
+  description.name = 'description'
+  description.content = metadata.description
+  if (!description.isConnected) document.head.append(description)
+
+  const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]') ?? document.createElement('link')
+  if (metadata.canonicalUrl) {
+    canonical.rel = 'canonical'
+    canonical.href = metadata.canonicalUrl
+    if (!canonical.isConnected) document.head.append(canonical)
+  } else {
+    canonical?.remove()
   }
 
+  const robots = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]')
+  if (metadata.indexable) robots?.remove()
+  else if (robots) robots.content = 'noindex,follow'
+  else {
+    const noindex = document.createElement('meta')
+    noindex.name = 'robots'
+    noindex.content = 'noindex,follow'
+    document.head.append(noindex)
+  }
+}
+
+export function App() {
+  const [route, setRoute] = useState(() => routeFromLocation(window.location))
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpener, setMenuOpener] = useState<HTMLElement | null>(null)
+  const menuOpenerRef = useRef<HTMLButtonElement>(null)
+
   useEffect(() => {
-    canonicalizeLegacyMenuHash()
-    const syncRoute = () => {
-      if (canonicalizeLegacyMenuHash()) return
-      if (canonicalizingLegacyMenuRef.current && window.location.hash === '#/') { setRoute('capital-map'); setMenuOpen(true); return }
-      setRoute(routeFromHash(window.location.hash)); setMenuOpen(false)
+    function syncRoute() {
+      const legacyRoute = legacyHashRoute(window.location.hash)
+      const legacyMenu = isLegacyMenuHash(window.location.hash)
+      if (legacyRoute || legacyMenu) {
+        const nextRoute = legacyRoute ?? 'capital-map'
+        window.history.replaceState(window.history.state, '', `${routeMetadata[nextRoute].path}${window.location.search}`)
+        setRoute(nextRoute)
+        setMenuOpen(legacyMenu)
+        return
+      }
+      setRoute(routeFromLocation(window.location))
+      setMenuOpen(false)
     }
+
+    syncRoute()
+    window.addEventListener('popstate', syncRoute)
     window.addEventListener('hashchange', syncRoute)
-    return () => window.removeEventListener('hashchange', syncRoute)
+    return () => {
+      window.removeEventListener('popstate', syncRoute)
+      window.removeEventListener('hashchange', syncRoute)
+    }
   }, [])
 
-  useEffect(() => {
-    const titles = {
-      'capital-map': 'Geoquiz — Capital dots',
-      'country-capital': 'Geoquiz — Country capitals',
-      'shape-capital': 'Geoquiz — Shape capitals',
-      'shape-neighbours': 'Geoquiz — Shape neighbours',
-      'shape-high-point': 'Geoquiz — Shape highest points',
-      'flag-country': 'Geoquiz — Flag countries',
-      'border-countries': 'Geoquiz — Country borders',
-      'not-found': 'Geoquiz — Quiz not found',
-    } as const
-    document.title = titles[route]
-  }, [route])
+  useEffect(() => { syncDocumentMetadata(route) }, [route])
 
   const openMenu = (event?: MouseEvent<HTMLButtonElement>) => { setMenuOpener(event?.currentTarget ?? menuOpenerRef.current); setMenuOpen(true) }
-  const chooseQuiz = (item: Readonly<{ route: Exclude<AppRoute, 'not-found'>; hash: string }>) => { setMenuOpen(false); window.location.hash = item.hash }
+  const chooseQuiz = (nextRoute: QuizRoute) => {
+    setMenuOpen(false)
+    window.history.pushState(window.history.state, '', routeMetadata[nextRoute].path)
+    setRoute(nextRoute)
+  }
 
   const isStudyQuiz = route === 'country-capital' || route === 'shape-capital' || route === 'shape-high-point' || route === 'flag-country' || route === 'border-countries'
   return <div className={`app-frame${route === 'capital-map' ? ' capital-map-frame' : ''}${route === 'shape-neighbours' ? ' shape-neighbours-frame' : ''}${isStudyQuiz ? ' study-quiz-frame' : ''}`}>

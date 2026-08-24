@@ -16,7 +16,7 @@ select { font: inherit; }
 
 button { cursor: pointer; }
 
-button:focus-visible, input:focus-visible, select:focus-visible, h1:focus-visible, .leaflet-control-zoom a:focus-visible {
+button:focus-visible, input:focus-visible, select:focus-visible, h1:focus-visible, .leaflet-control-zoom a:focus-visible, .quiz-menu-item:focus-visible {
   outline: 3px solid #ffcf70;
   outline-offset: 3px;
 }
@@ -56,7 +56,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, h1:focus-visibl
 .quiz-menu-close:hover { background: #2d4e7d; }
 .quiz-menu-intro { max-width: 56ch; margin: -2px 0 0; color: #c4d4ed; line-height: 1.45; }
 .quiz-menu-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
-.quiz-menu-item { display: grid; align-content: start; min-height: 118px; width: 100%; gap: 6px; padding: 16px; border: 1px solid #36547e; border-radius: 12px; background: #101e33; color: #f4f7ff; text-align: left; }
+.quiz-menu-item { display: grid; align-content: start; min-height: 118px; width: 100%; gap: 6px; padding: 16px; border: 1px solid #36547e; border-radius: 12px; background: #101e33; color: #f4f7ff; text-align: left; text-decoration: none; }
 .quiz-menu-item:hover { border-color: #80aefa; background: #1c3152; }
 .quiz-menu-item[aria-current="page"] { border-color: #88d9bb; box-shadow: inset 0 0 0 1px #88d9bb55; }
 .quiz-menu-item strong { font-size: 1.05rem; }

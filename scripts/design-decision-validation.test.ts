@@ -27,8 +27,17 @@ afterEach(() => {
 })
 
 describe('design-decision validation', () => {
-  it('accepts the checked-in decision system', () => {
+  it('accepts the checked-in decision system, including chained supersessions', () => {
     expect(designDecisionValidationErrors({ root: fixture() })).toEqual([])
+  })
+
+  it('rejects a supersession cycle without an accepted replacement', () => {
+    const root = fixture()
+    replace(root, 'DD-0019-overlay-quiz-menu.md', 'supersedes: DD-0001', 'supersedes: DD-0001, DD-0029')
+    replace(root, 'DD-0029-crawlable-quiz-routes.md', 'status: accepted', 'status: superseded')
+    replace(root, 'DD-0029-crawlable-quiz-routes.md', 'superseded_by: none', 'superseded_by: DD-0019')
+    replace(root, 'README.md', '| [DD-0029](DD-0029-crawlable-quiz-routes.md) | Crawlable quiz routes preserve overlay navigation | accepted |', '| [DD-0029](DD-0029-crawlable-quiz-routes.md) | Crawlable quiz routes preserve overlay navigation | superseded |')
+    expect(designDecisionValidationErrors({ root })).toContain('DD-0001-capital-dots-landing.md: supersession chain must terminate at an accepted replacement')
   })
 
   it('rejects malformed DD filenames and stale index rows', () => {

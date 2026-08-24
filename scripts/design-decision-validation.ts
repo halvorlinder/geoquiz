@@ -201,6 +201,21 @@ export function designDecisionValidationErrors(options: DesignDecisionValidation
     }
   }
 
+  function replacementChainEndsAccepted(id: string, visiting = new Set<string>()): boolean {
+    const record = records.get(id)
+    if (!record) return false
+    if (record.status === 'accepted') return true
+    if (record.status !== 'superseded' || visiting.has(id) || record.supersededBy.length === 0) return false
+    const nextVisiting = new Set(visiting).add(id)
+    return record.supersededBy.every((replacementId) => replacementChainEndsAccepted(replacementId, nextVisiting))
+  }
+
+  for (const record of records.values()) {
+    if (record.status === 'superseded' && !replacementChainEndsAccepted(record.id)) {
+      errors.push(`${record.file}: supersession chain must terminate at an accepted replacement`)
+    }
+  }
+
   const historicalRecords = new Map<string, DecisionRecord>()
   for (const [historicalFile, historicalText] of options.historicalRecords ?? []) {
     if (!historicalFile.startsWith('DD-') || !canonicalFilename.test(historicalFile)) continue

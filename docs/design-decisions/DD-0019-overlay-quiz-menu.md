@@ -1,11 +1,11 @@
 ---
 id: DD-0019
 title: Overlay quiz menu retains the active exercise
-status: accepted
+status: superseded
 date: 2026-08-24
 applies_to: app shell, routing, quiz navigation, responsive layout
 supersedes: DD-0001
-superseded_by: none
+superseded_by: DD-0029
 ---
 
 # DD-0019: Overlay quiz menu retains the active exercise
