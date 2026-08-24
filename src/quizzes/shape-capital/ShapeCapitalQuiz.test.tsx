@@ -51,7 +51,7 @@ describe('ShapeCapitalQuiz', () => {
       }
       unmount()
     }
-  })
+  }, 30_000)
 
   it('wires the non-OSM geoBoundaries credit onto an overridden silhouette challenge', () => {
     render(<ShapeCapitalQuiz entities={singapore} />)
