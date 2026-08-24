@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { flagRecordById } from '../../core/flags'
 import { flagTerritoryContinents } from '../../core/flagTerritoryContinentPolicy'
-import { flagAnswerCorpus, flagCountryQuestions, flagRecordContinent, isFlagCountryAnswerCorrect, isTimedFlagCountryAnswerAccepted, isTimedFlagCountryExactSubmitAccepted, matchFlagCountryAnswer } from './flagCountry'
+import { flagAnswerCorpus, flagCountryQuestions, flagExactAnswerOwners, flagRecordContinent, isFlagCountryAnswerCorrect, isTimedFlagCountryAnswerAccepted, isTimedFlagCountryExactSubmitAccepted, matchFlagCountryAnswer } from './flagCountry'
 
 describe('flag country catalog composition', () => {
   it('uses the exact sovereign/territory scopes and explicit continent policy', () => {
@@ -45,13 +45,67 @@ describe('flag-country answer matching', () => {
     expect(isFlagCountryAnswerCorrect('The Bahamas', flagRecordById('BHS'))).toBe(true)
     expect(isFlagCountryAnswerCorrect('The Gambia', flagRecordById('GMB'))).toBe(true)
     expect(isFlagCountryAnswerCorrect('DPRK', flagRecordById('PRK'))).toBe(true)
-    const owners = new Map<string, Set<string>>()
-    for (const { record, name } of flagAnswerCorpus()) {
-      const ids = owners.get(name) ?? new Set<string>()
-      ids.add(record.id)
-      owners.set(name, ids)
+    for (const candidate of flagAnswerCorpus()) {
+      const owners = flagExactAnswerOwners(candidate.name)
+      expect(owners, `${candidate.name} must have one runtime exact-answer owner`).toEqual([candidate.record.id])
     }
-    expect([...owners.values()].every((ids) => ids.size === 1)).toBe(true)
+  })
+
+  it('shares the complete exact-only abbreviation roster with sovereign flags', () => {
+    const roster: Readonly<Record<string, readonly string[]>> = {
+      ARE: ['UAE'], BIH: ['BiH'], CAF: ['CAR'], COD: ['DRC'], FSM: ['FSM'], GBR: ['UK'], KOR: ['ROK'],
+      NZL: ['NZ'], PNG: ['PNG'], PRK: ['DPRK'], SAU: ['KSA'], USA: ['US', 'USA'], ZAF: ['RSA'],
+    }
+    for (const [id, abbreviations] of Object.entries(roster)) {
+      const target = flagRecordById(id)
+      for (const abbreviation of abbreviations) {
+        for (const submitted of [abbreviation, abbreviation.split('').join('.'), abbreviation.split('').join('-'), abbreviation.split('').join(' ')]) {
+          expect(isFlagCountryAnswerCorrect(submitted, target), `${submitted} must answer ${id}`).toBe(true)
+          if (!((id === 'GBR' && abbreviation === 'UK') || (id === 'USA' && abbreviation === 'US'))) expect(isTimedFlagCountryAnswerAccepted(submitted, target), `${submitted} must auto-accept for ${id}`).toBe(true)
+        }
+        expect(matchFlagCountryAnswer(`${abbreviation}x`, target), `${abbreviation} typo must not be fuzzy`).toBe('invalid')
+      }
+    }
+    const exactOnly = flagAnswerCorpus().filter((candidate) => candidate.exactOnly)
+    expect(exactOnly.map(({ record, name }) => `${record.id}:${name}`)).toEqual([
+      'ARE:uae', 'BIH:bih', 'CAF:car', 'COD:drc', 'FSM:fsm', 'GBR:uk', 'KOR:rok', 'NZL:nz', 'PNG:png', 'PRK:dprk', 'SAU:ksa', 'USA:us', 'USA:usa', 'ZAF:rsa',
+    ])
+  })
+
+  it('requires exact Enter for the UK and US prefix abbreviations while auto-accepting other abbreviations', () => {
+    for (const submitted of ['UK', 'U.K.', 'U K', 'U-K']) {
+      expect(matchFlagCountryAnswer(submitted, flagRecordById('GBR'), { timed: true })).toBe('prefix')
+      expect(isTimedFlagCountryAnswerAccepted(submitted, flagRecordById('GBR'))).toBe(false)
+      expect(isTimedFlagCountryExactSubmitAccepted(submitted, flagRecordById('GBR'))).toBe(true)
+    }
+    for (const submitted of ['US', 'U.S.', 'U S', 'U-S']) {
+      expect(matchFlagCountryAnswer(submitted, flagRecordById('USA'), { timed: true })).toBe('prefix')
+      expect(isTimedFlagCountryAnswerAccepted(submitted, flagRecordById('USA'))).toBe(false)
+      expect(isTimedFlagCountryExactSubmitAccepted(submitted, flagRecordById('USA'))).toBe(true)
+    }
+    expect(isTimedFlagCountryAnswerAccepted('UAE', flagRecordById('ARE'))).toBe(true)
+    expect(isTimedFlagCountryAnswerAccepted('USA', flagRecordById('USA'))).toBe(true)
+  })
+
+  it('never lets an abbreviation answer another flag target in the full catalog', () => {
+    const abbreviations = flagAnswerCorpus().filter((candidate) => candidate.exactOnly)
+    for (const target of flagCountryQuestions('with-territories')) for (const candidate of abbreviations) {
+      if (candidate.record.id === target.id) continue
+      expect(matchFlagCountryAnswer(candidate.name, target.flag), `${candidate.name} must not answer ${target.id}`).not.toBe('correct')
+    }
+  })
+  it('rejects every non-curated production entity code in compact punctuation variants', () => {
+    const codeIdenticalCurated = new Set(['BIH', 'FSM', 'PNG', 'USA'])
+    for (const target of flagCountryQuestions('without-territories')) {
+      for (const submitted of [target.id, target.id.split('').join('.'), `${target.id}.`, target.id.split('').join('-'), target.id.split('').join(' ')]) {
+        if (codeIdenticalCurated.has(target.id)) expect(matchFlagCountryAnswer(submitted, target.flag), `${submitted} is an explicitly curated abbreviation`).toBe('correct')
+        else {
+          expect(matchFlagCountryAnswer(submitted, target.flag), `${submitted} must not become an identifier answer`).toBe('invalid')
+          expect(isTimedFlagCountryExactSubmitAccepted(submitted, target.flag)).toBe(false)
+        }
+      }
+    }
+    expect(matchFlagCountryAnswer('TUR', flagRecordById('TUR'))).toBe('invalid')
   })
   it('provides an exact Enter path for every otherwise-prefix-safe target without accepting other records', () => {
     for (const question of flagCountryQuestions('with-territories')) {

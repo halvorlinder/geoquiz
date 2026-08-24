@@ -73,3 +73,4 @@ paraphrase user direction rather than copying private conversation.
 | [DD-0019](DD-0019-overlay-quiz-menu.md) | Overlay quiz menu retains the active exercise | accepted | app shell, routing, quiz navigation, responsive layout |
 | [DD-0020](DD-0020-study-quiz-layout-and-keyboard-flow.md) | Study quiz layout and keyboard flow | accepted | country-capital, shape-capital, shape-high-point, flag-country, responsive layout, keyboard interaction |
 | [DD-0021](DD-0021-progressive-neighbour-map.md) | Practice progressively builds a target-focused neighbour map | accepted | shape-neighbours quiz, practice aids, country-shape map rendering, responsive map viewport |
+| [DD-0022](DD-0022-curated-country-abbreviations.md) | Curated country abbreviations are exact-only shared answers | accepted | entity catalog, shape-neighbours, flag-country, answer matching |

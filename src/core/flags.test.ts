@@ -31,6 +31,7 @@ describe('flag catalog helpers', () => {
     expect(normalizeFlagAnswer('Curaçao')).toBe(normalizeFlagAnswer('Curacao'))
     expect(flagRecordById('MO').aliases).toContain('Macau')
     expect(flagRecordById('SX').aliases).not.toContain('Saint Martin')
-    expect(flagRecordById('GBR').aliases).toContain('UK')
+    expect(flagRecordById('GBR').aliases).not.toContain('UK')
+    expect(flagRecordById('USA').aliases).not.toContain('USA')
   })
 })

@@ -877,10 +877,7 @@
     {
       "id": "GBR",
       "name": "United Kingdom",
-      "aliases": [
-        "UK",
-        "U.K."
-      ],
+      "aliases": [],
       "scope": "sovereign",
       "studyKind": "sovereign-study",
       "parent": null,
@@ -2612,11 +2609,7 @@
     {
       "id": "USA",
       "name": "United States",
-      "aliases": [
-        "USA",
-        "U.S.A.",
-        "United States of America"
-      ],
+      "aliases": [],
       "scope": "sovereign",
       "studyKind": "sovereign-study",
       "parent": null,

@@ -14,11 +14,14 @@ void compileTimeImmutabilityGuard
 
 describe('study entity catalog', () => {
   it('exposes the versioned 197-entity catalog through safe lookups', () => {
-    expect(entityCatalog.version).toBe(1)
+    expect(entityCatalog.version).toBe(2)
     expect(studyEntities).toHaveLength(197)
     expect(getEntityByCode('tur')?.name).toBe('Türkiye')
     expect(findEntity('Turkey')?.code).toBe('TUR')
     expect(findEntity('state of palestine')?.code).toBe('PSE')
+    expect(findEntity(' TUR ')?.code).toBe('TUR')
+    expect(findEntity('U.A.E.')?.code).toBe('ARE')
+    expect(findEntity('u a e')?.code).toBe('ARE')
     expect(getEntityByCode('XXX')).toBeUndefined()
     expect(getEntityByCode('')).toBeUndefined()
     expect(findEntity('not an entity')).toBeUndefined()
@@ -78,25 +81,32 @@ describe('study entity catalog', () => {
     expect(Object.isFrozen(studyEntities)).toBe(true)
     expect(Object.isFrozen(studyEntities[0])).toBe(true)
     expect(Object.isFrozen(studyEntities[0].aliases)).toBe(true)
+    expect(Object.isFrozen(studyEntities[0].abbreviations)).toBe(true)
     expect(Object.isFrozen(studyEntities[0].capitals)).toBe(true)
     expect(Object.isFrozen(studyEntities[0].capitals[0])).toBe(true)
   })
 
   it('rejects malformed catalog structures before initializing helpers', () => {
     const base = {
-      version: 1,
+      version: 2,
       checked: '2026-08-20',
       provenance: {
         entityRoster: 'test',
         continentPolicy: 'test',
         source: 'test',
       },
-      entities: [{ code: 'TST', name: 'Test entity', aliases: [], continent: 'Europe', capitals: [{ id: 'test-capital', role: 'Capital' }] }],
+      entities: [{ code: 'TST', name: 'Test entity', aliases: [], abbreviations: [], continent: 'Europe', capitals: [{ id: 'test-capital', role: 'Capital' }] }],
     }
 
     expect(() => parseEntityCatalog({ ...base, entities: undefined })).toThrow('entities must be an array')
+    expect(() => parseEntityCatalog({ ...base, version: 1 })).toThrow('version must be 2')
+    expect(() => parseEntityCatalog({ ...base, extra: true })).toThrow('catalog has missing or extra fields')
+    expect(() => parseEntityCatalog({ ...base, provenance: { ...base.provenance, extra: true } })).toThrow('provenance has missing or extra fields')
+    expect(() => parseEntityCatalog({ ...base, entities: [{ ...base.entities[0], extra: true }] })).toThrow('entities[0] has missing or extra fields')
     expect(() => parseEntityCatalog({ ...base, entities: [{ ...base.entities[0], continent: 'Antarctica' }] })).toThrow('continent is unsupported')
+    expect(() => parseEntityCatalog({ ...base, entities: [{ ...base.entities[0], abbreviations: undefined }] })).toThrow('abbreviations must be an array')
     expect(() => parseEntityCatalog({ ...base, entities: [{ ...base.entities[0], capitals: [{ id: 'test-capital' }] }] })).toThrow('capitals[0].role must be a nonempty string')
+    expect(() => parseEntityCatalog({ ...base, entities: [{ ...base.entities[0], capitals: [{ id: 'test-capital', role: 'Capital', extra: true }] }] })).toThrow('capitals[0] has missing or extra fields')
     expect(() => parseEntityCatalog({ ...base, provenance: null })).toThrow('provenance must be an object')
   })
 
@@ -107,5 +117,27 @@ describe('study entity catalog', () => {
     expect(catalogAssignments).toHaveLength(201)
     expect(new Set(catalogAssignments.map((assignment) => assignment.split(':')[1])).size).toBe(200)
     expect(catalogAssignments).toEqual(capitalAssociations)
+  })
+
+  it('rejects abbreviation roster, compact collision, and code-alias policy deviations', () => {
+    const alteredRoster = structuredClone(entityData)
+    alteredRoster.entities.find((entity) => entity.code === 'ARE')!.abbreviations = []
+    expect(validateEntityCatalog(alteredRoster, capitals)).toContain('ARE: abbreviations differ from approved policy')
+
+    const duplicateAbbreviation = structuredClone(entityData)
+    duplicateAbbreviation.entities.find((entity) => entity.code === 'CAF')!.abbreviations = ['U.A.E.']
+    expect(validateEntityCatalog(duplicateAbbreviation, capitals).join('\n')).toContain("CAF: abbreviation 'U.A.E.' collides with abbreviation of ARE")
+
+    const codeCollision = structuredClone(entityData)
+    codeCollision.entities.find((entity) => entity.code === 'ARE')!.abbreviations = ['ARG']
+    expect(validateEntityCatalog(codeCollision, capitals).join('\n')).toContain("ARE: abbreviation 'ARG' collides with code of ARG")
+
+    const unapprovedCode = structuredClone(entityData)
+    unapprovedCode.entities.find((entity) => entity.code === 'ARE')!.abbreviations = ['ARE']
+    expect(validateEntityCatalog(unapprovedCode, capitals).join('\n')).toContain("ARE: code-identical abbreviation 'ARE' is not approved")
+
+    const assignmentExtraField = structuredClone(entityData)
+    assignmentExtraField.entities.find((entity) => entity.code === 'ARE')!.capitals[0] = { ...assignmentExtraField.entities.find((entity) => entity.code === 'ARE')!.capitals[0], extra: true } as never
+    expect(validateEntityCatalog(assignmentExtraField, capitals)).toContain('entity 5: each capital assignment must have exactly id and role fields')
   })
 })

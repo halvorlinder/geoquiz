@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "checked": "2026-08-20",
+  "version": 2,
+  "checked": "2026-08-24",
   "provenance": {
     "entityRoster": "Derived from the versioned capitals.json study-entity associations.",
     "continentPolicy": "UN M49 regional placement baseline with product overrides for Russia, Türkiye, Kazakhstan, Egypt, and Georgia; Taiwan and Kosovo are supplemental study-product classifications.",
@@ -17,7 +17,8 @@
           "id": "kabul",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "AGO",
@@ -29,7 +30,8 @@
           "id": "luanda",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ALB",
@@ -41,7 +43,8 @@
           "id": "tirana",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "AND",
@@ -53,7 +56,8 @@
           "id": "andorra-la-vella",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ARE",
@@ -65,6 +69,9 @@
           "id": "abu-dhabi",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "UAE"
       ]
     },
     {
@@ -77,7 +84,8 @@
           "id": "buenos-aires",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ARM",
@@ -89,7 +97,8 @@
           "id": "yerevan",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ATG",
@@ -101,7 +110,8 @@
           "id": "saint-john-s",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "AUS",
@@ -113,7 +123,8 @@
           "id": "canberra",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "AUT",
@@ -125,7 +136,8 @@
           "id": "vienna",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "AZE",
@@ -137,7 +149,8 @@
           "id": "baku",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BDI",
@@ -149,7 +162,8 @@
           "id": "gitega",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BEL",
@@ -161,7 +175,8 @@
           "id": "brussels",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BEN",
@@ -173,7 +188,8 @@
           "id": "porto-novo",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BFA",
@@ -185,7 +201,8 @@
           "id": "ouagadougou",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BGD",
@@ -197,7 +214,8 @@
           "id": "dhaka",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BGR",
@@ -209,7 +227,8 @@
           "id": "sofia",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BHR",
@@ -221,7 +240,8 @@
           "id": "manama",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BHS",
@@ -235,7 +255,8 @@
           "id": "nassau",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BIH",
@@ -247,6 +268,9 @@
           "id": "sarajevo",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "BiH"
       ]
     },
     {
@@ -259,7 +283,8 @@
           "id": "minsk",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BLZ",
@@ -271,7 +296,8 @@
           "id": "belmopan",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BOL",
@@ -289,7 +315,8 @@
           "id": "sucre",
           "role": "Constitutional capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BRA",
@@ -301,7 +328,8 @@
           "id": "brasilia",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BRB",
@@ -313,7 +341,8 @@
           "id": "bridgetown",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BRN",
@@ -327,7 +356,8 @@
           "id": "bandar-seri-begawan",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BTN",
@@ -339,7 +369,8 @@
           "id": "thimphu",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "BWA",
@@ -351,7 +382,8 @@
           "id": "gaborone",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "CAF",
@@ -363,6 +395,9 @@
           "id": "bangui",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "CAR"
       ]
     },
     {
@@ -375,7 +410,8 @@
           "id": "ottawa",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "CHE",
@@ -387,7 +423,8 @@
           "id": "bern",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "CHL",
@@ -399,7 +436,8 @@
           "id": "santiago",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "CHN",
@@ -411,7 +449,8 @@
           "id": "beijing",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "CIV",
@@ -425,7 +464,8 @@
           "id": "yamoussoukro",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "CMR",
@@ -437,7 +477,8 @@
           "id": "yaounde",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "COD",
@@ -452,6 +493,9 @@
           "id": "kinshasa",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "DRC"
       ]
     },
     {
@@ -466,7 +510,8 @@
           "id": "brazzaville",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "COL",
@@ -478,7 +523,8 @@
           "id": "bogota",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "COM",
@@ -490,7 +536,8 @@
           "id": "moroni",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "CPV",
@@ -504,7 +551,8 @@
           "id": "praia",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "CRI",
@@ -516,7 +564,8 @@
           "id": "san-jose",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "CUB",
@@ -528,7 +577,8 @@
           "id": "havana",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "CYP",
@@ -540,7 +590,8 @@
           "id": "nicosia",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "CZE",
@@ -554,7 +605,8 @@
           "id": "prague",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "DEU",
@@ -566,7 +618,8 @@
           "id": "berlin",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "DJI",
@@ -578,7 +631,8 @@
           "id": "djibouti",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "DMA",
@@ -590,7 +644,8 @@
           "id": "roseau",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "DNK",
@@ -602,7 +657,8 @@
           "id": "copenhagen",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "DOM",
@@ -614,7 +670,8 @@
           "id": "santo-domingo",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "DZA",
@@ -626,7 +683,8 @@
           "id": "algiers",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ECU",
@@ -638,7 +696,8 @@
           "id": "quito",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "EGY",
@@ -650,7 +709,8 @@
           "id": "cairo",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ERI",
@@ -662,7 +722,8 @@
           "id": "asmara",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ESP",
@@ -674,7 +735,8 @@
           "id": "madrid",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "EST",
@@ -686,7 +748,8 @@
           "id": "tallinn",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ETH",
@@ -698,7 +761,8 @@
           "id": "addis-ababa",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "FIN",
@@ -710,7 +774,8 @@
           "id": "helsinki",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "FJI",
@@ -722,7 +787,8 @@
           "id": "suva",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "FRA",
@@ -734,7 +800,8 @@
           "id": "paris",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "FSM",
@@ -748,6 +815,9 @@
           "id": "palikir",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "FSM"
       ]
     },
     {
@@ -760,7 +830,8 @@
           "id": "libreville",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "GBR",
@@ -772,6 +843,9 @@
           "id": "london",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "UK"
       ]
     },
     {
@@ -784,7 +858,8 @@
           "id": "tbilisi",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "GHA",
@@ -796,7 +871,8 @@
           "id": "accra",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "GIN",
@@ -808,7 +884,8 @@
           "id": "conakry",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "GMB",
@@ -822,7 +899,8 @@
           "id": "banjul",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "GNB",
@@ -834,7 +912,8 @@
           "id": "bissau",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "GNQ",
@@ -846,7 +925,8 @@
           "id": "ciudad-de-la-paz",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "GRC",
@@ -858,7 +938,8 @@
           "id": "athens",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "GRD",
@@ -870,7 +951,8 @@
           "id": "saint-george-s",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "GTM",
@@ -882,7 +964,8 @@
           "id": "guatemala-city",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "GUY",
@@ -894,7 +977,8 @@
           "id": "georgetown",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "HND",
@@ -906,7 +990,8 @@
           "id": "tegucigalpa",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "HRV",
@@ -918,7 +1003,8 @@
           "id": "zagreb",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "HTI",
@@ -930,7 +1016,8 @@
           "id": "port-au-prince",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "HUN",
@@ -942,7 +1029,8 @@
           "id": "budapest",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "IDN",
@@ -954,7 +1042,8 @@
           "id": "jakarta",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "IND",
@@ -966,7 +1055,8 @@
           "id": "new-delhi",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "IRL",
@@ -978,7 +1068,8 @@
           "id": "dublin",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "IRN",
@@ -992,7 +1083,8 @@
           "id": "tehran",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "IRQ",
@@ -1004,7 +1096,8 @@
           "id": "baghdad",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ISL",
@@ -1016,7 +1109,8 @@
           "id": "reykjavik",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ISR",
@@ -1028,7 +1122,8 @@
           "id": "jerusalem",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ITA",
@@ -1040,7 +1135,8 @@
           "id": "rome",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "JAM",
@@ -1052,7 +1148,8 @@
           "id": "kingston",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "JOR",
@@ -1064,7 +1161,8 @@
           "id": "amman",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "JPN",
@@ -1076,7 +1174,8 @@
           "id": "tokyo",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "KAZ",
@@ -1088,7 +1187,8 @@
           "id": "astana",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "KEN",
@@ -1100,7 +1200,8 @@
           "id": "nairobi",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "KGZ",
@@ -1112,7 +1213,8 @@
           "id": "bishkek",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "KHM",
@@ -1124,7 +1226,8 @@
           "id": "phnom-penh",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "KIR",
@@ -1136,7 +1239,8 @@
           "id": "south-tarawa",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "KNA",
@@ -1148,7 +1252,8 @@
           "id": "basseterre",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "KOR",
@@ -1162,6 +1267,9 @@
           "id": "seoul",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "ROK"
       ]
     },
     {
@@ -1174,7 +1282,8 @@
           "id": "kuwait-city",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "LAO",
@@ -1188,7 +1297,8 @@
           "id": "vientiane",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "LBN",
@@ -1200,7 +1310,8 @@
           "id": "beirut",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "LBR",
@@ -1212,7 +1323,8 @@
           "id": "monrovia",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "LBY",
@@ -1224,7 +1336,8 @@
           "id": "tripoli",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "LCA",
@@ -1236,7 +1349,8 @@
           "id": "castries",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "LIE",
@@ -1248,7 +1362,8 @@
           "id": "vaduz",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "LKA",
@@ -1260,7 +1375,8 @@
           "id": "sri-jayawardenepura-kotte",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "LSO",
@@ -1272,7 +1388,8 @@
           "id": "maseru",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "LTU",
@@ -1284,7 +1401,8 @@
           "id": "vilnius",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "LUX",
@@ -1296,7 +1414,8 @@
           "id": "luxembourg",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "LVA",
@@ -1308,7 +1427,8 @@
           "id": "riga",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MAR",
@@ -1320,7 +1440,8 @@
           "id": "rabat",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MCO",
@@ -1332,7 +1453,8 @@
           "id": "monaco",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MDA",
@@ -1346,7 +1468,8 @@
           "id": "chisinau",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MDG",
@@ -1358,7 +1481,8 @@
           "id": "antananarivo",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MDV",
@@ -1370,7 +1494,8 @@
           "id": "male",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MEX",
@@ -1382,7 +1507,8 @@
           "id": "mexico-city",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MHL",
@@ -1394,7 +1520,8 @@
           "id": "majuro",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MKD",
@@ -1406,7 +1533,8 @@
           "id": "skopje",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MLI",
@@ -1418,7 +1546,8 @@
           "id": "bamako",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MLT",
@@ -1430,7 +1559,8 @@
           "id": "valletta",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MMR",
@@ -1442,7 +1572,8 @@
           "id": "nay-pyi-taw",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MNE",
@@ -1454,7 +1585,8 @@
           "id": "podgorica",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MNG",
@@ -1466,7 +1598,8 @@
           "id": "ulaanbaatar",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MOZ",
@@ -1478,7 +1611,8 @@
           "id": "maputo",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MRT",
@@ -1490,7 +1624,8 @@
           "id": "nouakchott",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MUS",
@@ -1502,7 +1637,8 @@
           "id": "port-louis",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MWI",
@@ -1514,7 +1650,8 @@
           "id": "lilongwe",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "MYS",
@@ -1526,7 +1663,8 @@
           "id": "kuala-lumpur",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "NAM",
@@ -1538,7 +1676,8 @@
           "id": "windhoek",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "NER",
@@ -1550,7 +1689,8 @@
           "id": "niamey",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "NGA",
@@ -1562,7 +1702,8 @@
           "id": "abuja",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "NIC",
@@ -1574,7 +1715,8 @@
           "id": "managua",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "NLD",
@@ -1586,7 +1728,8 @@
           "id": "amsterdam",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "NOR",
@@ -1598,7 +1741,8 @@
           "id": "oslo",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "NPL",
@@ -1610,7 +1754,8 @@
           "id": "kathmandu",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "NRU",
@@ -1622,7 +1767,8 @@
           "id": "yaren",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "NZL",
@@ -1634,6 +1780,9 @@
           "id": "wellington",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "NZ"
       ]
     },
     {
@@ -1646,7 +1795,8 @@
           "id": "muscat",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "PAK",
@@ -1658,7 +1808,8 @@
           "id": "islamabad",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "PAN",
@@ -1670,7 +1821,8 @@
           "id": "panama-city",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "PER",
@@ -1682,7 +1834,8 @@
           "id": "lima",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "PHL",
@@ -1694,7 +1847,8 @@
           "id": "manila",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "PLW",
@@ -1706,7 +1860,8 @@
           "id": "ngerulmud",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "PNG",
@@ -1718,6 +1873,9 @@
           "id": "port-moresby",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "PNG"
       ]
     },
     {
@@ -1730,13 +1888,13 @@
           "id": "warsaw",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "PRK",
       "name": "North Korea",
       "aliases": [
-        "DPRK",
         "Democratic People’s Republic of Korea"
       ],
       "continent": "Asia",
@@ -1745,6 +1903,9 @@
           "id": "pyongyang",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "DPRK"
       ]
     },
     {
@@ -1757,7 +1918,8 @@
           "id": "lisbon",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "PRY",
@@ -1769,7 +1931,8 @@
           "id": "asuncion",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "PSE",
@@ -1783,7 +1946,8 @@
           "id": "jerusalem",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "QAT",
@@ -1795,7 +1959,8 @@
           "id": "doha",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ROU",
@@ -1807,7 +1972,8 @@
           "id": "bucharest",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "RUS",
@@ -1821,7 +1987,8 @@
           "id": "moscow",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "RWA",
@@ -1833,7 +2000,8 @@
           "id": "kigali",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SAU",
@@ -1845,6 +2013,9 @@
           "id": "riyadh",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "KSA"
       ]
     },
     {
@@ -1857,7 +2028,8 @@
           "id": "khartoum",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SEN",
@@ -1869,7 +2041,8 @@
           "id": "dakar",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SGP",
@@ -1881,7 +2054,8 @@
           "id": "singapore",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SLB",
@@ -1893,7 +2067,8 @@
           "id": "honiara",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SLE",
@@ -1905,7 +2080,8 @@
           "id": "freetown",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SLV",
@@ -1917,7 +2093,8 @@
           "id": "san-salvador",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SMR",
@@ -1929,7 +2106,8 @@
           "id": "san-marino",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SOM",
@@ -1941,7 +2119,8 @@
           "id": "mogadishu",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SRB",
@@ -1953,7 +2132,8 @@
           "id": "belgrade",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SSD",
@@ -1965,7 +2145,8 @@
           "id": "juba",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "STP",
@@ -1977,7 +2158,8 @@
           "id": "sao-tome",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SUR",
@@ -1989,7 +2171,8 @@
           "id": "paramaribo",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SVK",
@@ -2001,7 +2184,8 @@
           "id": "bratislava",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SVN",
@@ -2013,7 +2197,8 @@
           "id": "ljubljana",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SWE",
@@ -2025,7 +2210,8 @@
           "id": "stockholm",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SWZ",
@@ -2043,7 +2229,8 @@
           "id": "mbabane",
           "role": "Administrative"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SYC",
@@ -2055,7 +2242,8 @@
           "id": "victoria",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "SYR",
@@ -2069,7 +2257,8 @@
           "id": "damascus",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TCD",
@@ -2081,7 +2270,8 @@
           "id": "n-djamena",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TGO",
@@ -2093,7 +2283,8 @@
           "id": "lome",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "THA",
@@ -2105,7 +2296,8 @@
           "id": "bangkok",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TJK",
@@ -2117,7 +2309,8 @@
           "id": "dushanbe",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TKM",
@@ -2129,7 +2322,8 @@
           "id": "ashgabat",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TLS",
@@ -2143,7 +2337,8 @@
           "id": "dili",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TON",
@@ -2155,7 +2350,8 @@
           "id": "nuku-alofa",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TTO",
@@ -2167,7 +2363,8 @@
           "id": "port-of-spain",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TUN",
@@ -2179,7 +2376,8 @@
           "id": "tunis",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TUR",
@@ -2193,7 +2391,8 @@
           "id": "ankara",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TUV",
@@ -2205,7 +2404,8 @@
           "id": "funafuti",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TWN",
@@ -2217,7 +2417,8 @@
           "id": "taipei",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "TZA",
@@ -2231,7 +2432,8 @@
           "id": "dodoma",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "UGA",
@@ -2243,7 +2445,8 @@
           "id": "kampala",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "UKR",
@@ -2255,7 +2458,8 @@
           "id": "kyiv",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "URY",
@@ -2267,18 +2471,25 @@
           "id": "montevideo",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "USA",
       "name": "United States",
-      "aliases": [],
+      "aliases": [
+        "United States of America"
+      ],
       "continent": "North America",
       "capitals": [
         {
           "id": "washington-d-c",
           "role": "Capital"
         }
+      ],
+      "abbreviations": [
+        "US",
+        "USA"
       ]
     },
     {
@@ -2291,7 +2502,8 @@
           "id": "tashkent",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "VAT",
@@ -2305,7 +2517,8 @@
           "id": "vatican-city",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "VCT",
@@ -2317,7 +2530,8 @@
           "id": "kingstown",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "VEN",
@@ -2331,7 +2545,8 @@
           "id": "caracas",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "VNM",
@@ -2345,7 +2560,8 @@
           "id": "hanoi",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "VUT",
@@ -2357,7 +2573,8 @@
           "id": "port-vila",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "WSM",
@@ -2369,7 +2586,8 @@
           "id": "apia",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "XKX",
@@ -2381,7 +2599,8 @@
           "id": "pristina",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "YEM",
@@ -2393,7 +2612,8 @@
           "id": "sana-a",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ZAF",
@@ -2413,6 +2633,9 @@
           "id": "pretoria",
           "role": "Administrative"
         }
+      ],
+      "abbreviations": [
+        "RSA"
       ]
     },
     {
@@ -2425,7 +2648,8 @@
           "id": "lusaka",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     },
     {
       "code": "ZWE",
@@ -2437,7 +2661,8 @@
           "id": "harare",
           "role": "Capital"
         }
-      ]
+      ],
+      "abbreviations": []
     }
   ]
 }

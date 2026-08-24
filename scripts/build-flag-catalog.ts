@@ -6,8 +6,9 @@ import { tmpdir } from 'node:os'
 import { join, relative, resolve } from 'node:path'
 import catalog from '../src/data/flags.json' with { type: 'json' }
 import capitals from '../src/data/capitals.json' with { type: 'json' }
+import entities from '../src/data/entities.json' with { type: 'json' }
 import { flagSvgSafetyIssue } from '../src/core/flagSvgSafety'
-import { pinnedFlagSource, validateFlagCatalogPolicy } from './flag-catalog-policy'
+import { pinnedFlagSource, validateFlagAnswerOwnership, validateFlagCatalogPolicy } from './flag-catalog-policy'
 
 const root = resolve(import.meta.dirname, '..')
 const tarballArgument = process.argv[2]
@@ -16,6 +17,7 @@ const tarball = resolve(tarballArgument)
 const source = pinnedFlagSource
 const capitalEntities = new Map(capitals.flatMap((place) => place.entities.map((entity) => [entity.code, entity.country])))
 const preflightFailures = validateFlagCatalogPolicy(catalog, capitalEntities)
+preflightFailures.push(...validateFlagAnswerOwnership(catalog, entities))
 if (preflightFailures.length) throw new Error(`Catalog preflight failed before filesystem access:\n- ${preflightFailures.join('\n- ')}`)
 const contained = (parent: string, child: string) => { const value = relative(parent, child); return value !== '' && !value.startsWith('..') && !value.includes(`${process.platform === 'win32' ? '\\' : '/'}..${process.platform === 'win32' ? '\\' : '/'}`) && !value.startsWith('/') }
 

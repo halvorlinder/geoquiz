@@ -5,7 +5,9 @@ export const saintHelenaFlagNote = 'Distinct Saint Helena, Ascension, and Trista
 
 const sovereignKeys: Record<string, string> = `AFG AF AGO AO ALB AL AND AD ARE AE ARG AR ARM AM ATG AG AUS AU AUT AT AZE AZ BDI BI BEL BE BEN BJ BFA BF BGD BD BGR BG BHR BH BHS BS BIH BA BLR BY BLZ BZ BOL BO BRA BR BRB BB BRN BN BTN BT BWA BW CAF CF CAN CA CHE CH CHL CL CHN CN CIV CI CMR CM COD CD COG CG COL CO COM KM CPV CV CRI CR CUB CU CYP CY CZE CZ DEU DE DJI DJ DMA DM DNK DK DOM DO DZA DZ ECU EC EGY EG ERI ER ESP ES EST EE ETH ET FIN FI FJI FJ FRA FR FSM FM GAB GA GBR GB GEO GE GHA GH GIN GN GMB GM GNB GW GNQ GQ GRC GR GRD GD GTM GT GUY GY HND HN HRV HR HTI HT HUN HU IDN ID IND IN IRL IE IRN IR IRQ IQ ISL IS ISR IL ITA IT JAM JM JOR JO JPN JP KAZ KZ KEN KE KGZ KG KHM KH KIR KI KNA KN KOR KR KWT KW LAO LA LBN LB LBR LR LBY LY LCA LC LIE LI LKA LK LSO LS LTU LT LUX LU LVA LV MAR MA MCO MC MDA MD MDG MG MDV MV MEX MX MHL MH MKD MK MLI ML MLT MT MMR MM MNE ME MNG MN MOZ MZ MRT MR MUS MU MWI MW MYS MY NAM NA NER NE NGA NG NIC NI NLD NL NOR NO NPL NP NRU NR NZL NZ OMN OM PAK PK PAN PA PER PE PHL PH PLW PW PNG PG POL PL PRK KP PRT PT PRY PY PSE PS QAT QA ROU RO RUS RU RWA RW SAU SA SDN SD SEN SN SGP SG SLB SB SLE SL SLV SV SMR SM SOM SO SRB RS SSD SS STP ST SUR SR SVK SK SVN SI SWE SE SWZ SZ SYC SC SYR SY TCD TD TGO TG THA TH TJK TJ TKM TM TLS TL TON TO TTO TT TUN TN TUR TR TUV TV TWN TW TZA TZ UGA UG UKR UA URY UY USA US UZB UZ VAT VA VCT VC VEN VE VNM VN VUT VU WSM WS XKX XK YEM YE ZAF ZA ZMB ZM ZWE ZW`.split(/\s+/).reduce<Record<string, string>>((map, value, index, values) => index % 2 ? { ...map, [values[index - 1]]: value } : map, {})
 
-const sovereignAliases: Record<string, string[]> = { BRN: ['Brunei Darussalam'], CIV: ['Ivory Coast'], CPV: ['Cape Verde'], CZE: ['Czech Republic'], FSM: ['Micronesia'], GBR: ['UK', 'U.K.'], LAO: ['Lao PDR'], PSE: ['Palestine'], SWZ: ['Swaziland'], TLS: ['East Timor'], TUR: ['Turkey'], USA: ['USA', 'U.S.A.', 'United States of America'], VAT: ['Vatican City', 'Holy See'] }
+// Sovereign abbreviations are owned by entities.json so the neighbour and flag
+// quizzes share the exact-only answer policy. Territory aliases remain here.
+const sovereignAliases: Record<string, string[]> = { BRN: ['Brunei Darussalam'], CIV: ['Ivory Coast'], CPV: ['Cape Verde'], CZE: ['Czech Republic'], FSM: ['Micronesia'], LAO: ['Lao PDR'], PSE: ['Palestine'], SWZ: ['Swaziland'], TLS: ['East Timor'], TUR: ['Turkey'], VAT: ['Vatican City', 'Holy See'] }
 
 export const territoryPolicy = [
   ['AX', 'Åland Islands', [], 'Finland', 'territory', 'AX', 'territorial-or-local', null], ['FO', 'Faroe Islands', [], 'Denmark', 'territory', 'FO', 'territorial-or-local', null], ['GL', 'Greenland', [], 'Denmark', 'territory', 'GL', 'territorial-or-local', null], ['HK', 'Hong Kong', [], 'China', 'territory', 'HK', 'territorial-or-local', null], ['MO', 'Macao', ['Macau'], 'China', 'territory', 'MO', 'territorial-or-local', null],
@@ -16,8 +18,10 @@ export const territoryPolicy = [
 ] as const
 
 type CatalogRecord = { id: string; name: string; aliases: string[]; scope: string; studyKind: string; parent: string | null; sourceKey: string; assetPath: string; flagStatus: string; statusSource: string | null; note: string; checked: string }
+type EntityAnswerRecord = { code: string; name: string; aliases: string[]; abbreviations: string[] }
 const recordKeys = 'aliases,assetPath,checked,flagStatus,id,name,note,parent,scope,sourceKey,statusSource,studyKind'.split(',').sort().join(',')
 const normalize = (value: string) => value.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' ')
+const compactNormalize = (value: string) => normalize(value).replace(/\s/g, '')
 
 export function validateFlagCatalogPolicy(value: unknown, capitalEntities: Map<string, string>): string[] {
   const failures: string[] = []
@@ -58,6 +62,61 @@ export function validateFlagCatalogPolicy(value: unknown, capitalEntities: Map<s
     answers.set(key, record.id)
   }
   return failures
+}
+
+/**
+ * Validates collisions by actual submitted-token semantics, rather than by the
+ * candidate implementation detail. An ordinary territory alias `CAR`, for
+ * example, conflicts with CAF's compact exact-only `CAR` abbreviation.
+ */
+export function validateFlagAnswerOwnership(value: unknown, entityCatalog: unknown): string[] {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return ['flag answer ownership: catalog must be an object']
+  if (!entityCatalog || typeof entityCatalog !== 'object' || Array.isArray(entityCatalog)) return ['flag answer ownership: entity catalog must be an object']
+  const records = (value as { records?: unknown }).records
+  const entities = (entityCatalog as { entities?: unknown }).entities
+  if (!Array.isArray(records) || !Array.isArray(entities)) return ['flag answer ownership: records and entities must be arrays']
+  const entityByCode = new Map<string, EntityAnswerRecord>()
+  for (const rawEntity of entities) {
+    if (!rawEntity || typeof rawEntity !== 'object' || Array.isArray(rawEntity)) continue
+    const entity = rawEntity as Partial<EntityAnswerRecord>
+    if (typeof entity.code === 'string' && typeof entity.name === 'string' && Array.isArray(entity.aliases) && Array.isArray(entity.abbreviations) && entity.aliases.every((alias) => typeof alias === 'string') && entity.abbreviations.every((abbreviation) => typeof abbreviation === 'string')) entityByCode.set(entity.code, entity as EntityAnswerRecord)
+  }
+  const ordinaryOwners = new Map<string, string>()
+  const ordinaryCompactOwners = new Map<string, Set<string>>()
+  const abbreviationOwners = new Map<string, string>()
+  const failures: string[] = []
+  const claimOrdinary = (answer: string, owner: string) => {
+    const key = normalize(answer)
+    const existing = ordinaryOwners.get(key)
+    if (existing && existing !== owner) failures.push(`flag answer '${answer}' collides with ${existing} and ${owner}`)
+    ordinaryOwners.set(key, owner)
+    const compact = compactNormalize(answer)
+    const compactOwners = ordinaryCompactOwners.get(compact) ?? new Set<string>()
+    compactOwners.add(owner)
+    ordinaryCompactOwners.set(compact, compactOwners)
+  }
+  for (const rawRecord of records) {
+    if (!rawRecord || typeof rawRecord !== 'object' || Array.isArray(rawRecord)) continue
+    const record = rawRecord as Partial<CatalogRecord>
+    if (typeof record.id !== 'string' || typeof record.name !== 'string' || !Array.isArray(record.aliases) || !record.aliases.every((alias) => typeof alias === 'string')) continue
+    const entity = record.scope === 'sovereign' ? entityByCode.get(record.id) : undefined
+    for (const answer of [record.name, ...record.aliases, ...(entity ? [entity.name, ...entity.aliases] : [])]) claimOrdinary(answer, record.id)
+  }
+  for (const rawRecord of records) {
+    if (!rawRecord || typeof rawRecord !== 'object' || Array.isArray(rawRecord)) continue
+    const record = rawRecord as Partial<CatalogRecord>
+    if (record.scope !== 'sovereign' || typeof record.id !== 'string') continue
+    const entity = entityByCode.get(record.id)
+    if (!entity) continue
+    for (const abbreviation of entity.abbreviations) {
+      const key = compactNormalize(abbreviation)
+      const existing = abbreviationOwners.get(key)
+      if (existing && existing !== record.id) failures.push(`flag abbreviation '${abbreviation}' collides with ${existing} and ${record.id}`)
+      abbreviationOwners.set(key, record.id)
+      for (const ordinaryOwner of ordinaryCompactOwners.get(key) ?? []) if (ordinaryOwner !== record.id) failures.push(`flag abbreviation '${abbreviation}' collides with ordinary answer of ${ordinaryOwner} and ${record.id}`)
+    }
+  }
+  return [...new Set(failures)]
 }
 
 export function validateDuplicateHashGroups(value: unknown, assetIds: Set<string>, actualGroups: string[][]): string[] {

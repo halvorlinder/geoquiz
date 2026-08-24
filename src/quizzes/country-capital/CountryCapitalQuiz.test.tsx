@@ -12,12 +12,12 @@ const capitals: Capital[] = [
   { id: 'beta', capital: 'Beta City', aliases: [], latitude: 0, longitude: 0, coordinateSource: 'test', checked: '2026-08-20', entities: [{ code: 'TST', country: 'Testland', sourceRef: 'test', checked: '2026-08-20' }] },
   { id: 'gamma', capital: 'Gamma City', aliases: [], latitude: 0, longitude: 0, coordinateSource: 'test', checked: '2026-08-20', entities: [{ code: 'OTH', country: 'Otherland', sourceRef: 'test', checked: '2026-08-20' }] },
 ]
-const entities: StudyEntity[] = [{ code: 'TST', name: 'Testland', aliases: [], continent: 'Europe', capitals: [{ id: 'alpha', role: 'Legislative' }, { id: 'beta', role: 'Executive' }] }]
-const twoEntities: StudyEntity[] = [...entities, { code: 'OTH', name: 'Otherland', aliases: [], continent: 'Europe', capitals: [{ id: 'gamma', role: 'Capital' }] }]
+const entities: StudyEntity[] = [{ code: 'TST', name: 'Testland', aliases: [], abbreviations: [], continent: 'Europe', capitals: [{ id: 'alpha', role: 'Legislative' }, { id: 'beta', role: 'Executive' }] }]
+const twoEntities: StudyEntity[] = [...entities, { code: 'OTH', name: 'Otherland', aliases: [], abbreviations: [], continent: 'Europe', capitals: [{ id: 'gamma', role: 'Capital' }] }]
 const jerusalem: Capital = { id: 'jerusalem', capital: 'Jerusalem', aliases: [], latitude: 0, longitude: 0, coordinateSource: 'test', checked: '2026-08-20', entities: [{ code: 'ISR', country: 'Israel', sourceRef: 'test', checked: '2026-08-20' }, { code: 'PSE', country: 'State of Palestine', sourceRef: 'test', checked: '2026-08-20' }] }
 const sharedCapitalEntities: StudyEntity[] = [
-  { code: 'ISR', name: 'Israel', aliases: [], continent: 'Asia', capitals: [{ id: 'jerusalem', role: 'Capital' }] },
-  { code: 'PSE', name: 'State of Palestine', aliases: [], continent: 'Asia', capitals: [{ id: 'jerusalem', role: 'Capital' }] },
+  { code: 'ISR', name: 'Israel', aliases: [], abbreviations: [], continent: 'Asia', capitals: [{ id: 'jerusalem', role: 'Capital' }] },
+  { code: 'PSE', name: 'State of Palestine', aliases: [], abbreviations: [], continent: 'Asia', capitals: [{ id: 'jerusalem', role: 'Capital' }] },
 ]
 
 afterEach(() => {
