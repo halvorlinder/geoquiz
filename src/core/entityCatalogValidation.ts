@@ -7,6 +7,12 @@ type SourceCapital = { id: string; entities: SourceAssociation[] }
 const expectedEntities = 197
 const expectedAssociations = 201
 const expectedPlaces = 200
+const expectedAbbreviations: Readonly<Record<string, readonly string[]>> = {
+  ARE: ['UAE'], BIH: ['BiH'], CAF: ['CAR'], COD: ['DRC'], FSM: ['FSM'], GBR: ['UK'], KOR: ['ROK'],
+  NZL: ['NZ'], PNG: ['PNG'], PRK: ['DPRK'], SAU: ['KSA'], USA: ['US', 'USA'], ZAF: ['RSA'],
+}
+const codeIdenticalAbbreviations = new Set(['BIH', 'FSM', 'PNG', 'USA'])
+const entityKeys = ['abbreviations', 'aliases', 'capitals', 'code', 'continent', 'name'].join(',')
 const expectedCapitalRoles: Record<string, Record<string, string>> = {
   BOL: { sucre: 'Constitutional capital', 'la-paz': 'Seat of government' },
   SWZ: { mbabane: 'Administrative', lobamba: 'Royal and legislative' },
@@ -15,6 +21,10 @@ const expectedCapitalRoles: Record<string, Record<string, string>> = {
 
 function normalized(value: string) {
   return value.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' ')
+}
+
+function compactNormalized(value: string) {
+  return normalized(value).replace(/\s/g, '')
 }
 
 function isRecord(value: unknown): value is UnknownRecord {
@@ -63,8 +73,8 @@ export function validateEntityCatalog(entityCatalog: unknown, capitals: unknown)
   }
 
   if (!isRecord(entityCatalog)) return [...failures, 'catalog must be an object']
-  if (entityCatalog.version !== 1) failures.push('catalog version must be 1')
-  if (!isString(entityCatalog.checked)) failures.push('catalog checked date is required')
+  if (entityCatalog.version !== 2) failures.push('catalog version must be 2')
+  if (entityCatalog.checked !== '2026-08-24') failures.push('catalog checked date must be 2026-08-24')
   if (!isRecord(entityCatalog.provenance) || !isString(entityCatalog.provenance.entityRoster) || !isString(entityCatalog.provenance.continentPolicy) || !isString(entityCatalog.provenance.source)) {
     failures.push('catalog provenance must contain entityRoster, continentPolicy, and source')
   }
@@ -81,13 +91,15 @@ export function validateEntityCatalog(entityCatalog: unknown, capitals: unknown)
       failures.push(`${label}: must be an object`)
       continue
     }
-    const { code, name, aliases, continent, capitals: assignments } = rawEntity
+    const { code, name, aliases, abbreviations, continent, capitals: assignments } = rawEntity
+    if (Object.keys(rawEntity).sort().join(',') !== entityKeys) failures.push(`${label}: record schema has missing or extra fields`)
     if (!isString(code) || !/^[A-Z]{3}$/.test(code)) failures.push(`${label}: code must be a stable uppercase three-letter value`)
     if (!isString(name)) failures.push(`${label}: canonical name is required`)
     if (!isString(continent) || !Object.values<Continent>(continentByEntityCode).includes(continent as Continent)) failures.push(`${label}: continent must be supported`)
     if (!Array.isArray(aliases)) failures.push(`${label}: aliases must be an array`)
+    if (!Array.isArray(abbreviations)) failures.push(`${label}: abbreviations must be an array`)
     if (!Array.isArray(assignments) || assignments.length === 0) failures.push(`${label}: capital assignments are required`)
-    if (!isString(code) || !isString(name) || !Array.isArray(aliases) || !Array.isArray(assignments)) continue
+    if (!isString(code) || !isString(name) || !Array.isArray(aliases) || !Array.isArray(abbreviations) || !Array.isArray(assignments)) continue
 
     if (catalogByCode.has(code)) failures.push(`${label}: duplicate entity code ${code}`)
     catalogByCode.set(code, rawEntity)
@@ -116,6 +128,10 @@ export function validateEntityCatalog(entityCatalog: unknown, capitals: unknown)
         failures.push(`${label}: each capital assignment needs a nonempty id and role`)
         continue
       }
+      if (Object.keys(assignment).sort().join(',') !== 'id,role') {
+        failures.push(`${label}: each capital assignment must have exactly id and role fields`)
+        continue
+      }
       if (!capitalIds.has(assignment.id)) failures.push(`${label}: capital id ${assignment.id} is not in capitals.json`)
       if (assignmentIds.has(assignment.id)) failures.push(`${label}: duplicate capital id ${assignment.id}`)
       assignmentIds.add(assignment.id)
@@ -127,13 +143,20 @@ export function validateEntityCatalog(entityCatalog: unknown, capitals: unknown)
 
   const canonicalOwners = new Map<string, string>()
   const aliasOwners = new Map<string, string>()
+  const compactNameAliasOwners = new Map<string, string>()
+  const productionCodes = new Map<string, string>()
   for (const rawEntity of entityCatalog.entities) {
     if (!isRecord(rawEntity) || !isString(rawEntity.code) || !isString(rawEntity.name)) continue
+    productionCodes.set(rawEntity.code, rawEntity.code)
     for (const value of [rawEntity.code, rawEntity.name]) {
       const key = normalized(value)
       const existingOwner = canonicalOwners.get(key)
       if (existingOwner && existingOwner !== rawEntity.code) failures.push(`${rawEntity.code}: canonical value '${value}' collides with ${existingOwner}`)
       canonicalOwners.set(key, rawEntity.code)
+      const compactKey = compactNormalized(value)
+      const compactOwner = compactNameAliasOwners.get(compactKey)
+      if (compactOwner && compactOwner !== rawEntity.code) failures.push(`${rawEntity.code}: canonical value '${value}' has compact collision with ${compactOwner}`)
+      compactNameAliasOwners.set(compactKey, rawEntity.code)
     }
   }
   for (const rawEntity of entityCatalog.entities) {
@@ -146,7 +169,35 @@ export function validateEntityCatalog(entityCatalog: unknown, capitals: unknown)
       if (canonicalOwner) failures.push(`${rawEntity.code}: alias '${alias}' collides with canonical name or code of ${canonicalOwner}`)
       if (aliasOwner) failures.push(`${rawEntity.code}: alias '${alias}' collides with alias of ${aliasOwner}`)
       aliasOwners.set(key, rawEntity.code)
+      const compactKey = compactNormalized(alias)
+      const compactOwner = compactNameAliasOwners.get(compactKey)
+      if (compactOwner && compactOwner !== rawEntity.code) failures.push(`${rawEntity.code}: alias '${alias}' has compact collision with ${compactOwner}`)
+      compactNameAliasOwners.set(compactKey, rawEntity.code)
     }
+  }
+
+  const abbreviationOwners = new Map<string, string>()
+  for (const rawEntity of entityCatalog.entities) {
+    if (!isRecord(rawEntity) || !isString(rawEntity.code) || !Array.isArray(rawEntity.abbreviations)) continue
+    const seen = new Set<string>()
+    for (const abbreviation of rawEntity.abbreviations) {
+      if (!isString(abbreviation)) {
+        failures.push(`${rawEntity.code}: abbreviations must be nonempty strings`)
+        continue
+      }
+      const key = compactNormalized(abbreviation)
+      if (!key || seen.has(key)) failures.push(`${rawEntity.code}: abbreviations must be unique after compact normalization`)
+      seen.add(key)
+      const existingOwner = abbreviationOwners.get(key)
+      if (existingOwner && existingOwner !== rawEntity.code) failures.push(`${rawEntity.code}: abbreviation '${abbreviation}' collides with abbreviation of ${existingOwner}`)
+      abbreviationOwners.set(key, rawEntity.code)
+      const nameAliasOwner = compactNameAliasOwners.get(key)
+      if (nameAliasOwner && nameAliasOwner !== rawEntity.code) failures.push(`${rawEntity.code}: abbreviation '${abbreviation}' collides with name or alias of ${nameAliasOwner}`)
+      const codeOwner = productionCodes.get(key.toUpperCase())
+      if (codeOwner && codeOwner !== rawEntity.code) failures.push(`${rawEntity.code}: abbreviation '${abbreviation}' collides with code of ${codeOwner}`)
+      if (codeOwner === rawEntity.code && !codeIdenticalAbbreviations.has(rawEntity.code)) failures.push(`${rawEntity.code}: code-identical abbreviation '${abbreviation}' is not approved`)
+    }
+    if (JSON.stringify(rawEntity.abbreviations) !== JSON.stringify(expectedAbbreviations[rawEntity.code] ?? [])) failures.push(`${rawEntity.code}: abbreviations differ from approved policy`)
   }
 
   if (entityCatalog.entities.length !== expectedEntities) failures.push(`expected ${expectedEntities} entities, found ${entityCatalog.entities.length}`)

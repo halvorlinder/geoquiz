@@ -78,10 +78,11 @@ duplicates.
 
 Aliases are collision-checked after the same diacritic/punctuation normalization
 used by the quiz. Consequently `Åland`/`Aland` and `Curaçao`/`Curacao` do not
-need redundant catalog aliases. The catalog instead retains non-redundant study
-variants such as UK/U.K., USA/U.S.A./United States of America, Macau, and
-Virgin Islands forms. It intentionally excludes ambiguous `Congo` and `Saint
-Martin` aliases.
+need redundant catalog aliases. Sovereign canonical names and ordinary aliases
+are supplied from the shared entity catalog; its exact-only abbreviations (such
+as UK, US, USA, and DPRK) are deliberately not duplicated in this flag catalog.
+Territory-only aliases remain here, including Macau and Virgin Islands forms.
+The catalog intentionally excludes ambiguous `Congo` and `Saint Martin` aliases.
 
 Byte identity is not visual similarity. The review list for potentially
 confusing but separately recorded designs includes Romania/Chad,

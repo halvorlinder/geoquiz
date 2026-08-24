@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { flagRecordById } from '../../core/flags'
 import { normalizeAnswer } from '../../core/answerMatching'
-import { scoreboardKey } from '../../core/scoreboard/scoreboard'
+import { readScoreboard, scoreboardKey } from '../../core/scoreboard/scoreboard'
 import { flagAnswerNames, flagCountryQuestions } from './flagCountry'
 import { FLAG_COUNTRY_DATA_VERSION, FlagCountryQuiz } from './FlagCountryQuiz'
 
@@ -132,6 +132,20 @@ describe('FlagCountryQuiz', () => {
     expect(current().id).not.toBe(answer.id)
   })
 
+  it('holds every compact UK and US variant until one exact Enter submission', () => {
+    for (const [id, variants] of [['GBR', ['UK', 'U.K.', 'U K', 'U-K']], ['USA', ['US', 'U.S.', 'U S', 'U-S']]] as const) for (const value of variants) {
+      const view = render(<FlagCountryQuiz questionFactory={() => questions([id])} />)
+      fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+      const input = screen.getByLabelText('country') as HTMLInputElement
+      fireEvent.change(input, { target: { value } })
+      expect(current().id, `${value} must not auto-advance`).toBe(id)
+      fireEvent.keyDown(window, { key: 'Enter' }); fireEvent.submit(input.closest('form')!)
+      expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
+      fireEvent.keyUp(window, { key: 'Enter' })
+      view.unmount()
+    }
+  })
+
   it('shows a focused timed reveal acknowledgement and safely completes when storage is unavailable', () => {
     const descriptor = Object.getOwnPropertyDescriptor(window, 'localStorage')
     Object.defineProperty(window, 'localStorage', { configurable: true, get: () => { throw new DOMException('blocked', 'SecurityError') } })
@@ -150,6 +164,7 @@ describe('FlagCountryQuiz', () => {
   })
 
   it('persists a completed timed board under the exact flag-country filter key', () => {
+    expect(FLAG_COUNTRY_DATA_VERSION).toBe('flag-country-v1-entities-2-flags-1-territory-policy-1')
     render(<FlagCountryQuiz questionFactory={() => questions(['CAN'])} />)
     fireEvent.change(screen.getByLabelText('Question set'), { target: { value: 'North America' } })
     fireEvent.change(screen.getByLabelText('Territory scope'), { target: { value: 'with-territories' } })
@@ -158,6 +173,7 @@ describe('FlagCountryQuiz', () => {
     const key = scoreboardKey({ quizId: 'flag-country', filters: { continent: 'North America', territoryScope: 'with-territories' }, dataVersion: FLAG_COUNTRY_DATA_VERSION })
     const payload = JSON.parse(window.localStorage.getItem(key) ?? '{}')
     expect(payload.entries[0]).toMatchObject({ correctCount: 1, revealedCount: 0, totalCount: 1, dataVersion: FLAG_COUNTRY_DATA_VERSION })
+    expect(readScoreboard(window.localStorage, { quizId: 'flag-country', filters: { continent: 'North America', territoryScope: 'with-territories' }, dataVersion: 'flag-country-v1-entities-1-flags-1-territory-policy-1' })).toEqual([])
   })
 
   it('keeps timed completion nonfatal when localStorage setItem throws quota errors', () => {

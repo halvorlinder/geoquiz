@@ -28,7 +28,7 @@ describe('ShapeNeighboursQuiz', () => {
   it('has no unresolved target or answer leakage across all 157 production questions', () => {
     for (const question of catalog) {
       const { container, unmount } = render(<ShapeNeighboursQuiz questionFactory={factory(question)} />)
-      assertAbsent(container, [question.entity.name, ...question.entity.aliases, question.entity.code, ...question.neighbourCodes.flatMap((code) => { const entity = entityForNeighbourCode(code)!; return [entity.name, ...entity.aliases, entity.code] })])
+      assertAbsent(container, [question.entity.name, ...question.entity.aliases, ...question.entity.abbreviations, question.entity.code, ...question.neighbourCodes.flatMap((code) => { const entity = entityForNeighbourCode(code)!; return [entity.name, ...entity.aliases, ...entity.abbreviations, entity.code] })])
       unmount()
     }
   })
@@ -81,7 +81,7 @@ describe('ShapeNeighboursQuiz', () => {
     vi.useFakeTimers(); const { container } = render(<ShapeNeighboursQuiz questionFactory={factory(afghanistan)} />)
     practice('China')
     expect(screen.getByRole('list', { name: 'Answered neighbours' }).textContent).toContain('China')
-    assertAbsent(container, [afghanistan.entity.name, ...afghanistan.entity.aliases, afghanistan.entity.code, ...afghanistan.neighbourCodes.filter((code) => code !== 'CHN').flatMap((code) => { const e = entityForNeighbourCode(code)!; return [e.name, ...e.aliases, e.code] })])
+    assertAbsent(container, [afghanistan.entity.name, ...afghanistan.entity.aliases, ...afghanistan.entity.abbreviations, afghanistan.entity.code, ...afghanistan.neighbourCodes.filter((code) => code !== 'CHN').flatMap((code) => { const e = entityForNeighbourCode(code)!; return [e.name, ...e.aliases, ...e.abbreviations, e.code] })])
   })
 
   it('completes every practice neighbour in arbitrary order with focus, green state, Next, and restart focus', () => {

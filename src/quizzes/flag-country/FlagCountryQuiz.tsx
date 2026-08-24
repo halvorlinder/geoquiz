@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent, type KeyboardEvent, type MouseEvent } from 'react'
 import { flagAssetUrl, flagCatalogVersion, type FlagScope } from '../../core/flags'
+import { entityCatalog } from '../../core/entity'
 import { readScoreboard, recordScoreboardEntry, type ScoreboardEntry, type ScoreboardStorage } from '../../core/scoreboard/scoreboard'
 import { currentQuestionId, elapsedTimedSessionMs, isTimedSessionComplete, startTimedSession, timedSessionOutcome, transitionTimedSession, type TimedSession } from '../../core/session/timedSession'
 import { advanceQuiz, isComplete, startQuiz, type QuizProgress } from '../../core/shuffledDeck'
@@ -9,7 +10,7 @@ type Mode = 'practice' | 'timed'
 type Config = Readonly<{ mode: Mode; continent: FlagContinent; territoryScope: FlagScope }>
 type QuestionState = Readonly<{ value: string; resolved: 'correct' | 'revealed' | null }>
 type Feedback = Readonly<{ kind: 'neutral' | 'correct' | 'incorrect' | 'revealed'; message: string }>
-export const FLAG_COUNTRY_DATA_VERSION = `flag-country-v1-entities-1-flags-${flagCatalogVersion}-territory-policy-1`
+export const FLAG_COUNTRY_DATA_VERSION = `flag-country-v1-entities-${entityCatalog.version}-flags-${flagCatalogVersion}-territory-policy-1`
 const emptyState = (): QuestionState => ({ value: '', resolved: null })
 const duration = (milliseconds: number) => { const seconds = Math.floor(milliseconds / 1000); return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}` }
 function storage(): ScoreboardStorage | undefined { try { return window.localStorage } catch { return undefined } }

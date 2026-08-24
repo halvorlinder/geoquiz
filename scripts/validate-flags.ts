@@ -7,7 +7,7 @@ import manifest from '../src/data/flag-assets-manifest.json' with { type: 'json'
 import { flagSvgSafetyIssue } from '../src/core/flagSvgSafety'
 import { flagTerritoryContinents } from '../src/core/flagTerritoryContinentPolicy'
 import entities from '../src/data/entities.json' with { type: 'json' }
-import { pinnedFlagSource, validateDuplicateHashGroups, validateFlagCatalogPolicy } from './flag-catalog-policy'
+import { pinnedFlagSource, validateDuplicateHashGroups, validateFlagAnswerOwnership, validateFlagCatalogPolicy } from './flag-catalog-policy'
 
 type FlagRecord = { id: string; name: string; aliases: string[]; scope: string; studyKind: string; parent: string | null; sourceKey: string; assetPath: string; flagStatus: string; statusSource: string | null; note: string; checked: string }
 type Asset = { id: string; sourceKey: string; path: string; sha256: string; flagStatus: string }
@@ -47,6 +47,7 @@ if (entityContinents.size !== 197) fail('entity catalog must provide exactly 197
 for (const id of exclusions) if (records.some((record) => record.id === id)) fail(`excluded record ${id} is present`)
 const capitalEntities = new Map(capitals.flatMap((place) => place.entities.map((entity) => [entity.code, entity.country])))
 failures.push(...validateFlagCatalogPolicy(catalog, capitalEntities))
+failures.push(...validateFlagAnswerOwnership(catalog, entities))
 for (const record of sovereigns) if (capitalEntities.get(record.id) !== record.name) fail(`${record.id} does not cross-reference its canonical capital entity name`)
 for (const record of sovereigns) if (!entityContinents.has(record.id)) fail(`${record.id} has no sovereign entity continent assignment`)
 const ids = new Set<string>(), paths = new Set<string>(), answers = new Map<string, string>(), assetIds = new Set<string>(), hashes = new Map<string, string[]>()
