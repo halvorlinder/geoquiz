@@ -74,3 +74,5 @@ paraphrase user direction rather than copying private conversation.
 | [DD-0020](DD-0020-study-quiz-layout-and-keyboard-flow.md) | Study quiz layout and keyboard flow | accepted | country-capital, shape-capital, shape-high-point, flag-country, responsive layout, keyboard interaction |
 | [DD-0021](DD-0021-progressive-neighbour-map.md) | Practice progressively builds a target-focused neighbour map | accepted | shape-neighbours quiz, practice aids, country-shape map rendering, responsive map viewport |
 | [DD-0022](DD-0022-curated-country-abbreviations.md) | Curated country abbreviations are exact-only shared answers | accepted | entity catalog, shape-neighbours, flag-country, answer matching |
+| [DD-0024](DD-0024-border-image-quiz.md) | Country-border image quiz | superseded | quiz menu, border image quiz, local border geometry, answer interaction |
+| [DD-0025](DD-0025-border-context-map.md) | Easy border context map | accepted | border image quiz, Easy border rendering, local map interaction |

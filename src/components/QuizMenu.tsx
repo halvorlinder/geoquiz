@@ -10,6 +10,7 @@ const quizMenuItems: readonly QuizMenuItem[] = [
   { route: 'shape-neighbours', name: 'Shape neighbours', description: 'Name every land neighbour from a country shape.', hash: '#/shape-neighbours' },
   { route: 'shape-high-point', name: 'Shape highest points', description: 'Name the marked highest point of a country.', hash: '#/shape-high-point' },
   { route: 'flag-country', name: 'Flag countries', description: 'Identify countries or territories from their flags.', hash: '#/flag-country' },
+  { route: 'border-countries', name: 'Country borders', description: 'Identify countries from one shared land border.', hash: '#/border-countries' },
 ]
 
 export function QuizMenu({ open, currentRoute, opener, fallbackOpenerRef, onClose, onChoose }: Readonly<{

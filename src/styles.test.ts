@@ -128,4 +128,16 @@ describe('viewport layout stylesheet contract', () => {
     expect(styles).toContain('overflow-wrap: anywhere')
     expect(styles).toContain('.practice-previous-answer-details .country-shape-attribution')
   })
+
+  it('gives resolved Easy border layers a real entry animation and disables it for reduced motion', () => {
+    expect(styles).toContain('.easy-border-answer { animation: easy-border-answer-enter 180ms ease-out both; }')
+    expect(styles).toContain('@keyframes easy-border-answer-enter')
+    expect(styles).toContain('@media (prefers-reduced-motion: reduce) { .easy-border-answer { animation: none; } }')
+  })
+
+  it('keeps the desktop Easy border map intrinsic inside its border-only card and separates the source link', () => {
+    expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card { align-self: start; height: auto; }')
+    expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card .easy-border-context-shell { flex: 0 0 auto; min-height: 313px; }')
+    expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card .border-source { flex: 0 0 auto; margin-top: 12px; }')
+  })
 })

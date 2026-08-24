@@ -1,4 +1,4 @@
-export type AppRoute = 'capital-map' | 'country-capital' | 'shape-capital' | 'shape-neighbours' | 'shape-high-point' | 'flag-country' | 'not-found'
+export type AppRoute = 'capital-map' | 'country-capital' | 'shape-capital' | 'shape-neighbours' | 'shape-high-point' | 'flag-country' | 'border-countries' | 'not-found'
 
 export function routeFromHash(hash: string): AppRoute {
   if (!hash || hash === '#' || hash === '#/') return 'capital-map'
@@ -11,5 +11,6 @@ export function routeFromHash(hash: string): AppRoute {
   if (hash === '#/shape-neighbours') return 'shape-neighbours'
   if (hash === '#/shape-high-point') return 'shape-high-point'
   if (hash === '#/flag-country') return 'flag-country'
+  if (hash === '#/border-countries' || (import.meta.env.DEV && hash.startsWith('#/border-countries?qa='))) return 'border-countries'
   return 'not-found'
 }

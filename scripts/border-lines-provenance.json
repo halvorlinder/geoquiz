@@ -1,0 +1,19 @@
+{
+  "release": "2026-08-19.0",
+  "boundaryArtifact": "s3://overturemaps-us-west-2/release/2026-08-19.0/theme=divisions/type=division_boundary/*",
+  "areaArtifact": "s3://overturemaps-us-west-2/release/2026-08-19.0/theme=divisions/type=division_area/*",
+  "extraction": "DuckDB v1.5.5: SELECT id, to_json(sources) FROM read_parquet(area artifact) WHERE id IN (13 pinned IDs); no network during generation",
+  "osmPlanetSnapshot": "2026-07-23T00:00:00Z",
+  "license": "ODbL-1.0",
+  "sourceSha256": "02719f611372d5534a8b4d49696e8161b1c703919bcf6ff1bb19c33f2b0df84e",
+  "generatedSha256": "3ce9c9b5864434bd42fcd3263c303167712f6ea5a293cb547f1b5a4af1eafe18",
+  "boundaries": {
+    "AND,ESP": "7086d103-61e3-3e8c-8b44-3606d7ee7037", "AND,FRA": "e903e4f3-09e9-3c08-a455-1bb6f57657bf", "AUT,LIE": "9210bb50-70b2-3bdf-bd92-1e302c70911f", "BWA,ZMB": "b92c9fe9-b80d-3dda-9f8a-ec94497c323f", "CHE,LIE": "27baa767-50ac-3e8e-a021-9b85b69535e0", "ESP,MAR": "bedca194-3a06-3164-ab50-6b2b30af69d3", "FRA,MCO": "89e7f282-2515-3275-82f7-4a91e58507d5", "ITA,SMR": "08c56ad5-9294-37cb-ab9b-65f2b27fd6ad", "ITA,VAT": "1031e8f1-8945-37c8-9946-f735dabeb14a"
+  },
+  "areas": {
+    "AD": "37abbf42-9b55-4a53-8f41-abb069915642", "AT": "2a0e60c1-1e67-4a09-84a3-603bd8124c5c", "BW": "9deff093-3553-4b05-b25f-851275e2648d", "CH": "508f8d1f-2491-437c-b857-f44ccc0446ad", "ES": "d7c5e5ff-be46-455a-a6b6-965760e3a336", "FR": "166e386a-2b15-45b0-9b23-fb0260657b7b", "IT": "678c68ad-ae0d-4aeb-aa7c-03c413b5d32c", "LI": "8e2416ee-a760-42c9-a3d0-c357d056bc80", "MA": "c73464c9-1e03-4112-90ed-5d8f67a80056", "MC": "0b88c2ba-94d4-4207-9937-4b6e99a16885", "SM": "31785ed8-d1ab-4bd3-beb0-8a0e929c680c", "VA": "919fe895-a910-4126-9582-5ffd7bfe022d", "ZM": "10ed145c-b9d4-4302-97af-37e46da77633"
+  },
+  "areaGeometrySources": {
+    "AD": "r9407@88", "AT": "r16239@1461", "BW": "r1889339@175", "CH": "r51701@658", "ES": "r1311341@912", "FR": "r2202162@737", "IT": "r365331@577", "LI": "r1155955@100", "MA": "r13834513@70", "MC": "r1124039@72", "SM": "r54624@95", "VA": "r36989@116", "ZM": "r195271@254"
+  }
+}

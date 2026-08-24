@@ -50,6 +50,17 @@ describe('App quiz menu navigation', () => {
     expect(await screen.findByRole('heading', { name: 'Flag quiz' })).toBeTruthy()
   })
 
+  it('opens the lazy Country borders route from the modal menu with its route title and heading', async () => {
+    setHash('#/')
+    render(<App />)
+    await screen.findByRole('heading', { name: 'Capital map mock' })
+    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+    fireEvent.click(screen.getByRole('button', { name: /Country borders/ }))
+    expect(window.location.hash).toBe('#/border-countries')
+    expect(await screen.findByRole('heading', { name: 'Country borders' })).toBeTruthy()
+    expect(document.title).toBe('Geoquiz — Country borders')
+  })
+
   it('canonicalizes the legacy chooser hash to the landing route and opens the modal', async () => {
     cleanup()
     window.history.pushState(window.history.state, '', '#/quizzes')
