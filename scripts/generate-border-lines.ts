@@ -11,6 +11,8 @@ const ROOT = join(import.meta.dirname, '..')
 const SOURCE = join(ROOT, 'public/data-sources/border-countries/overture-divisions-2026-08-19.0.json.gz')
 const OUTPUT = join(ROOT, 'src/data/border-lines.json')
 const PUBLIC_OUTPUT = join(ROOT, 'public/data-sources/border-countries/border-lines-v1.json')
+const OUTPUT_V2 = join(ROOT, 'src/data/border-lines-v2.json')
+const PUBLIC_OUTPUT_V2 = join(ROOT, 'public/data-sources/border-countries/border-lines-v2.json')
 const INPUT = join(ROOT, '.handover/tmp/overture')
 const SCALE = 10_000_000
 
@@ -129,16 +131,48 @@ function simplifyRing(ring: Position[], protectedPoints: ReadonlySet<string>): P
   const output: Position[]=[]; for(let i=1;i<boundaries.length;i+=1) output.push(...rdp(rotated.slice(boundaries[i-1],boundaries[i]+1),0.006).slice(i===1?0:1))
   if (output.length < 4) return closed; if (pkey(output[0]) !== pkey(output.at(-1)!)) output.push(output[0]); return output
 }
-function exactPathForOverride(source: Source, pair: string): Position[] {
+function canonicalRunKey(points: readonly Position[]) {
+  const forward=points.map(pkey).join(';'), reverse=[...points].reverse().map(pkey).join(';')
+  return forward<reverse?forward:reverse
+}
+/** Returns every independent continuous shared run. Closed rings are rotated at
+ * a non-shared seam before scanning, so a real run is never split by encoding. */
+export function sharedPaths(rings: readonly Position[][], other: ReadonlySet<string>): Position[][] {
+  const output: Position[][]=[]
+  for (const ring of rings) {
+    let candidate=ring
+    if (ring.length>3&&pkey(ring[0])===pkey(ring.at(-1)!)&&other.has(skey(ring[0],ring[1]))&&other.has(skey(ring.at(-2)!,ring.at(-1)!))) {
+      const breakAt=ring.slice(1).findIndex((point,index)=>!other.has(skey(ring[index],point)))
+      if(breakAt>=0) candidate=[...ring.slice(breakAt+1,-1),...ring.slice(0,breakAt+2)]
+    }
+    let current: Position[]=[]
+    for(let index=1;index<candidate.length;index+=1){
+      if(other.has(skey(candidate[index-1],candidate[index]))){if(!current.length)current=[candidate[index-1]];current.push(candidate[index])}
+      else if(current.length>=2){output.push(current);current=[]} else current=[]
+    }
+    if(current.length>=2)output.push(current)
+  }
+  const unique=new Map<string,Position[]>()
+  for(const run of output)unique.set(canonicalRunKey(run),run)
+  return [...unique.values()].sort((a,b)=>geodesicLineLength(b)-geodesicLineLength(a)||canonicalRunKey(a).localeCompare(canonicalRunKey(b)))
+}
+function exactPathsForOverride(source: Source, pair: string): Position[][] {
   const [left,right] = pair.split(','); const line=parseLineComponents(source.boundaries[overridePairs.get(pair)!].wkt)
   const leftSegments=segments(parseRings(source.areas[overtureCountry[left as keyof typeof overtureCountry]].wkt)); const rightSegments=segments(parseRings(source.areas[overtureCountry[right as keyof typeof overtureCountry]].wkt)); const exact=new Set([...leftSegments].filter((value)=>rightSegments.has(value)))
-  const run=longestSharedPath(line,exact); if (!run) throw new Error(`${pair}: no byte-exact Overture area-aligned run.`)
-  if (pair === 'ESP,MAR') { const longitude=run.reduce((sum,point)=>sum+point[0],0)/run.length; const kilometres=geodesicLineLength(run)/1000; if (longitude > -2.8 || longitude < -3.1 || kilometres < 9.9 || kilometres > 10.1) throw new Error('ESP,MAR primary run must remain the Melilla fixture.') }
-  return run
+  const runs=sharedPaths(line,exact); if (!runs.length) throw new Error(`${pair}: no byte-exact Overture area-aligned run.`)
+  if (pair === 'ESP,MAR') { const run=runs[0]; const longitude=run.reduce((sum,point)=>sum+point[0],0)/run.length; const kilometres=geodesicLineLength(run)/1000; if (longitude > -2.8 || longitude < -3.1 || kilometres < 9.9 || kilometres > 10.1) throw new Error('ESP,MAR primary run must remain the Melilla fixture.') }
+  return runs
 }
+/** v1 remains byte-identical: it deliberately retains only the first (longest)
+ * ordered run while v2 records every independent run. */
+function exactPathForOverride(source: Source, pair: string): Position[] { return exactPathsForOverride(source,pair)[0] }
 function currentLine(pair: string, shapes: CountryShapeDataset): Position[] {
   const [left,right]=pair.split(','); const a=shapes.shapes[left], b=shapes.shapes[right]; if(!a||!b) throw new Error(`${pair}: missing current shape.`)
   const run=longestSharedPath(shapePositions(a),segments(shapePositions(b))); if(!run) throw new Error(`${pair}: no current exact run.`); return run
+}
+function currentRuns(pair: string, shapes: CountryShapeDataset): Position[][] {
+  const [left,right]=pair.split(','); const a=shapes.shapes[left],b=shapes.shapes[right]; if(!a||!b)throw new Error(`${pair}: missing current shape.`)
+  const runs=sharedPaths(shapePositions(a),segments(shapePositions(b))); if(!runs.length)throw new Error(`${pair}: no current exact run.`); return runs
 }
 function derive(source: Source) {
   const shapeDataset=countryShapes as unknown as CountryShapeDataset; const pairs=(neighbours as unknown as { boundaries: { codes: [string,string] }[] }).boundaries.map((edge)=>edge.codes.join(','))
@@ -152,12 +186,28 @@ function derive(source: Source) {
   for(const line of lines.filter((line)=>line.source==='overture-2026-08-19.0')) for(const code of line.codes) { const areaSegments=segments(overrideShapes[code]); if(line.path.slice(1).some((point,index)=>!areaSegments.has(skey(line.path[index],point)))) throw new Error(`${line.codes.join(',')}: generated area no longer contains primary line.`) }
   return output
 }
+function deriveV2(source: Source) {
+  const shapeDataset=countryShapes as unknown as CountryShapeDataset; const pairs=(neighbours as unknown as { boundaries: { codes: [string,string] }[] }).boundaries.map((edge)=>edge.codes.join(','))
+  const lines=pairs.map(pair=>{const runs=overridePairs.has(pair)?exactPathsForOverride(source,pair):currentRuns(pair,shapeDataset);return {codes:pair.split(',') as [string,string],runs,source:overridePairs.has(pair)?'overture-2026-08-19.0':'current-shapes' as const}})
+  const overrideShapes: Record<string, readonly Position[][]>={};const protect=new Map<string,Set<string>>()
+  for(const line of lines.filter(line=>line.source==='overture-2026-08-19.0'))for(const code of line.codes){const set=protect.get(code)??new Set<string>();line.runs.flat().forEach(point=>set.add(pkey(point)));protect.set(code,set)}
+  for(const [code,area]of Object.entries(source.areas)){const studyCode=(Object.entries(overtureCountry).find(([,value])=>value===code)?.[0]??code);overrideShapes[studyCode]=parseRings(area.wkt).map(ring=>simplifyRing(ring,protect.get(studyCode)??new Set()))}
+  for(const line of lines)for(const code of line.codes){const shape=line.source==='overture-2026-08-19.0'?overrideShapes[code]:shapePositions(shapeDataset.shapes[code]);const shapeSegments=segments(shape);for(const run of line.runs)if(run.slice(1).some((point,index)=>!shapeSegments.has(skey(run[index],point))))throw new Error(`${line.codes.join(',')}: generated run no longer belongs to ${code}.`)}
+  const runCount=lines.reduce((total,line)=>total+line.runs.length,0);if(lines.length!==317||runCount!==352||lines.filter(line=>line.runs.length>1).length!==27)throw new Error(`Unexpected v2 run registry: ${lines.length} pairs / ${runCount} runs.`)
+  return {version:2,dataVersion:'border-lines-v2-orientation-1-overture-2026-08-19.0',runOrdering:'geodesic-length-descending-then-canonical-orientation-independent-coordinate-key',source:{overtureRelease:source.release,osmPlanetSnapshot:'2026-07-23T00:00:00Z',inputHashes:source.inputHashes,sourceSha256:sha(SOURCE)},lines:lines.map(line=>[line.codes[0],line.codes[1],line.source==='current-shapes'?0:1,line.runs.map(encode)]),overrideShapes:Object.fromEntries(Object.entries(overrideShapes).map(([code,rings])=>[code,rings.map(encode)]))}
+}
 export function generateBorderLines(): string {
   if (!existsSync(SOURCE)) throw new Error('Pinned Overture source artifact is absent; extraction must not fetch from the network.')
   const source=JSON.parse(gunzipSync(readFileSync(SOURCE)).toString()) as Source
   validatePinnedSource(source)
   return `${JSON.stringify(derive(source))}\n`
 }
+export function generateBorderLinesV2(): string {
+  if (!existsSync(SOURCE)) throw new Error('Pinned Overture source artifact is absent; extraction must not fetch from the network.')
+  const source=JSON.parse(gunzipSync(readFileSync(SOURCE)).toString()) as Source
+  validatePinnedSource(source)
+  return `${JSON.stringify(deriveV2(source))}\n`
+}
 if (process.argv.includes('--extract')) { writeFileSync(SOURCE, gzipSync(JSON.stringify(extractPinnedOvertureSource()))); console.log(`Wrote ${SOURCE}`) }
-if (process.argv.includes('--write')) { const generated=generateBorderLines(); writeFileSync(OUTPUT, generated); writeFileSync(PUBLIC_OUTPUT, generated); console.log(`Wrote ${OUTPUT}`) }
-if (process.argv.includes('--check')) { const generated=generateBorderLines(); if(readFileSync(OUTPUT,'utf8')!==generated) throw new Error('Border line output is not deterministic/current; run npm run generate:border-lines -- --write'); if(sha(OUTPUT)!==provenance.generatedSha256 || sha(PUBLIC_OUTPUT)!==provenance.generatedSha256) throw new Error('Generated border-line hash lock failed.'); console.log('Border line output is deterministic.') }
+if (process.argv.includes('--write')) { const generated=generateBorderLines(),generatedV2=generateBorderLinesV2(); writeFileSync(OUTPUT, generated); writeFileSync(PUBLIC_OUTPUT, generated); writeFileSync(OUTPUT_V2,generatedV2);writeFileSync(PUBLIC_OUTPUT_V2,generatedV2); console.log(`Wrote ${OUTPUT} and ${OUTPUT_V2}`) }
+if (process.argv.includes('--check')) { const generated=generateBorderLines(),generatedV2=generateBorderLinesV2(); if(readFileSync(OUTPUT,'utf8')!==generated||readFileSync(OUTPUT_V2,'utf8')!==generatedV2||readFileSync(PUBLIC_OUTPUT_V2,'utf8')!==generatedV2) throw new Error('Border line output is not deterministic/current; run npm run generate:border-lines -- --write'); if(sha(OUTPUT)!==provenance.generatedSha256 || sha(PUBLIC_OUTPUT)!==provenance.generatedSha256||sha(OUTPUT_V2)!==provenance.generatedV2Sha256||sha(PUBLIC_OUTPUT_V2)!==provenance.generatedV2Sha256) throw new Error('Generated border-line hash lock failed.'); console.log('Border line output is deterministic.') }

@@ -6,6 +6,7 @@ import { scoreboardKey } from '../../core/scoreboard/scoreboard'
 import { normalizeAnswer } from '../../core/answerMatching'
 import { BORDER_DATA_VERSION, borderEntity, borderQuestions, borderSetupNote, borderShape, type BorderQuestion } from './borderCountries'
 import { borderContextGeometry } from './borderContextGeometry'
+import { allBorderRunsFocus } from './borderContextViewport'
 
 const quizLeaflet = vi.hoisted(() => ({ fitBounds: vi.fn(), stop: vi.fn(), invalidateSize: vi.fn() }))
 vi.mock('react-leaflet', () => ({
@@ -21,6 +22,7 @@ const easy3 = borderQuestions('easy', 'All', () => 0).find((question) => questio
 const hard = borderQuestions('hard', 'All', () => 0)[0]
 const iran = borderQuestions('easy', 'All', () => 0).find((question) => question.codes.join(',') === 'AFG,IRN')!
 const unitedStates = borderQuestions('easy', 'All', () => 0).find((question) => question.codes.join(',') === 'CAN,USA')!
+const hardMulti = borderQuestions('hard', 'All', () => 0).find((question) => question.codes.join(',') === 'ESP,FRA')!
 const answerName = (question: BorderQuestion) => borderEntity(question.answerCode!)!.name
 const factory = (...questions: BorderQuestion[]) => () => questions
 const stableRandom = () => 0
@@ -61,7 +63,7 @@ describe('BorderCountriesQuiz', () => {
   it('offers deterministic development-only Chrome fixture URLs while keeping Hard line-only', () => {
     const original = window.location.hash
     try {
-      for (const [fixture, known] of [['rus-prk', 'Russia'], ['bwa-botswana', 'Botswana'], ['bwa-zambia', 'Zambia'], ['vatican-italy', 'Italy'], ['liechtenstein', 'Liechtenstein'], ['spain-morocco', 'Spain'], ['france-monaco', 'France']] as const) {
+      for (const [fixture, known] of [['rus-prk', 'Russia'], ['bwa-botswana', 'Botswana'], ['bwa-zambia', 'Zambia'], ['vatican-italy', 'Italy'], ['liechtenstein', 'Liechtenstein'], ['spain-morocco', 'Spain'], ['france-monaco', 'France'], ['esp-fra', 'Spain'], ['esp-mar', 'Spain'], ['can-usa', 'Canada'], ['arm-aze', 'Armenia']] as const) {
         window.location.hash = `#/border-countries?qa=${fixture}`
         const view = render(<BorderCountriesQuiz />)
         expect(screen.getByRole('heading', { name: `Which country borders ${known}?` })).toBeTruthy()
@@ -74,6 +76,11 @@ describe('BorderCountriesQuiz', () => {
       expect(screen.getByRole('status').textContent).not.toContain('other side')
       expect(hardFixture.container.querySelector('.easy-border-context-map, .leaflet-container')).toBeNull()
       expect(hardFixture.container.querySelector('.border-image-hard')).toBeTruthy()
+      hardFixture.unmount()
+      window.location.hash = '#/border-countries?qa=hard-multi'
+      const multiHardFixture = render(<BorderCountriesQuiz />)
+      expect(screen.getByText('2 border sections')).toBeTruthy()
+      expect(multiHardFixture.container.querySelector('.easy-border-context-map, .leaflet-container')).toBeNull()
     } finally { window.location.hash = original }
   })
   it('refits a restarted Easy fixture card and restores input focus without remounting a resolved answer', async () => {
@@ -87,6 +94,61 @@ describe('BorderCountriesQuiz', () => {
       fireEvent.click(screen.getByRole('button', { name: 'Start / restart practice' }))
       await waitFor(() => expect(quizLeaflet.fitBounds.mock.calls.length).toBeGreaterThan(initialFits))
       await waitFor(() => expect(document.activeElement).toBe(screen.getByLabelText('Other country')))
+    } finally { window.location.hash = original }
+  })
+  it('resets a same-card multi-run Easy restart from local section focus to the all-run union', async () => {
+    const original = window.location.hash
+    try {
+      window.location.hash = '#/border-countries?qa=can-usa'
+      quizLeaflet.fitBounds.mockClear()
+      const { container } = render(<BorderCountriesQuiz />)
+      const focus=allBorderRunsFocus(unitedStates.runs)
+      const unionBounds=[[focus.bounds[0],focus.bounds[1]],[focus.bounds[2],focus.bounds[3]]]
+      const unionOptions={ animate:true,maxZoom:focus.maxZoom,padding:[focus.padding[0],focus.padding[1]] }
+      fireEvent.change(screen.getByLabelText('Other country'), { target: { value: answerName(unitedStates) } })
+      fireEvent.click(screen.getByRole('button', { name: 'Check answer' }))
+      fireEvent.click(screen.getByRole('button', { name: 'Focus next section' }))
+      expect(quizLeaflet.fitBounds).toHaveBeenLastCalledWith(expect.not.arrayContaining(unionBounds),expect.anything())
+      fireEvent.click(screen.getByRole('button', { name: 'Start / restart practice' }))
+      await waitFor(() => expect(quizLeaflet.fitBounds).toHaveBeenLastCalledWith(unionBounds,expect.objectContaining(unionOptions)))
+      await waitFor(() => expect(document.activeElement).toBe(screen.getByLabelText('Other country')))
+      expect(container.querySelector('.easy-border-answer')).toBeNull()
+      expect(container.querySelector('.border-reveal-answer')).toBeNull()
+    } finally { window.location.hash = original }
+  })
+  it('resets a one-disclosed multi-run Hard local focus to the union on either final disclosure path', async () => {
+    const original = window.location.hash
+    const first=borderEntity(hardMulti.codes[0])!.name, second=borderEntity(hardMulti.codes[1])!.name
+    const focus=allBorderRunsFocus(hardMulti.runs)
+    const unionBounds=[[focus.bounds[0],focus.bounds[1]],[focus.bounds[2],focus.bounds[3]]]
+    const unionOptions={ animate:true,maxZoom:focus.maxZoom,padding:[focus.padding[0],focus.padding[1]] }
+    const beginOneDisclosed=async () => {
+      window.location.hash = '#/border-countries?qa=hard-multi'
+      quizLeaflet.fitBounds.mockClear()
+      const view=render(<BorderCountriesQuiz />)
+      fireEvent.change(screen.getByLabelText('Country'), { target: { value: first } })
+      fireEvent.click(screen.getByRole('button', { name: 'Check answer' }))
+      await waitFor(() => expect(document.activeElement).toBe(screen.getByLabelText('Country')))
+      expect(view.container.querySelectorAll('.easy-border-selected-run-halo, .easy-border-selected-run')).toHaveLength(2)
+      fireEvent.click(screen.getByRole('button', { name: 'Focus next section' }))
+      expect(quizLeaflet.fitBounds).toHaveBeenLastCalledWith(expect.not.arrayContaining(unionBounds),expect.anything())
+      return view
+    }
+    try {
+      const correctPath=await beginOneDisclosed()
+      fireEvent.change(screen.getByLabelText('Country'), { target: { value: second } })
+      fireEvent.click(screen.getByRole('button', { name: 'Check answer' }))
+      await waitFor(() => expect(quizLeaflet.fitBounds).toHaveBeenLastCalledWith(unionBounds,expect.objectContaining(unionOptions)))
+      expect(correctPath.container.querySelectorAll('.easy-border-selected-run-halo, .easy-border-selected-run')).toHaveLength(2)
+      await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Next border' })))
+      correctPath.unmount()
+
+      const revealPath=await beginOneDisclosed()
+      fireEvent.click(screen.getByRole('button', { name: 'Reveal answers' }))
+      await waitFor(() => expect(quizLeaflet.fitBounds).toHaveBeenLastCalledWith(unionBounds,expect.objectContaining(unionOptions)))
+      expect(revealPath.container.querySelectorAll('.easy-border-selected-run-halo, .easy-border-selected-run')).toHaveLength(2)
+      await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Next border' })))
+      revealPath.unmount()
     } finally { window.location.hash = original }
   })
   it('keeps native timed setup and the border-touching continent description', () => {

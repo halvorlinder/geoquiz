@@ -1,11 +1,11 @@
 ---
 id: DD-0026
 title: Hard border Practice progressive disclosure
-status: accepted
+status: superseded
 date: 2026-08-25
 applies_to: border image quiz, Easy and Hard border rendering, local map interaction, Practice disclosure
 supersedes: DD-0025
-superseded_by: none
+superseded_by: DD-0028
 ---
 
 # DD-0026: Hard border Practice progressive disclosure

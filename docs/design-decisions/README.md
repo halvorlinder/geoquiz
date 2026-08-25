@@ -76,5 +76,6 @@ paraphrase user direction rather than copying private conversation.
 | [DD-0022](DD-0022-curated-country-abbreviations.md) | Curated country abbreviations are exact-only shared answers | accepted | entity catalog, shape-neighbours, flag-country, answer matching |
 | [DD-0024](DD-0024-border-image-quiz.md) | Country-border image quiz | superseded | quiz menu, border image quiz, local border geometry, answer interaction |
 | [DD-0025](DD-0025-border-context-map.md) | Easy border context map | superseded | border image quiz, Easy border rendering, local map interaction |
-| [DD-0026](DD-0026-hard-border-practice-disclosure.md) | Hard border Practice progressive disclosure | accepted | border image quiz, Easy and Hard border rendering, local map interaction, Practice disclosure |
+| [DD-0026](DD-0026-hard-border-practice-disclosure.md) | Hard border Practice progressive disclosure | superseded | border image quiz, Easy and Hard border rendering, local map interaction, Practice disclosure |
 | [DD-0027](DD-0027-fixed-viewport-site-layout.md) | Fixed-viewport site layout and keyboard flow | accepted | all routes, responsive layout, overlay quiz menu, keyboard interaction |
+| [DD-0028](DD-0028-multi-run-border-sections.md) | Complete multi-run border sections | accepted | border image quiz, local border geometry, Easy and Hard border rendering, Practice disclosure |

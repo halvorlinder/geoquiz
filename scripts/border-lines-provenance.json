@@ -7,6 +7,7 @@
   "license": "ODbL-1.0",
   "sourceSha256": "02719f611372d5534a8b4d49696e8161b1c703919bcf6ff1bb19c33f2b0df84e",
   "generatedSha256": "3ce9c9b5864434bd42fcd3263c303167712f6ea5a293cb547f1b5a4af1eafe18",
+  "generatedV2Sha256": "4997be0b6c627f2ebaf177d9122dbc90f9cf813a3b09e02ddc3e111a1b41b1ee",
   "boundaries": {
     "AND,ESP": "7086d103-61e3-3e8c-8b44-3606d7ee7037", "AND,FRA": "e903e4f3-09e9-3c08-a455-1bb6f57657bf", "AUT,LIE": "9210bb50-70b2-3bdf-bd92-1e302c70911f", "BWA,ZMB": "b92c9fe9-b80d-3dda-9f8a-ec94497c323f", "CHE,LIE": "27baa767-50ac-3e8e-a021-9b85b69535e0", "ESP,MAR": "bedca194-3a06-3164-ab50-6b2b30af69d3", "FRA,MCO": "89e7f282-2515-3275-82f7-4a91e58507d5", "ITA,SMR": "08c56ad5-9294-37cb-ab9b-65f2b27fd6ad", "ITA,VAT": "1031e8f1-8945-37c8-9946-f735dabeb14a"
   },

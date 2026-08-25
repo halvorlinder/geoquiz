@@ -195,10 +195,14 @@ select { width: 100%; min-height: 42px; padding: 8px 10px; border: 1px solid #5a
 .border-line-halo { fill: none; stroke: #101b2d; stroke-width: 10px; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
 .border-line-mark { fill: none; stroke: #ffcf70; stroke-width: 4px; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
 .border-image-hard > svg { width: min(76%, 350px); }
-.easy-border-context-shell { display: grid; grid-template-rows: minmax(110px, 1fr) auto auto; min-height: 260px; overflow: hidden; border: 1px solid #3d5a84; border-radius: 12px; background: #101e33; }
+.border-image-hard > .border-line-multi { display: block; height: 100%; min-height: 160px; }
+.border-image-hard--multi { grid-template-rows: auto minmax(0, 1fr); }
+.border-line-section-count { margin: 0; color: #c4d4ed; font-size: .75rem; font-weight: 750; }
+.easy-border-context-shell { position: relative; display: grid; grid-template-rows: minmax(110px, 1fr) auto; min-height: 260px; overflow: hidden; border: 1px solid #3d5a84; border-radius: 12px; background: #101e33; }
 .easy-border-context-map { min-height: 0; height: 100%; width: 100%; background: #101e33; }
 .easy-border-context-hint { margin: 0; padding: 5px 10px; color: #c4d4ed; font-size: .75rem; }
-.easy-border-recenter { margin: 0 10px 6px; justify-self: start; }
+.easy-border-map-controls { position: absolute; z-index: 500; right: 7px; bottom: 31px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 8px; max-width: calc(100% - 14px); }
+.easy-border-map-controls .text-button { min-height: 28px; padding: 4px 7px; border: 1px solid #385275; border-radius: 999px; background: #111e33e8; color: #c5d6f3; font-size: .72rem; text-decoration: none; }
 .easy-border-answer { animation: easy-border-answer-enter 180ms ease-out both; }
 .easy-border-answer-revealed { stroke-dasharray: 6 5; }
 @keyframes easy-border-answer-enter { from { opacity: 0; } to { opacity: 1; } }
@@ -463,9 +467,10 @@ input:disabled { cursor: not-allowed; opacity: .65; }
   .border-quiz-shell > .border-question-card .border-image { flex: 1 1 126px; min-height: 116px; margin-bottom: 5px; padding: 8px; }
   .border-quiz-shell > .border-question-card .border-image > svg { min-height: 100px; }
   .border-quiz-shell > .border-question-card .easy-border-context-shell { flex: 1 1 164px; min-height: 164px; }
-  .border-quiz-shell > .border-question-card .easy-border-context-shell { grid-template-rows: minmax(108px, 1fr) auto auto; }
+  .border-quiz-shell > .border-question-card .easy-border-context-shell { grid-template-rows: minmax(108px, 1fr) auto; }
   .border-quiz-shell > .border-question-card .easy-border-context-hint { padding: 3px 8px; font-size: .68rem; }
-  .border-quiz-shell > .border-question-card .easy-border-recenter { min-height: 28px; margin: 0 8px 4px; padding: 4px 7px; font-size: .72rem; }
+  .border-quiz-shell > .border-question-card .easy-border-map-controls { right: 5px; bottom: 26px; gap: 3px 5px; }
+  .border-quiz-shell > .border-question-card .easy-border-map-controls .text-button { min-height: 32px; padding: 3px 6px; font-size: .68rem; }
   .border-quiz-shell > .border-question-card .border-source { margin: 0 0 4px; font-size: .66rem; }
   .border-quiz-shell > .border-question-card h2 { margin-bottom: 3px; font-size: 1.1rem; }
   .border-quiz-shell > .border-question-card .country-capital-instruction { margin-bottom: 4px; font-size: .78rem; line-height: 1.18; }

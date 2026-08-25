@@ -140,14 +140,15 @@ describe('viewport layout stylesheet contract', () => {
     expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card { align-self: stretch; height: 100%; }')
     expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card .easy-border-context-shell { flex: 1 1 220px; min-height: 150px; }')
     expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card .border-source { flex: 0 0 auto; margin-top: 8px; }')
-    expect(styles).toContain('.easy-border-context-shell { display: grid; grid-template-rows: minmax(110px, 1fr) auto auto;')
+    expect(styles).toContain('.easy-border-context-shell { position: relative; display: grid; grid-template-rows: minmax(110px, 1fr) auto;')
     expect(styles).toContain('.easy-border-context-map { min-height: 0; height: 100%;')
-    expect(styles).toContain('.easy-border-recenter { margin: 0 10px 6px; justify-self: start; }')
+    expect(styles).toContain('.easy-border-map-controls { position: absolute; z-index: 500;')
     expect(styles).toContain('.border-question-card .easy-border-context-shell { flex: 1 1 170px; min-height: 170px; }')
   })
 
   it('gives Border its own 390x844 action/media budget for initial and disclosed states', () => {
     expect(styles).toContain('.border-quiz-shell > .border-question-card .easy-border-context-shell { flex: 1 1 164px; min-height: 164px; }')
+    expect(styles).toContain('.border-quiz-shell > .border-question-card .easy-border-map-controls { right: 5px; bottom: 26px;')
     expect(styles).toContain('.border-quiz-shell > .border-question-card .border-answer-actions { flex-flow: row wrap; align-items: center; gap: 2px 12px; min-height: 38px; }')
     expect(styles).toContain('.border-quiz-shell > .border-question-card .border-answer-actions .primary-button { width: auto; min-height: 38px;')
     expect(styles).toContain('card has at least 544px')
@@ -161,6 +162,16 @@ describe('viewport layout stylesheet contract', () => {
     }
     expect(Object.values(cardTracks).every((track) => track < 544)).toBe(true)
     expect(styles).not.toContain('.border-quiz-shell > .setup-card .setup-note { display: none; }')
+  })
+
+  it('keeps the multi-section map overlay touchable without colliding with zoom or its hint row', () => {
+    expect(styles).toContain('.border-image-hard > svg { width: min(76%, 350px); }')
+    expect(styles).toContain('.border-quiz-shell > .border-question-card .easy-border-map-controls .text-button { min-height: 32px;')
+    // 164px shell: 26px reserved hint/offset + 32px controls leaves the
+    // controls starting at y=106; Leaflet's two 31px zoom buttons from y=10
+    // end at y=72, so both one-row controls remain distinct and usable.
+    const shell=164, controlsBottom=26, controlsHeight=32, zoomTop=10, zoomHeight=62
+    expect(shell-controlsBottom-controlsHeight).toBeGreaterThan(zoomTop+zoomHeight)
   })
 
   it('keeps resolved high-point facts in a compact no-scroll mobile fact strip', () => {

@@ -5,6 +5,11 @@ import { describe, expect, it } from 'vitest'
 const fixtureSources = [
   ['src/quizzes/shape-neighbours/ShapeNeighboursQuiz.tsx', 'qa=china'],
   ['src/quizzes/shape-high-point/ShapeHighPointQuiz.tsx', 'qa=colombia'],
+  ['src/quizzes/border-countries/BorderCountriesQuiz.tsx', 'esp-fra'],
+  ['src/quizzes/border-countries/BorderCountriesQuiz.tsx', 'esp-mar'],
+  ['src/quizzes/border-countries/BorderCountriesQuiz.tsx', 'can-usa'],
+  ['src/quizzes/border-countries/BorderCountriesQuiz.tsx', 'arm-aze'],
+  ['src/quizzes/border-countries/BorderCountriesQuiz.tsx', 'hard-multi'],
 ] as const
 
 describe('DEV-only Chrome QA fixtures', () => {
@@ -18,5 +23,6 @@ describe('DEV-only Chrome QA fixtures', () => {
     const routeSource = readFileSync(resolve(process.cwd(), 'src/appRoute.ts'), 'utf8')
     expect(routeSource).toContain("import.meta.env.DEV && hash === '#/shape-neighbours?qa=china'")
     expect(routeSource).toContain("import.meta.env.DEV && hash === '#/shape-high-point?qa=colombia'")
+    for (const token of ['esp-fra','esp-mar','can-usa','arm-aze','hard-multi']) expect(routeSource).toContain(`#/border-countries?qa=${token}`)
   })
 })

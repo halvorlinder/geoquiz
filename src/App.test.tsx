@@ -85,6 +85,15 @@ describe('App quiz menu navigation', () => {
     expect(screen.queryByRole('heading', { name: 'Quiz not found' })).toBeNull()
   })
 
+  it('loads the exact DEV multi-run Hard border fixture through the actual lazy route', async () => {
+    cleanup()
+    setHash('#/border-countries?qa=hard-multi')
+    render(<App />)
+    expect(await screen.findByText('2 border sections')).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Which countries share this border?' })).toBeTruthy()
+    expect(screen.queryByRole('heading', { name: 'Quiz not found' })).toBeNull()
+  })
+
   it('canonicalizes the legacy chooser hash to the landing route and opens the modal', async () => {
     cleanup()
     window.history.pushState(window.history.state, '', '#/quizzes')

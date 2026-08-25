@@ -7,7 +7,7 @@ land-boundary edges, 157 eligible entities, and 40 known zero-neighbour
 entities.
 
 The separate Country borders image quiz renders this same authoritative roster
-through display-only selected runs. Its geometry and ODbL provenance are in
+through display-only exact shared runs. Its geometry and ODbL provenance are in
 `docs/border-lines-data.md`; it never determines neighbour answers.
 
 ## Scope and neutrality

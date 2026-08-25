@@ -8,10 +8,10 @@ import { borderContextGeometry } from './borderContextGeometry'
 const leaflet = vi.hoisted(() => ({ fitBounds: vi.fn(), stop: vi.fn(), invalidateSize: vi.fn() }))
 vi.mock('react-leaflet', async () => {
   const React = await import('react')
-  function MountedGeoJson({ data, style }: { data: { properties: Record<string, never>; geometry: { coordinates: unknown } }; style: { className?: string; color?: string; dashArray?: string } }) {
+  function MountedGeoJson({ data, style }: { data: { properties: Record<string, never>; geometry: { type: string; coordinates: unknown } }; style: { className?: string; color?: string; dashArray?: string } }) {
     // React-Leaflet v5 consumes each layer's data at mount: assertions exercise that contract.
     const [initial] = React.useState(data)
-    return <div className={style.className} data-properties={JSON.stringify(initial.properties)} data-geometry={JSON.stringify(initial.geometry.coordinates).slice(0, 120)} data-color={style.color} data-dash={style.dashArray} />
+    return <div className={style.className} data-properties={JSON.stringify(initial.properties)} data-geometry-type={initial.geometry.type} data-geometry={JSON.stringify(initial.geometry.coordinates).slice(0, 120)} data-color={style.color} data-dash={style.dashArray} />
   }
   return {
     MapContainer: ({ children, className, bounds, boundsOptions }: { children: ReactNode; className: string; bounds: unknown; boundsOptions: { padding: unknown; maxZoom: number } }) => <div className={className} data-initial-bounds={JSON.stringify(bounds)} data-initial-options={JSON.stringify(boundsOptions)}>{children}</div>,
@@ -23,6 +23,7 @@ vi.mock('react-leaflet', async () => {
 import { EasyBorderContextMap } from './EasyBorderContextMap'
 
 const easy = borderQuestions('easy', 'All', () => 0).find(question => question.codes.join(',') === 'BWA,ZMB')!
+const multi = borderQuestions('easy', 'All', () => 0).find(question => question.codes.join(',') === 'CAN,USA')!
 const answerName = borderEntity(easy.answerCode!)!.name
 function countries(question: BorderQuestion, answerStatus?: 'correct'|'revealed') {
   const known=borderEntity(question.knownCode!)!, knownShape=borderShape(question.knownCode!,question.source)!
@@ -68,6 +69,33 @@ describe('EasyBorderContextMap', () => {
     const calls = leaflet.fitBounds.mock.calls.length
     fireEvent.click(screen.getByRole('button', { name: 'Recenter shared border' }))
     expect(leaflet.fitBounds.mock.calls.length).toBe(calls + 1)
+  })
+
+  it('mounts every multi-run section as one property-free MultiLineString and cycles local focus without unmounting runs', () => {
+    const { container,rerender }=render(<EasyBorderContextMap runs={multi.runs} countries={countries(multi)} recenterEpoch={0}/>)
+    const lines=container.querySelectorAll('.easy-border-selected-run-halo, .easy-border-selected-run')
+    expect(lines).toHaveLength(2)
+    for(const line of lines){expect(line.getAttribute('data-properties')).toBe('{}');expect(line.getAttribute('data-geometry-type')).toBe('MultiLineString');expect(line.getAttribute('data-geometry')).toContain('[[')}
+    expect(screen.getByRole('button',{name:'Focus next section'})).toBeTruthy()
+    expect(screen.getByRole('button',{name:'Show all sections'})).toBeTruthy()
+    const map=container.querySelector('.easy-border-context-map')!
+    const unionBounds=JSON.parse(map.getAttribute('data-initial-bounds')!)
+    const unionOptions=JSON.parse(map.getAttribute('data-initial-options')!)
+    const fitCount=leaflet.fitBounds.mock.calls.length
+    fireEvent.click(screen.getByRole('button',{name:'Focus next section'}))
+    expect(leaflet.fitBounds).toHaveBeenCalledTimes(fitCount+1)
+    expect(leaflet.fitBounds).toHaveBeenLastCalledWith(expect.not.arrayContaining(unionBounds),expect.anything())
+    // Correct/revealed updates externally recenter the all-run union immediately;
+    // the prior local section must not leak into either disclosed state.
+    rerender(<EasyBorderContextMap runs={multi.runs} countries={countries(multi,'correct')} recenterEpoch={1}/>)
+    expect(leaflet.fitBounds).toHaveBeenLastCalledWith(unionBounds,expect.objectContaining(unionOptions))
+    expect(container.querySelectorAll('.easy-border-selected-run-halo, .easy-border-selected-run')).toHaveLength(2)
+    rerender(<EasyBorderContextMap runs={multi.runs} countries={countries(multi,'revealed')} recenterEpoch={2}/>)
+    expect(leaflet.fitBounds).toHaveBeenLastCalledWith(unionBounds,expect.objectContaining(unionOptions))
+    expect(container.querySelectorAll('.easy-border-selected-run-halo, .easy-border-selected-run')).toHaveLength(2)
+    fireEvent.click(screen.getByRole('button',{name:'Show all sections'}))
+    expect(leaflet.fitBounds).toHaveBeenLastCalledWith(unionBounds,expect.objectContaining(unionOptions))
+    expect(container.querySelectorAll('.easy-border-selected-run-halo, .easy-border-selected-run')).toHaveLength(2)
   })
 
   it('uses and cleans up the window-resize fallback when ResizeObserver is unavailable', () => {
