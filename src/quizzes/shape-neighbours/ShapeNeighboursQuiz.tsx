@@ -105,6 +105,13 @@ function setupCount(
   return shapeNeighboursQuestions(entities, continent).length;
 }
 
+/** Direct Chrome-only QA fixture; production builds erase this branch. */
+function developmentFixture(entities: readonly StudyEntity[]) {
+  if (!import.meta.env.DEV) return undefined;
+  if (window.location.hash.split("?")[1] !== "qa=china") return undefined;
+  return shapeNeighboursQuestions(entities).find((question) => question.entity.code === "CHN");
+}
+
 export type ShapeNeighboursQuizProps = Readonly<{
   entities?: readonly StudyEntity[];
   /** Test seam: production uses the audited local question factory. */
@@ -120,12 +127,15 @@ export function ShapeNeighboursQuiz({
 }: ShapeNeighboursQuizProps) {
   // Tests may inject a small catalog; production always uses the checked local catalog.
   const entities = suppliedEntities ?? studyEntities;
+  const fixture = questionFactory ? undefined : developmentFixture(entities);
   const questionsFor = useCallback(
     (continent: NeighbourContinent) =>
-      questionFactory
+      fixture
+        ? [fixture]
+        : questionFactory
         ? questionFactory(continent)
         : shapeNeighboursQuestions(entities, continent),
-    [entities, questionFactory],
+    [entities, fixture, questionFactory],
   );
   const allQuestions = useMemo(() => questionsFor("All"), [questionsFor]);
   const [draft, setDraft] = useState<Config>({
@@ -166,7 +176,9 @@ export function ShapeNeighboursQuiz({
     () => questionsFor(active.continent),
     [active.continent, questionsFor],
   );
-  const draftCount = questionFactory
+  const draftCount = fixture
+    ? 1
+    : questionFactory
     ? questionsFor(draft.continent).length
     : setupCount(entities, draft.continent);
   const target =
@@ -624,8 +636,10 @@ export function ShapeNeighboursQuiz({
     .map((code) => entityForNeighbourCode(code, entities))
     .filter((entity): entity is StudyEntity => Boolean(entity));
   const mapEnabled = active.mode === "practice" && showProgressMap;
+  const denseRoster = target.neighbourCodes.length >= 12;
+  const denseMixedReveal = denseRoster && state.revealed;
   return (
-    <main className="app-shell quiz-active-shell shape-neighbours-shell">
+    <main className={`app-shell quiz-active-shell shape-neighbours-shell${denseRoster ? " shape-neighbours-shell--dense-roster" : ""}`}>
       <header className="masthead">
         <div>
           <p className="eyebrow">
@@ -656,7 +670,7 @@ export function ShapeNeighboursQuiz({
       </header>
       {setup}
       <section
-        className={`country-capital-card shape-neighbours-card ${state.complete ? "neighbours-correct" : state.revealed ? "neighbours-revealed" : ""}`}
+        className={`country-capital-card shape-neighbours-card ${mapEnabled ? "shape-neighbours-card--map" : "shape-neighbours-card--silhouette"} ${denseRoster ? "shape-neighbours-card--dense-roster" : ""} ${state.foundCodes.length > 0 && !state.complete && !state.revealed ? "shape-neighbours-card--partial" : ""} ${active.mode === "practice" ? "shape-neighbours-card--practice" : "shape-neighbours-card--timed"} ${state.complete ? "shape-neighbours-card--resolved neighbours-correct" : state.revealed ? "shape-neighbours-card--resolved shape-neighbours-card--revealed neighbours-revealed" : ""}`}
         aria-labelledby="shape-neighbours-question"
       >
         <p className="eyebrow">
@@ -717,7 +731,7 @@ export function ShapeNeighboursQuiz({
           </strong>
           <span>{state.foundCodes.length} found</span>
         </p>
-        {found.length > 0 && (
+        {found.length > 0 && !denseMixedReveal && (
           <ul
             className="neighbour-answer-list"
             aria-label="Answered neighbours"
@@ -734,20 +748,34 @@ export function ShapeNeighboursQuiz({
           <>
             <p className="country-capital-reveal-entity">
               {target.entity.name}
+              {denseMixedReveal && <span className="neighbour-answer-legend"><span aria-hidden="true">✓ Correct</span><span aria-hidden="true">Dashed Revealed</span><span className="visually-hidden">Answer key: solid check-mark chips are correct; dashed chips are revealed.</span></span>}
             </p>
-            <ul
-              className="neighbour-answer-list"
-              aria-label="Revealed neighbours"
-            >
-              {target.neighbourCodes
-                .filter((code) => !state.foundCodes.includes(code))
-                .map((code) => {
+            {denseMixedReveal ? (
+              <ul className="neighbour-answer-list neighbour-answer-list--mixed" aria-label="Answered and revealed neighbours">
+                {target.neighbourCodes.map((code) => {
                   const entity = entityForNeighbourCode(code, entities);
+                  const correct = state.foundCodes.includes(code);
+                  const status = correct ? "Correct" : "Revealed";
                   return entity ? (
-                    <li key={entity.code}>{entity.name}</li>
+                    <li aria-label={`${entity.name} — ${status}`} className={correct ? "neighbour-answer--correct" : "neighbour-answer--revealed"} key={entity.code}>{entity.name}</li>
                   ) : null;
                 })}
-            </ul>
+              </ul>
+            ) : (
+              <ul
+                className="neighbour-answer-list"
+                aria-label="Revealed neighbours"
+              >
+                {target.neighbourCodes
+                  .filter((code) => !state.foundCodes.includes(code))
+                  .map((code) => {
+                    const entity = entityForNeighbourCode(code, entities);
+                    return entity ? (
+                      <li key={entity.code}>{entity.name}</li>
+                    ) : null;
+                  })}
+              </ul>
+            )}
           </>
         )}
         <form

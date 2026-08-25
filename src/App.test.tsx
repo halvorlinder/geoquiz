@@ -61,6 +61,30 @@ describe('App quiz menu navigation', () => {
     expect(document.title).toBe('Geoquiz — Country borders')
   })
 
+  it('marks only the Shape Neighbours active route for its desktop rail/card composition', async () => {
+    setHash('#/shape-neighbours')
+    render(<App />)
+    expect(await screen.findByRole('heading', { name: 'Shape neighbours' })).toBeTruthy()
+    expect(document.querySelector('.app-frame.shape-neighbours-frame')).toBeTruthy()
+    expect(document.querySelector('.app-frame.shape-neighbours-frame .shape-neighbours-shell')).toBeTruthy()
+  })
+
+  it('loads exact DEV China and Colombia QA hashes through their actual lazy routes instead of Not Found', async () => {
+    cleanup()
+    setHash('#/shape-neighbours?qa=china')
+    render(<App />)
+    expect(await screen.findByText('14 remaining')).toBeTruthy()
+    expect(screen.getByRole('switch', { name: 'Neighbour map' })).toBeTruthy()
+    expect(screen.queryByRole('heading', { name: 'Quiz not found' })).toBeNull()
+
+    cleanup()
+    setHash('#/shape-high-point?qa=colombia')
+    render(<App />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Reveal answer' }))
+    expect(await screen.findByText('Pico Simón Bolívar')).toBeTruthy()
+    expect(screen.queryByRole('heading', { name: 'Quiz not found' })).toBeNull()
+  })
+
   it('canonicalizes the legacy chooser hash to the landing route and opens the modal', async () => {
     cleanup()
     window.history.pushState(window.history.state, '', '#/quizzes')

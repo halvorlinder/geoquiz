@@ -4,13 +4,14 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { BorderCountriesQuiz } from './BorderCountriesQuiz'
 import { scoreboardKey } from '../../core/scoreboard/scoreboard'
 import { normalizeAnswer } from '../../core/answerMatching'
-import { BORDER_DATA_VERSION, borderEntity, borderQuestions, borderSetupNote, type BorderQuestion } from './borderCountries'
+import { BORDER_DATA_VERSION, borderEntity, borderQuestions, borderSetupNote, borderShape, type BorderQuestion } from './borderCountries'
+import { borderContextGeometry } from './borderContextGeometry'
 
 const quizLeaflet = vi.hoisted(() => ({ fitBounds: vi.fn(), stop: vi.fn(), invalidateSize: vi.fn() }))
 vi.mock('react-leaflet', () => ({
   MapContainer: ({ children, className }: { children: ReactNode; className: string }) => <div className={className}>{children}</div>,
   Pane: ({ children }: { children: ReactNode }) => <>{children}</>,
-  GeoJSON: () => <div />,
+  GeoJSON: ({ data, style }: { data: { properties?: Record<string, never>; geometry?: { coordinates?: unknown } }; style?: { className?: string } }) => <div className={style?.className} data-properties={JSON.stringify(data.properties ?? {})} data-geometry={JSON.stringify(data.geometry?.coordinates ?? [])} />,
   useMap: () => ({ ...quizLeaflet, getContainer: () => document.querySelector('.easy-border-context-map') as HTMLElement }),
 }))
 
@@ -144,6 +145,62 @@ describe('BorderCountriesQuiz', () => {
     fireEvent.change(input, { target: { value: names[0] } })
     fireEvent.click(screen.getByRole('button', { name: 'Check answer' }))
     expect(screen.getByRole('button', { name: 'Next border' })).toBeTruthy()
+    expect(document.querySelectorAll('.easy-border-answer-correct')).toHaveLength(2)
+    expect(document.querySelectorAll('.easy-border-answer-revealed')).toHaveLength(0)
+  })
+  it('progressively renders only disclosed Hard Practice countries and locks one-country reveal after use', async () => {
+    render(<BorderCountriesQuiz questionFactory={factory(hard)} />)
+    fireEvent.click(screen.getByLabelText('Hard')); fireEvent.click(screen.getByRole('button', { name: 'Start / restart practice' }))
+    const names=hard.codes.map(code=>borderEntity(code)!.name)
+    expect(document.querySelector('.easy-border-context-map')).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'Reveal one country' }))
+    expect(screen.getByLabelText('Revealed countries').textContent).toContain(names[0])
+    expect(screen.getByLabelText('Revealed countries').textContent).toContain('Revealed')
+    expect(screen.queryByRole('button', { name: 'Reveal one country' })).toBeNull()
+    expect(document.querySelector('.easy-border-context-map')?.getAttribute('aria-label')).toContain(names[0])
+    expect(document.querySelector('.easy-border-context-map')?.getAttribute('aria-label')).not.toContain(names[1])
+    expect(document.querySelector('.border-question-card--hard.border-question-card--context')).toBeTruthy()
+    expect(document.querySelector('.border-answer-form .border-answer-actions')).toBeTruthy()
+    const input=screen.getByLabelText('Country')
+    fireEvent.change(input,{target:{value:names[1]}}); fireEvent.click(screen.getByRole('button',{name:'Check answer'}))
+    expect(screen.getByRole('button',{name:'Next border'})).toBeTruthy()
+    await waitFor(()=>expect(document.activeElement).toBe(screen.getByRole('button',{name:'Next border'})))
+    fireEvent.click(screen.getByRole('button',{name:'Next border'}))
+    expect(document.querySelector('.score-number')?.textContent).toContain('0correct')
+  })
+  it('keeps one-country reveal idempotent for held keys and repeated pointer activation', () => {
+    render(<BorderCountriesQuiz questionFactory={factory(hard)} />)
+    fireEvent.click(screen.getByLabelText('Hard')); fireEvent.click(screen.getByRole('button', { name: 'Start / restart practice' }))
+    const revealOne=screen.getByRole('button',{name:'Reveal one country'})
+    expect(fireEvent.keyDown(revealOne,{key:'Enter',repeat:true})).toBe(false)
+    fireEvent.click(revealOne,{detail:1}); fireEvent.click(revealOne,{detail:2})
+    expect(screen.getByLabelText('Revealed countries').children).toHaveLength(1)
+    expect(screen.queryByRole('button',{name:'Reveal one country'})).toBeNull()
+  })
+  it('renders visible, non-colour Hard status labels with distinct correct and revealed treatments', () => {
+    render(<BorderCountriesQuiz questionFactory={factory(hard)} />)
+    fireEvent.click(screen.getByLabelText('Hard')); fireEvent.click(screen.getByRole('button', { name: 'Start / restart practice' }))
+    const [first,second]=hard.codes.map(code=>borderEntity(code)!.name)
+    fireEvent.change(screen.getByLabelText('Country'),{target:{value:first}});fireEvent.click(screen.getByRole('button',{name:'Check answer'}))
+    fireEvent.click(screen.getByRole('button',{name:'Reveal one country'}))
+    expect(screen.getByLabelText('Answered countries').textContent).toContain('Correct')
+    expect(screen.getByLabelText('Revealed countries').textContent).toContain(`Revealed`)
+    expect(document.querySelector('.border-revealed-chips')).toBeTruthy()
+    expect(document.querySelector('.easy-border-answer-correct')).toBeTruthy()
+    expect(document.querySelector('.easy-border-answer-revealed')).toBeTruthy()
+    expect(second).toBeTruthy()
+  })
+  it('renders both Hard countries for full Practice reveal but never mounts a map for Timed Hard', () => {
+    const practice=render(<BorderCountriesQuiz questionFactory={factory(hard)} />)
+    fireEvent.click(screen.getByLabelText('Hard')); fireEvent.click(screen.getByRole('button', { name: 'Start / restart practice' }))
+    fireEvent.click(screen.getByRole('button',{name:'Reveal answers'}))
+    expect(screen.getByLabelText('Revealed countries').children).toHaveLength(2)
+    expect(document.querySelector('.easy-border-context-map')?.getAttribute('aria-label')).toContain(borderEntity(hard.codes[0])!.name)
+    practice.unmount()
+    render(<BorderCountriesQuiz questionFactory={factory(hard)} />)
+    fireEvent.click(screen.getByLabelText('Hard')); fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button',{name:'Start timed run'}))
+    expect(document.querySelector('.easy-border-context-map')).toBeNull()
+    expect(screen.queryByRole('button',{name:'Reveal one country'})).toBeNull()
   })
   it('keeps one Hard chip per answer, reports duplicate and known-wrong input, then resolves in either order', async () => {
     for (const names of [hard.codes.map((code) => borderEntity(code)!.name), [...hard.codes].reverse().map((code) => borderEntity(code)!.name)]) {
@@ -277,6 +334,50 @@ describe('BorderCountriesQuiz', () => {
         for (const value of forbidden) expect(token(value).test(attributeValue), `${question.id} leaked ${value} through ${attribute}`).toBe(false)
       }
       view.unmount()
+    }
+  }, 30_000)
+  it('discloses only the earned Hard endpoint across every production pair', () => {
+    const token = (value: string) => new RegExp(`(^|[^\\p{L}\\p{N}])${normalizeAnswer(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^\\p{L}\\p{N}])`, 'iu')
+    for (const question of borderQuestions('hard')) {
+      const view=render(<BorderCountriesQuiz questionFactory={factory(question)} />)
+      const first=borderEntity(question.codes[0])!, unresolved=borderEntity(question.codes[1])!
+      fireEvent.change(screen.getByLabelText('Country'),{target:{value:first.name}});fireEvent.click(screen.getByRole('button',{name:'Check answer'}))
+      const main=screen.getByRole('main')
+      const disclosedLabel=normalizeAnswer(first.name)
+      const forbidden=[unresolved.code,unresolved.name,...unresolved.aliases,...unresolved.abbreviations].filter(value=>!token(value).test(disclosedLabel))
+      for(const value of forbidden) expect(token(value).test(normalizeAnswer(main.textContent??'')),`${question.id} leaked ${value}`).toBe(false)
+      for(const element of main.querySelectorAll('*')) for(const attribute of element.getAttributeNames()) for(const value of forbidden) expect(token(value).test(normalizeAnswer(element.getAttribute(attribute)??'')),`${question.id} leaked ${value} through ${attribute}`).toBe(false)
+      const unresolvedGeometry=JSON.stringify((borderContextGeometry(borderShape(unresolved.code,question.source)!) as { geometry: { coordinates: unknown } }).geometry.coordinates)
+      expect(main.innerHTML,`${question.id} serialized unresolved geometry`).not.toContain(unresolvedGeometry)
+      expect(main.querySelectorAll('[data-properties="{}"]'),question.id).toHaveLength(3)
+      expect(main.querySelectorAll('.easy-border-answer-correct'),question.id).toHaveLength(1)
+      expect(main.querySelectorAll('.easy-border-answer-revealed'),question.id).toHaveLength(0)
+      view.unmount()
+    }
+  }, 30_000)
+  it('keeps the opposite endpoint hidden for both answer orientations and the one-country reveal path across every pair', () => {
+    const token = (value: string) => new RegExp(`(^|[^\\p{L}\\p{N}])${normalizeAnswer(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^\\p{L}\\p{N}])`, 'iu')
+    const assertHidden=(main: HTMLElement, question: BorderQuestion, entityCode: string, disclosedCode: string) => {
+      const entity=borderEntity(entityCode)!, disclosed=borderEntity(disclosedCode)!
+      const values=[entity.code,entity.name,...entity.aliases,...entity.abbreviations].filter(value=>!token(value).test(normalizeAnswer(disclosed.name)))
+      for(const value of values) expect(token(value).test(normalizeAnswer(main.textContent??'')),`${question.id} leaked ${value}`).toBe(false)
+      for(const element of main.querySelectorAll('*')) for(const attribute of element.getAttributeNames()) for(const value of values) expect(token(value).test(normalizeAnswer(element.getAttribute(attribute)??'')),`${question.id} leaked ${value} through ${attribute}`).toBe(false)
+      const geometry=JSON.stringify((borderContextGeometry(borderShape(entity.code,question.source)!) as { geometry: { coordinates: unknown } }).geometry.coordinates)
+      expect(main.innerHTML,`${question.id} serialized unresolved geometry`).not.toContain(geometry)
+    }
+    for(const question of borderQuestions('hard')) {
+      const reverse=render(<BorderCountriesQuiz questionFactory={factory(question)} />)
+      const second=borderEntity(question.codes[1])!
+      fireEvent.change(screen.getByLabelText('Country'),{target:{value:second.name}});fireEvent.click(screen.getByRole('button',{name:'Check answer'}))
+      assertHidden(screen.getByRole('main'),question,question.codes[0],question.codes[1])
+      expect(document.querySelectorAll('.easy-border-answer-correct'),question.id).toHaveLength(1)
+      reverse.unmount()
+
+      const revealed=render(<BorderCountriesQuiz questionFactory={factory(question)} />)
+      fireEvent.click(screen.getByRole('button',{name:'Reveal one country'}))
+      assertHidden(screen.getByRole('main'),question,question.codes[1],question.codes[0])
+      expect(document.querySelectorAll('.easy-border-answer-revealed'),question.id).toHaveLength(1)
+      revealed.unmount()
     }
   }, 30_000)
 })

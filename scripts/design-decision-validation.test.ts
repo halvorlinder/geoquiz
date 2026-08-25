@@ -84,6 +84,32 @@ describe('design-decision validation', () => {
     expect(designDecisionValidationErrors({ root })).toEqual([])
   })
 
+  it('accepts an auditable reciprocal replacement chain after the middle replacement is superseded', () => {
+    const root = fixture()
+    replace(root, 'DD-0003-rendered-browser-design-review.md', 'supersedes: none', 'supersedes: DD-0002')
+    replace(root, 'DD-0003-rendered-browser-design-review.md', 'status: accepted', 'status: superseded')
+    replace(root, 'DD-0003-rendered-browser-design-review.md', 'superseded_by: none', 'superseded_by: DD-0004')
+    replace(root, 'DD-0002-capital-map-viewport-composition.md', 'status: accepted', 'status: superseded')
+    replace(root, 'DD-0002-capital-map-viewport-composition.md', 'superseded_by: none', 'superseded_by: DD-0003')
+    replace(root, 'DD-0004-practice-and-timed-session-behavior.md', 'supersedes: none', 'supersedes: DD-0003')
+    replace(root, 'README.md', '| [DD-0002](DD-0002-capital-map-viewport-composition.md) | Capital-map viewport composition | accepted |', '| [DD-0002](DD-0002-capital-map-viewport-composition.md) | Capital-map viewport composition | superseded |')
+    replace(root, 'README.md', '| [DD-0003](DD-0003-rendered-browser-design-review.md) | Rendered browser review is required for visual acceptance | accepted |', '| [DD-0003](DD-0003-rendered-browser-design-review.md) | Rendered browser review is required for visual acceptance | superseded |')
+    expect(designDecisionValidationErrors({ root })).toEqual([])
+  })
+
+  it('still rejects a rejected record as a replacement in a reciprocal chain', () => {
+    const root = fixture()
+    replace(root, 'DD-0003-rendered-browser-design-review.md', 'supersedes: none', 'supersedes: DD-0002')
+    replace(root, 'DD-0003-rendered-browser-design-review.md', 'status: accepted', 'status: rejected')
+    replace(root, 'DD-0002-capital-map-viewport-composition.md', 'status: accepted', 'status: superseded')
+    replace(root, 'DD-0002-capital-map-viewport-composition.md', 'superseded_by: none', 'superseded_by: DD-0003')
+    replace(root, 'README.md', '| [DD-0002](DD-0002-capital-map-viewport-composition.md) | Capital-map viewport composition | accepted |', '| [DD-0002](DD-0002-capital-map-viewport-composition.md) | Capital-map viewport composition | superseded |')
+    replace(root, 'README.md', '| [DD-0003](DD-0003-rendered-browser-design-review.md) | Rendered browser review is required for visual acceptance | accepted |', '| [DD-0003](DD-0003-rendered-browser-design-review.md) | Rendered browser review is required for visual acceptance | rejected |')
+    const errors = designDecisionValidationErrors({ root })
+    expect(errors).toContain('DD-0003-rendered-browser-design-review.md: only accepted replacement records may supersede another decision')
+    expect(errors).toContain('DD-0002-capital-map-viewport-composition.md: replacement DD-0003 must be accepted or historically superseded')
+  })
+
   it('rejects deleting or renaming a historical decision', () => {
     const root = fixture()
     const historicalFile = 'DD-0001-capital-dots-landing.md'

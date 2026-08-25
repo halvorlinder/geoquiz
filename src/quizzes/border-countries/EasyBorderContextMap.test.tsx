@@ -1,8 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { borderEntity, borderQuestions } from './borderCountries'
+import { borderEntity, borderQuestions, borderShape, type BorderQuestion } from './borderCountries'
 import { normalizeAnswer } from '../../core/answerMatching'
+import { borderContextGeometry } from './borderContextGeometry'
 
 const leaflet = vi.hoisted(() => ({ fitBounds: vi.fn(), stop: vi.fn(), invalidateSize: vi.fn() }))
 vi.mock('react-leaflet', async () => {
@@ -23,6 +24,12 @@ import { EasyBorderContextMap } from './EasyBorderContextMap'
 
 const easy = borderQuestions('easy', 'All', () => 0).find(question => question.codes.join(',') === 'BWA,ZMB')!
 const answerName = borderEntity(easy.answerCode!)!.name
+function countries(question: BorderQuestion, answerStatus?: 'correct'|'revealed') {
+  const known=borderEntity(question.knownCode!)!, knownShape=borderShape(question.knownCode!,question.source)!
+  const answer=answerStatus?borderEntity(question.answerCode!)!:undefined, answerShape=answerStatus?borderShape(question.answerCode!,question.source):undefined
+  return [{ name: known.name, geometry: borderContextGeometry(knownShape), status: 'known' as const }, ...(answer&&answerShape?[{ name:answer.name, geometry:borderContextGeometry(answerShape), status:answerStatus! }]:[])]
+}
+function contextMap(question: BorderQuestion, answerStatus?: 'correct'|'revealed', recenterEpoch=0) { return <EasyBorderContextMap path={question.path} countries={countries(question,answerStatus)} recenterEpoch={recenterEpoch} /> }
 
 beforeEach(() => {
   leaflet.fitBounds.mockClear(); leaflet.stop.mockClear(); leaflet.invalidateSize.mockClear()
@@ -32,7 +39,7 @@ afterEach(() => { Object.defineProperty(window, 'ResizeObserver', { configurable
 
 describe('EasyBorderContextMap', () => {
   it('mounts only property-free known geometry and exact run while unresolved', () => {
-    const { container } = render(<EasyBorderContextMap question={easy} recenterEpoch={0} />)
+    const { container } = render(contextMap(easy))
     expect(screen.getByRole('region', { name: `Border context map for ${borderEntity(easy.knownCode!)!.name}` })).toBeTruthy()
     const map = container.querySelector('.easy-border-context-map')!
     expect(map.getAttribute('role')).toBe('application')
@@ -44,17 +51,17 @@ describe('EasyBorderContextMap', () => {
   })
 
   it('mounts exact answer geometry only after resolution, refits with matching initial options, and recenters', () => {
-    const { container, rerender } = render(<EasyBorderContextMap question={easy} recenterEpoch={0} />)
+    const { container, rerender } = render(contextMap(easy))
     const map = container.querySelector('.easy-border-context-map')!
     const initialBounds = map.getAttribute('data-initial-bounds')
     const initialOptions = JSON.parse(map.getAttribute('data-initial-options') ?? '{}')
     expect(leaflet.fitBounds).toHaveBeenLastCalledWith(JSON.parse(initialBounds!), expect.objectContaining(initialOptions))
     const initialFitCount = leaflet.fitBounds.mock.calls.length
-    rerender(<EasyBorderContextMap question={easy} answerStatus="correct" recenterEpoch={1} />)
+    rerender(contextMap(easy, 'correct', 1))
     expect(leaflet.fitBounds).toHaveBeenCalledTimes(initialFitCount + 1)
     const correct = container.querySelector('.easy-border-answer-correct')!
     expect(correct.getAttribute('data-color')).toBe('#75d4ad'); expect(correct.getAttribute('data-dash')).toBeNull()
-    rerender(<EasyBorderContextMap question={easy} answerStatus="revealed" recenterEpoch={2} />)
+    rerender(contextMap(easy, 'revealed', 2))
     expect(leaflet.fitBounds).toHaveBeenCalledTimes(initialFitCount + 2)
     const revealed = container.querySelector('.easy-border-answer-revealed')!
     expect(revealed.getAttribute('data-color')).toBe('#e08989'); expect(revealed.getAttribute('data-dash')).toBe('6 5')
@@ -65,7 +72,7 @@ describe('EasyBorderContextMap', () => {
 
   it('uses and cleans up the window-resize fallback when ResizeObserver is unavailable', () => {
     const invalidate = leaflet.invalidateSize
-    const { unmount } = render(<EasyBorderContextMap question={easy} recenterEpoch={0} />)
+    const { unmount } = render(contextMap(easy))
     fireEvent(window, new Event('resize'))
     expect(invalidate).toHaveBeenCalledWith({ animate: false, pan: false })
     unmount(); invalidate.mockClear(); fireEvent(window, new Event('resize'))
@@ -82,7 +89,7 @@ describe('EasyBorderContextMap', () => {
       unobserve = vi.fn()
     }
     Object.defineProperty(window, 'ResizeObserver', { configurable: true, value: TestResizeObserver })
-    const { container, unmount } = render(<EasyBorderContextMap question={easy} recenterEpoch={0} />)
+    const { container, unmount } = render(contextMap(easy))
     const map = container.querySelector('.easy-border-context-map')!
     expect(observe).toHaveBeenCalledWith(map)
     fireEvent(window, new Event('resize'))
@@ -95,14 +102,14 @@ describe('EasyBorderContextMap', () => {
 
   it('uses an immediate refit under reduced motion', () => {
     Object.defineProperty(window, 'matchMedia', { configurable: true, value: () => ({ matches: true }) })
-    render(<EasyBorderContextMap question={easy} recenterEpoch={0} />)
+    render(contextMap(easy))
     expect(leaflet.fitBounds).toHaveBeenLastCalledWith(expect.any(Array), expect.objectContaining({ animate: false }))
   })
 
   it('keeps all 634 unresolved Easy answer identities out of text, attributes, and map properties', () => {
     const token = (value: string) => new RegExp(`(^|[^\\p{L}\\p{N}])${normalizeAnswer(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^\\p{L}\\p{N}])`, 'iu')
     for (const random of [() => 0, () => .99]) for (const question of borderQuestions('easy', 'All', random)) {
-      const view = render(<EasyBorderContextMap question={question} recenterEpoch={0} />)
+      const view = render(contextMap(question))
       const answer = borderEntity(question.answerCode!)!
       const knownLabel = normalizeAnswer(borderEntity(question.knownCode!)!.name)
       // A few curated alternate names are literal substrings of the intentionally

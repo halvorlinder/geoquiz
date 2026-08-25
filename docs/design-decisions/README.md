@@ -71,8 +71,10 @@ paraphrase user direction rather than copying private conversation.
 | [DD-0017](DD-0017-high-fidelity-microstate-silhouettes.md) | High-fidelity microstate silhouettes | accepted | country silhouettes, microstate geometry, boundary attribution |
 | [DD-0018](DD-0018-non-disclosing-shape-attribution.md) | Shape attribution is local and non-disclosing | accepted | country silhouettes, boundary attribution, unresolved challenges |
 | [DD-0019](DD-0019-overlay-quiz-menu.md) | Overlay quiz menu retains the active exercise | accepted | app shell, routing, quiz navigation, responsive layout |
-| [DD-0020](DD-0020-study-quiz-layout-and-keyboard-flow.md) | Study quiz layout and keyboard flow | accepted | country-capital, shape-capital, shape-high-point, flag-country, responsive layout, keyboard interaction |
+| [DD-0020](DD-0020-study-quiz-layout-and-keyboard-flow.md) | Study quiz layout and keyboard flow | superseded | country-capital, shape-capital, shape-high-point, flag-country, responsive layout, keyboard interaction |
 | [DD-0021](DD-0021-progressive-neighbour-map.md) | Practice progressively builds a target-focused neighbour map | accepted | shape-neighbours quiz, practice aids, country-shape map rendering, responsive map viewport |
 | [DD-0022](DD-0022-curated-country-abbreviations.md) | Curated country abbreviations are exact-only shared answers | accepted | entity catalog, shape-neighbours, flag-country, answer matching |
 | [DD-0024](DD-0024-border-image-quiz.md) | Country-border image quiz | superseded | quiz menu, border image quiz, local border geometry, answer interaction |
-| [DD-0025](DD-0025-border-context-map.md) | Easy border context map | accepted | border image quiz, Easy border rendering, local map interaction |
+| [DD-0025](DD-0025-border-context-map.md) | Easy border context map | superseded | border image quiz, Easy border rendering, local map interaction |
+| [DD-0026](DD-0026-hard-border-practice-disclosure.md) | Hard border Practice progressive disclosure | accepted | border image quiz, Easy and Hard border rendering, local map interaction, Practice disclosure |
+| [DD-0027](DD-0027-fixed-viewport-site-layout.md) | Fixed-viewport site layout and keyboard flow | accepted | all routes, responsive layout, overlay quiz menu, keyboard interaction |
