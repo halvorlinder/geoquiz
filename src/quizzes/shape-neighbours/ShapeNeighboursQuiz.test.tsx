@@ -12,6 +12,7 @@ vi.mock('./NeighbourProgressMap', () => ({
 const catalog = shapeNeighboursQuestions()
 const q = (code: string) => catalog.find((question) => question.entity.code === code)!
 const afghanistan = q('AFG'), niger = q('NER'), guinea = q('GIN')
+const brazil = q('BRA'), china = q('CHN'), russia = q('RUS')
 const liechtenstein = q('LIE')
 const factory = (...items: ShapeNeighboursQuestion[]) => () => items
 const small = (question: ShapeNeighboursQuestion, codes: readonly string[]): ShapeNeighboursQuestion => ({ ...question, neighbourCodes: codes })
@@ -25,6 +26,23 @@ function assertAbsent(container: HTMLElement, values: readonly string[]) { const
 afterEach(() => { vi.restoreAllMocks(); vi.useRealTimers(); window.localStorage.clear() })
 
 describe('ShapeNeighboursQuiz', () => {
+  it('uses the DEV-only China fixture only without an injected question factory', () => {
+    vi.useFakeTimers()
+    const original = window.location.hash
+    try {
+      window.location.hash = '#/shape-neighbours?qa=china'
+      const fixtureView = render(<ShapeNeighboursQuiz />)
+      expect(screen.getByText('14 remaining')).toBeTruthy()
+      fireEvent.click(screen.getByRole('switch', { name: 'Neighbour map' }))
+      expect(screen.getByLabelText('Neighbour study map')).toBeTruthy()
+      fixtureView.unmount()
+
+      render(<ShapeNeighboursQuiz questionFactory={factory(afghanistan)} />)
+      expect(document.querySelector('.shape-neighbours-card--dense-roster')).toBeNull()
+      expect(screen.getByText(/remaining/, { selector: 'strong' }).textContent).toBe(`${afghanistan.neighbourCodes.length} remaining`)
+    } finally { window.location.hash = original }
+  })
+
   it('has no unresolved target or answer leakage across all 157 production questions', () => {
     for (const question of catalog) {
       const { container, unmount } = render(<ShapeNeighboursQuiz questionFactory={factory(question)} />)
@@ -47,6 +65,7 @@ describe('ShapeNeighboursQuiz', () => {
     expect(screen.queryByLabelText('Neighbour study map')).toBeNull()
     fireEvent.click(toggle)
     expect(toggle.getAttribute('aria-checked')).toBe('true')
+    expect(document.querySelector('.shape-neighbours-card--map.shape-neighbours-card--practice')).toBeTruthy()
     expect(screen.getByLabelText('Neighbour study map').getAttribute('data-layers')).toBe('')
     practice('China')
     expect(screen.getByLabelText('Neighbour study map').getAttribute('data-layers')).toBe('found')
@@ -73,6 +92,7 @@ describe('ShapeNeighboursQuiz', () => {
     render(<ShapeNeighboursQuiz questionFactory={factory(afghanistan)} />)
     fireEvent.click(screen.getByLabelText('Timed'))
     fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+    expect(document.querySelector('.shape-neighbours-card--silhouette.shape-neighbours-card--timed')).toBeTruthy()
     expect(screen.queryByRole('switch', { name: 'Neighbour map' })).toBeNull()
     expect(screen.queryByLabelText('Neighbour study map')).toBeNull()
   })
@@ -101,8 +121,80 @@ describe('ShapeNeighboursQuiz', () => {
   it('reveals a partial practice prompt exactly once with red state and deliberate Next', () => {
     vi.useFakeTimers(); const { container } = render(<ShapeNeighboursQuiz questionFactory={factory(afghanistan)} />)
     practice('China'); fireEvent.click(screen.getByRole('button', { name: 'Reveal answers' })); flush()
-    expect(container.querySelector('.neighbours-revealed')).toBeTruthy(); expect(container.textContent).toContain('Afghanistan'); expect(screen.getByRole('list', { name: 'Revealed neighbours' }).children).toHaveLength(5); expect(document.activeElement).toBe(screen.getByRole('button', { name: /Next country/ }))
+    expect(container.querySelector('.neighbours-revealed.shape-neighbours-card--resolved.shape-neighbours-card--revealed')).toBeTruthy(); expect(container.textContent).toContain('Afghanistan'); expect(screen.getByRole('list', { name: 'Revealed neighbours' }).children).toHaveLength(5); expect(document.activeElement).toBe(screen.getByRole('button', { name: /Next country/ }))
     fireEvent.click(screen.getByRole('button', { name: /Next country/ })); flush(); expect(screen.getByRole('heading', { name: 'Deck complete' })).toBeTruthy()
+  })
+
+  it('keeps dense and non-dense map-off partial and reveal states complete for the desktop silhouette budget', () => {
+    vi.useFakeTimers()
+    const brazilView = render(<ShapeNeighboursQuiz questionFactory={factory(brazil)} />)
+    expect(brazilView.container.querySelector('.shape-neighbours-card--silhouette')).toBeTruthy()
+    practice(answerNames(brazil)[0])
+    expect(brazilView.container.querySelector('.shape-neighbours-card--silhouette.shape-neighbours-card--partial')).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Check answer' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Reveal answers' })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Reveal answers' })); flush()
+    expect(screen.getByRole('list', { name: 'Answered neighbours' }).children).toHaveLength(1)
+    expect(screen.getByRole('list', { name: 'Revealed neighbours' }).children).toHaveLength(9)
+    expect(screen.getByRole('button', { name: /Next country/ })).toBeTruthy()
+    brazilView.unmount()
+
+    const chinaView = render(<ShapeNeighboursQuiz questionFactory={factory(china)} />)
+    answerNames(china).slice(0, 13).forEach(practice)
+    expect(chinaView.container.querySelector('.shape-neighbours-card--silhouette.shape-neighbours-card--dense-roster.shape-neighbours-card--partial')).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Check answer' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Reveal answers' })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Reveal answers' })); flush()
+    expect(screen.getByRole('list', { name: 'Answered and revealed neighbours' }).children).toHaveLength(14)
+    expect(screen.getByRole('button', { name: /Next country/ })).toBeTruthy()
+    chinaView.unmount()
+
+    const russiaView = render(<ShapeNeighboursQuiz questionFactory={factory(russia)} />)
+    answerNames(russia).forEach(practice)
+    expect(russiaView.container.querySelector('.shape-neighbours-card--silhouette.shape-neighbours-card--dense-roster.neighbours-correct')).toBeTruthy()
+    expect(screen.getByRole('list', { name: 'Answered neighbours' }).children).toHaveLength(14)
+    expect(screen.getByRole('button', { name: /Next country/ })).toBeTruthy()
+  })
+
+  it('uses production-derived dense roster states for China and Russia without losing map controls or answer chips', () => {
+    vi.useFakeTimers()
+    expect(china.neighbourCodes).toHaveLength(14)
+    expect(russia.neighbourCodes).toHaveLength(14)
+
+    const chinaView = render(<ShapeNeighboursQuiz questionFactory={factory(china)} />)
+    fireEvent.click(screen.getByRole('switch', { name: 'Neighbour map' }))
+    answerNames(china).slice(0, 13).forEach(practice)
+    expect(chinaView.container.querySelector('.shape-neighbours-card--dense-roster.shape-neighbours-card--partial.shape-neighbours-card--map')).toBeTruthy()
+    expect(screen.getByRole('list', { name: 'Answered neighbours' }).children).toHaveLength(13)
+    expect(screen.getByLabelText('Neighbour study map')).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Recenter target' })).toBeTruthy()
+    expect(screen.getByRole('status')).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Check answer' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Reveal answers' })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Reveal answers' })); flush()
+    expect(chinaView.container.querySelector('.shape-neighbours-card--dense-roster.shape-neighbours-card--resolved.shape-neighbours-card--revealed')).toBeTruthy()
+    const mixed = screen.getByRole('list', { name: 'Answered and revealed neighbours' })
+    expect(mixed.children).toHaveLength(14)
+    expect(screen.queryByRole('list', { name: 'Answered neighbours' })).toBeNull()
+    expect(screen.queryByRole('list', { name: 'Revealed neighbours' })).toBeNull()
+    expect(screen.getByText('✓ Correct')).toBeTruthy()
+    expect(screen.getByText('Dashed Revealed')).toBeTruthy()
+    expect(mixed.querySelectorAll('.neighbour-answer--correct')).toHaveLength(13)
+    expect(mixed.querySelectorAll('.neighbour-answer--revealed')).toHaveLength(1)
+    expect(Array.from(mixed.children).filter((chip) => chip.getAttribute('aria-label')?.endsWith('Correct'))).toHaveLength(13)
+    expect(Array.from(mixed.children).filter((chip) => chip.getAttribute('aria-label')?.endsWith('Revealed'))).toHaveLength(1)
+    expect(screen.getByRole('button', { name: /Next country/ })).toBeTruthy()
+    chinaView.unmount()
+
+    const russiaView = render(<ShapeNeighboursQuiz questionFactory={factory(russia)} />)
+    fireEvent.click(screen.getByRole('switch', { name: 'Neighbour map' }))
+    answerNames(russia).forEach(practice)
+    expect(russiaView.container.querySelector('.shape-neighbours-card--dense-roster.shape-neighbours-card--resolved.neighbours-correct')).toBeTruthy()
+    expect(screen.getByRole('list', { name: 'Answered neighbours' }).children).toHaveLength(14)
+    expect(screen.getByLabelText('Neighbour study map')).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Recenter target' })).toBeTruthy()
+    expect(screen.getByRole('status')).toBeTruthy()
+    expect(screen.getByRole('button', { name: /Next country/ })).toBeTruthy()
   })
 
   it('preserves timed found and typed state across circular and one-pending skips', () => {

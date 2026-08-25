@@ -72,6 +72,13 @@ function storage(): ScoreboardStorage | undefined {
   }
 }
 
+/** Direct Chrome-only QA fixture; production builds erase this branch. */
+function developmentFixture(entities: readonly StudyEntity[]) {
+  if (!import.meta.env.DEV) return undefined;
+  if (window.location.hash.split("?")[1] !== "qa=colombia") return undefined;
+  return shapeHighPointQuestions(entities).find((question) => question.entity.code === "COL");
+}
+
 function Timer({ session }: { session: TimedSession }) {
   const [now, setNow] = useState(() => performance.now());
   const complete = isTimedSessionComplete(session);
@@ -104,12 +111,15 @@ export function ShapeHighPointQuiz({
   corpus = allHighPoints(),
 }: ShapeHighPointQuizProps) {
   const entities = suppliedEntities ?? studyEntities;
+  const fixture = questionFactory ? undefined : developmentFixture(entities);
   const questionsFor = useCallback(
     (continent: HighPointContinent) =>
-      questionFactory
+      fixture
+        ? [fixture]
+        : questionFactory
         ? questionFactory(continent)
         : shapeHighPointQuestions(entities, continent),
-    [entities, questionFactory],
+    [entities, fixture, questionFactory],
   );
   const allQuestions = useMemo(() => questionsFor("All"), [questionsFor]);
   const [draft, setDraft] = useState<Config>({
@@ -534,7 +544,7 @@ export function ShapeHighPointQuiz({
       </header>
       {setup}
       <section
-        className={`country-capital-card shape-high-point-card ${state.resolved ? `high-point-${state.resolved}` : ""}`}
+        className={`country-capital-card shape-high-point-card ${state.resolved ? `shape-high-point-card--resolved high-point-${state.resolved}` : ""}`}
         aria-labelledby="shape-high-point-question"
       >
         <p className="eyebrow">
@@ -698,7 +708,7 @@ function RevealDetails({ question }: { question: ShapeHighPointQuestion }) {
         <dd>{question.highPoint.coordinateConfidence}</dd>
       </div>
       {question.highPoint.note && (
-        <div>
+        <div className="high-point-note">
           <dt>Note</dt>
           <dd>{question.highPoint.note}</dd>
         </div>

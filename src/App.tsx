@@ -56,7 +56,7 @@ export function App() {
   const chooseQuiz = (item: Readonly<{ route: Exclude<AppRoute, 'not-found'>; hash: string }>) => { setMenuOpen(false); window.location.hash = item.hash }
 
   const isStudyQuiz = route === 'country-capital' || route === 'shape-capital' || route === 'shape-high-point' || route === 'flag-country' || route === 'border-countries'
-  return <div className={`app-frame${route === 'capital-map' ? ' capital-map-frame' : ''}${isStudyQuiz ? ' study-quiz-frame' : ''}`}>
+  return <div className={`app-frame${route === 'capital-map' ? ' capital-map-frame' : ''}${route === 'shape-neighbours' ? ' shape-neighbours-frame' : ''}${isStudyQuiz ? ' study-quiz-frame' : ''}`}>
     <nav className="quiz-route-nav" aria-label="Quiz navigation"><button ref={menuOpenerRef} className="quiz-menu-trigger" type="button" onClick={openMenu}>All quizzes</button></nav>
     {route === 'not-found' ? <NotFound onOpenMenu={openMenu} /> :
     <Suspense fallback={<main className="app-shell"><p className="feedback" role="status">Loading quiz…</p></main>}>

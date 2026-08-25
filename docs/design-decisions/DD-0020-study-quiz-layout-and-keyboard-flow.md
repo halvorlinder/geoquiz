@@ -1,11 +1,11 @@
 ---
 id: DD-0020
 title: Study quiz layout and keyboard flow
-status: accepted
+status: superseded
 date: 2026-08-24
 applies_to: country-capital, shape-capital, shape-high-point, flag-country, responsive layout, keyboard interaction
 supersedes: none
-superseded_by: none
+superseded_by: DD-0027
 ---
 
 # DD-0020: Study quiz layout and keyboard flow

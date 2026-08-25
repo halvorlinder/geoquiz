@@ -1,11 +1,11 @@
 ---
 id: DD-0025
 title: Easy border context map
-status: accepted
+status: superseded
 date: 2026-08-24
 applies_to: border image quiz, Easy border rendering, local map interaction
 supersedes: DD-0024
-superseded_by: none
+superseded_by: DD-0026
 ---
 
 # DD-0025: Easy border context map

@@ -9,29 +9,27 @@ describe('viewport layout stylesheet contract', () => {
     expect(styles).toContain('.quiz-menu-dialog { width: min(760px, calc(100vw - 40px));')
     expect(styles).toContain('.quiz-menu-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));')
     expect(styles).toContain('.quiz-menu-item[aria-current="page"]')
-    expect(styles).toContain('.quiz-menu-dialog { inset: auto 0 0; width: 100%; max-height: 100dvh;')
-    expect(styles).toContain('.quiz-menu-list { grid-template-columns: 1fr; }')
+    expect(styles).toContain('.quiz-menu-dialog { inset: auto 0 0; width: 100%; height: 100dvh; max-height: 100dvh; min-height: 0; margin: 0; overflow: hidden;')
+    expect(styles).toContain('.quiz-menu-list { grid-template-columns: 1fr; grid-template-rows: repeat(7, minmax(0, 1fr));')
     expect(styles).toContain('inset: auto 0 0')
   })
 
-  it('scopes the calm two-column study layout and mobile scrolling to the four non-map study quizzes', () => {
+  it('scopes the calm two-column study layout and fixed viewport composition to study quizzes', () => {
     expect(styles).toContain('@media (min-width: 900px)')
     expect(styles).toContain('.study-quiz-frame > .quiz-active-shell { display: grid; grid-template-columns: minmax(260px, .62fr) minmax(500px, 1.38fr);')
     expect(260 + 500 + 28).toBeLessThanOrEqual(900 - 32)
-    expect(styles).toContain('.study-quiz-frame { overflow-y: auto; }')
+    expect(styles).toContain('.study-quiz-frame { overflow: hidden; }')
     expect(styles).toContain('.study-quiz-frame:has(dialog[open]) { overflow: hidden; }')
-    expect(styles).toContain('.study-quiz-frame .shape-capital-visual { flex: 0 0 clamp(150px, 43vw, 220px);')
+    expect(styles).toContain('.study-quiz-frame .shape-capital-visual { flex: 1 1 110px; min-height: 76px; max-height: 150px;')
   })
 
-  it('keeps flag media intrinsically sized from its cap, padding, and borders without inheriting silhouette rules', () => {
+  it('scales flag media inside every capped visual instead of letting intrinsic flags cover the prompt', () => {
     const flagRule = styles.match(/\.flag-country-image\s*\{([^}]*)\}/)?.[1]
     expect(flagRule).toContain('max-height: 220px')
     const imageCap = Number(flagRule?.match(/max-height:\s*(\d+)px/)?.[1])
     expect(imageCap).toBe(220)
 
-    const imageCapOverrides = styles.slice(styles.indexOf('.flag-country-image {') + '.flag-country-image {'.length)
-      .match(/\.flag-country-image\s*\{[^}]*max-height:/g) ?? []
-    expect(imageCapOverrides).toHaveLength(0)
+    expect(styles).toContain('.study-quiz-frame .flag-country-visual .flag-country-image { width: auto; max-width: 100%; height: 100%; max-height: 100%; min-height: 0; }')
     expect(styles).toContain('.shape-capital-silhouette { max-height: 100%; }')
     expect(styles).not.toMatch(/\.shape-capital-silhouette\s*,\s*\.flag-country-image\s*\{[^}]*max-height:/)
 
@@ -47,12 +45,15 @@ describe('viewport layout stylesheet contract', () => {
 
     expect(tabletFlagRule).toContain('flex: 0 0 auto')
     expect(tabletFlagRule).toContain(`min-block-size: calc(${imageCap}px + ${2 * tabletPadding}px + ${2 * border}px)`)
-    expect(mobileFlagRule).toContain('flex: 0 0 auto')
-    expect(mobileFlagRule).toContain(`min-block-size: calc(${imageCap}px + ${2 * mobilePadding}px + ${2 * border}px)`)
+    expect(mobileFlagRule).toContain('flex: 1 1 110px')
+    expect(mobileFlagRule).toContain('min-block-size: 76px')
     expect(imageCap + 2 * tabletPadding + 2 * border).toBe(246)
-    expect(imageCap + 2 * mobilePadding + 2 * border).toBe(250)
+    expect(76).toBeLessThan(imageCap + 2 * mobilePadding + 2 * border)
+    // The mobile visual has a 76px minimum and 20px of chrome; the image is
+    // explicitly constrained to that remaining track rather than its 220px cap.
+    expect(76 - 2 * 10 - 2 * border).toBe(54)
     expect(tabletStyles).toContain('.study-quiz-frame .shape-capital-visual { flex: 0 0 clamp(180px, 30vw, 240px); min-height: 180px; max-height: none; }')
-    expect(mobileStyles).toContain('.study-quiz-frame .shape-capital-visual { flex: 0 0 clamp(150px, 43vw, 220px); min-height: 150px; max-height: none; padding: 14px; }')
+    expect(mobileStyles).toContain('.study-quiz-frame .shape-capital-visual { flex: 1 1 110px; min-height: 76px; max-height: 150px; padding: 10px; }')
     expect(tabletStyles).not.toMatch(/\.shape-capital-visual\s*,\s*\.study-quiz-frame \.flag-country-visual/)
     expect(mobileStyles).not.toMatch(/\.shape-capital-visual\s*,\s*\.study-quiz-frame \.flag-country-visual/)
   })
@@ -135,9 +136,51 @@ describe('viewport layout stylesheet contract', () => {
     expect(styles).toContain('@media (prefers-reduced-motion: reduce) { .easy-border-answer { animation: none; } }')
   })
 
-  it('keeps the desktop Easy border map intrinsic inside its border-only card and separates the source link', () => {
-    expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card { align-self: start; height: auto; }')
-    expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card .easy-border-context-shell { flex: 0 0 auto; min-height: 313px; }')
-    expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card .border-source { flex: 0 0 auto; margin-top: 12px; }')
+  it('caps the desktop border map inside the fixed viewport card and separates the source link', () => {
+    expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card { align-self: stretch; height: 100%; }')
+    expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card .easy-border-context-shell { flex: 1 1 220px; min-height: 150px; }')
+    expect(styles).toContain('.study-quiz-frame > .border-quiz-shell > .border-question-card .border-source { flex: 0 0 auto; margin-top: 8px; }')
+    expect(styles).toContain('.easy-border-context-shell { position: relative; display: grid; grid-template-rows: minmax(110px, 1fr) auto;')
+    expect(styles).toContain('.easy-border-context-map { min-height: 0; height: 100%;')
+    expect(styles).toContain('.easy-border-map-controls { position: absolute; z-index: 500;')
+    expect(styles).toContain('.border-question-card .easy-border-context-shell { flex: 1 1 170px; min-height: 170px; }')
+  })
+
+  it('gives Border its own 390x844 action/media budget for initial and disclosed states', () => {
+    expect(styles).toContain('.border-quiz-shell > .border-question-card .easy-border-context-shell { flex: 1 1 164px; min-height: 164px; }')
+    expect(styles).toContain('.border-quiz-shell > .border-question-card .easy-border-map-controls { right: 5px; bottom: 26px;')
+    expect(styles).toContain('.border-quiz-shell > .border-question-card .border-answer-actions { flex-flow: row wrap; align-items: center; gap: 2px 12px; min-height: 38px; }')
+    expect(styles).toContain('.border-quiz-shell > .border-question-card .border-answer-actions .primary-button { width: auto; min-height: 38px;')
+    expect(styles).toContain('card has at least 544px')
+    const shared = 164 + 20 + 29 + 24 + 96 + 24 + 20
+    const cardTracks = {
+      easyInitial: shared,
+      hardInitial: shared + 38,
+      oneRevealed: shared + 52 + 38,
+      mixedOrFullCorrect: shared + 52 + 38,
+      fullReveal: shared + 52 + 38,
+    }
+    expect(Object.values(cardTracks).every((track) => track < 544)).toBe(true)
+    expect(styles).not.toContain('.border-quiz-shell > .setup-card .setup-note { display: none; }')
+  })
+
+  it('keeps the multi-section map overlay touchable without colliding with zoom or its hint row', () => {
+    expect(styles).toContain('.border-image-hard > svg { width: min(76%, 350px); }')
+    expect(styles).toContain('.border-quiz-shell > .border-question-card .easy-border-map-controls .text-button { min-height: 32px;')
+    // 164px shell: 26px reserved hint/offset + 32px controls leaves the
+    // controls starting at y=106; Leaflet's two 31px zoom buttons from y=10
+    // end at y=72, so both one-row controls remain distinct and usable.
+    const shell=164, controlsBottom=26, controlsHeight=32, zoomTop=10, zoomHeight=62
+    expect(shell-controlsBottom-controlsHeight).toBeGreaterThan(zoomTop+zoomHeight)
+  })
+
+  it('keeps resolved high-point facts in a compact no-scroll mobile fact strip', () => {
+    expect(styles).toContain('.shape-high-point-card--resolved .high-point-reveal-details { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; margin-bottom: 4px; }')
+    expect(styles).toContain('.shape-high-point-card--resolved .high-point-reveal-details .high-point-note { grid-column: 1 / -1; }')
+    expect(styles).toContain('.shape-high-point-card--resolved .country-capital-actions .primary-button { width: auto; min-height: 36px;')
+  })
+
+  it('does not introduce app-owned scroll containers', () => {
+    expect(styles).not.toMatch(/overflow-(?:x|y):\s*(?:auto|scroll)/)
   })
 })

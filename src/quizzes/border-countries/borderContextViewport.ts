@@ -52,7 +52,7 @@ export function borderContextScreenSpan(path: readonly BorderPosition[], focus: 
 }
 
 /** A stable, line-first frame. It intentionally never expands to the known-country silhouette. */
-export function selectedBorderFocus(path: readonly BorderPosition[]): BorderContextFocus {
+function focusForPositions(path: readonly BorderPosition[], requireScreenFloor: boolean): BorderContextFocus {
   if (
     path.length < 2 ||
     path.some(([longitude, latitude]) => !Number.isFinite(longitude) || !Number.isFinite(latitude) || Math.abs(latitude) > WEB_MERCATOR_LIMIT) ||
@@ -79,6 +79,15 @@ export function selectedBorderFocus(path: readonly BorderPosition[]): BorderCont
   ] as [number, number, number, number])
   const base = Object.freeze({ bounds, maxZoom: MAX_ZOOM, padding: Object.freeze([BORDER_CONTEXT_MAP_PADDING, BORDER_CONTEXT_MAP_PADDING] as [number, number]) })
   const minimumScreenSpan = Math.min(...BORDER_CONTEXT_MAP_WIDTHS.map(width => borderContextScreenSpan(path, base as BorderContextFocus, width)))
-  if (minimumScreenSpan < SCREEN_SPACE_FLOOR) throw new Error('Selected run cannot meet the 96px local-map floor with the canonical Leaflet fit.')
+  if (requireScreenFloor && minimumScreenSpan < SCREEN_SPACE_FLOOR) throw new Error('Selected run cannot meet the 96px local-map floor with the canonical Leaflet fit.')
   return Object.freeze({ ...base, minimumScreenSpan })
+}
+/** A stable line-first frame for one independently selectable section. */
+export function selectedBorderFocus(path: readonly BorderPosition[]): BorderContextFocus { return focusForPositions(path,true) }
+/** A union frame for every independently mounted run. It intentionally does
+ * not require every distant tiny section to meet the single-run screen floor;
+ * the map's Focus next section control restores that local fit. */
+export function allBorderRunsFocus(runs: readonly (readonly BorderPosition[])[]): BorderContextFocus {
+  if(!runs.length)throw new Error('Border context requires at least one selected run.')
+  return focusForPositions(runs.flat(),false)
 }

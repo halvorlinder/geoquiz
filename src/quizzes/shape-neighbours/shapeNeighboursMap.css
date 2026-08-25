@@ -1,8 +1,8 @@
 .shape-neighbours-card { display: grid; gap: 0; }
-.shape-neighbours-shell.quiz-active-shell { min-height: 0; overflow-x: hidden; overflow-y: auto; align-content: start; scroll-padding-block: 18px; overscroll-behavior: contain; }
+.shape-neighbours-shell.quiz-active-shell { min-height: 0; overflow: hidden; align-content: start; }
 /* Override the shared active-shell card rule: a neighbour map card is an
    intrinsic grid item, not the fixed-height flex panel used by compact quizzes. */
-.shape-neighbours-shell.quiz-active-shell > .shape-neighbours-card { display: grid; align-self: start; height: auto; min-height: 0; overflow: visible; }
+.shape-neighbours-shell.quiz-active-shell > .shape-neighbours-card { display: grid; align-self: stretch; height: 100%; min-height: 0; }
 .shape-neighbours-card .shape-capital-visual { margin-bottom: 12px; }
 .neighbour-progress-map-shell { position: relative; min-height: clamp(230px, 34vw, 370px); margin: 0 0 12px; overflow: hidden; border: 1px solid #3c5b86; border-radius: 14px; background: radial-gradient(circle at 50% 45%, #243f68, #101e33 72%); }
 .neighbour-progress-map { min-height: clamp(230px, 34vw, 370px); background: transparent; }
@@ -13,11 +13,124 @@
 .neighbour-map-attribution a { color: #b9d3ff; text-underline-offset: 2px; }
 .neighbour-map-layer { animation: neighbour-map-enter 420ms ease-out both; transform-box: fill-box; transform-origin: center; }
 .neighbour-map-layer-revealed { stroke-dasharray: 4 3; }
+.neighbour-answer-legend { display: inline-flex; gap: 6px; color: #c4d4ed; font-size: .72rem; font-weight: 800; line-height: 1.15; }
+.neighbour-answer-list--mixed .neighbour-answer--correct { border-color: #438c72; background: #17382f; color: #d9fff0; }
+.neighbour-answer-list--mixed .neighbour-answer--revealed { border-color: #a85d5a; border-style: dashed; background: #442b32; color: #ffb9ab; }
 .shape-neighbours-aid { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 12px; padding: 9px 11px; border: 1px solid #36547e; border-radius: 11px; background: #101e33; }
 .shape-neighbours-aid-copy { margin: 0; color: #c4d4ed; font-size: .82rem; line-height: 1.35; }
 .shape-neighbours-aid button { flex: 0 0 auto; }
 .shape-neighbours-recenter { margin: -4px 0 12px; justify-self: start; }
 @keyframes neighbour-map-enter { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
 @media (prefers-reduced-motion: reduce) { .neighbour-map-layer { animation: none; } }
+/* The desktop neighbour exercise is a rail/card study composition. It is kept
+   separate from `.study-quiz-frame` so the established <=620px fixed tracks
+   and the Capital dots frame are untouched. */
+@media (min-width: 900px) {
+  .shape-neighbours-frame > .shape-neighbours-shell { width: min(1180px, calc(100% - 32px)); display: grid; grid-template-columns: minmax(260px, .62fr) minmax(500px, 1.38fr); grid-template-rows: auto minmax(0, 1fr); align-items: start; height: 100%; min-height: 0; gap: 14px 28px; padding-block: clamp(14px, 2.5vh, 28px); }
+  .shape-neighbours-frame > .shape-neighbours-shell > .masthead { grid-column: 1 / -1; align-items: center; padding-bottom: 4px; border-bottom: 1px solid #2b456d; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .setup-card { grid-column: 1; align-self: start; grid-template-columns: 1fr; padding: 12px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .setup-card > label, .shape-neighbours-frame > .shape-neighbours-shell > .setup-card > select, .shape-neighbours-frame > .shape-neighbours-shell > .setup-card .secondary-button { grid-column: 1; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card { grid-column: 2; display: flex; flex-direction: column; align-self: stretch; width: 100%; height: 100%; min-height: 0; padding: clamp(18px, 2.4vw, 30px); }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card--silhouette .shape-capital-visual { flex: 1 1 150px; min-height: 150px; max-height: 180px; margin-bottom: 8px; padding: 10px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card--silhouette .country-shape-attribution { margin: -2px 0 6px; }
+  /* The 1440x900 card track is 729px. In the longest map-on card its fixed
+     stack is 36 padding + 17 eyebrow + 32 aid + 156 map/margin + 42 recenter
+     + 35 heading + 24 instruction + 25 progress + 27 target/key + 110 four
+     mixed-chip rows + 98 disabled-form/status + 38 Next = 640px. A 150px
+     Leaflet track is still useful on desktop and leaves 89px for real font
+     metrics, wrapping, and the partial/correct variants instead of clipping
+     them behind the fixed shell. */
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card--map { padding: 18px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .eyebrow { margin-bottom: 2px; font-size: .72rem; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .shape-neighbours-aid { gap: 8px; margin: 0 0 6px; padding: 6px 8px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .shape-neighbours-aid-copy { font-size: .76rem; line-height: 1.2; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .map-layer-switch { padding: 5px 8px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card--map .neighbour-progress-map-shell { flex: 1 1 150px; min-height: 150px; margin-bottom: 6px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card--map .neighbour-progress-map { min-height: 150px; height: 100%; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card--map .shape-neighbours-recenter { min-height: 36px; margin: 0 0 6px; padding: 7px 10px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card h2 { margin-bottom: 3px; font-size: 1.35rem; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .country-capital-instruction { margin-bottom: 6px; font-size: .9rem; line-height: 1.25; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .neighbour-progress { margin-bottom: 6px; font-size: .8rem; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .neighbour-answer-list { grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); gap: 4px; margin-bottom: 6px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .neighbour-answer-list li { padding: 4px 6px; font-size: .78rem; line-height: 1.16; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .neighbour-answer-list--mixed { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card--dense-roster .neighbour-answer-list:not(.neighbour-answer-list--mixed) { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card--dense-roster .neighbour-answer-list:not(.neighbour-answer-list--mixed) li { padding: 4px 6px; font-size: .78rem; line-height: 1.16; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .country-capital-reveal-entity { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; font-size: .9rem; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .neighbour-answer-legend { font-size: .68rem; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card form label { margin-bottom: 3px; font-size: .8rem; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card form input { min-height: 40px; margin-bottom: 4px; padding: 8px 10px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .feedback { min-height: 24px; margin: 5px 0; font-size: .82rem; line-height: 1.25; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .primary-button { min-height: 38px; padding: 8px 11px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .country-capital-actions { min-height: 30px; margin-top: 2px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .text-button { min-height: 30px; padding: 5px 0; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .timed-actions { gap: 8px; }
+  .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card .timed-actions .secondary-button { min-height: 36px; padding: 7px 10px; }
+}
 @media (min-width: 621px) and (max-height: 920px) { .neighbour-progress-map-shell, .neighbour-progress-map { min-height: 260px; } }
-@media (max-width: 620px) { .neighbour-progress-map-shell, .neighbour-progress-map { min-height: 250px; } .neighbour-map-attribution { max-width: calc(100% - 20px); } .neighbour-map-hint { display: none; } .shape-neighbours-aid { align-items: flex-start; flex-direction: column; } }
+@media (min-width: 900px) and (max-height: 920px) { .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card--map .neighbour-progress-map-shell, .shape-neighbours-frame > .shape-neighbours-shell > .shape-neighbours-card--map .neighbour-progress-map { min-height: 150px; } }
+@media (max-width: 620px) {
+  .shape-neighbours-shell.quiz-active-shell { grid-template-rows: auto auto minmax(0, 1fr); gap: 6px; padding-block: 6px; }
+  /* Dense 390x844 partial budget: 32 route-nav + 12 shell padding + 12 shell
+     gaps + 42 masthead + 168 setup leaves 578px for the card.  Its 20 padding
+     + 13 eyebrow + 30 aid + 174 map/attribution + 26 recenter + 64 textual
+     rows + 120 (three long-name partial-chip rows) + 99 form/status/check + 24
+     reveal action totals 570px.  The cards therefore reflow inside the fixed
+     track without hiding a control or shrinking the 145px map. */
+  .shape-neighbours-shell--dense-roster > .masthead { display: flex; align-items: center; gap: 8px; min-height: 42px; }
+  .shape-neighbours-shell--dense-roster > .masthead h1 { font-size: 1.3rem; }
+  .shape-neighbours-shell--dense-roster > .masthead .eyebrow { margin-bottom: 2px; font-size: .63rem; }
+  .shape-neighbours-shell--dense-roster > .masthead .progress { margin: 0 0 0 auto; font-size: .7rem; line-height: 1.1; text-align: right; }
+  .shape-neighbours-shell--dense-roster > .masthead .progress span { font-size: .82rem; }
+  .shape-neighbours-shell--dense-roster > .setup-card { gap: 4px 8px; padding: 7px 10px; }
+  .shape-neighbours-shell--dense-roster > .setup-card h2 { font-size: .88rem; }
+  .shape-neighbours-shell--dense-roster > .setup-card .setup-note { margin: 0; font-size: .68rem; line-height: 1.1; }
+  .shape-neighbours-shell.quiz-active-shell > .shape-neighbours-card { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 10px; }
+  .shape-neighbours-card .eyebrow { margin-bottom: 3px; font-size: .63rem; }
+  .shape-neighbours-card h2 { margin-bottom: 4px; font-size: 1rem; }
+  .shape-neighbours-card .country-capital-instruction { margin-bottom: 4px; font-size: .78rem; line-height: 1.2; }
+  .shape-neighbours-card--map .neighbour-progress-map-shell { display: grid; grid-template-rows: minmax(145px, 1fr) auto; flex: 1 1 174px; min-height: 174px; margin-bottom: 4px; }
+  .shape-neighbours-card--map .neighbour-progress-map { grid-row: 1; min-height: 145px; height: 100%; }
+  .shape-neighbours-card--map .neighbour-map-attribution { position: static; z-index: auto; max-width: none; min-height: 24px; padding: 4px 7px; border-width: 1px 0 0; border-radius: 0; font-size: .7rem; pointer-events: auto; }
+  .shape-neighbours-card--silhouette .shape-capital-visual { flex: 1 1 100px; min-height: 76px; }
+  .shape-neighbours-recenter { min-height: 28px; margin: 0 0 4px; padding: 5px 8px; font-size: .74rem; }
+  .neighbour-map-hint { display: none; }
+  .shape-neighbours-aid { align-items: center; flex-direction: row; gap: 6px; margin: 0 0 4px; padding: 5px 7px; }
+  .shape-neighbours-aid-copy { font-size: .7rem; line-height: 1.18; }
+  .shape-neighbours-aid .map-layer-switch { padding: 4px 6px; font-size: .68rem; }
+  .shape-neighbours-card .neighbour-progress { margin: 0 0 4px; font-size: .74rem; }
+  .shape-neighbours-card .neighbour-answer-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; margin: 0 0 4px; }
+  .shape-neighbours-card .neighbour-answer-list li { min-width: 0; padding: 3px 4px; font-size: .72rem; line-height: 1.12; overflow-wrap: anywhere; }
+  .shape-neighbours-card form label { margin-bottom: 2px; font-size: .72rem; }
+  .shape-neighbours-card form input { min-height: 34px; margin-bottom: 3px; padding: 6px 8px; font-size: 1rem; }
+  .shape-neighbours-card .feedback { min-height: 18px; margin: 3px 0; font-size: .7rem; line-height: 1.15; }
+  .shape-neighbours-card .primary-button { min-height: 34px; padding: 6px 8px; font-size: .82rem; }
+  .shape-neighbours-card .country-capital-actions { min-height: 24px; margin-top: 2px; }
+  /* A resolved Afghanistan-class roster has the same fixed media track, but
+     reflows its answer/status rows horizontally so Next remains in the card. */
+  .shape-neighbours-card--resolved.shape-neighbours-card--map .shape-neighbours-aid { margin-bottom: 2px; padding-block: 4px; }
+  .shape-neighbours-card--resolved.shape-neighbours-card--map .shape-neighbours-recenter { min-height: 26px; margin-bottom: 2px; padding-block: 4px; }
+  .shape-neighbours-card--resolved .country-capital-reveal-entity { margin: 0 0 3px; font-size: .76rem; line-height: 1.1; }
+  .shape-neighbours-card--resolved .neighbour-answer-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .shape-neighbours-card--resolved .neighbour-answer-list li { min-height: 0; padding: 2px 3px; font-size: .72rem; line-height: 1.08; }
+  .shape-neighbours-card--resolved form label { margin-bottom: 1px; }
+  .shape-neighbours-card--resolved form input { min-height: 32px; margin-bottom: 2px; padding-block: 5px; }
+  .shape-neighbours-card--resolved .feedback { min-height: 16px; margin: 2px 0; }
+  .shape-neighbours-card--resolved .country-capital-actions .primary-button { min-height: 34px; }
+  /* China and Russia each have fourteen neighbours. Dense partial cards use
+     five columns. Their mixed reveal uses four wider columns and a shared key,
+     avoiding word splits and repeated status rows while keeping the 145px map. */
+  .shape-neighbours-card--dense-roster.shape-neighbours-card--partial .neighbour-answer-list,
+  .shape-neighbours-card--dense-roster.shape-neighbours-card--resolved .neighbour-answer-list:not(.neighbour-answer-list--mixed) { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .shape-neighbours-card--dense-roster.shape-neighbours-card--partial .neighbour-answer-list li,
+  .shape-neighbours-card--dense-roster.shape-neighbours-card--resolved .neighbour-answer-list:not(.neighbour-answer-list--mixed) li { padding: 2px; font-size: .72rem; line-height: 1.05; }
+  .shape-neighbours-card--dense-roster.shape-neighbours-card--map .shape-neighbours-aid { margin-bottom: 2px; padding-block: 4px; }
+  .shape-neighbours-card--dense-roster.shape-neighbours-card--map .shape-neighbours-recenter { min-height: 26px; margin-bottom: 2px; padding-block: 4px; }
+  .shape-neighbours-card--dense-roster .country-capital-reveal-entity { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .shape-neighbours-card--dense-roster .neighbour-answer-legend { flex: 0 0 auto; gap: 5px; font-size: .62rem; line-height: 1.1; }
+  .shape-neighbours-card--dense-roster .neighbour-answer-list--mixed { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 2px; }
+  .shape-neighbours-card--dense-roster .neighbour-answer-list--mixed li { display: block; min-height: 0; padding: 2px; font-size: .72rem; line-height: 1.05; overflow-wrap: normal; word-break: normal; }
+  /* Mixed reveal has four word-wrapping rows at 28px (112px). Its inline key
+     shares the country-label row, replacing the former 120px repeated-badge
+     allowance in the dense partial budget and retaining an 8px viewport spare. */
+}

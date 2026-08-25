@@ -182,7 +182,10 @@ export function designDecisionValidationErrors(options: DesignDecisionValidation
     }
     if (record.status === 'superseded' && record.supersededBy.length === 0) errors.push(`${record.file}: superseded records require superseded_by`)
     if (record.status !== 'superseded' && record.supersededBy.length > 0) errors.push(`${record.file}: only superseded records may set superseded_by`)
-    if (record.status !== 'accepted' && record.supersedes.length > 0) errors.push(`${record.file}: only accepted replacement records may supersede another decision`)
+    // A previously accepted replacement can itself be superseded while retaining
+    // its immutable historical `supersedes` metadata. This permits an auditable
+    // DD chain without rewriting the original replacement decision.
+    if (!['accepted', 'superseded'].includes(record.status) && record.supersedes.length > 0) errors.push(`${record.file}: only accepted replacement records may supersede another decision`)
 
     for (const targetId of record.supersedes) {
       const target = records.get(targetId)
@@ -193,7 +196,7 @@ export function designDecisionValidationErrors(options: DesignDecisionValidation
     for (const replacementId of record.supersededBy) {
       const replacement = records.get(replacementId)
       if (!replacement) continue
-      if (replacement.status !== 'accepted') errors.push(`${record.file}: replacement ${replacementId} must be accepted`)
+      if (!['accepted', 'superseded'].includes(replacement.status)) errors.push(`${record.file}: replacement ${replacementId} must be accepted or historically superseded`)
       if (!replacement.supersedes.includes(id)) errors.push(`${record.file}: superseded_by ${replacementId} is not reciprocal`)
     }
   }

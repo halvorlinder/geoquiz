@@ -8,9 +8,9 @@ export function routeFromHash(hash: string): AppRoute {
   if (hash === '#/capital-map') return 'capital-map'
   if (hash === '#/country-capital') return 'country-capital'
   if (hash === '#/shape-capital') return 'shape-capital'
-  if (hash === '#/shape-neighbours') return 'shape-neighbours'
-  if (hash === '#/shape-high-point') return 'shape-high-point'
+  if (hash === '#/shape-neighbours' || (import.meta.env.DEV && hash === '#/shape-neighbours?qa=china')) return 'shape-neighbours'
+  if (hash === '#/shape-high-point' || (import.meta.env.DEV && hash === '#/shape-high-point?qa=colombia')) return 'shape-high-point'
   if (hash === '#/flag-country') return 'flag-country'
-  if (hash === '#/border-countries' || (import.meta.env.DEV && hash.startsWith('#/border-countries?qa='))) return 'border-countries'
+  if (hash === '#/border-countries' || (import.meta.env.DEV && ['#/border-countries?qa=rus-prk','#/border-countries?qa=bwa-botswana','#/border-countries?qa=bwa-zambia','#/border-countries?qa=vatican-italy','#/border-countries?qa=liechtenstein','#/border-countries?qa=spain-morocco','#/border-countries?qa=france-monaco','#/border-countries?qa=hard','#/border-countries?qa=esp-fra','#/border-countries?qa=esp-mar','#/border-countries?qa=can-usa','#/border-countries?qa=arm-aze','#/border-countries?qa=hard-multi'].includes(hash))) return 'border-countries'
   return 'not-found'
 }
