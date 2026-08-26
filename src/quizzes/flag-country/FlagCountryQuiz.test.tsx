@@ -109,6 +109,27 @@ describe('FlagCountryQuiz', () => {
     expect(document.querySelector('.flag-country-card')?.className).toContain('flag-revealed')
   })
 
+  it('uses the canonical Vatican City display label while accepting country aliases in Practice and Timed runs', () => {
+    const vat = () => questions(['VAT'])
+    for (const answer of ['Vatican City', 'Vatican', 'the Vatican', 'Holy See']) {
+      const practice = render(<FlagCountryQuiz questionFactory={vat} />)
+      const practiceInput = screen.getByLabelText('country')
+      fireEvent.change(practiceInput, { target: { value: answer } })
+      fireEvent.submit(practiceInput.closest('form')!)
+      expect(screen.getByText('Vatican City')).toBeTruthy()
+      expect(screen.queryByText('Holy See')).toBeNull()
+      practice.unmount()
+
+      const timed = render(<FlagCountryQuiz questionFactory={vat} />)
+      fireEvent.click(screen.getByLabelText('Timed'))
+      fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+      fireEvent.change(screen.getByLabelText('country'), { target: { value: answer } })
+      expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
+      expect(screen.queryByText('Holy See')).toBeNull()
+      timed.unmount()
+    }
+  })
+
   it('uses exact Enter once for prefix answers and ignores held-repeat submissions after the next question renders', () => {
     render(<FlagCountryQuiz questionFactory={() => questions(['DMA', 'NER'])} />)
     fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
@@ -165,7 +186,7 @@ describe('FlagCountryQuiz', () => {
   })
 
   it('persists a completed timed board under the exact flag-country filter key', () => {
-    expect(FLAG_COUNTRY_DATA_VERSION).toBe('flag-country-v1-entities-2-flags-1-territory-policy-1')
+    expect(FLAG_COUNTRY_DATA_VERSION).toBe('flag-country-v1-entities-3-flags-2-territory-policy-1')
     render(<FlagCountryQuiz questionFactory={() => questions(['CAN'])} />)
     fireEvent.change(screen.getByLabelText('Question set'), { target: { value: 'North America' } })
     fireEvent.change(screen.getByLabelText('Territory scope'), { target: { value: 'with-territories' } })

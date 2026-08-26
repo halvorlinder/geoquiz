@@ -3226,7 +3226,7 @@
     "entities": [
       {
         "code": "VAT",
-        "country": "Vatican City / Holy See",
+        "country": "Vatican City",
         "sourceRef": "UNGEGN: https://unstats.un.org/unsd/geoinfo/geonames/About.htm",
         "checked": "2026-08-19"
       }

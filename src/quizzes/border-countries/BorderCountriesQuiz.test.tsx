@@ -1,8 +1,8 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { BorderCountriesQuiz } from './BorderCountriesQuiz'
-import { scoreboardKey } from '../../core/scoreboard/scoreboard'
+import { BORDER_COUNTRIES_DATA_VERSION, BORDER_COUNTRIES_SCORE_DATA_VERSION, BorderCountriesQuiz } from './BorderCountriesQuiz'
+import { readScoreboard, scoreboardKey } from '../../core/scoreboard/scoreboard'
 import { timedScoreDataVersion } from '../../core/session/timedScoreVersion'
 import { normalizeAnswer } from '../../core/answerMatching'
 import { BORDER_DATA_VERSION, borderEntity, borderQuestions, borderSetupNote, borderShape, type BorderQuestion } from './borderCountries'
@@ -24,6 +24,7 @@ const hard = borderQuestions('hard', 'All', () => 0)[0]
 const iran = borderQuestions('easy', 'All', () => 0).find((question) => question.codes.join(',') === 'AFG,IRN')!
 const unitedStates = borderQuestions('easy', 'All', () => 0).find((question) => question.codes.join(',') === 'CAN,USA')!
 const hardMulti = borderQuestions('hard', 'All', () => 0).find((question) => question.codes.join(',') === 'ESP,FRA')!
+const italyVatican = borderQuestions('easy', 'All', () => 0).find((question) => question.codes.join(',') === 'ITA,VAT' && question.knownCode === 'ITA')!
 const answerName = (question: BorderQuestion) => borderEntity(question.answerCode!)!.name
 const factory = (...questions: BorderQuestion[]) => () => questions
 const stableRandom = () => 0
@@ -303,8 +304,12 @@ describe('BorderCountriesQuiz', () => {
     const restart = await screen.findByRole('button', { name: 'Restart timed run' })
     await waitFor(() => expect(document.activeElement).toBe(restart))
     expect(document.querySelector('.score-number')?.textContent).toContain('0 correct · 1 revealed · 1 total')
-    const key = scoreboardKey({ quizId: 'border-countries', filters: { continent: 'All', difficulty: 'easy', orientation: '1' }, dataVersion: timedScoreDataVersion(BORDER_DATA_VERSION) })
-    expect(JSON.parse(window.localStorage.getItem(key) ?? '{}').entries[0]).toMatchObject({ correctCount: 0, revealedCount: 1, totalCount: 1, dataVersion: timedScoreDataVersion(BORDER_DATA_VERSION) })
+    expect(BORDER_COUNTRIES_DATA_VERSION).toBe(`border-countries-${BORDER_DATA_VERSION}-entities-3`)
+    const key = scoreboardKey({ quizId: 'border-countries', filters: { continent: 'All', difficulty: 'easy', orientation: '1' }, dataVersion: BORDER_COUNTRIES_SCORE_DATA_VERSION })
+    expect(JSON.parse(window.localStorage.getItem(key) ?? '{}').entries[0]).toMatchObject({ correctCount: 0, revealedCount: 1, totalCount: 1, dataVersion: BORDER_COUNTRIES_SCORE_DATA_VERSION })
+    expect(readScoreboard(window.localStorage, { quizId: 'border-countries', filters: { continent: 'All', difficulty: 'easy', orientation: '1' }, dataVersion: BORDER_DATA_VERSION })).toEqual([])
+    expect(readScoreboard(window.localStorage, { quizId: 'border-countries', filters: { continent: 'All', difficulty: 'easy', orientation: '1' }, dataVersion: BORDER_COUNTRIES_DATA_VERSION })).toEqual([])
+    expect(readScoreboard(window.localStorage, { quizId: 'border-countries', filters: { continent: 'All', difficulty: 'easy', orientation: '1' }, dataVersion: timedScoreDataVersion(BORDER_DATA_VERSION) })).toEqual([])
   })
   it('records and presents a mixed timed correct/revealed outcome with the scoped board key', async () => {
     render(<BorderCountriesQuiz questionFactory={factory(easy, easy2)} />)
@@ -315,7 +320,7 @@ describe('BorderCountriesQuiz', () => {
     fireEvent.click(await screen.findByRole('button', { name: 'Continue' }))
     await screen.findByRole('heading', { name: 'Timed run complete' })
     expect(document.querySelector('.score-number')?.textContent).toContain('1 correct · 1 revealed · 2 total')
-    const key = scoreboardKey({ quizId: 'border-countries', filters: { continent: 'All', difficulty: 'easy', orientation: '1' }, dataVersion: timedScoreDataVersion(BORDER_DATA_VERSION) })
+    const key = scoreboardKey({ quizId: 'border-countries', filters: { continent: 'All', difficulty: 'easy', orientation: '1' }, dataVersion: BORDER_COUNTRIES_SCORE_DATA_VERSION })
     expect(JSON.parse(window.localStorage.getItem(key) ?? '{}').entries[0]).toMatchObject({ correctCount: 1, revealedCount: 1, totalCount: 2 })
   })
   it('suppresses held-key activation on timed skip and reveal controls', () => {
@@ -342,6 +347,26 @@ describe('BorderCountriesQuiz', () => {
     fireEvent.compositionStart(input); fireEvent.change(input, { target: { value: 'US' } }); expect(screen.getByText('1 remaining')).toBeTruthy()
     fireEvent.compositionEnd(input, { currentTarget: { value: 'US' } }); expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
     view.unmount()
+  })
+
+  it('accepts all Vatican City country spellings in Easy Practice and Timed answer flows', () => {
+    for (const answer of ['Vatican City', 'Vatican', 'the Vatican', 'Holy See']) {
+      const practice = render(<BorderCountriesQuiz questionFactory={factory(italyVatican)} random={stableRandom} />)
+      const input = screen.getByLabelText('Other country')
+      fireEvent.change(input, { target: { value: answer } })
+      fireEvent.click(screen.getByRole('button', { name: 'Check answer' }))
+      expect(screen.getByLabelText('Answered countries').textContent).toContain('Vatican City')
+      expect(screen.queryByText('Holy See')).toBeNull()
+      practice.unmount()
+
+      const timed = render(<BorderCountriesQuiz questionFactory={factory(italyVatican)} random={stableRandom} />)
+      fireEvent.click(screen.getByLabelText('Timed'))
+      fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+      fireEvent.change(screen.getByLabelText('Other country'), { target: { value: answer } })
+      expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
+      expect(screen.queryByText('Holy See')).toBeNull()
+      timed.unmount()
+    }
   })
   it('reports an exact timed answer as advancing to the next distinct border without a Continue control', async () => {
     render(<BorderCountriesQuiz questionFactory={factory(easy, easy2)} random={stableRandom} />)

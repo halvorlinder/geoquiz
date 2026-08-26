@@ -72,7 +72,7 @@ try {
   const license = readFileSync(join(packageRoot, 'LICENSE'), 'utf8').replace(/\r\n?/g, '\n')
   writeFileSync(join(root, 'docs/licenses-country-flag-icons-MIT.txt'), license)
   writeFileSync(join(root, 'src/data/flags.json'), `${JSON.stringify(catalog, null, 2)}\n`)
-  writeFileSync(join(root, 'src/data/flag-assets-manifest.json'), `${JSON.stringify({ version: 1, checked: catalog.checked, source, assets, duplicateHashGroups: [] }, null, 2)}\n`)
+  writeFileSync(join(root, 'src/data/flag-assets-manifest.json'), `${JSON.stringify({ version: 2, checked: catalog.checked, source, assets, duplicateHashGroups: [] }, null, 2)}\n`)
   console.log(`Generated ${catalog.records.length} records and ${assets.length} local SVG assets.`)
 } finally {
   rmSync(extraction, { recursive: true, force: true })

@@ -28,7 +28,7 @@ const fail = (message: string) => failures.push(message)
 if (!catalog || typeof catalog !== 'object' || Object.keys(catalog).sort().join(',') !== 'checked,records,source,version') throw new Error('Flag data validation failed:\n- catalog root schema has missing or extra fields')
 if (!manifest || typeof manifest !== 'object' || Object.keys(manifest).sort().join(',') !== 'assets,checked,duplicateHashGroups,source,version') throw new Error('Flag data validation failed:\n- manifest root schema has missing or extra fields')
 if (!Array.isArray(catalog.records) || !Array.isArray(manifest.assets)) throw new Error('Flag data validation failed:\n- catalog records and manifest assets must be arrays')
-if (typeof catalog.version !== 'number' || typeof manifest.version !== 'number' || typeof catalog.checked !== 'string' || typeof manifest.checked !== 'string' || catalog.version !== 1 || manifest.version !== 1 || catalog.checked !== manifest.checked || catalog.checked !== '2026-08-20') fail('catalog and manifest version/checked metadata must be v1 and agree')
+if (typeof catalog.version !== 'number' || typeof manifest.version !== 'number' || typeof catalog.checked !== 'string' || typeof manifest.checked !== 'string' || catalog.version !== 2 || manifest.version !== 2 || catalog.checked !== manifest.checked || catalog.checked !== '2026-08-20') fail('catalog and manifest version/checked metadata must be v2 and agree')
 if (Object.keys(approvedSourceKeys).length !== 235) fail('approved source-key policy must contain exactly 235 records')
 if (JSON.stringify(catalog.source) !== JSON.stringify(expectedSource) || JSON.stringify(manifest.source) !== JSON.stringify(expectedSource)) fail('source provenance does not match the approved pinned package')
 try {

@@ -15,6 +15,7 @@ const q = (code: string) => catalog.find((question) => question.entity.code === 
 const afghanistan = q('AFG'), niger = q('NER'), guinea = q('GIN')
 const brazil = q('BRA'), china = q('CHN'), russia = q('RUS')
 const liechtenstein = q('LIE')
+const italy = q('ITA')
 const factory = (...items: ShapeNeighboursQuestion[]) => () => items
 const small = (question: ShapeNeighboursQuestion, codes: readonly string[]): ShapeNeighboursQuestion => ({ ...question, neighbourCodes: codes })
 const flush = () => act(() => vi.runOnlyPendingTimers())
@@ -119,6 +120,27 @@ describe('ShapeNeighboursQuiz', () => {
     practice('China'); practice('China'); expect(screen.getByText('That neighbour is already recorded.')).toBeTruthy(); expect(input().selectionStart).toBe(0)
   })
 
+  it('accepts all Vatican City country spellings in Practice and Timed answer flows', () => {
+    for (const answer of ['Vatican City', 'Vatican', 'the Vatican', 'Holy See']) {
+      vi.useFakeTimers()
+      const practiceView = render(<ShapeNeighboursQuiz questionFactory={factory(small(italy, ['VAT']))} />)
+      practice(answer)
+      expect(screen.getByRole('list', { name: 'Answered neighbours' }).textContent).toContain('Vatican City')
+      expect(screen.queryByText('Holy See')).toBeNull()
+      practiceView.unmount()
+
+      const timedView = render(<ShapeNeighboursQuiz questionFactory={factory(small(italy, ['VAT']))} />)
+      fireEvent.click(screen.getByLabelText('Timed'))
+      fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+      fireEvent.change(input(), { target: { value: answer } })
+      flush()
+      expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
+      expect(screen.queryByText('Holy See')).toBeNull()
+      timedView.unmount()
+      vi.useRealTimers()
+    }
+  })
+
   it('reveals a partial practice prompt exactly once with red state and deliberate Next', () => {
     vi.useFakeTimers(); const { container } = render(<ShapeNeighboursQuiz questionFactory={factory(afghanistan)} />)
     practice('China'); fireEvent.click(screen.getByRole('button', { name: 'Reveal answers' })); flush()
@@ -217,7 +239,7 @@ describe('ShapeNeighboursQuiz', () => {
   it('shows timed reveal acknowledgement before moving onward and records a scoped score', () => {
     vi.useFakeTimers(); render(<ShapeNeighboursQuiz questionFactory={factory(afghanistan)} />); fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button', { name: 'Start timed run' })); fireEvent.click(screen.getByRole('button', { name: 'Reveal answers' }))
     expect(screen.getByRole('heading', { name: 'Answers revealed' })).toBeTruthy(); expect(screen.getByText('Afghanistan')).toBeTruthy(); expect(document.activeElement).toBe(screen.getByRole('region', { name: 'Answers revealed' })); fireEvent.click(screen.getByRole('button', { name: 'Continue' })); flush(); expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
-    const dataVersion = timedScoreDataVersion('shape-neighbours-v1-entities-2-shapes-3-neighbours-1'); const key = scoreboardKey({ quizId: 'shape-neighbours', filters: { continent: 'All' }, dataVersion }); const stored = JSON.parse(window.localStorage.getItem(key) ?? '{}'); expect(stored.entries).toHaveLength(1); expect(stored.entries[0].dataVersion).toBe(dataVersion)
+    const dataVersion = timedScoreDataVersion('shape-neighbours-v1-entities-3-shapes-3-neighbours-1'); const key = scoreboardKey({ quizId: 'shape-neighbours', filters: { continent: 'All' }, dataVersion }); const stored = JSON.parse(window.localStorage.getItem(key) ?? '{}'); expect(stored.entries).toHaveLength(1); expect(stored.entries[0].dataVersion).toBe(dataVersion)
   })
 
   it('keeps timed completion usable when storage and repeated controls fail', () => {
@@ -235,7 +257,7 @@ describe('ShapeNeighboursQuiz', () => {
 
   it('auto-completes a timed run correctly and records the correct outcome', () => {
     vi.useFakeTimers(); render(<ShapeNeighboursQuiz questionFactory={factory(small(afghanistan, ['CHN']))} />); fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button', { name: 'Start timed run' })); fireEvent.change(input(), { target: { value: 'China' } }); flush()
-    const dataVersion = timedScoreDataVersion('shape-neighbours-v1-entities-2-shapes-3-neighbours-1'); const stored = JSON.parse(window.localStorage.getItem(scoreboardKey({ quizId: 'shape-neighbours', filters: { continent: 'All' }, dataVersion })) ?? '{}'); expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy(); expect(screen.getAllByText(/1 correct · 0 revealed · 1 total/).length).toBeGreaterThan(0); expect(stored.entries).toHaveLength(1); expect(stored.entries[0].dataVersion).toBe(dataVersion); expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Restart timed run' }))
+    const dataVersion = timedScoreDataVersion('shape-neighbours-v1-entities-3-shapes-3-neighbours-1'); const stored = JSON.parse(window.localStorage.getItem(scoreboardKey({ quizId: 'shape-neighbours', filters: { continent: 'All' }, dataVersion })) ?? '{}'); expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy(); expect(screen.getAllByText(/1 correct · 0 revealed · 1 total/).length).toBeGreaterThan(0); expect(stored.entries).toHaveLength(1); expect(stored.entries[0].dataVersion).toBe(dataVersion); expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Restart timed run' }))
   })
 
   it('handles strict-prefix target contexts without timed submission', () => {

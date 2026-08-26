@@ -92,7 +92,7 @@ describe('ShapeHighPointQuiz', () => {
     fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
     fireEvent.compositionStart(input()); fireEvent.change(input(), { target: { value: 'Møllehøj' } }); expect(screen.getByRole('heading', { name: 'Shape highest points' })).toBeTruthy()
     fireEvent.compositionEnd(input(), { currentTarget: input() }); flush(); expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
-    const dataVersion = timedScoreDataVersion('shape-high-point-v1-entities-2-high-points-2026.08.20-shapes-2')
+    const dataVersion = timedScoreDataVersion('shape-high-point-v1-entities-3-high-points-2026.08.20-shapes-2')
     const stored = JSON.parse(window.localStorage.getItem(scoreboardKey({ quizId: 'shape-high-point', filters: { continent: 'All' }, dataVersion })) ?? '{}')
     expect(stored.entries).toHaveLength(1)
     expect(stored.entries[0].dataVersion).toBe(dataVersion)

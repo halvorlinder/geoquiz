@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type ChangeEvent, type KeyboardEvent, type MouseEvent } from 'react'
 import { matchNeighbourAnswer } from '../../core/entityAnswerMatching'
-import { studyEntities } from '../../core/entity'
+import { entityCatalog, studyEntities } from '../../core/entity'
 import { readScoreboard, recordScoreboardEntry, type ScoreboardEntry, type ScoreboardStorage } from '../../core/scoreboard/scoreboard'
 import { currentQuestionId, elapsedTimedSessionMs, isTimedSessionComplete, isTimedSessionPaused, pauseTimedSession, resumeTimedSession, startTimedSession, timedSessionOutcome, transitionTimedSession, type TimedSession } from '../../core/session/timedSession'
 import { timedScoreDataVersion } from '../../core/session/timedScoreVersion'
@@ -11,6 +11,11 @@ import { EasyBorderContextMap, type BorderContextCountry } from './EasyBorderCon
 import { borderContextGeometry } from './borderContextGeometry'
 import { blankHardPracticeState, discloseCorrect, hardDisclosureFor, hardPracticeCountsCorrect, isHardPracticeComplete, revealAllHardEndpoints, revealOneHardEndpoint, type HardPracticeState } from './hardPracticeState'
 import { BORDER_DATA_VERSION, borderContinents, borderEntity, borderQuestions, borderSetupNote, borderShape, type BorderContinent, type BorderDifficulty, type BorderQuestion } from './borderCountries'
+
+/** Scores depend on both stable border rendering and shared entity-answer policy. */
+export const BORDER_COUNTRIES_DATA_VERSION = `border-countries-${BORDER_DATA_VERSION}-entities-${entityCatalog.version}`
+/** Timed scores additionally isolate active-time pause semantics from wall-clock runs. */
+export const BORDER_COUNTRIES_SCORE_DATA_VERSION = timedScoreDataVersion(BORDER_COUNTRIES_DATA_VERSION)
 
 type Mode = 'practice' | 'timed'
 type Config = Readonly<{ mode: Mode; difficulty: BorderDifficulty; continent: BorderContinent }>
@@ -73,13 +78,13 @@ export function BorderCountriesQuiz({ questionFactory = borderQuestions, random 
   const target=active.mode==='timed' ? (timed ? activeDeck.find((q)=>q.id===currentQuestionId(timed)) : undefined) : practice.deck[practice.index]
   const state=target ? active.mode==='timed' ? timedStates[target.id]??blank() : practiceState : blank()
   const complete=active.mode==='timed' ? Boolean(timed&&isTimedSessionComplete(timed)) : isComplete(practice)
-  const scope=useMemo(()=>({ quizId:'border-countries', filters:{ continent:active.continent,difficulty:active.difficulty,orientation:'1' }, dataVersion:timedScoreDataVersion(BORDER_DATA_VERSION) }),[active])
+  const scope=useMemo(()=>({ quizId:'border-countries', filters:{ continent:active.continent,difficulty:active.difficulty,orientation:'1' }, dataVersion:BORDER_COUNTRIES_SCORE_DATA_VERSION }),[active])
   useEffect(()=>{ if(active.mode!=='timed'||!timed||isTimedSessionComplete(timed)||isTimedSessionPaused(timed)) return; const id=window.setInterval(()=>setNow(performance.now()),250); return()=>window.clearInterval(id) },[active.mode,timed])
   useEffect(()=>{ if(acknowledgement)return; if(target&&!complete&&!state.complete&&!state.revealed) window.setTimeout(()=>inputRef.current?.focus(),0); if(state.complete||state.revealed) window.setTimeout(()=>nextRef.current?.focus(),0); if(complete) window.setTimeout(()=>restartRef.current?.focus(),0) },[acknowledgement,target,complete,state.complete,state.revealed])
   useEffect(()=>{ if(acknowledgement) window.setTimeout(()=>acknowledgementRef.current?.focus(),0) },[acknowledgement])
   useEffect(()=>{ if(!acknowledgement) actionLock.current=false },[acknowledgement,timed])
-  useEffect(()=>{ if(!timed||!isTimedSessionComplete(timed)||recorded.current===timed) return; recorded.current=timed; const outcome=timedSessionOutcome(timed); setScores(recordScoreboardEntry(getStorage(),scope,{ durationMs:Math.round(elapsedTimedSessionMs(timed,performance.now())),correctCount:outcome.correctCount,revealedCount:outcome.revealedCount,totalCount:outcome.totalCount,completedAt:new Date().toISOString(),dataVersion:timedScoreDataVersion(BORDER_DATA_VERSION) })) },[scope,timed])
-  function begin(config: Config) { const deck=fixture ? [fixture.question] : questionFactory(config.difficulty,config.continent,runRandom); if(!deck.length)return; const effectiveConfig=fixture?.config ?? config; actionLock.current=false; pausedRef.current=false; setAcknowledgement(null); setActive(effectiveConfig); setActiveDeck(deck); setPractice(startQuiz(deck,runRandom)); setPracticeState(blank()); setTimedStates({}); setPresentationEpoch(value=>value+1); setFeedback(initialFeedback(effectiveConfig.difficulty)); if(effectiveConfig.mode==='timed'){ const session=startTimedSession(deck.map(q=>q.id),performance.now(),runRandom); recorded.current=null; setTimed(session); setScores(readScoreboard(getStorage(),{ quizId:'border-countries',filters:{continent:effectiveConfig.continent,difficulty:effectiveConfig.difficulty,orientation:'1'},dataVersion:timedScoreDataVersion(BORDER_DATA_VERSION) })) } else setTimed(null) }
+  useEffect(()=>{ if(!timed||!isTimedSessionComplete(timed)||recorded.current===timed) return; recorded.current=timed; const outcome=timedSessionOutcome(timed); setScores(recordScoreboardEntry(getStorage(),scope,{ durationMs:Math.round(elapsedTimedSessionMs(timed,performance.now())),correctCount:outcome.correctCount,revealedCount:outcome.revealedCount,totalCount:outcome.totalCount,completedAt:new Date().toISOString(),dataVersion:BORDER_COUNTRIES_SCORE_DATA_VERSION })) },[scope,timed])
+  function begin(config: Config) { const deck=fixture ? [fixture.question] : questionFactory(config.difficulty,config.continent,runRandom); if(!deck.length)return; const effectiveConfig=fixture?.config ?? config; actionLock.current=false; pausedRef.current=false; setAcknowledgement(null); setActive(effectiveConfig); setActiveDeck(deck); setPractice(startQuiz(deck,runRandom)); setPracticeState(blank()); setTimedStates({}); setPresentationEpoch(value=>value+1); setFeedback(initialFeedback(effectiveConfig.difficulty)); if(effectiveConfig.mode==='timed'){ const session=startTimedSession(deck.map(q=>q.id),performance.now(),runRandom); recorded.current=null; setTimed(session); setScores(readScoreboard(getStorage(),{ quizId:'border-countries',filters:{continent:effectiveConfig.continent,difficulty:effectiveConfig.difficulty,orientation:'1'},dataVersion:BORDER_COUNTRIES_SCORE_DATA_VERSION })) } else setTimed(null) }
   function update(next: (old: State)=>State) { if(!target||(active.mode==='timed'&&pausedRef.current))return; if(active.mode==='timed')setTimedStates(old=>({...old,[target.id]:next(old[target.id]??blank())}));else setPracticeState(next) }
   function done(kind:'correct'|'reveal') { if(active.mode==='timed'&&timed&&!pausedRef.current)setTimed(transitionTimedSession(timed,kind==='correct'?'correct':'reveal',performance.now())) }
   function submit(value: string, timedMode=false) {

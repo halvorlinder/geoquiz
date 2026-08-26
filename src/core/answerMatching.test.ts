@@ -88,6 +88,18 @@ describe('capital answers', () => {
     expect(checkCapitalAnswer('Cape Verde', praia, data)).toEqual({ status: 'incorrect' })
   })
 
+  it('keeps Vatican City capital-place answers distinct from country/entity aliases', () => {
+    const vatican = data.find((capital) => capital.id === 'vatican-city')!
+    expect(vatican.capital).toBe('Vatican City')
+    expect(vatican.aliases).toEqual(['Vatican'])
+    expect(checkCapitalAnswer('Vatican', vatican, data)).toMatchObject({ status: 'correct' })
+    expect(isTimedCapitalAnswerAccepted('Vatican', vatican, data)).toBe(true)
+    for (const submitted of ['the Vatican', 'Holy See']) {
+      expect(checkCapitalAnswer(submitted, vatican, data), `${submitted} is a country/entity alias, not a capital-place answer`).toEqual({ status: 'incorrect' })
+      expect(isTimedCapitalAnswerAccepted(submitted, vatican, data)).toBe(false)
+    }
+  })
+
   it('rejects clearly unrelated input', () => {
     expect(checkCapitalAnswer('Bergen', oslo, [oslo, rome])).toEqual({ status: 'incorrect' })
   })

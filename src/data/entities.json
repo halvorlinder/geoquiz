@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "checked": "2026-08-24",
+  "version": 3,
+  "checked": "2026-08-26",
   "provenance": {
     "entityRoster": "Derived from the versioned capitals.json study-entity associations.",
     "continentPolicy": "UN M49 regional placement baseline with product overrides for Russia, Türkiye, Kazakhstan, Egypt, and Georgia; Taiwan and Kosovo are supplemental study-product classifications.",
@@ -2507,8 +2507,10 @@
     },
     {
       "code": "VAT",
-      "name": "Vatican City / Holy See",
+      "name": "Vatican City",
       "aliases": [
+        "Vatican",
+        "the Vatican",
         "Holy See"
       ],
       "continent": "Europe",

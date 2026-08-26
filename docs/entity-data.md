@@ -14,7 +14,7 @@ supported `continent`, and one or more role-labelled `capitals` assignments. Eac
 `capitals.json` place `id`; a capital place can therefore be shared without
 duplicating it.
 
-Version 2 is derived directly from the versioned 197-entity roster in
+Version 3 is derived directly from the versioned 197-entity roster in
 `capitals.json`, which contains 201 entity-to-capital associations and 200 unique
 capital places. The entity validator requires exact reciprocal coverage. Update
 both datasets deliberately when the study roster changes; do not use visual map
@@ -55,7 +55,8 @@ policy, and is not a statement about the city’s status, sovereignty, or border
 ## Alias policy
 
 Aliases are for established country/entity naming variants only, such as Turkey
-for Türkiye, Cape Verde for Cabo Verde, and Palestine for State of Palestine.
+for Türkiye, Cape Verde for Cabo Verde, Palestine for State of Palestine, and
+Vatican, the Vatican, and legacy Holy See for Vatican City.
 They are never capital-answer aliases. Aliases must be nonempty after
 normalization, unique, and cannot collide with another entity’s canonical name,
 code, or alias.
@@ -80,18 +81,20 @@ its existing flag-specific aliases, obsolete or former initialisms, and informal
 directional shorthand. This is a conservative English learning set, not a list
 of every domestic acronym.
 
-The roster was reviewed on 2026-08-24 against already-audited primary evidence
+The abbreviation roster was reviewed on 2026-08-24 against already-audited primary evidence
 categories: official government and United Nations usage for UAE, CAR, DRC,
 BiH, FSM, UK, ROK, DPRK, KSA, NZ, PNG, US/USA, and RSA. No runtime source is
 used; additions require the same evidence review and collision validation.
 
 ## Maintenance and validation
 
-The catalog was updated and checked on 2026-08-24 from the repository’s
+The catalog was updated and checked on 2026-08-26 from the repository’s
 `capitals.json` roster, UN M49 placement baseline, the documented product
 overrides, and the Taiwan/Kosovo supplemental classifications. Review it annually
 and whenever a study-entity, naming, continent-policy, or capital-association
-change is made. Run `npm run validate:data`; it runs the capital validator
+change is made. The ordinary Vatican naming aliases were reviewed as a
+country/entity-answer correction on that date; capital-place answers remain
+owned only by `capitals.json`. Run `npm run validate:data`; it runs the capital validator
 followed by the entity validator, which checks schema integrity, exact 197/201/200
 coverage, aliases and abbreviations, compact ownership/collision rules, continent policy, reciprocal references, shared Jerusalem, and
 the multi-capital role mappings.
