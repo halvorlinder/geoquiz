@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { Capital } from '../../core/capital'
 import type { StudyEntity } from '../../core/entity'
 import { scoreboardKey } from '../../core/scoreboard/scoreboard'
+import { timedScoreDataVersion } from '../../core/session/timedScoreVersion'
 import { CountryCapitalQuiz } from './CountryCapitalQuiz'
 import { countryCapitalData, countryCapitalQuestions } from './countryCapital'
 
@@ -117,6 +118,28 @@ describe('CountryCapitalQuiz', () => {
     expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
   })
 
+  it('pauses a timed multi-field question without changing its partial locks and resumes at the first unresolved field', async () => {
+    render(<CountryCapitalQuiz entities={entities} capitals={capitals} />)
+    fireEvent.click(screen.getByLabelText('Timed'))
+    fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+    const legislative = screen.getByLabelText('Legislative') as HTMLInputElement
+    const executive = screen.getByLabelText('Executive') as HTMLInputElement
+    fireEvent.change(legislative, { target: { value: 'Alpha City' } })
+    expect(legislative.disabled).toBe(true)
+    fireEvent.click(screen.getByRole('button', { name: 'Pause' }))
+    fireEvent.change(executive, { target: { value: 'Beta City' } })
+    fireEvent.compositionEnd(executive)
+    fireEvent.click(screen.getByRole('button', { name: 'Skip' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Reveal answers' }))
+    expect(executive.value).toBe('')
+    expect(screen.getByRole('heading', { name: 'Paused' })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Resume timed run' }))
+    await new Promise((resolve) => window.setTimeout(resolve, 0))
+    expect(document.activeElement).toBe(executive)
+    expect(legislative.disabled).toBe(true)
+    expect(screen.getByLabelText('Executive')).toBe(executive)
+  })
+
   it('uses natural role feedback after a timed Bolivia capital lock', () => {
     const bolivia = countryCapitalData.entities.filter((entity) => entity.code === 'BOL')
     render(<CountryCapitalQuiz entities={bolivia} capitals={countryCapitalData.capitals} />)
@@ -216,11 +239,13 @@ describe('CountryCapitalQuiz', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
     fireEvent.click(screen.getByRole('button', { name: 'Reveal answers' }))
     fireEvent.click(screen.getByRole('button', { name: 'Continue' }))
-    const europeKey = scoreboardKey({ quizId: 'country-capital', filters: { continent: 'Europe' }, dataVersion: 'test' })
-    const allKey = scoreboardKey({ quizId: 'country-capital', filters: { continent: 'All' }, dataVersion: 'test' })
-    const stored = JSON.parse(window.localStorage.getItem(europeKey) ?? '{}') as { entries?: Array<{ durationMs: number; correctCount: number; revealedCount: number; totalCount: number }> }
+    const dataVersion = timedScoreDataVersion('country-capital-v1-entities-2-capital-data-v1')
+    const europeKey = scoreboardKey({ quizId: 'country-capital', filters: { continent: 'Europe' }, dataVersion })
+    const allKey = scoreboardKey({ quizId: 'country-capital', filters: { continent: 'All' }, dataVersion })
+    const stored = JSON.parse(window.localStorage.getItem(europeKey) ?? '{}') as { entries?: Array<{ durationMs: number; correctCount: number; revealedCount: number; totalCount: number; dataVersion: string }> }
     expect(stored.entries).toHaveLength(1)
     expect(stored.entries?.[0]).toMatchObject({ durationMs: expect.any(Number), correctCount: 0, revealedCount: 1, totalCount: 1 })
+    expect(stored.entries?.[0].dataVersion).toBe(dataVersion)
     expect(window.localStorage.getItem(allKey)).toBeNull()
   })
 

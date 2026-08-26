@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { Capital } from '../../core/capital'
 import { CapitalMapQuiz } from './CapitalMapQuiz'
 import { scoreboardKey } from '../../core/scoreboard/scoreboard'
+import { timedScoreDataVersion } from '../../core/session/timedScoreVersion'
 
 vi.mock('./CapitalMap', () => ({
   CapitalMap: ({ capitals, mode, statusByCapitalId, target, questionNumber }: { capitals: Capital[]; mode: string; statusByCapitalId: Record<string, string>; target: Capital; questionNumber: number }) => (
@@ -320,10 +321,12 @@ describe('CapitalMapQuiz interaction and focus flow', () => {
     fireEvent.change(screen.getByRole('textbox', { name: 'Capital city' }), { target: { value: 'Oslo' } })
     expect(screen.getByText('Correct — Oslo.')).toBeTruthy()
     expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
-    const key = scoreboardKey({ quizId: 'capital-map', filters: { continent: 'All' }, dataVersion: 'test' })
+    const dataVersion = timedScoreDataVersion('capital-map-v1-entities-2-capitals-1')
+    const key = scoreboardKey({ quizId: 'capital-map', filters: { continent: 'All' }, dataVersion })
     const stored = JSON.parse(window.localStorage.getItem(key) ?? '{}')
     expect(stored.entries).toHaveLength(1)
     expect(stored.entries[0].durationMs).toBe(1_250)
+    expect(stored.entries[0].dataVersion).toBe(dataVersion)
     act(() => vi.advanceTimersByTime(5_000))
     expect(JSON.parse(window.localStorage.getItem(key) ?? '{}').entries).toHaveLength(1)
   })
@@ -434,13 +437,14 @@ describe('CapitalMapQuiz interaction and focus flow', () => {
     expect(screen.getAllByText(/1 correct · 1 revealed · 2 total/)).toHaveLength(2)
     expect(screen.getByRole('listitem').textContent).toMatch(/0:00 · 1 correct · 1 revealed · 2 total/)
 
-    const allKey = scoreboardKey({ quizId: 'capital-map', filters: { continent: 'All' }, dataVersion: 'test' })
+    const dataVersion = timedScoreDataVersion('capital-map-v1-entities-2-capitals-1')
+    const allKey = scoreboardKey({ quizId: 'capital-map', filters: { continent: 'All' }, dataVersion })
     expect(JSON.parse(window.localStorage.getItem(allKey) ?? '{}').entries).toHaveLength(1)
     fireEvent.change(screen.getByLabelText('Question set'), { target: { value: 'Asia' } })
     fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
     fireEvent.change(screen.getByRole('textbox', { name: 'Capital city' }), { target: { value: 'Sanaa' } })
 
-    const asiaKey = scoreboardKey({ quizId: 'capital-map', filters: { continent: 'Asia' }, dataVersion: 'test' })
+    const asiaKey = scoreboardKey({ quizId: 'capital-map', filters: { continent: 'Asia' }, dataVersion })
     expect(JSON.parse(window.localStorage.getItem(allKey) ?? '{}').entries).toHaveLength(1)
     expect(JSON.parse(window.localStorage.getItem(asiaKey) ?? '{}').entries).toHaveLength(1)
   })
@@ -491,5 +495,22 @@ describe('CapitalMapQuiz interaction and focus flow', () => {
     expect(screen.getByRole('button', { name: 'Check answer' })).toBeTruthy()
     expect(document.activeElement).toBe(screen.getByRole('textbox', { name: 'Capital city' }))
     expect(Number(screen.getByTestId('capital-map').getAttribute('data-question-key'))).toBeGreaterThan(skippedKey)
+  })
+
+  it('keeps the active map question and typed answer stable while a timed run is paused', () => {
+    render(<CapitalMapQuiz data={[onlyCapital]} />)
+    fireEvent.click(screen.getByRole('radio', { name: 'Timed' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+    const map = screen.getByTestId('capital-map')
+    const questionKey = map.getAttribute('data-question-key')
+    const input = screen.getByRole('textbox', { name: 'Capital city' }) as HTMLInputElement
+    fireEvent.change(input, { target: { value: 'Osl' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Pause' }))
+    fireEvent.change(input, { target: { value: 'Oslo' } })
+    fireEvent.compositionEnd(input)
+    fireEvent.click(screen.getByRole('button', { name: 'Reveal answer' }))
+    expect(input.value).toBe('Osl')
+    expect(map.getAttribute('data-question-key')).toBe(questionKey)
+    expect(screen.queryByRole('heading', { name: 'Timed run complete' })).toBeNull()
   })
 })

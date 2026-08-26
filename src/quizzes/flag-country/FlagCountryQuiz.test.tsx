@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { flagRecordById } from '../../core/flags'
 import { normalizeAnswer } from '../../core/answerMatching'
 import { readScoreboard, scoreboardKey } from '../../core/scoreboard/scoreboard'
+import { timedScoreDataVersion } from '../../core/session/timedScoreVersion'
 import { flagAnswerNames, flagCountryQuestions } from './flagCountry'
 import { FLAG_COUNTRY_DATA_VERSION, FlagCountryQuiz } from './FlagCountryQuiz'
 
@@ -170,9 +171,9 @@ describe('FlagCountryQuiz', () => {
     fireEvent.change(screen.getByLabelText('Territory scope'), { target: { value: 'with-territories' } })
     fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
     const input = screen.getByLabelText('country or territory'); fireEvent.change(input, { target: { value: 'Canada' } })
-    const key = scoreboardKey({ quizId: 'flag-country', filters: { continent: 'North America', territoryScope: 'with-territories' }, dataVersion: FLAG_COUNTRY_DATA_VERSION })
+    const key = scoreboardKey({ quizId: 'flag-country', filters: { continent: 'North America', territoryScope: 'with-territories' }, dataVersion: timedScoreDataVersion(FLAG_COUNTRY_DATA_VERSION) })
     const payload = JSON.parse(window.localStorage.getItem(key) ?? '{}')
-    expect(payload.entries[0]).toMatchObject({ correctCount: 1, revealedCount: 0, totalCount: 1, dataVersion: FLAG_COUNTRY_DATA_VERSION })
+    expect(payload.entries[0]).toMatchObject({ correctCount: 1, revealedCount: 0, totalCount: 1, dataVersion: timedScoreDataVersion(FLAG_COUNTRY_DATA_VERSION) })
     expect(readScoreboard(window.localStorage, { quizId: 'flag-country', filters: { continent: 'North America', territoryScope: 'with-territories' }, dataVersion: 'flag-country-v1-entities-1-flags-1-territory-policy-1' })).toEqual([])
   })
 
@@ -197,5 +198,14 @@ describe('FlagCountryQuiz', () => {
     const reveal = screen.getByRole('button', { name: 'Reveal answer' }); reveal.focus(); expect(fireEvent.keyDown(reveal, { key: 'Enter', repeat: true })).toBe(false); expect(fireEvent.keyDown(reveal, { key: ' ', repeat: true })).toBe(false)
     expect(screen.queryByRole('heading', { name: 'Answer revealed' })).toBeNull(); fireEvent.click(reveal)
     expect(screen.getAllByRole('heading', { name: 'Answer revealed' })).toHaveLength(1)
+  })
+
+  it('keeps a timed flag answer and manual actions inert while paused', () => {
+    render(<FlagCountryQuiz questionFactory={() => questions(['CAN'])} />)
+    fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+    const input = screen.getByLabelText('country') as HTMLInputElement
+    fireEvent.change(input, { target: { value: 'Can' } }); fireEvent.click(screen.getByRole('button', { name: 'Pause' }))
+    fireEvent.change(input, { target: { value: 'Canada' } }); fireEvent.compositionEnd(input); fireEvent.click(screen.getByRole('button', { name: 'Skip' })); fireEvent.click(screen.getByRole('button', { name: 'Reveal answer' }))
+    expect(input.value).toBe('Can'); expect(screen.getByRole('heading', { name: 'Paused' })).toBeTruthy(); expect(screen.queryByRole('heading', { name: 'Timed run complete' })).toBeNull()
   })
 })

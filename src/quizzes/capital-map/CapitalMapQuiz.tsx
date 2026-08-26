@@ -4,8 +4,10 @@ import { checkCapitalAnswer } from '../../core/answerMatching'
 import type { Capital } from '../../core/capital'
 import { entityCatalog } from '../../core/entity'
 import { readScoreboard, recordScoreboardEntry, type ScoreboardEntry, type ScoreboardStorage } from '../../core/scoreboard/scoreboard'
-import { currentQuestionId, elapsedTimedSessionMs, isTimedSessionComplete, startTimedSession, timedSessionOutcome, transitionTimedSession, type TimedSession, type TimedSessionAction } from '../../core/session/timedSession'
+import { currentQuestionId, elapsedTimedSessionMs, isTimedSessionComplete, isTimedSessionPaused, pauseTimedSession, resumeTimedSession, startTimedSession, timedSessionOutcome, transitionTimedSession, type TimedSession, type TimedSessionAction } from '../../core/session/timedSession'
+import { timedScoreDataVersion } from '../../core/session/timedScoreVersion'
 import { advanceQuiz, isComplete, startQuiz, type QuizProgress } from '../../core/shuffledDeck'
+import { TimedPause } from '../../components/TimedPause'
 import { CapitalMap } from './CapitalMap'
 import { capitalMapContinents, capitalsForContinent, isTimedCapitalAnswerAccepted, type CapitalMapContinent, type CapitalMapMode, type CapitalStatus } from './capitalMapModes'
 
@@ -67,14 +69,15 @@ function useFullSizeViewport(): boolean {
 function TimedClock({ session }: { session: TimedSession }) {
   const [now, setNow] = useState(() => performance.now())
   const complete = isTimedSessionComplete(session)
+  const paused = isTimedSessionPaused(session)
 
   useEffect(() => {
     const update = () => setNow(performance.now())
     update()
-    if (complete) return undefined
+    if (complete || paused) return undefined
     const interval = window.setInterval(update, 250)
     return () => window.clearInterval(interval)
-  }, [session, complete])
+  }, [session, complete, paused])
 
   const elapsed = readableDuration(elapsedTimedSessionMs(session, now))
   return <p className="timer" aria-label={`Elapsed time ${elapsed}`}>Time {elapsed}</p>
@@ -136,6 +139,7 @@ export function CapitalMapQuiz({ data = capitalData }: CapitalMapQuizProps) {
   const recordedSessionRef = useRef<TimedSession | null>(null)
   const composingRef = useRef(false)
   const timedActionLockRef = useRef(false)
+  const timedPausedRef = useRef(false)
   const fullSizeViewport = useFullSizeViewport()
 
   const activeCapitals = useMemo(() => capitalsForContinent(data, active.continent), [data, active.continent])
@@ -145,7 +149,8 @@ export function CapitalMapQuiz({ data = capitalData }: CapitalMapQuizProps) {
   const complete = practiceComplete || timedComplete
   const timedQuestionId = timedSession ? currentQuestionId(timedSession) : null
   const target = active.mode === 'timed' ? activeCapitals.find((capital) => capital.id === timedQuestionId) : quiz.deck[quiz.index]
-  const scope = useMemo(() => ({ quizId: 'capital-map', filters: { continent: active.continent }, dataVersion: CAPITAL_MAP_DATA_VERSION }), [active.continent])
+  const timedDataVersion = timedScoreDataVersion(CAPITAL_MAP_DATA_VERSION)
+  const scope = useMemo(() => ({ quizId: 'capital-map', filters: { continent: active.continent }, dataVersion: timedDataVersion }), [active.continent, timedDataVersion])
 
   const timedStatuses = useMemo<Readonly<Record<string, CapitalStatus>>>(() => timedSession?.statusByQuestionId ?? {}, [timedSession])
   const showPracticePreviousAnswerRecap = previousAnswer !== null && active.mode === 'practice' && fullSizeViewport
@@ -178,15 +183,16 @@ export function CapitalMapQuiz({ data = capitalData }: CapitalMapQuizProps) {
       revealedCount: outcome.revealedCount,
       totalCount: outcome.totalCount,
       completedAt: new Date().toISOString(),
-      dataVersion: CAPITAL_MAP_DATA_VERSION,
+      dataVersion: timedDataVersion,
     }
     setScoreboard(recordScoreboardEntry(safeLocalStorage(), scope, entry))
-  }, [scope, timedSession])
+  }, [scope, timedDataVersion, timedSession])
 
   function clearTransitions() {
     window.clearTimeout(advanceTimerRef.current)
     setAdvancing(false)
     timedActionLockRef.current = false
+    timedPausedRef.current = false
   }
 
   function advancePresentation() {
@@ -214,7 +220,7 @@ export function CapitalMapQuiz({ data = capitalData }: CapitalMapQuizProps) {
     setQuiz(initialQuiz(nextDeck))
     setPreviousAnswer(null)
     setAnswer('')
-    setScoreboard(readScoreboard(safeLocalStorage(), { quizId: 'capital-map', filters: { continent: config.continent }, dataVersion: CAPITAL_MAP_DATA_VERSION }))
+    setScoreboard(readScoreboard(safeLocalStorage(), { quizId: 'capital-map', filters: { continent: config.continent }, dataVersion: timedScoreDataVersion(CAPITAL_MAP_DATA_VERSION) }))
     setTimedSession(startTimedSession(nextDeck.map((capital) => capital.id), performance.now()))
     setFeedback({ kind: 'neutral', message: 'Timed run started. Type the circled capital.' })
   }
@@ -255,7 +261,7 @@ export function CapitalMapQuiz({ data = capitalData }: CapitalMapQuizProps) {
   }
 
   function performTimedAction(action: TimedSessionAction) {
-    if (!timedSession || !target || (action !== 'skip' && timedActionLockRef.current)) return
+    if (!timedSession || !target || timedPausedRef.current || (action !== 'skip' && timedActionLockRef.current)) return
     const now = performance.now()
     if (action !== 'skip') timedActionLockRef.current = true
     const resolvedTarget = target
@@ -277,6 +283,7 @@ export function CapitalMapQuiz({ data = capitalData }: CapitalMapQuizProps) {
   }
 
   function updateTimedAnswer(value: string) {
+    if (timedPausedRef.current) return
     setAnswer(value)
     if (composingRef.current || !target || timedActionLockRef.current) return
     setFeedback({ kind: 'neutral', message: 'Type the circled capital.' })
@@ -295,6 +302,20 @@ export function CapitalMapQuiz({ data = capitalData }: CapitalMapQuizProps) {
   function restartCurrentSetup() {
     if (active.mode === 'timed') startTimed(active)
     else resetPractice(active)
+  }
+
+  function pauseTimedRun() {
+    if (!timedSession || !target || timedPausedRef.current) return
+    const now = performance.now()
+    timedPausedRef.current = true
+    setTimedSession((session) => session ? pauseTimedSession(session, now) : session)
+  }
+
+  function resumeTimedRun() {
+    if (!timedPausedRef.current) return
+    const now = performance.now()
+    timedPausedRef.current = false
+    setTimedSession((session) => session ? resumeTimedSession(session, now) : session)
   }
 
   const setup = <SetupControls draft={draft} active={active} availableCount={draftCapitalCount} onDraftMode={(mode) => setDraft((current) => ({ ...current, mode }))} onDraftContinent={(continent) => setDraft((current) => ({ ...current, continent }))} onApply={applyDraft} />
@@ -376,7 +397,7 @@ export function CapitalMapQuiz({ data = capitalData }: CapitalMapQuizProps) {
               placeholder="Type your answer"
             />
             <p className={`feedback ${feedback.kind}`} role="status" aria-live="polite">{feedback.message}</p>
-            <div className="timed-actions"><button className="secondary-button" type="button" onClick={(event) => activateManualTimedAction('skip', event)} onKeyDown={preventRepeatedTimedKeyboardActivation}>Skip</button><button className="text-button" type="button" onClick={(event) => activateManualTimedAction('reveal', event)} onKeyDown={preventRepeatedTimedKeyboardActivation}>Reveal answer</button></div>
+            <div className="timed-actions"><TimedPause paused={isTimedSessionPaused(timedSession!)} canPause={Boolean(target && !timedComplete)} focusRef={inputRef} onPause={pauseTimedRun} onResume={resumeTimedRun} /><button className="secondary-button" type="button" onClick={(event) => activateManualTimedAction('skip', event)} onKeyDown={preventRepeatedTimedKeyboardActivation}>Skip</button><button className="text-button" type="button" onClick={(event) => activateManualTimedAction('reveal', event)} onKeyDown={preventRepeatedTimedKeyboardActivation}>Reveal answer</button></div>
             <p className="timed-legend">Status: white dots are pending or skipped; green dots are correct; red dots were revealed. The gold ring marks the current capital.</p>
           </>}
         </aside>

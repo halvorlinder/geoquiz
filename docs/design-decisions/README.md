@@ -80,3 +80,4 @@ paraphrase user direction rather than copying private conversation.
 | [DD-0027](DD-0027-fixed-viewport-site-layout.md) | Fixed-viewport site layout and keyboard flow | accepted | all routes, responsive layout, overlay quiz menu, keyboard interaction |
 | [DD-0028](DD-0028-multi-run-border-sections.md) | Complete multi-run border sections | accepted | border image quiz, local border geometry, Easy and Hard border rendering, Practice disclosure |
 | [DD-0029](DD-0029-crawlable-quiz-routes.md) | Crawlable quiz routes preserve overlay navigation | accepted | app shell, routing, quiz navigation, search discovery, static hosting |
+| [DD-0030](DD-0030-timed-run-pause.md) | Timed runs support a manual pause | accepted | shared timed sessions, timed quiz interaction, scoreboards, keyboard accessibility |

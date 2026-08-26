@@ -8,6 +8,10 @@ export type TimedSession = Readonly<{
   statusByQuestionId: Readonly<Record<string, QuestionStatus>>
   startedAtMs: number
   completedAtMs: number | null
+  /** The monotonic instant at which the run was manually paused. */
+  pausedAtMs: number | null
+  /** Sum of completed pause intervals; the open interval is derived from pausedAtMs. */
+  pausedDurationMs: number
 }>
 
 type RandomSource = () => number
@@ -62,6 +66,8 @@ function freezeSession(
   statusByQuestionId: Record<string, QuestionStatus>,
   startedAtMs: number,
   completedAtMs: number | null,
+  pausedAtMs: number | null,
+  pausedDurationMs: number,
 ): TimedSession {
   const copiedStatuses = createStatusRecord(questionIds, statusByQuestionId)
   return Object.freeze({
@@ -70,6 +76,8 @@ function freezeSession(
     statusByQuestionId: Object.freeze(copiedStatuses),
     startedAtMs,
     completedAtMs,
+    pausedAtMs,
+    pausedDurationMs,
   })
 }
 
@@ -139,6 +147,10 @@ function assertValidSession(session: TimedSession): Readonly<Record<string, Ques
   if (!Array.isArray(session.pendingQuestionIds)) fail('pending question IDs must be an array')
   const statusByQuestionId = assertExactStatusRecord(session.statusByQuestionId, session.questionIds)
   assertFiniteClock(session.startedAtMs, 'startedAtMs')
+  if (session.pausedAtMs !== null) assertFiniteClock(session.pausedAtMs, 'pausedAtMs')
+  if (!Number.isFinite(session.pausedDurationMs) || session.pausedDurationMs < 0) {
+    fail('pausedDurationMs must be a non-negative finite number')
+  }
 
   const allQuestionIds = new Set(session.questionIds)
 
@@ -163,6 +175,7 @@ function assertValidSession(session: TimedSession): Readonly<Record<string, Ques
   } else if (session.completedAtMs !== null) {
     fail('incomplete state cannot have completedAtMs')
   }
+  if (session.completedAtMs !== null && session.pausedAtMs !== null) fail('completed state cannot be paused')
   return statusByQuestionId
 }
 
@@ -190,6 +203,8 @@ export function startTimedSession(
     statusByQuestionId,
     nowMs,
     null,
+    null,
+    0,
   )
 }
 
@@ -206,8 +221,31 @@ export function isTimedSessionComplete(session: TimedSession): boolean {
 export function elapsedTimedSessionMs(session: TimedSession, nowMs: number): number {
   assertValidSession(session)
   assertFiniteClock(nowMs, 'nowMs')
-  const endMs = session.completedAtMs ?? nowMs
-  return Math.max(0, endMs - session.startedAtMs)
+  const endMs = session.completedAtMs ?? session.pausedAtMs ?? nowMs
+  return Math.max(0, endMs - session.startedAtMs - session.pausedDurationMs)
+}
+
+export function isTimedSessionPaused(session: TimedSession): boolean {
+  assertValidSession(session)
+  return session.pausedAtMs !== null
+}
+
+/** Freezes active elapsed time without changing the pending queue or outcomes. */
+export function pauseTimedSession(session: TimedSession, nowMs: number): TimedSession {
+  const statusByQuestionId = assertValidSession(session)
+  assertFiniteClock(nowMs, 'nowMs')
+  if (session.pendingQuestionIds.length === 0) fail('cannot pause a completed run')
+  if (session.pausedAtMs !== null) fail('run is already paused')
+  return freezeSession(session.questionIds, session.pendingQuestionIds, createStatusRecord(session.questionIds, statusByQuestionId), session.startedAtMs, null, nowMs, session.pausedDurationMs)
+}
+
+/** Resumes a manually paused run, accumulating exactly its just-finished pause interval. */
+export function resumeTimedSession(session: TimedSession, nowMs: number): TimedSession {
+  const statusByQuestionId = assertValidSession(session)
+  assertFiniteClock(nowMs, 'nowMs')
+  if (session.pausedAtMs === null) fail('run is not paused')
+  const addedPause = Math.max(0, nowMs - session.pausedAtMs)
+  return freezeSession(session.questionIds, session.pendingQuestionIds, createStatusRecord(session.questionIds, statusByQuestionId), session.startedAtMs, null, null, session.pausedDurationMs + addedPause)
 }
 
 /**
@@ -223,6 +261,7 @@ export function transitionTimedSession(
   assertFiniteClock(nowMs, 'nowMs')
   if (!['correct', 'skip', 'reveal'].includes(action)) fail('action is invalid')
   if (session.pendingQuestionIds.length === 0) fail('cannot transition a completed run')
+  if (session.pausedAtMs !== null) fail('cannot transition a paused run')
 
   const [currentQuestionId, ...remainingQuestionIds] = session.pendingQuestionIds
   if (action === 'skip') {
@@ -232,6 +271,8 @@ export function transitionTimedSession(
       createStatusRecord(session.questionIds, statusByQuestionId),
       session.startedAtMs,
       null,
+      null,
+      session.pausedDurationMs,
     )
   }
 
@@ -249,6 +290,8 @@ export function transitionTimedSession(
     nextStatusByQuestionId,
     session.startedAtMs,
     completedAtMs,
+    null,
+    session.pausedDurationMs,
   )
 }
 

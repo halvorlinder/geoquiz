@@ -2,8 +2,10 @@ import { useEffect, useMemo, useRef, useState, type ChangeEvent, type KeyboardEv
 import type { Capital } from '../core/capital'
 import type { StudyEntity } from '../core/entity'
 import { readScoreboard, recordScoreboardEntry, type ScoreboardEntry, type ScoreboardStorage } from '../core/scoreboard/scoreboard'
-import { currentQuestionId, elapsedTimedSessionMs, isTimedSessionComplete, startTimedSession, timedSessionOutcome, transitionTimedSession, type TimedSession, type TimedSessionAction } from '../core/session/timedSession'
+import { currentQuestionId, elapsedTimedSessionMs, isTimedSessionComplete, isTimedSessionPaused, pauseTimedSession, resumeTimedSession, startTimedSession, timedSessionOutcome, transitionTimedSession, type TimedSession, type TimedSessionAction } from '../core/session/timedSession'
+import { timedScoreDataVersion } from '../core/session/timedScoreVersion'
 import { advanceQuiz, isComplete, startQuiz, type QuizProgress } from '../core/shuffledDeck'
+import { TimedPause } from './TimedPause'
 
 const capitalFieldContinents = ['All', 'Africa', 'Asia', 'Europe', 'North America', 'South America', 'Oceania'] as const
 export type CapitalFieldContinent = (typeof capitalFieldContinents)[number]
@@ -51,13 +53,14 @@ function allLocked(state: FieldState, fieldCount: number): boolean { return firs
 function TimedClock({ session }: { session: TimedSession }) {
   const [now, setNow] = useState(() => performance.now())
   const complete = isTimedSessionComplete(session)
+  const paused = isTimedSessionPaused(session)
   useEffect(() => {
     const update = () => setNow(performance.now())
     update()
-    if (complete) return undefined
+    if (complete || paused) return undefined
     const interval = window.setInterval(update, 250)
     return () => window.clearInterval(interval)
-  }, [complete, session])
+  }, [complete, paused, session])
   const elapsed = readableDuration(elapsedTimedSessionMs(session, now))
   return <p className="timer" aria-label={`Elapsed time ${elapsed}`}>Time {elapsed}</p>
 }
@@ -107,10 +110,12 @@ export function CapitalFieldsQuiz({ quizId, quizTitle, dataVersion, entities, ca
   const [presentationKey, setPresentationKey] = useState(0)
   const [scoreboard, setScoreboard] = useState<readonly ScoreboardEntry[]>([])
   const fieldRefs = useRef<Record<number, HTMLInputElement | null>>({})
+  const pauseFocusRef = useRef<HTMLElement | null>(null)
   const nextButtonRef = useRef<HTMLButtonElement>(null)
   const revealSummaryRef = useRef<HTMLElement>(null)
   const restartButtonRef = useRef<HTMLButtonElement>(null)
   const actionLockRef = useRef(false)
+  const timedPausedRef = useRef(false)
   const practiceActionLockRef = useRef(false)
   const acknowledgementLockRef = useRef(false)
   const composingRef = useRef(false)
@@ -126,7 +131,8 @@ export function CapitalFieldsQuiz({ quizId, quizTitle, dataVersion, entities, ca
   const complete = practiceComplete || timedComplete
   const focusIndex = target ? firstUnresolvedField(currentState, target.fields.length) : null
   const targetId = target?.id
-  const scope = useMemo(() => ({ quizId, filters: { continent: active.continent }, dataVersion }), [active.continent, dataVersion, quizId])
+  const timedDataVersion = timedScoreDataVersion(dataVersion)
+  const scope = useMemo(() => ({ quizId, filters: { continent: active.continent }, dataVersion: timedDataVersion }), [active.continent, quizId, timedDataVersion])
 
   useEffect(() => {
     if (!targetId || complete || focusIndex === null) return
@@ -143,13 +149,13 @@ export function CapitalFieldsQuiz({ quizId, quizTitle, dataVersion, entities, ca
     const outcome = timedSessionOutcome(timedSession)
     setScoreboard(recordScoreboardEntry(safeLocalStorage(), scope, {
       durationMs: Math.round(elapsedTimedSessionMs(timedSession, performance.now())), correctCount: outcome.correctCount,
-      revealedCount: outcome.revealedCount, totalCount: outcome.totalCount, completedAt: new Date().toISOString(), dataVersion,
+      revealedCount: outcome.revealedCount, totalCount: outcome.totalCount, completedAt: new Date().toISOString(), dataVersion: timedDataVersion,
     }))
-  }, [dataVersion, scope, timedSession])
+  }, [scope, timedDataVersion, timedSession])
 
   function resetQuestionState() {
     setPracticeState(emptyFieldState()); setTimedStates({}); setRevealed(false); setRevealAcknowledgement(null); setQuestionComplete(false)
-    composingRef.current = false; actionLockRef.current = false; practiceActionLockRef.current = false; acknowledgementLockRef.current = false
+    composingRef.current = false; actionLockRef.current = false; timedPausedRef.current = false; practiceActionLockRef.current = false; acknowledgementLockRef.current = false
   }
   function startPractice(config: AppliedConfig) {
     setActive(config); setQuiz(startQuiz(questions(entities, capitals, config.continent))); setTimedSession(null); resetQuestionState()
@@ -160,7 +166,7 @@ export function CapitalFieldsQuiz({ quizId, quizTitle, dataVersion, entities, ca
     if (currentQuestions.length === 0) return
     setActive(config); setQuiz(startQuiz(currentQuestions)); resetQuestionState(); recordedSessionRef.current = null
     setTimedSession(startTimedSession(currentQuestions.map((question) => question.id), performance.now()))
-    setScoreboard(readScoreboard(safeLocalStorage(), { quizId, filters: { continent: config.continent }, dataVersion }))
+    setScoreboard(readScoreboard(safeLocalStorage(), { quizId, filters: { continent: config.continent }, dataVersion: timedScoreDataVersion(dataVersion) }))
     setPresentationKey((key) => key + 1); setFeedback({ kind: 'neutral', message: 'Timed run started. Type each required capital.' })
   }
   function applyDraft() { if (draft.mode === 'timed') startTimed(draft); else startPractice(draft) }
@@ -197,12 +203,12 @@ export function CapitalFieldsQuiz({ quizId, quizTitle, dataVersion, entities, ca
   }
   function updateTimedState(questionId: string, update: (state: FieldState) => FieldState) { setTimedStates((states) => ({ ...states, [questionId]: update(states[questionId] ?? emptyFieldState()) })) }
   function transitionTimed(action: TimedSessionAction, message: Feedback) {
-    if (!timedSession || !target || actionLockRef.current) return
+    if (!timedSession || !target || timedPausedRef.current || actionLockRef.current) return
     actionLockRef.current = true; setTimedSession((session) => session ? transitionTimedSession(session, action, performance.now()) : session)
     setPresentationKey((key) => key + 1); setFeedback(message); window.setTimeout(() => { actionLockRef.current = false }, 0)
   }
   function updateTimedValue(index: number, value: string) {
-    if (!target || actionLockRef.current || isLocked(currentState, index)) return
+    if (!target || timedPausedRef.current || actionLockRef.current || isLocked(currentState, index)) return
     if (composingRef.current) { updateTimedState(target.id, (state) => ({ ...state, values: { ...state.values, [index]: value } })); return }
     const field = target.fields[index]
     const accepted = isTimedAnswerAccepted(value, field, capitals)
@@ -213,7 +219,7 @@ export function CapitalFieldsQuiz({ quizId, quizTitle, dataVersion, entities, ca
     else setFeedback({ kind: 'neutral', message: 'Type each required capital.' })
   }
   function revealTimedAnswers() {
-    if (!target) return
+    if (!target || timedPausedRef.current) return
     const values = { ...currentState.values }
     target.fields.forEach((field, index) => { if (!isLocked(currentState, index)) values[index] = field.capital.capital })
     updateTimedState(target.id, () => ({ values, locked: target.fields.map((_, index) => index), revealed: target.fields.flatMap((_, index) => isLocked(currentState, index) ? [] : [index]) }))
@@ -229,6 +235,8 @@ export function CapitalFieldsQuiz({ quizId, quizTitle, dataVersion, entities, ca
     if (!timedSession) return
     transitionTimed('skip', { kind: 'neutral', message: timedSession.pendingQuestionIds.length === 1 ? 'Skipped. This is the only pending country, so it remains current.' : 'Skipped. This country returns after the other pending countries.' })
   }
+  function pauseTimedRun() { if (!timedSession || !target || timedPausedRef.current) return; const now = performance.now(); timedPausedRef.current = true; setTimedSession((session) => session ? pauseTimedSession(session, now) : session) }
+  function resumeTimedRun() { if (!timedPausedRef.current) return; const now = performance.now(); timedPausedRef.current = false; setTimedSession((session) => session ? resumeTimedSession(session, now) : session) }
   function manualTimedAction(action: 'skip' | 'reveal', event: MouseEvent<HTMLButtonElement>) { if (event.detail > 1) return; if (action === 'skip') skipTimedQuestion(); else revealTimedAnswers() }
   function preventRepeatedKeyboardActivation(event: KeyboardEvent<HTMLButtonElement>) { if (event.repeat && (event.key === 'Enter' || event.key === ' ')) event.preventDefault() }
 
@@ -261,8 +269,8 @@ export function CapitalFieldsQuiz({ quizId, quizTitle, dataVersion, entities, ca
       <div className="country-capital-fields">{target.fields.map((field, index) => {
         const locked = isLocked(currentState, index); const fieldRevealed = isRevealed(currentState, index); const status = fieldRevealed ? 'Revealed' : locked ? 'Correct' : 'Pending'
         const fieldId = `${quizId}-field-${index}`; const statusId = `${quizId}-status-${index}`
-        return <div className={`country-capital-field field-${status.toLowerCase()}`} key={field.capital.id}><label htmlFor={fieldId}>{field.role}</label><input ref={(element) => { fieldRefs.current[index] = element }} id={fieldId} name={fieldId} value={currentState.values[index] ?? ''} onChange={(event: ChangeEvent<HTMLInputElement>) => active.mode === 'timed' ? updateTimedValue(index, event.target.value) : setPracticeValue(index, event.target.value)} onCompositionStart={() => { composingRef.current = true }} onCompositionEnd={(event) => { composingRef.current = false; if (active.mode === 'timed') updateTimedValue(index, event.currentTarget.value) }} disabled={locked || resolved} autoComplete="off" autoCapitalize="words" spellCheck="false" placeholder="Type your answer" aria-describedby={statusId} /><p id={statusId} className="field-status"><span aria-hidden="true">{status === 'Correct' ? '✓ ' : status === 'Revealed' ? '↳ ' : '○ '}</span>{status}</p></div>
+        return <div className={`country-capital-field field-${status.toLowerCase()}`} key={field.capital.id}><label htmlFor={fieldId}>{field.role}</label><input ref={(element) => { fieldRefs.current[index] = element; if (index === focusIndex) pauseFocusRef.current = element }} id={fieldId} name={fieldId} value={currentState.values[index] ?? ''} onChange={(event: ChangeEvent<HTMLInputElement>) => active.mode === 'timed' ? updateTimedValue(index, event.target.value) : setPracticeValue(index, event.target.value)} onCompositionStart={() => { composingRef.current = true }} onCompositionEnd={(event) => { composingRef.current = false; if (active.mode === 'timed') updateTimedValue(index, event.currentTarget.value) }} disabled={locked || resolved} autoComplete="off" autoCapitalize="words" spellCheck="false" placeholder="Type your answer" aria-describedby={statusId} /><p id={statusId} className="field-status"><span aria-hidden="true">{status === 'Correct' ? '✓ ' : status === 'Revealed' ? '↳ ' : '○ '}</span>{status}</p></div>
       })}</div><p className={`feedback ${feedback.kind}`} role="status" aria-live="polite">{feedback.message}</p>
-      {active.mode === 'practice' ? <div className="country-capital-actions">{!resolved ? <><button className="primary-button" type="submit">Check answers</button><button className="text-button" type="button" onClick={revealPracticeAnswers}>Reveal answers</button></> : <button ref={nextButtonRef} className="primary-button" type="button" onClick={nextPracticeQuestion}>Next country <span aria-hidden="true">→</span></button>}</div> : <div className="timed-actions"><button className="secondary-button" type="button" onClick={(event) => manualTimedAction('skip', event)} onKeyDown={preventRepeatedKeyboardActivation}>Skip</button><button className="text-button" type="button" onClick={(event) => manualTimedAction('reveal', event)} onKeyDown={preventRepeatedKeyboardActivation}>Reveal answers</button></div>}</form>
+      {active.mode === 'practice' ? <div className="country-capital-actions">{!resolved ? <><button className="primary-button" type="submit">Check answers</button><button className="text-button" type="button" onClick={revealPracticeAnswers}>Reveal answers</button></> : <button ref={nextButtonRef} className="primary-button" type="button" onClick={nextPracticeQuestion}>Next country <span aria-hidden="true">→</span></button>}</div> : <div className="timed-actions"><TimedPause paused={isTimedSessionPaused(timedSession!)} canPause={!timedComplete && !revealAcknowledgement} focusRef={pauseFocusRef} onPause={pauseTimedRun} onResume={resumeTimedRun} /><button className="secondary-button" type="button" onClick={(event) => manualTimedAction('skip', event)} onKeyDown={preventRepeatedKeyboardActivation}>Skip</button><button className="text-button" type="button" onClick={(event) => manualTimedAction('reveal', event)} onKeyDown={preventRepeatedKeyboardActivation}>Reveal answers</button></div>}</form>
     </section></main>
 }
