@@ -79,7 +79,9 @@ duplicates.
 Aliases are collision-checked after the same diacritic/punctuation normalization
 used by the quiz. Consequently `Åland`/`Aland` and `Curaçao`/`Curacao` do not
 need redundant catalog aliases. Sovereign canonical names and ordinary aliases
-are supplied from the shared entity catalog; its exact-only abbreviations (such
+are supplied from the shared entity catalog; the flag catalog’s version 2
+Vatican City naming correction keeps `Vatican`, `the Vatican`, and legacy
+`Holy See` owned there rather than duplicating them in a flag record. Its exact-only abbreviations (such
 as UK, US, USA, and DPRK) are deliberately not duplicated in this flag catalog.
 Territory-only aliases remain here, including Macau and Virgin Islands forms.
 The catalog intentionally excludes ambiguous `Congo` and `Saint Martin` aliases.

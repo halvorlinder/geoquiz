@@ -94,7 +94,7 @@ export function parseEntityCatalog(value: unknown): EntityCatalog {
   if (!isRecord(value.provenance)) throw new Error('Invalid entity catalog: provenance must be an object')
   if (Object.keys(value.provenance).sort().join(',') !== 'continentPolicy,entityRoster,source') throw new Error('Invalid entity catalog: provenance has missing or extra fields')
   if (!Array.isArray(value.entities)) throw new Error('Invalid entity catalog: entities must be an array')
-  if (value.version !== 2) throw new Error('Invalid entity catalog: version must be 2')
+  if (value.version !== 3) throw new Error('Invalid entity catalog: version must be 3')
   return Object.freeze({
     version: value.version,
     checked: requiredString(value.checked, 'checked'),

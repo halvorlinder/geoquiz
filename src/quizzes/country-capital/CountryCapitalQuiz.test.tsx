@@ -239,7 +239,7 @@ describe('CountryCapitalQuiz', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
     fireEvent.click(screen.getByRole('button', { name: 'Reveal answers' }))
     fireEvent.click(screen.getByRole('button', { name: 'Continue' }))
-    const dataVersion = timedScoreDataVersion('country-capital-v1-entities-2-capital-data-v1')
+    const dataVersion = timedScoreDataVersion('country-capital-v1-entities-3-capital-data-v1')
     const europeKey = scoreboardKey({ quizId: 'country-capital', filters: { continent: 'Europe' }, dataVersion })
     const allKey = scoreboardKey({ quizId: 'country-capital', filters: { continent: 'All' }, dataVersion })
     const stored = JSON.parse(window.localStorage.getItem(europeKey) ?? '{}') as { entries?: Array<{ durationMs: number; correctCount: number; revealedCount: number; totalCount: number; dataVersion: string }> }

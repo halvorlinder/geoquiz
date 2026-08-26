@@ -96,7 +96,7 @@ describe('ShapeCapitalQuiz', () => {
     expect(screen.getByText('Constitutional capital is correct. Continue with the remaining fields.')).toBeTruthy()
     fireEvent.change(screen.getByLabelText('Seat of government'), { target: { value: 'La Paz' } })
     expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
-    const dataVersion = timedScoreDataVersion('shape-capital-v1-entities-2-capital-data-v1-shapes-3')
+    const dataVersion = timedScoreDataVersion('shape-capital-v1-entities-3-capital-data-v1-shapes-3')
     const key = scoreboardKey({ quizId: 'shape-capital', filters: { continent: 'All' }, dataVersion })
     const stored = JSON.parse(window.localStorage.getItem(key) ?? '{}')
     expect(stored.entries).toHaveLength(1)

@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { flagAssetUrl, flagRecordById, flagRecordsForScope, normalizeFlagAnswer } from './flags'
+import { flagAssetUrl, flagCatalogVersion, flagRecordById, flagRecordsForScope, normalizeFlagAnswer } from './flags'
 
 describe('flag catalog helpers', () => {
   it('has exact scopes and deterministic code ordering', () => {
+    expect(flagCatalogVersion).toBe(2)
     expect(flagRecordsForScope('without-territories')).toHaveLength(197)
     expect(flagRecordsForScope('only-territories')).toHaveLength(38)
     expect(flagRecordsForScope('with-territories')).toHaveLength(235)

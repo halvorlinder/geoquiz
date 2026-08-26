@@ -7,7 +7,7 @@ const sovereignKeys: Record<string, string> = `AFG AF AGO AO ALB AL AND AD ARE A
 
 // Sovereign abbreviations are owned by entities.json so the neighbour and flag
 // quizzes share the exact-only answer policy. Territory aliases remain here.
-const sovereignAliases: Record<string, string[]> = { BRN: ['Brunei Darussalam'], CIV: ['Ivory Coast'], CPV: ['Cape Verde'], CZE: ['Czech Republic'], FSM: ['Micronesia'], LAO: ['Lao PDR'], PSE: ['Palestine'], SWZ: ['Swaziland'], TLS: ['East Timor'], TUR: ['Turkey'], VAT: ['Vatican City', 'Holy See'] }
+const sovereignAliases: Record<string, string[]> = { BRN: ['Brunei Darussalam'], CIV: ['Ivory Coast'], CPV: ['Cape Verde'], CZE: ['Czech Republic'], FSM: ['Micronesia'], LAO: ['Lao PDR'], PSE: ['Palestine'], SWZ: ['Swaziland'], TLS: ['East Timor'], TUR: ['Turkey'] }
 
 export const territoryPolicy = [
   ['AX', 'Åland Islands', [], 'Finland', 'territory', 'AX', 'territorial-or-local', null], ['FO', 'Faroe Islands', [], 'Denmark', 'territory', 'FO', 'territorial-or-local', null], ['GL', 'Greenland', [], 'Denmark', 'territory', 'GL', 'territorial-or-local', null], ['HK', 'Hong Kong', [], 'China', 'territory', 'HK', 'territorial-or-local', null], ['MO', 'Macao', ['Macau'], 'China', 'territory', 'MO', 'territorial-or-local', null],
@@ -28,7 +28,7 @@ export function validateFlagCatalogPolicy(value: unknown, capitalEntities: Map<s
   if (!value || typeof value !== 'object' || Array.isArray(value)) return ['catalog root must be an object']
   const catalog = value as { version?: unknown; checked?: unknown; source?: unknown; records?: unknown }
   if (Object.keys(catalog).sort().join(',') !== 'checked,records,source,version') return ['catalog root schema has missing or extra fields']
-  if (catalog.version !== 1 || catalog.checked !== '2026-08-20' || JSON.stringify(catalog.source) !== JSON.stringify(pinnedFlagSource) || !Array.isArray(catalog.records)) return ['catalog root version, checked, source, or records is invalid']
+  if (catalog.version !== 2 || catalog.checked !== '2026-08-20' || JSON.stringify(catalog.source) !== JSON.stringify(pinnedFlagSource) || !Array.isArray(catalog.records)) return ['catalog root version, checked, source, or records is invalid']
   if (catalog.records.length !== 235 || Object.keys(sovereignKeys).length !== 197 || territoryPolicy.length !== 38) failures.push('catalog must contain exact 197 sovereign and 38 territory records')
   const byId = new Map<string, CatalogRecord>()
   for (const raw of catalog.records) {

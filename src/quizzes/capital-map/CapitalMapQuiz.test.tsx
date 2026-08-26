@@ -321,7 +321,7 @@ describe('CapitalMapQuiz interaction and focus flow', () => {
     fireEvent.change(screen.getByRole('textbox', { name: 'Capital city' }), { target: { value: 'Oslo' } })
     expect(screen.getByText('Correct — Oslo.')).toBeTruthy()
     expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
-    const dataVersion = timedScoreDataVersion('capital-map-v1-entities-2-capitals-1')
+    const dataVersion = timedScoreDataVersion('capital-map-v1-entities-3-capitals-1')
     const key = scoreboardKey({ quizId: 'capital-map', filters: { continent: 'All' }, dataVersion })
     const stored = JSON.parse(window.localStorage.getItem(key) ?? '{}')
     expect(stored.entries).toHaveLength(1)
@@ -437,7 +437,7 @@ describe('CapitalMapQuiz interaction and focus flow', () => {
     expect(screen.getAllByText(/1 correct · 1 revealed · 2 total/)).toHaveLength(2)
     expect(screen.getByRole('listitem').textContent).toMatch(/0:00 · 1 correct · 1 revealed · 2 total/)
 
-    const dataVersion = timedScoreDataVersion('capital-map-v1-entities-2-capitals-1')
+    const dataVersion = timedScoreDataVersion('capital-map-v1-entities-3-capitals-1')
     const allKey = scoreboardKey({ quizId: 'capital-map', filters: { continent: 'All' }, dataVersion })
     expect(JSON.parse(window.localStorage.getItem(allKey) ?? '{}').entries).toHaveLength(1)
     fireEvent.change(screen.getByLabelText('Question set'), { target: { value: 'Asia' } })

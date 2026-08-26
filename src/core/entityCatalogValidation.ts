@@ -73,8 +73,8 @@ export function validateEntityCatalog(entityCatalog: unknown, capitals: unknown)
   }
 
   if (!isRecord(entityCatalog)) return [...failures, 'catalog must be an object']
-  if (entityCatalog.version !== 2) failures.push('catalog version must be 2')
-  if (entityCatalog.checked !== '2026-08-24') failures.push('catalog checked date must be 2026-08-24')
+  if (entityCatalog.version !== 3) failures.push('catalog version must be 3')
+  if (entityCatalog.checked !== '2026-08-26') failures.push('catalog checked date must be 2026-08-26')
   if (!isRecord(entityCatalog.provenance) || !isString(entityCatalog.provenance.entityRoster) || !isString(entityCatalog.provenance.continentPolicy) || !isString(entityCatalog.provenance.source)) {
     failures.push('catalog provenance must contain entityRoster, continentPolicy, and source')
   }

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { studyEntities } from '../../core/entity'
 import { flagRecordById } from '../../core/flags'
 import { flagTerritoryContinents } from '../../core/flagTerritoryContinentPolicy'
 import { flagAnswerCorpus, flagCountryQuestions, flagExactAnswerOwners, flagRecordContinent, isFlagCountryAnswerCorrect, isTimedFlagCountryAnswerAccepted, isTimedFlagCountryExactSubmitAccepted, matchFlagCountryAnswer } from './flagCountry'
@@ -48,6 +49,16 @@ describe('flag-country answer matching', () => {
     for (const candidate of flagAnswerCorpus()) {
       const owners = flagExactAnswerOwners(candidate.name)
       expect(owners, `${candidate.name} must have one runtime exact-answer owner`).toEqual([candidate.record.id])
+    }
+  })
+
+  it('shares every Vatican City country spelling from the entity catalog in Practice and Timed mode', () => {
+    const target = flagRecordById('VAT')
+    expect(target.name).toBe('Vatican City')
+    const entity = studyEntities.find((candidate) => candidate.code === 'VAT')!
+    for (const submitted of [entity.name, ...entity.aliases]) {
+      expect(isFlagCountryAnswerCorrect(submitted, target), `${submitted} must answer the Vatican City flag in Practice`).toBe(true)
+      expect(isTimedFlagCountryAnswerAccepted(submitted, target), `${submitted} must auto-accept for the Vatican City flag in Timed mode`).toBe(true)
     }
   })
 

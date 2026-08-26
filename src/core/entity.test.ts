@@ -14,7 +14,7 @@ void compileTimeImmutabilityGuard
 
 describe('study entity catalog', () => {
   it('exposes the versioned 197-entity catalog through safe lookups', () => {
-    expect(entityCatalog.version).toBe(2)
+    expect(entityCatalog.version).toBe(3)
     expect(studyEntities).toHaveLength(197)
     expect(getEntityByCode('tur')?.name).toBe('Türkiye')
     expect(findEntity('Turkey')?.code).toBe('TUR')
@@ -22,6 +22,7 @@ describe('study entity catalog', () => {
     expect(findEntity(' TUR ')?.code).toBe('TUR')
     expect(findEntity('U.A.E.')?.code).toBe('ARE')
     expect(findEntity('u a e')?.code).toBe('ARE')
+    for (const spelling of ['Vatican City', 'Vatican', 'the Vatican', 'Holy See']) expect(findEntity(spelling)?.code, `${spelling} must resolve to Vatican City`).toBe('VAT')
     expect(getEntityByCode('XXX')).toBeUndefined()
     expect(getEntityByCode('')).toBeUndefined()
     expect(findEntity('not an entity')).toBeUndefined()
@@ -88,7 +89,7 @@ describe('study entity catalog', () => {
 
   it('rejects malformed catalog structures before initializing helpers', () => {
     const base = {
-      version: 2,
+      version: 3,
       checked: '2026-08-20',
       provenance: {
         entityRoster: 'test',
@@ -99,7 +100,7 @@ describe('study entity catalog', () => {
     }
 
     expect(() => parseEntityCatalog({ ...base, entities: undefined })).toThrow('entities must be an array')
-    expect(() => parseEntityCatalog({ ...base, version: 1 })).toThrow('version must be 2')
+    expect(() => parseEntityCatalog({ ...base, version: 2 })).toThrow('version must be 3')
     expect(() => parseEntityCatalog({ ...base, extra: true })).toThrow('catalog has missing or extra fields')
     expect(() => parseEntityCatalog({ ...base, provenance: { ...base.provenance, extra: true } })).toThrow('provenance has missing or extra fields')
     expect(() => parseEntityCatalog({ ...base, entities: [{ ...base.entities[0], extra: true }] })).toThrow('entities[0] has missing or extra fields')

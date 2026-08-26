@@ -1,6 +1,6 @@
 # Capital dataset notes
 
-`src/data/capitals.json` is a locally bundled, deliberately finite study list. It contains 197 study entities: 193 UN members plus Vatican City / Holy See, State of Palestine, Kosovo, and Taiwan. Those map to 201 entity→capital associations and 200 unique capital places/questions. This is a learning policy, not a statement about recognition, borders, or territorial claims.
+`src/data/capitals.json` is a locally bundled, deliberately finite study list. It contains 197 study entities: 193 UN members plus Vatican City, State of Palestine, Kosovo, and Taiwan. Those map to 201 entity→capital associations and 200 unique capital places/questions. This is a learning policy, not a statement about recognition, borders, or territorial claims.
 
 ## Selection rules
 
@@ -29,7 +29,7 @@
 | Sri Lanka | Sri Jayewardenepura Kotte | Official legislative capital; Colombo remains the commercial and executive centre. |
 | Switzerland | Bern | Federal City, conventionally treated as its capital. |
 | Tanzania | Dodoma | National capital; Dar es Salaam remains the largest city and some functions remain there. |
-| Vatican City / Holy See | Vatican City | City-state / Holy See seat represented once. |
+| Vatican City | Vatican City | City-state represented once. |
 
 ## Maintenance and attribution
 

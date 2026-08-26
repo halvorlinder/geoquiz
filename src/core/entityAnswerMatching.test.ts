@@ -18,6 +18,16 @@ describe('entity neighbour answer matching', () => {
     expect(matchNeighbourAnswer('AAA', ['AAA'], [], entities)).toEqual({ status: 'invalid' })
   })
 
+  it('accepts each approved Vatican City country spelling in Practice and Timed mode', () => {
+    const target = studyEntities.find((entity) => entity.code === 'VAT')!
+    expect(target.name).toBe('Vatican City')
+    expect(target.aliases).toEqual(['Vatican', 'the Vatican', 'Holy See'])
+    for (const spelling of [target.name, ...target.aliases]) {
+      expect(matchNeighbourAnswer(spelling, ['VAT'], [], studyEntities), `${spelling} must answer Vatican City in Practice`).toMatchObject({ status: 'correct-new', entity: target })
+      expect(matchNeighbourAnswer(spelling, ['VAT'], [], studyEntities, { timed: true }), `${spelling} must answer Vatican City in Timed mode`).toMatchObject({ status: 'correct-new', entity: target })
+    }
+  })
+
   it('keeps known non-neighbours out and blocks timed prefixes and ambiguous typos', () => {
     expect(matchNeighbourAnswer('Beta State', ['AAA'], [], entities)).toMatchObject({ status: 'known-non-neighbour' })
     expect(matchNeighbourAnswer('alp', ['AAA'], [], entities, { timed: true })).toEqual({ status: 'invalid' })
