@@ -1,115 +1,97 @@
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { routeMetadata } from './appRoute'
 import { App } from './App'
 
 vi.mock('./quizzes/capital-map/CapitalMapQuiz', () => ({ default: () => <main><h1>Capital map mock</h1><input aria-label="Capital answer" /></main> }))
 
-function setHash(hash: string) {
-  window.location.hash = hash
-  fireEvent(window, new HashChangeEvent('hashchange'))
+function setPath(path: string) {
+  window.history.replaceState(window.history.state, '', path)
+  fireEvent.popState(window)
 }
 
-afterEach(() => { setHash('#/') })
+async function expectRoute(route: keyof typeof routeMetadata, heading: string) {
+  expect(await screen.findByRole('heading', { name: heading })).toBeTruthy()
+  expect(window.location.pathname).toBe(routeMetadata[route].path)
+  expect(document.title).toBe(routeMetadata[route].title)
+  expect(document.head.querySelector('meta[name="description"]')?.getAttribute('content')).toBe(routeMetadata[route].description)
+  expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(routeMetadata[route].canonicalUrl)
+  expect(document.head.querySelector('meta[name="robots"]')).toBeNull()
+  expect((screen.getByRole('dialog', { hidden: true }) as HTMLDialogElement).open).toBe(false)
+}
+
+afterEach(() => {
+  cleanup()
+  setPath('/geoquiz/')
+  document.head.querySelector('meta[name="robots"]')?.remove()
+})
 
 describe('App quiz menu navigation', () => {
-  it('opens a modal over the mounted quiz without changing its route, and restores menu-button focus on close', async () => {
-    setHash('#/country-capital')
+  it('opens a modal over the mounted quiz and restores menu-button focus on close', async () => {
+    setPath('/geoquiz/country-capital/')
     render(<App />)
     await screen.findByRole('heading', { name: 'Country capitals' })
     const opener = screen.getByRole('button', { name: 'All quizzes' })
     opener.focus()
     fireEvent.click(opener)
     const dialog = screen.getByRole('dialog', { name: 'Choose a quiz' })
-    expect(dialog).toBeTruthy()
-    expect(window.location.hash).toBe('#/country-capital')
+    expect(window.location.pathname).toBe('/geoquiz/country-capital/')
     expect(screen.getByRole('heading', { name: 'Country capitals' })).toBeTruthy()
-    expect(screen.getByRole('button', { name: /Country capitals.*Current quiz/ }).getAttribute('aria-current')).toBe('page')
-    fireEvent.click(screen.getByRole('dialog', { hidden: true }).querySelector('button[aria-label="Close quiz menu"]')!)
+    expect(screen.getByRole('link', { name: /Country capitals.*Current quiz/ }).getAttribute('aria-current')).toBe('page')
+    fireEvent.click(dialog.querySelector('button[aria-label="Close quiz menu"]')!)
     await waitFor(() => expect(document.activeElement).toBe(opener))
   })
 
-  it('uses Escape and current-quiz selection to close the dialog without route changes', async () => {
-    setHash('#/')
+  it('uses Escape and current-quiz selection to close without route changes', async () => {
+    setPath('/geoquiz/')
     render(<App />)
     await screen.findByRole('heading', { name: 'Capital map mock' })
     fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
     fireEvent(screen.getByRole('dialog', { name: 'Choose a quiz' }), new Event('cancel', { cancelable: true }))
-    expect(window.location.hash).toBe('#/')
+    expect(window.location.pathname).toBe('/geoquiz/')
     fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
-    fireEvent.click(screen.getByRole('button', { name: /Capital dots.*Current quiz/ }))
-    expect(window.location.hash).toBe('#/')
+    fireEvent.click(screen.getByRole('link', { name: /Capital dots.*Current quiz/ }))
+    expect(window.location.pathname).toBe('/geoquiz/')
   })
 
-  it('navigates only after choosing a different quiz', async () => {
-    setHash('#/')
+  it('opens the lazy Country borders route from a crawlable menu link with canonical metadata', async () => {
+    setPath('/geoquiz/')
     render(<App />)
     await screen.findByRole('heading', { name: 'Capital map mock' })
     fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
-    fireEvent.click(screen.getByRole('button', { name: /Flag countries/ }))
-    expect(window.location.hash).toBe('#/flag-country')
-    expect(await screen.findByRole('heading', { name: 'Flag quiz' })).toBeTruthy()
+    fireEvent.click(screen.getByRole('link', { name: /Country borders/ }))
+    await expectRoute('border-countries', 'Country borders')
   })
 
-  it('opens the lazy Country borders route from the modal menu with its route title and heading', async () => {
-    setHash('#/')
-    render(<App />)
-    await screen.findByRole('heading', { name: 'Capital map mock' })
-    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
-    fireEvent.click(screen.getByRole('button', { name: /Country borders/ }))
-    expect(window.location.hash).toBe('#/border-countries')
-    expect(await screen.findByRole('heading', { name: 'Country borders' })).toBeTruthy()
-    expect(document.title).toBe('Geoquiz — Country borders')
-  })
-
-  it('marks only the Shape Neighbours active route for its desktop rail/card composition', async () => {
-    setHash('#/shape-neighbours')
+  it('marks only the Shape Neighbours route for its desktop rail/card composition', async () => {
+    setPath('/geoquiz/shape-neighbours/')
     render(<App />)
     expect(await screen.findByRole('heading', { name: 'Shape neighbours' })).toBeTruthy()
     expect(document.querySelector('.app-frame.shape-neighbours-frame')).toBeTruthy()
     expect(document.querySelector('.app-frame.shape-neighbours-frame .shape-neighbours-shell')).toBeTruthy()
   })
 
-  it('loads exact DEV China and Colombia QA hashes through their actual lazy routes instead of Not Found', async () => {
-    cleanup()
-    setHash('#/shape-neighbours?qa=china')
+  it('preserves exact DEV China and Colombia QA hashes for their lazy quiz fixtures', async () => {
+    setPath('/geoquiz/#/shape-neighbours?qa=china')
     render(<App />)
     expect(await screen.findByText('14 remaining')).toBeTruthy()
     expect(screen.getByRole('switch', { name: 'Neighbour map' })).toBeTruthy()
-    expect(screen.queryByRole('heading', { name: 'Quiz not found' })).toBeNull()
+    expect(window.location.hash).toBe('#/shape-neighbours?qa=china')
 
     cleanup()
-    setHash('#/shape-high-point?qa=colombia')
+    setPath('/geoquiz/#/shape-high-point?qa=colombia')
     render(<App />)
     fireEvent.click(await screen.findByRole('button', { name: 'Reveal answer' }))
     expect(await screen.findByText('Pico Simón Bolívar')).toBeTruthy()
-    expect(screen.queryByRole('heading', { name: 'Quiz not found' })).toBeNull()
+    expect(window.location.hash).toBe('#/shape-high-point?qa=colombia')
   })
 
-  it('loads the exact DEV multi-run Hard border fixture through the actual lazy route', async () => {
-    cleanup()
-    setHash('#/border-countries?qa=hard-multi')
+  it('preserves the exact DEV multi-run Hard border fixture hash', async () => {
+    setPath('/geoquiz/#/border-countries?qa=hard-multi')
     render(<App />)
     expect(await screen.findByText('2 border sections')).toBeTruthy()
     expect(screen.getByRole('heading', { name: 'Which countries share this border?' })).toBeTruthy()
-    expect(screen.queryByRole('heading', { name: 'Quiz not found' })).toBeNull()
-  })
-
-  it('canonicalizes the legacy chooser hash to the landing route and opens the modal', async () => {
-    cleanup()
-    window.history.pushState(window.history.state, '', '#/quizzes')
-    const historyLength = window.history.length
-    const replaceState = vi.spyOn(window.history, 'replaceState')
-    render(<App />)
-    expect(await screen.findByRole('heading', { name: 'Capital map mock' })).toBeTruthy()
-    expect(window.location.hash).toBe('#/')
-    expect(replaceState).toHaveBeenCalledTimes(1)
-    expect(window.history.length).toBe(historyLength)
-    const dialog = screen.getByRole('dialog') as HTMLDialogElement
-    expect(dialog.open).toBe(true)
-    expect(dialog.getAttribute('aria-labelledby')).toBe('quiz-menu-title')
-    expect(document.title).toBe('Geoquiz — Capital dots')
-    fireEvent.click(dialog.querySelector('button[aria-label="Close quiz menu"]')!)
-    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('button', { name: 'All quizzes' })))
+    expect(window.location.hash).toBe('#/border-countries?qa=hard-multi')
   })
 
   it('promotes every opening to a native modal and closes it before the next opening', async () => {
@@ -120,7 +102,7 @@ describe('App quiz menu navigation', () => {
     Object.defineProperty(HTMLDialogElement.prototype, 'showModal', { configurable: true, value: showModal })
     Object.defineProperty(HTMLDialogElement.prototype, 'close', { configurable: true, value: close })
     try {
-      setHash('#/')
+      setPath('/geoquiz/')
       render(<App />)
       await screen.findByRole('heading', { name: 'Capital map mock' })
       fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
@@ -137,30 +119,129 @@ describe('App quiz menu navigation', () => {
     }
   })
 
-  it('keeps legacy capital-map and unknown routes recoverable without a chooser page', async () => {
-    setHash('#/capital-map')
+  it('uses History API for ordinary menu choices and synchronizes metadata', async () => {
+    setPath('/geoquiz/')
     render(<App />)
-    expect(await screen.findByRole('heading', { name: 'Capital map mock' })).toBeTruthy()
-    setHash('#/not-a-quiz')
-    expect(screen.getByRole('heading', { name: 'Quiz not found' })).toBeTruthy()
-    const notFoundOpener = screen.getByRole('button', { name: 'Open quiz menu' })
-    fireEvent.click(notFoundOpener)
-    expect(screen.getByRole('dialog', { name: 'Choose a quiz' })).toBeTruthy()
-    fireEvent.click(screen.getByRole('button', { name: 'Close quiz menu' }))
-    await waitFor(() => expect(document.activeElement).toBe(notFoundOpener))
-    fireEvent.click(notFoundOpener)
-    fireEvent(screen.getByRole('dialog', { name: 'Choose a quiz' }), new Event('cancel', { cancelable: true }))
-    await waitFor(() => expect(document.activeElement).toBe(notFoundOpener))
-    expect(screen.queryByText('Focused, local-first exercises for learning world geography.')).toBeNull()
+    await screen.findByRole('heading', { name: 'Capital map mock' })
+    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+    fireEvent.click(screen.getByRole('link', { name: /Flag countries/ }))
+    expect(window.location.pathname).toBe('/geoquiz/flag-country/')
+    expect(await screen.findByRole('heading', { name: 'Flag quiz' })).toBeTruthy()
+    expect(document.title).toBe(routeMetadata['flag-country'].title)
+    expect(document.head.querySelector('meta[name="description"]')?.getAttribute('content')).toBe(routeMetadata['flag-country'].description)
+    expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(routeMetadata['flag-country'].canonicalUrl)
   })
 
-  it('synchronizes representative lazy routes and titles when hash history changes', async () => {
-    setHash('#/shape-high-point')
+  it('keeps History API menu navigation synchronized through Back and Forward', async () => {
+    setPath('/geoquiz/')
+    render(<App />)
+    await screen.findByRole('heading', { name: 'Capital map mock' })
+
+    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+    fireEvent.click(screen.getByRole('link', { name: /Country capitals/ }))
+    await expectRoute('country-capital', 'Country capitals')
+
+    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+    fireEvent.click(screen.getByRole('link', { name: /Flag countries/ }))
+    await expectRoute('flag-country', 'Flag quiz')
+
+    window.history.back()
+    await expectRoute('country-capital', 'Country capitals')
+    await waitFor(() => expect(document.activeElement).toBe(screen.getAllByPlaceholderText('Type your answer')[0]))
+    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+    expect(screen.getByRole('link', { name: /Country capitals.*Current quiz/ }).getAttribute('aria-current')).toBe('page')
+    fireEvent.click(screen.getByRole('button', { name: 'Close quiz menu' }))
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('button', { name: 'All quizzes' })))
+
+    window.history.forward()
+    await expectRoute('flag-country', 'Flag quiz')
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('textbox', { name: 'country' })))
+    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+    expect(screen.getByRole('link', { name: /Flag countries.*Current quiz/ }).getAttribute('aria-current')).toBe('page')
+  })
+
+  it('keeps modified links native', async () => {
+    setPath('/geoquiz/')
+    render(<App />)
+    await screen.findByRole('heading', { name: 'Capital map mock' })
+    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+    const link = screen.getByRole('link', { name: /Flag countries/ })
+    link.addEventListener('click', (event) => event.preventDefault(), { once: true })
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true, button: 1 })
+    link.dispatchEvent(event)
+    expect(link.getAttribute('href')).toBe('/geoquiz/flag-country/')
+    expect(window.location.pathname).toBe('/geoquiz/')
+    expect((screen.getByRole('dialog') as HTMLDialogElement).open).toBe(true)
+  })
+
+  it('keeps a modified current-quiz link native instead of closing the dialog', async () => {
+    setPath('/geoquiz/border-countries/')
+    render(<App />)
+    await screen.findByRole('heading', { name: 'Country borders' })
+    fireEvent.click(screen.getByRole('button', { name: 'All quizzes' }))
+    const link = screen.getByRole('link', { name: /Country borders.*Current quiz/ })
+    link.addEventListener('click', (event) => event.preventDefault(), { once: true })
+    link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, button: 0, metaKey: true }))
+    expect(link.getAttribute('href')).toBe('/geoquiz/border-countries/')
+    expect(window.location.pathname).toBe('/geoquiz/border-countries/')
+    expect((screen.getByRole('dialog') as HTMLDialogElement).open).toBe(true)
+  })
+
+  it('replaces an ordinary legacy hash with its canonical path and preserves the query', async () => {
+    setPath('/geoquiz/?source=bookmark#/border-countries')
+    const historyLength = window.history.length
+    const replaceState = vi.spyOn(window.history, 'replaceState')
+    render(<App />)
+    await expectRoute('border-countries', 'Country borders')
+    expect(window.location.search).toBe('?source=bookmark')
+    expect(window.location.hash).toBe('')
+    expect(window.history.length).toBe(historyLength)
+    expect(replaceState).toHaveBeenCalledWith(window.history.state, '', '/geoquiz/border-countries/?source=bookmark')
+  })
+
+  it('canonicalizes legacy hashes with replacement and opens the former chooser once', async () => {
+    setPath('/geoquiz/#/quizzes')
+    const historyLength = window.history.length
+    const replaceState = vi.spyOn(window.history, 'replaceState')
+    render(<App />)
+    expect(await screen.findByRole('heading', { name: 'Capital map mock' })).toBeTruthy()
+    expect(window.location.pathname).toBe('/geoquiz/')
+    expect(window.location.hash).toBe('')
+    expect(replaceState).toHaveBeenCalled()
+    expect(window.history.length).toBe(historyLength)
+    expect((screen.getByRole('dialog') as HTMLDialogElement).open).toBe(true)
+    fireEvent.click(screen.getByRole('button', { name: 'Close quiz menu' }))
+    await waitFor(() => expect((screen.getByRole('dialog', { hidden: true }) as HTMLDialogElement).open).toBe(false))
+    expect(replaceState).toHaveBeenCalledTimes(1)
+    setPath('/geoquiz/country-capital/')
+    expect(await screen.findByRole('heading', { name: 'Country capitals' })).toBeTruthy()
+    expect((screen.getByRole('dialog', { hidden: true }) as HTMLDialogElement).open).toBe(false)
+  })
+
+  it('synchronizes routes and noindex metadata on browser history changes', async () => {
+    setPath('/geoquiz/shape-high-point/')
     render(<App />)
     expect(await screen.findByRole('heading', { name: 'Shape highest points' })).toBeTruthy()
-    expect(document.title).toBe('Geoquiz — Shape highest points')
-    setHash('#/flag-country')
-    expect(await screen.findByRole('heading', { name: 'Flag quiz' })).toBeTruthy()
-    expect(document.title).toBe('Geoquiz — Flag countries')
+    setPath('/geoquiz/not-a-quiz/')
+    expect(screen.getByRole('heading', { name: 'Quiz not found' })).toBeTruthy()
+    expect(document.title).toBe(routeMetadata['not-found'].title)
+    expect(document.head.querySelector('link[rel="canonical"]')).toBeNull()
+    expect(document.head.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex,follow')
+  })
+
+  it('recovers from Not Found through the menu and restores the opener after Close and Escape', async () => {
+    setPath('/geoquiz/not-a-quiz/')
+    render(<App />)
+    expect(await screen.findByRole('heading', { name: 'Quiz not found' })).toBeTruthy()
+    const opener = screen.getByRole('button', { name: 'Open quiz menu' })
+
+    fireEvent.click(opener)
+    expect(screen.getByRole('dialog', { name: 'Choose a quiz' })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Close quiz menu' }))
+    await waitFor(() => expect(document.activeElement).toBe(opener))
+
+    fireEvent.click(opener)
+    fireEvent(screen.getByRole('dialog', { name: 'Choose a quiz' }), new Event('cancel', { cancelable: true }))
+    await waitFor(() => expect(document.activeElement).toBe(opener))
   })
 })

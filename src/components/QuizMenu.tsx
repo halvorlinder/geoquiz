@@ -1,16 +1,16 @@
 import { useLayoutEffect, useRef, type MouseEvent, type RefObject, type SyntheticEvent } from 'react'
-import type { AppRoute } from '../appRoute'
+import { routeMetadata, type AppRoute, type QuizRoute } from '../appRoute'
 
-type QuizMenuItem = Readonly<{ route: Exclude<AppRoute, 'not-found'>; name: string; description: string; hash: string }>
+type QuizMenuItem = Readonly<{ route: QuizRoute; name: string; description: string }>
 
 const quizMenuItems: readonly QuizMenuItem[] = [
-  { route: 'capital-map', name: 'Capital dots', description: 'Identify a highlighted capital from its place on the map.', hash: '#/' },
-  { route: 'country-capital', name: 'Country capitals', description: 'Name each country’s capital or capitals.', hash: '#/country-capital' },
-  { route: 'shape-capital', name: 'Shape capitals', description: 'Name a capital from its country silhouette.', hash: '#/shape-capital' },
-  { route: 'shape-neighbours', name: 'Shape neighbours', description: 'Name every land neighbour from a country shape.', hash: '#/shape-neighbours' },
-  { route: 'shape-high-point', name: 'Shape highest points', description: 'Name the marked highest point of a country.', hash: '#/shape-high-point' },
-  { route: 'flag-country', name: 'Flag countries', description: 'Identify countries or territories from their flags.', hash: '#/flag-country' },
-  { route: 'border-countries', name: 'Country borders', description: 'Identify countries from one shared land border.', hash: '#/border-countries' },
+  { route: 'capital-map', name: 'Capital dots', description: 'Identify a highlighted capital from its place on the map.' },
+  { route: 'country-capital', name: 'Country capitals', description: 'Name each country’s capital or capitals.' },
+  { route: 'shape-capital', name: 'Shape capitals', description: 'Name a capital from its country silhouette.' },
+  { route: 'shape-neighbours', name: 'Shape neighbours', description: 'Name every land neighbour from a country shape.' },
+  { route: 'shape-high-point', name: 'Shape highest points', description: 'Name the marked highest point of a country.' },
+  { route: 'flag-country', name: 'Flag countries', description: 'Identify countries or territories from their flags.' },
+  { route: 'border-countries', name: 'Country borders', description: 'Identify countries from their shared land borders.' },
 ]
 
 export function QuizMenu({ open, currentRoute, opener, fallbackOpenerRef, onClose, onChoose }: Readonly<{
@@ -19,7 +19,7 @@ export function QuizMenu({ open, currentRoute, opener, fallbackOpenerRef, onClos
   opener: HTMLElement | null
   fallbackOpenerRef: RefObject<HTMLElement | null>
   onClose: () => void
-  onChoose: (item: QuizMenuItem) => void
+  onChoose: (route: QuizRoute) => void
 }>) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
@@ -46,6 +46,12 @@ export function QuizMenu({ open, currentRoute, opener, fallbackOpenerRef, onClos
   function closeMenu() { onClose(); restoreOpener() }
   function onCancel(event: SyntheticEvent<HTMLDialogElement>) { event.preventDefault(); closeMenu() }
   function onBackdropClick(event: MouseEvent<HTMLDialogElement>) { if (event.target === event.currentTarget) closeMenu() }
+  function chooseQuiz(event: MouseEvent<HTMLAnchorElement>, item: QuizMenuItem) {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    if (item.route === currentRoute) { event.preventDefault(); closeMenu(); return }
+    event.preventDefault()
+    onChoose(item.route)
+  }
 
   return <dialog ref={dialogRef} className="quiz-menu-dialog" aria-labelledby="quiz-menu-title" onCancel={onCancel} onClose={() => { if (!closingProgrammaticallyRef.current) onClose() }} onClick={onBackdropClick}>
     <div className="quiz-menu-panel">
@@ -57,7 +63,7 @@ export function QuizMenu({ open, currentRoute, opener, fallbackOpenerRef, onClos
       <ul className="quiz-menu-list">
         {quizMenuItems.map((item) => {
           const current = item.route === currentRoute
-          return <li key={item.route}><button className="quiz-menu-item" type="button" aria-current={current ? 'page' : undefined} onClick={() => current ? closeMenu() : onChoose(item)}><strong>{item.name}</strong><span>{item.description}</span>{current && <em>Current quiz</em>}</button></li>
+          return <li key={item.route}><a className="quiz-menu-item" href={routeMetadata[item.route].path} aria-current={current ? 'page' : undefined} onClick={(event) => chooseQuiz(event, item)}><strong>{item.name}</strong><span>{item.description}</span>{current && <em>Current quiz</em>}</a></li>
         })}
       </ul>
     </div>

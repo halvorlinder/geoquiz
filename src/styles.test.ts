@@ -9,6 +9,10 @@ describe('viewport layout stylesheet contract', () => {
     expect(styles).toContain('.quiz-menu-dialog { width: min(760px, calc(100vw - 40px));')
     expect(styles).toContain('.quiz-menu-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));')
     expect(styles).toContain('.quiz-menu-item[aria-current="page"]')
+    const menuItemRule = styles.match(/\.quiz-menu-item\s*\{([^}]*)\}/)?.[1]
+    expect(menuItemRule).toContain('display: grid')
+    expect(menuItemRule).toContain('text-decoration: none')
+    expect(styles).toContain('.quiz-menu-item:focus-visible')
     expect(styles).toContain('.quiz-menu-dialog { inset: auto 0 0; width: 100%; height: 100dvh; max-height: 100dvh; min-height: 0; margin: 0; overflow: hidden;')
     expect(styles).toContain('.quiz-menu-list { grid-template-columns: 1fr; grid-template-rows: repeat(7, minmax(0, 1fr));')
     expect(styles).toContain('inset: auto 0 0')

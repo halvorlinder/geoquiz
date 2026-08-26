@@ -70,7 +70,7 @@ paraphrase user direction rather than copying private conversation.
 | [DD-0016](DD-0016-desktop-only-practice-answer-recap.md) | Practice answer recap is desktop-only | accepted | capital map, desktop practice, study facts |
 | [DD-0017](DD-0017-high-fidelity-microstate-silhouettes.md) | High-fidelity microstate silhouettes | accepted | country silhouettes, microstate geometry, boundary attribution |
 | [DD-0018](DD-0018-non-disclosing-shape-attribution.md) | Shape attribution is local and non-disclosing | accepted | country silhouettes, boundary attribution, unresolved challenges |
-| [DD-0019](DD-0019-overlay-quiz-menu.md) | Overlay quiz menu retains the active exercise | accepted | app shell, routing, quiz navigation, responsive layout |
+| [DD-0019](DD-0019-overlay-quiz-menu.md) | Overlay quiz menu retains the active exercise | superseded | app shell, routing, quiz navigation, responsive layout |
 | [DD-0020](DD-0020-study-quiz-layout-and-keyboard-flow.md) | Study quiz layout and keyboard flow | superseded | country-capital, shape-capital, shape-high-point, flag-country, responsive layout, keyboard interaction |
 | [DD-0021](DD-0021-progressive-neighbour-map.md) | Practice progressively builds a target-focused neighbour map | accepted | shape-neighbours quiz, practice aids, country-shape map rendering, responsive map viewport |
 | [DD-0022](DD-0022-curated-country-abbreviations.md) | Curated country abbreviations are exact-only shared answers | accepted | entity catalog, shape-neighbours, flag-country, answer matching |
@@ -79,3 +79,4 @@ paraphrase user direction rather than copying private conversation.
 | [DD-0026](DD-0026-hard-border-practice-disclosure.md) | Hard border Practice progressive disclosure | superseded | border image quiz, Easy and Hard border rendering, local map interaction, Practice disclosure |
 | [DD-0027](DD-0027-fixed-viewport-site-layout.md) | Fixed-viewport site layout and keyboard flow | accepted | all routes, responsive layout, overlay quiz menu, keyboard interaction |
 | [DD-0028](DD-0028-multi-run-border-sections.md) | Complete multi-run border sections | accepted | border image quiz, local border geometry, Easy and Hard border rendering, Practice disclosure |
+| [DD-0029](DD-0029-crawlable-quiz-routes.md) | Crawlable quiz routes preserve overlay navigation | accepted | app shell, routing, quiz navigation, search discovery, static hosting |
