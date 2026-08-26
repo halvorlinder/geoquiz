@@ -28,11 +28,15 @@ import {
   currentQuestionId,
   elapsedTimedSessionMs,
   isTimedSessionComplete,
+  isTimedSessionPaused,
+  pauseTimedSession,
+  resumeTimedSession,
   startTimedSession,
   timedSessionOutcome,
   transitionTimedSession,
   type TimedSession,
 } from "../../core/session/timedSession";
+import { timedScoreDataVersion } from "../../core/session/timedScoreVersion";
 import {
   advanceQuiz,
   isComplete,
@@ -47,6 +51,7 @@ import {
   type ShapeNeighboursQuestion,
 } from "./shapeNeighbours";
 import { NeighbourProgressMap, type NeighbourProgressLayer } from "./NeighbourProgressMap";
+import { TimedPause } from "../../components/TimedPause";
 
 type Mode = "practice" | "timed";
 type Config = Readonly<{ mode: Mode; continent: NeighbourContinent }>;
@@ -84,12 +89,13 @@ function storage(): ScoreboardStorage | undefined {
 function Timer({ session }: { session: TimedSession }) {
   const [now, setNow] = useState(() => performance.now());
   const complete = isTimedSessionComplete(session);
+  const paused = isTimedSessionPaused(session);
   useEffect(() => {
     setNow(performance.now());
-    if (complete) return undefined;
+    if (complete || paused) return undefined;
     const id = window.setInterval(() => setNow(performance.now()), 250);
     return () => window.clearInterval(id);
-  }, [complete, session]);
+  }, [complete, paused, session]);
   const value = duration(elapsedTimedSessionMs(session, now));
   return (
     <p className="timer" aria-label={`Elapsed time ${value}`}>
@@ -170,6 +176,7 @@ export function ShapeNeighboursQuiz({
   const restartRef = useRef<HTMLButtonElement>(null);
   const composing = useRef(false);
   const actionLock = useRef(false);
+  const pausedRef = useRef(false);
   const recorded = useRef<TimedSession | null>(null);
 
   const activeQuestions = useMemo(
@@ -218,7 +225,7 @@ export function ShapeNeighboursQuiz({
     () => ({
       quizId: "shape-neighbours",
       filters: { continent: active.continent },
-      dataVersion: DATA_VERSION,
+      dataVersion: timedScoreDataVersion(DATA_VERSION),
     }),
     [active.continent],
   );
@@ -266,7 +273,7 @@ export function ShapeNeighboursQuiz({
         revealedCount: result.revealedCount,
         totalCount: result.totalCount,
         completedAt: new Date().toISOString(),
-        dataVersion: DATA_VERSION,
+        dataVersion: timedScoreDataVersion(DATA_VERSION),
       }),
     );
   }, [scope, timed]);
@@ -277,6 +284,7 @@ export function ShapeNeighboursQuiz({
     setAcknowledgement(null);
     composing.current = false;
     actionLock.current = false;
+    pausedRef.current = false;
   }
   function start(config: Config) {
     const questions = questionsFor(config.continent);
@@ -297,7 +305,7 @@ export function ShapeNeighboursQuiz({
         readScoreboard(storage(), {
           quizId: "shape-neighbours",
           filters: { continent: config.continent },
-          dataVersion: DATA_VERSION,
+          dataVersion: timedScoreDataVersion(DATA_VERSION),
         }),
       );
       setFeedback({
@@ -314,6 +322,7 @@ export function ShapeNeighboursQuiz({
   }
   function updateState(update: (current: QuestionState) => QuestionState) {
     if (!target) return;
+    if (active.mode === "timed" && pausedRef.current) return;
     if (active.mode === "timed")
       setTimedStates((states) => ({
         ...states,
@@ -328,6 +337,7 @@ export function ShapeNeighboursQuiz({
     }, 0);
   }
   function process(value: string, timedMode: boolean) {
+    if (timedMode && pausedRef.current) return;
     if (!target || state.revealed || state.complete) return;
     const match = matchNeighbourAnswer(
       value,
@@ -382,7 +392,7 @@ export function ShapeNeighboursQuiz({
     if (!composing.current && active.mode === "timed") process(value, true);
   }
   function transition(action: "correct" | "skip" | "reveal", message: string) {
-    if (!timed || actionLock.current) return;
+    if (!timed || pausedRef.current || actionLock.current) return;
     actionLock.current = true;
     setTimed((session) =>
       session
@@ -404,6 +414,7 @@ export function ShapeNeighboursQuiz({
     }, 0);
   }
   function reveal() {
+    if (active.mode === "timed" && pausedRef.current) return;
     if (!target || state.revealed || state.complete) return;
     updateState((current) => ({
       ...current,
@@ -460,6 +471,18 @@ export function ShapeNeighboursQuiz({
       return true;
     }
     return false;
+  }
+  function pauseTimedRun() {
+    if (!timed || !target || pausedRef.current) return;
+    const now = performance.now();
+    pausedRef.current = true;
+    setTimed((session) => session ? pauseTimedSession(session, now) : session);
+  }
+  function resumeTimedRun() {
+    if (!pausedRef.current) return;
+    const now = performance.now();
+    pausedRef.current = false;
+    setTimed((session) => session ? resumeTimedSession(session, now) : session);
   }
 
   const setup = (
@@ -837,6 +860,7 @@ export function ShapeNeighboursQuiz({
           </div>
         ) : (
           <div className="timed-actions">
+            <TimedPause paused={isTimedSessionPaused(timed!)} canPause={!complete && !acknowledgement && !state.complete && !state.revealed} focusRef={inputRef} onPause={pauseTimedRun} onResume={resumeTimedRun} />
             <button
               className="secondary-button"
               type="button"

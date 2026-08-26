@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { BorderCountriesQuiz } from './BorderCountriesQuiz'
 import { scoreboardKey } from '../../core/scoreboard/scoreboard'
+import { timedScoreDataVersion } from '../../core/session/timedScoreVersion'
 import { normalizeAnswer } from '../../core/answerMatching'
 import { BORDER_DATA_VERSION, borderEntity, borderQuestions, borderSetupNote, borderShape, type BorderQuestion } from './borderCountries'
 import { borderContextGeometry } from './borderContextGeometry'
@@ -302,8 +303,8 @@ describe('BorderCountriesQuiz', () => {
     const restart = await screen.findByRole('button', { name: 'Restart timed run' })
     await waitFor(() => expect(document.activeElement).toBe(restart))
     expect(document.querySelector('.score-number')?.textContent).toContain('0 correct · 1 revealed · 1 total')
-    const key = scoreboardKey({ quizId: 'border-countries', filters: { continent: 'All', difficulty: 'easy', orientation: '1' }, dataVersion: BORDER_DATA_VERSION })
-    expect(JSON.parse(window.localStorage.getItem(key) ?? '{}').entries[0]).toMatchObject({ correctCount: 0, revealedCount: 1, totalCount: 1, dataVersion: BORDER_DATA_VERSION })
+    const key = scoreboardKey({ quizId: 'border-countries', filters: { continent: 'All', difficulty: 'easy', orientation: '1' }, dataVersion: timedScoreDataVersion(BORDER_DATA_VERSION) })
+    expect(JSON.parse(window.localStorage.getItem(key) ?? '{}').entries[0]).toMatchObject({ correctCount: 0, revealedCount: 1, totalCount: 1, dataVersion: timedScoreDataVersion(BORDER_DATA_VERSION) })
   })
   it('records and presents a mixed timed correct/revealed outcome with the scoped board key', async () => {
     render(<BorderCountriesQuiz questionFactory={factory(easy, easy2)} />)
@@ -314,7 +315,7 @@ describe('BorderCountriesQuiz', () => {
     fireEvent.click(await screen.findByRole('button', { name: 'Continue' }))
     await screen.findByRole('heading', { name: 'Timed run complete' })
     expect(document.querySelector('.score-number')?.textContent).toContain('1 correct · 1 revealed · 2 total')
-    const key = scoreboardKey({ quizId: 'border-countries', filters: { continent: 'All', difficulty: 'easy', orientation: '1' }, dataVersion: BORDER_DATA_VERSION })
+    const key = scoreboardKey({ quizId: 'border-countries', filters: { continent: 'All', difficulty: 'easy', orientation: '1' }, dataVersion: timedScoreDataVersion(BORDER_DATA_VERSION) })
     expect(JSON.parse(window.localStorage.getItem(key) ?? '{}').entries[0]).toMatchObject({ correctCount: 1, revealedCount: 1, totalCount: 2 })
   })
   it('suppresses held-key activation on timed skip and reveal controls', () => {
@@ -442,4 +443,13 @@ describe('BorderCountriesQuiz', () => {
       revealed.unmount()
     }
   }, 30_000)
+
+  it('keeps timed border input and transition controls inert while paused', () => {
+    render(<BorderCountriesQuiz questionFactory={factory(easy)} random={() => 0} />)
+    fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+    const answer = screen.getByLabelText('Other country') as HTMLInputElement
+    fireEvent.change(answer, { target: { value: 'Par' } }); fireEvent.click(screen.getByRole('button', { name: 'Pause' }))
+    fireEvent.change(answer, { target: { value: borderEntity(easy.answerCode!)!.name } }); fireEvent.compositionEnd(answer); fireEvent.click(screen.getByRole('button', { name: 'Skip' })); fireEvent.click(screen.getByRole('button', { name: 'Reveal answer' }))
+    expect(answer.value).toBe('Par'); expect(screen.getByRole('heading', { name: 'Paused' })).toBeTruthy()
+  })
 })

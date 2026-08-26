@@ -3,6 +3,9 @@ import {
   currentQuestionId,
   elapsedTimedSessionMs,
   isTimedSessionComplete,
+  isTimedSessionPaused,
+  pauseTimedSession,
+  resumeTimedSession,
   startTimedSession,
   timedSessionOutcome,
   transitionTimedSession,
@@ -119,6 +122,23 @@ describe('timed session', () => {
     expect(elapsedTimedSessionMs(completed, 1_000)).toBe(0)
   })
 
+  it('freezes elapsed active time and accumulates repeated manual pauses exactly once', () => {
+    const started = startTimedSession(['one', 'two'], 100, () => 0.99)
+    const paused = pauseTimedSession(started, 140)
+    expect(isTimedSessionPaused(paused)).toBe(true)
+    expect(elapsedTimedSessionMs(paused, 9_999)).toBe(40)
+    expect(() => transitionTimedSession(paused, 'skip', 150)).toThrow('paused')
+
+    const resumed = resumeTimedSession(paused, 200)
+    expect(isTimedSessionPaused(resumed)).toBe(false)
+    expect(resumed.pausedDurationMs).toBe(60)
+    expect(elapsedTimedSessionMs(resumed, 260)).toBe(100)
+    const pausedAgain = pauseTimedSession(resumed, 300)
+    const oneResolved = transitionTimedSession(resumeTimedSession(pausedAgain, 350), 'correct', 400)
+    const completed = transitionTimedSession(oneResolved, 'correct', 410)
+    expect(elapsedTimedSessionMs(completed, 9_999)).toBe(200)
+  })
+
   it('rejects invalid IDs, RNG values, clocks, transitions, and corrupted states', () => {
     expect(() => startTimedSession([], 0)).toThrow('at least one question ID')
     expect(() => startTimedSession(['one', 'one'], 0)).toThrow('duplicate question ID')
@@ -132,6 +152,9 @@ describe('timed session', () => {
     expect(() => transitionTimedSession(session, 'correct', Number.POSITIVE_INFINITY)).toThrow('nowMs')
     const completed = transitionTimedSession(session, 'correct', 1)
     expect(() => transitionTimedSession(completed, 'skip', 2)).toThrow('completed run')
+    expect(() => pauseTimedSession(completed, 2)).toThrow('completed run')
+    expect(() => resumeTimedSession(session, 2)).toThrow('not paused')
+    expect(() => pauseTimedSession(pauseTimedSession(session, 1), 2)).toThrow('already paused')
 
     const corrupted = {
       ...session,
@@ -144,5 +167,10 @@ describe('timed session', () => {
       statusByQuestionId: ['pending'],
     }
     expect(() => currentQuestionId(arrayStatuses as never)).toThrow('question statuses must be a record')
+
+    expect(() => currentQuestionId({ ...session, pausedAtMs: Number.NaN })).toThrow('pausedAtMs')
+    expect(() => currentQuestionId({ ...session, pausedDurationMs: -1 })).toThrow('pausedDurationMs')
+    expect(() => currentQuestionId({ ...session, pausedDurationMs: Number.POSITIVE_INFINITY })).toThrow('pausedDurationMs')
+    expect(() => currentQuestionId({ ...completed, pausedAtMs: 2 })).toThrow('completed state cannot be paused')
   })
 })

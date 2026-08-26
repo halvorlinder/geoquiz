@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { scoreboardKey } from '../../core/scoreboard/scoreboard'
+import { timedScoreDataVersion } from '../../core/session/timedScoreVersion'
 import { getEntityByCode } from '../../core/entity'
 import { shapeHighPointQuestions, type ShapeHighPointQuestion } from './shapeHighPoint'
 import { ShapeHighPointQuiz } from './ShapeHighPointQuiz'
@@ -91,7 +92,10 @@ describe('ShapeHighPointQuiz', () => {
     fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
     fireEvent.compositionStart(input()); fireEvent.change(input(), { target: { value: 'Møllehøj' } }); expect(screen.getByRole('heading', { name: 'Shape highest points' })).toBeTruthy()
     fireEvent.compositionEnd(input(), { currentTarget: input() }); flush(); expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
-    expect(JSON.parse(window.localStorage.getItem(scoreboardKey({ quizId: 'shape-high-point', filters: { continent: 'All' }, dataVersion: 'test' })) ?? '{}').entries).toHaveLength(1)
+    const dataVersion = timedScoreDataVersion('shape-high-point-v1-entities-2-high-points-2026.08.20-shapes-2')
+    const stored = JSON.parse(window.localStorage.getItem(scoreboardKey({ quizId: 'shape-high-point', filters: { continent: 'All' }, dataVersion })) ?? '{}')
+    expect(stored.entries).toHaveLength(1)
+    expect(stored.entries[0].dataVersion).toBe(dataVersion)
     first.unmount()
     const rerendered = render(<ShapeHighPointQuiz questionFactory={single(franceQuestion)} />)
     fireEvent.click(rerendered.getByLabelText('Timed')); fireEvent.click(rerendered.getByRole('button', { name: 'Start timed run' })); fireEvent.click(rerendered.getByRole('button', { name: 'Reveal answer' }))
@@ -102,5 +106,13 @@ describe('ShapeHighPointQuiz', () => {
     vi.useFakeTimers(); vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('blocked') }); render(<ShapeHighPointQuiz questionFactory={single(denmarkQuestion)} />)
     fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button', { name: 'Start timed run' })); fireEvent.change(input(), { target: { value: 'typing' } }); fireEvent.click(screen.getByRole('button', { name: 'Skip' })); flush()
     expect(input().value).toBe('typing'); expect(screen.getByText('Skipped. This is the only pending country.')).toBeTruthy(); fireEvent.click(screen.getByRole('button', { name: 'Reveal answer' })); fireEvent.click(screen.getByRole('button', { name: 'Continue' })); flush(); expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
+  })
+
+  it('keeps a timed highest-point answer unchanged and action guards inert while paused', () => {
+    vi.useFakeTimers(); render(<ShapeHighPointQuiz questionFactory={single(denmarkQuestion)} />)
+    fireEvent.click(screen.getByLabelText('Timed')); fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+    fireEvent.change(input(), { target: { value: 'Mølle' } }); fireEvent.click(screen.getByRole('button', { name: 'Pause' }))
+    fireEvent.change(input(), { target: { value: 'Møllehøj' } }); fireEvent.compositionEnd(input()); fireEvent.click(screen.getByRole('button', { name: 'Skip' })); fireEvent.click(screen.getByRole('button', { name: 'Reveal answer' }))
+    expect(input().value).toBe('Mølle'); expect(screen.getByRole('heading', { name: 'Paused' })).toBeTruthy()
   })
 })

@@ -2,6 +2,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react'
 import { StrictMode } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { scoreboardKey } from '../../core/scoreboard/scoreboard'
+import { timedScoreDataVersion } from '../../core/session/timedScoreVersion'
 import { shapeCapitalData, shapeCapitalQuestions } from './shapeCapital'
 import { ShapeCapitalQuiz } from './ShapeCapitalQuiz'
 
@@ -95,8 +96,20 @@ describe('ShapeCapitalQuiz', () => {
     expect(screen.getByText('Constitutional capital is correct. Continue with the remaining fields.')).toBeTruthy()
     fireEvent.change(screen.getByLabelText('Seat of government'), { target: { value: 'La Paz' } })
     expect(screen.getByRole('heading', { name: 'Timed run complete' })).toBeTruthy()
-    const key = scoreboardKey({ quizId: 'shape-capital', filters: { continent: 'All' }, dataVersion: 'test' })
-    expect(JSON.parse(window.localStorage.getItem(key) ?? '{}').entries).toHaveLength(1)
+    const dataVersion = timedScoreDataVersion('shape-capital-v1-entities-2-capital-data-v1-shapes-3')
+    const key = scoreboardKey({ quizId: 'shape-capital', filters: { continent: 'All' }, dataVersion })
+    const stored = JSON.parse(window.localStorage.getItem(key) ?? '{}')
+    expect(stored.entries).toHaveLength(1)
+    expect(stored.entries[0].dataVersion).toBe(dataVersion)
+  })
+
+  it('exposes the shared pause control only for an answerable timed shape-capital question', () => {
+    renderSouthAfrica()
+    expect(screen.queryByRole('button', { name: 'Pause' })).toBeNull()
+    fireEvent.click(screen.getByLabelText('Timed'))
+    fireEvent.click(screen.getByRole('button', { name: 'Start timed run' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Pause' }))
+    expect(screen.getByRole('heading', { name: 'Paused' })).toBeTruthy()
   })
 
   it('keeps partial timed answers across circular skips and shows the entity only after reveal acknowledgement', () => {

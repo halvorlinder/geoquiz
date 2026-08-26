@@ -26,11 +26,15 @@ import {
   currentQuestionId,
   elapsedTimedSessionMs,
   isTimedSessionComplete,
+  isTimedSessionPaused,
+  pauseTimedSession,
+  resumeTimedSession,
   startTimedSession,
   timedSessionOutcome,
   transitionTimedSession,
   type TimedSession,
 } from "../../core/session/timedSession";
+import { timedScoreDataVersion } from "../../core/session/timedScoreVersion";
 import {
   advanceQuiz,
   isComplete,
@@ -47,6 +51,7 @@ import {
   type HighPointContinent,
   type ShapeHighPointQuestion,
 } from "./shapeHighPoint";
+import { TimedPause } from "../../components/TimedPause";
 
 type Mode = "practice" | "timed";
 type Config = Readonly<{ mode: Mode; continent: HighPointContinent }>;
@@ -82,12 +87,13 @@ function developmentFixture(entities: readonly StudyEntity[]) {
 function Timer({ session }: { session: TimedSession }) {
   const [now, setNow] = useState(() => performance.now());
   const complete = isTimedSessionComplete(session);
+  const paused = isTimedSessionPaused(session);
   useEffect(() => {
     setNow(performance.now());
-    if (complete) return undefined;
+    if (complete || paused) return undefined;
     const id = window.setInterval(() => setNow(performance.now()), 250);
     return () => window.clearInterval(id);
-  }, [complete, session]);
+  }, [complete, paused, session]);
   const value = duration(elapsedTimedSessionMs(session, now));
   return (
     <p className="timer" aria-label={`Elapsed time ${value}`}>
@@ -152,6 +158,7 @@ export function ShapeHighPointQuiz({
   const restartRef = useRef<HTMLButtonElement>(null);
   const composing = useRef(false);
   const actionLock = useRef(false);
+  const pausedRef = useRef(false);
   const recorded = useRef<TimedSession | null>(null);
   const activeQuestions = useMemo(
     () => questionsFor(active.continent),
@@ -178,7 +185,7 @@ export function ShapeHighPointQuiz({
     () => ({
       quizId: "shape-high-point",
       filters: { continent: active.continent },
-      dataVersion,
+      dataVersion: timedScoreDataVersion(dataVersion),
     }),
     [active.continent],
   );
@@ -212,7 +219,7 @@ export function ShapeHighPointQuiz({
         revealedCount: result.revealedCount,
         totalCount: result.totalCount,
         completedAt: new Date().toISOString(),
-        dataVersion,
+        dataVersion: timedScoreDataVersion(dataVersion),
       }),
     );
   }, [scope, timed]);
@@ -223,6 +230,7 @@ export function ShapeHighPointQuiz({
     setAcknowledgement(null);
     composing.current = false;
     actionLock.current = false;
+    pausedRef.current = false;
   }
   function start(config: Config) {
     const questions = questionsFor(config.continent);
@@ -243,7 +251,7 @@ export function ShapeHighPointQuiz({
         readScoreboard(storage(), {
           quizId: "shape-high-point",
           filters: { continent: config.continent },
-          dataVersion,
+          dataVersion: timedScoreDataVersion(dataVersion),
         }),
       );
       setFeedback({
@@ -260,6 +268,7 @@ export function ShapeHighPointQuiz({
   }
   function updateState(update: (current: State) => State) {
     if (!target) return;
+    if (active.mode === "timed" && pausedRef.current) return;
     if (active.mode === "timed")
       setTimedStates((states) => ({
         ...states,
@@ -271,7 +280,7 @@ export function ShapeHighPointQuiz({
     action: "correct" | "skip" | "reveal",
     message: Feedback,
   ) {
-    if (!timed || actionLock.current) return;
+    if (!timed || pausedRef.current || actionLock.current) return;
     actionLock.current = true;
     setTimed((session) =>
       session
@@ -302,6 +311,7 @@ export function ShapeHighPointQuiz({
     }
   }
   function setValue(value: string) {
+    if (active.mode === "timed" && pausedRef.current) return;
     updateState((current) => ({ ...current, value }));
     if (
       !target ||
@@ -316,6 +326,7 @@ export function ShapeHighPointQuiz({
     } else setFeedback({ kind: "neutral", message: "Type the highest point." });
   }
   function reveal() {
+    if (active.mode === "timed" && pausedRef.current) return;
     if (!target || state.resolved) return;
     updateState(() => ({
       value: target.highPoint.label,
@@ -372,6 +383,18 @@ export function ShapeHighPointQuiz({
       return true;
     }
     return false;
+  }
+  function pauseTimedRun() {
+    if (!timed || !target || pausedRef.current) return;
+    const now = performance.now();
+    pausedRef.current = true;
+    setTimed((session) => session ? pauseTimedSession(session, now) : session);
+  }
+  function resumeTimedRun() {
+    if (!pausedRef.current) return;
+    const now = performance.now();
+    pausedRef.current = false;
+    setTimed((session) => session ? resumeTimedSession(session, now) : session);
   }
 
   const setup = (
@@ -654,6 +677,7 @@ export function ShapeHighPointQuiz({
           </div>
         ) : (
           <div className="timed-actions">
+            <TimedPause paused={isTimedSessionPaused(timed!)} canPause={!complete && !acknowledgement && !state.resolved} focusRef={inputRef} onPause={pauseTimedRun} onResume={resumeTimedRun} />
             <button
               className="secondary-button"
               type="button"
